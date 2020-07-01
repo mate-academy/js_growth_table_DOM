@@ -19,13 +19,9 @@ Some rules:
 As always, on JS Advanced course you do not need to change the HTML layout or CSS styles.
 
 Examples:
-
-10x10:
 ![10x10](./src/images/10x10.png)
 
-2x2:
 ![2x2](./src/images/2x2.png)
 
-3x10:
 ![3x10](./src/images/3x10.png)
 
