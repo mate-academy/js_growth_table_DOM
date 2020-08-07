@@ -5,24 +5,21 @@ const appendRow = document.querySelector('.append-row');
 const removeRow = document.querySelector('.remove-row');
 const appendColumn = document.querySelector('.append-column');
 const removeColumn = document.querySelector('.remove-column');
+const MIN_SIZE = 2;
+const MAX_SIZE = 10;
 
 const table = document.querySelector('.field');
 
 const deleteRow = (event) => {
-  const item = event.target;
-  const minLength = 2;
+  const target = event.target;
 
   table.deleteRow(table.rows.length - 1);
   appendRow.disabled = false;
-
-  if (table.rows.length === minLength) {
-    item.disabled = true;
-  }
+  target.disabled = table.rows.length === MIN_SIZE;
 };
 
 const deleteColumn = (event) => {
-  const item = event.target;
-  const minLength = 2;
+  const target = event.target;
   const lastCell = table.rows[0].cells.length - 1;
 
   for (let i = 0; i < table.rows.length; i++) {
@@ -30,15 +27,11 @@ const deleteColumn = (event) => {
   }
 
   appendColumn.disabled = false;
-
-  if (table.rows[0].cells.length === minLength) {
-    item.disabled = true;
-  }
+  target.disabled = table.rows[0].cells.length === MIN_SIZE;
 };
 
 const addRow = (event) => {
-  const item = event.target;
-  const maxLength = 10;
+  const target = event.target;
 
   const newRow = document.createElement('tr');
 
@@ -48,25 +41,18 @@ const addRow = (event) => {
 
   table.append(newRow);
   removeRow.disabled = false;
-
-  if (table.rows.length === maxLength) {
-    item.disabled = true;
-  }
+  target.disabled = table.rows.length === MAX_SIZE;
 };
 
 const addColumn = (event) => {
-  const item = event.target;
-  const maxLength = 10;
+  const target = event.target;
 
   for (let i = 0; i < table.rows.length; i++) {
     table.rows[i].append(document.createElement('td'));
   }
 
   removeColumn.disabled = false;
-
-  if (table.rows[0].cells.length === maxLength) {
-    item.disabled = true;
-  }
+  target.disabled = table.rows[0].cells.length === MAX_SIZE;
 };
 
 appendRow.addEventListener('click', addRow);
