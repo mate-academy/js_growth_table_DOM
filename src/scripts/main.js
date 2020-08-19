@@ -26,13 +26,13 @@ container.addEventListener('click', (event) => {
       }
       tbody.append(createTr);
 
-      if (tableRow.length > 2) {
-        buttonRemRow.disabled = false;
+      if (tableRow.length === 10) {
+        buttonApRow.disabled = true;
         break;
       }
 
-      if (tableRow.length === 10) {
-        buttonApRow.disabled = true;
+      if (tableRow.length > 2 && tableRow.length < 10) {
+        buttonRemRow.disabled = false;
         break;
       }
       break;
@@ -56,7 +56,7 @@ container.addEventListener('click', (event) => {
         tableRow[i].append(createTd);
       }
 
-      if (tableColumn.length > 2) {
+      if (tableColumn.length > 2 && tableColumn.length < 10) {
         buttonRemCol.disabled = false;
         break;
       }
