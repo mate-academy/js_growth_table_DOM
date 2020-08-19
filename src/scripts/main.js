@@ -30,6 +30,11 @@ container.addEventListener('click', (event) => {
         buttonApRow.disabled = true;
         break;
       }
+
+      if (tableRow.length > 2 && tableRow.length < 10) {
+        buttonRemRow.disabled = false;
+        break;
+      }
       break;
     case 'remove-row':
       tbody.lastElementChild.parentNode.removeChild(tbody.lastElementChild);
@@ -51,6 +56,11 @@ container.addEventListener('click', (event) => {
         tableRow[i].append(createTd);
       }
 
+      if (tableColumn.length > 2 && tableColumn.length < 10) {
+        buttonRemCol.disabled = false;
+        break;
+      }
+
       if (tableColumn.length === 10) {
         buttonApCol.disabled = true;
         break;
@@ -67,7 +77,7 @@ container.addEventListener('click', (event) => {
         break;
       }
 
-      if (tableColumn.length < 10) {
+      if (tableColumn.length < 10 && tableColumn.length > 2) {
         buttonApCol.disabled = false;
         break;
       }
