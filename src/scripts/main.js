@@ -7,25 +7,25 @@ const removeRow = document.querySelector('.remove-row');
 
 document.querySelectorAll('.button').forEach((button) => {
   button.addEventListener('click', (event) => {
-    if (event.target === appendColumn) {
-      document.querySelectorAll('tr').forEach((tr) => {
-        tr.append(document.createElement('td'));
-      });
-    };
+    switch (event.target) {
+      case appendColumn:
+        document.querySelectorAll('tr')
+          .forEach(tr => tr.append(document.createElement('td')));
+        break;
 
-    if (event.target === removeColumn) {
-      document.querySelectorAll('td:last-child').forEach((td) => {
-        td.remove();
-      });
-    };
+      case removeColumn:
+        document.querySelectorAll('td:last-child')
+          .forEach(td => td.remove());
+        break;
 
-    if (event.target === appendRow) {
-      document.querySelector('.field')
-        .append(document.querySelector('tr').cloneNode(true));
-    };
+      case appendRow:
+        document.querySelector('.field')
+          .append(document.querySelector('tr').cloneNode(true));
+        break;
 
-    if (event.target === removeRow) {
-      document.querySelector('tr:last-child').remove();
+      case removeRow:
+        document.querySelector('tr:last-child').remove();
+        break;
     };
 
     appendColumn.disabled = document.querySelector('tr').children.length > 9;
