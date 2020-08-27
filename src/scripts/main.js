@@ -7,8 +7,8 @@
   const appendColumn = document.querySelector('.append-column');
   const removeColumn = document.querySelector('.remove-column');
 
-  const maxTable = 10;
-  const minTable = 2;
+  const maxTable = 9;
+  const minTable = 3;
   let currentSizeColumn = table.firstChild.querySelectorAll('td').length;
   let currentSizeRow = table.querySelectorAll('tr').length;
 
@@ -18,34 +18,34 @@
   removeColumn.addEventListener('click', remColumn);
 
   function addRow() {
-    const allTr = document.querySelector('tr');
-    const tr = document.createElement('tr');
+    removeRow.disabled = false;
 
-    if (currentSizeRow >= maxTable) {
-      return;
+    if (currentSizeRow === maxTable) {
+      appendRow.disabled = true;
     }
 
-    tr.innerHTML = allTr.innerHTML;
-    table.appendChild(tr);
+    table.appendChild(table.lastElementChild.cloneNode(true));
     currentSizeRow++;
   }
 
   function addColumn() {
-    if (currentSizeColumn >= maxTable) {
-      return;
+    removeColumn.disabled = false;
+
+    if (currentSizeColumn === maxTable) {
+      appendColumn.disabled = true;
     }
 
     [...table.children].forEach(tr => {
-      const td = document.createElement('td');
-
-      tr.append(td);
+      tr.append(tr.lastElementChild.cloneNode(true));
     });
     currentSizeColumn++;
   }
 
   function remRow() {
+    appendRow.disabled = false;
+
     if (currentSizeRow <= minTable) {
-      return;
+      removeRow.disabled = true;
     }
 
     table.removeChild(table.querySelector('tr'));
@@ -53,8 +53,10 @@
   }
 
   function remColumn() {
+    appendColumn.disabled = false;
+
     if (currentSizeColumn <= minTable) {
-      return;
+      removeColumn.disabled = true;
     }
 
     [...table.children].forEach(tr => {
