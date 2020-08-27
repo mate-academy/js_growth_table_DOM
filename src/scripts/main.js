@@ -29,8 +29,8 @@ removeRow.addEventListener('click', event => {
 });
 
 appendColumn.addEventListener('click', event => {
-  for (const item of rows) {
-    item.append(document.createElement('td'));
+  for (const row of rows) {
+    row.append(document.createElement('td'));
   }
 
   if (rows[0].children.length === 10) {
@@ -41,8 +41,8 @@ appendColumn.addEventListener('click', event => {
 });
 
 removeColumn.addEventListener('click', event => {
-  for (const item of rows) {
-    item.lastElementChild.remove();
+  for (const row of rows) {
+    row.lastElementChild.remove();
   }
 
   if (rows[0].children.length === 2) {
