@@ -6,7 +6,6 @@
   const removeRow = document.querySelector('.remove-row');
   const appendColumn = document.querySelector('.append-column');
   const removeColumn = document.querySelector('.remove-column');
-  const allTr = document.querySelector('tr');
 
   const maxTable = 10;
   const minTable = 2;
@@ -19,6 +18,7 @@
   removeColumn.addEventListener('click', remColumn);
 
   function addRow() {
+    const allTr = document.querySelector('tr');
     const tr = document.createElement('tr');
 
     if (currentSizeRow >= maxTable) {
