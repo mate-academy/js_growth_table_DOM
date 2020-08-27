@@ -13,15 +13,8 @@ removeColumn.addEventListener('click', () => {
   [...row].map(tr => {
     tr.lastElementChild.remove();
 
-    switch (tr.childElementCount) {
-      case 2:
-        removeColumn.disabled = true;
-        break;
-
-      case 9:
-        addColumn.disabled = false;
-        break;
-    }
+    removeColumn.disabled = (tr.childElementCount === 2);
+    addColumn.disabled = (tr.childElementCount === 10);
   });
 });
 
@@ -33,15 +26,8 @@ addColumn.addEventListener('click', () => {
 
     tr.append(td);
 
-    switch (tr.childElementCount) {
-      case 3:
-        removeColumn.disabled = false;
-        break;
-
-      case 10:
-        addColumn.disabled = true;
-        break;
-    }
+    removeColumn.disabled = (tr.childElementCount === 2);
+    addColumn.disabled = (tr.childElementCount === 10);
   });
 });
 
@@ -50,27 +36,13 @@ addRow.addEventListener('click', () => {
 
   tbody.append(row[0].cloneNode(true));
 
-  switch (tbody.childElementCount) {
-    case 3:
-      removeRow.disabled = false;
-      break;
-
-    case 10:
-      addRow.disabled = true;
-      break;
-  }
+  removeRow.disabled = (tbody.childElementCount === 2);
+  addRow.disabled = (tbody.childElementCount === 10);
 });
 
 removeRow.addEventListener('click', () => {
   tbody.lastChild.remove();
 
-  switch (tbody.childElementCount) {
-    case 2:
-      removeRow.disabled = true;
-      break;
-
-    case 9:
-      addRow.disabled = false;
-      break;
-  }
+  removeRow.disabled = (tbody.childElementCount === 2);
+  addRow.disabled = (tbody.childElementCount === 10);
 });
