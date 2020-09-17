@@ -14,7 +14,7 @@ container.addEventListener('click', (event) => {
   };
 
   if (event.target === remColumn) {
-    [...row].forEach(elemtd => elemtd.lastChild.remove());
+    [...row].forEach(elemtd => elemtd.lastElementChild.remove());
   };
 
   if (event.target === appRow) {
