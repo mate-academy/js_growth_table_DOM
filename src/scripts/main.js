@@ -32,7 +32,7 @@ appendRow.addEventListener('click', () => {
 
   const row = document.createElement('tr');
 
-  row.innerHTML = `<td></td>`.repeat(rows[0].cells.length);
+  row.innerHTML = `<td></td>`.repeat(cells.length);
 
   table.append(row);
 });
@@ -48,7 +48,7 @@ removeColumn.addEventListener('click', () => {
 
   [...rows].forEach(row => {
     row.lastElementChild.remove();
-  })
+  });
 });
 
 appendColumn.addEventListener('click', () => {
