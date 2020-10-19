@@ -7,6 +7,9 @@ const removeRowButton = document.querySelector('.remove-row');
 const addColumnButton = document.querySelector('.append-column');
 const removeColumnButton = document.querySelector('.remove-column');
 
+const maxLength = 10;
+const minLength = 2;
+
 addRowButton.addEventListener('click', (event) => {
   const row = document.createElement('tr');
 
@@ -17,7 +20,7 @@ addRowButton.addEventListener('click', (event) => {
   tableBody.append(row);
   removeRowButton.disabled = false;
 
-  if (tableBody.rows.length >= 10) {
+  if (tableBody.rows.length >= maxLength) {
     addRowButton.disabled = true;
   }
 });
@@ -26,7 +29,7 @@ removeRowButton.addEventListener('click', (event) => {
   tableBody.removeChild(tableBody.lastElementChild);
   addRowButton.disabled = false;
 
-  if (tableBody.rows.length <= 2) {
+  if (tableBody.rows.length <= minLength) {
     removeRowButton.disabled = true;
   }
 });
@@ -38,7 +41,7 @@ addColumnButton.addEventListener('click', (event) => {
 
   removeColumnButton.disabled = false;
 
-  if (tableBody.rows[0].cells.length >= 10) {
+  if (tableBody.rows[0].cells.length >= maxLength) {
     addColumnButton.disabled = true;
   }
 });
@@ -50,7 +53,7 @@ removeColumnButton.addEventListener('click', (event) => {
 
   addColumnButton.disabled = false;
 
-  if (tableBody.rows[0].cells.length <= 2) {
+  if (tableBody.rows[0].cells.length <= minLength) {
     removeColumnButton.disabled = true;
   }
 });
