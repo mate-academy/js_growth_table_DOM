@@ -5,35 +5,27 @@ const removeRow = document.querySelector('.remove-row');
 const appendColumn = document.querySelector('.append-column');
 const removeColumn = document.querySelector('.remove-column');
 const tbody = document.querySelector('.field tbody');
+const min = 2;
+const max = 10;
 
 appendRow.onclick = () => {
-  if (removeRow.disabled) {
-    removeRow.disabled = false;
-  }
+  removeRow.disabled = false;
 
   tbody.append(tbody.children[0].cloneNode(true));
 
-  if (tbody.children.length === 10) {
-    appendRow.disabled = true;
-  }
+  appendRow.disabled = tbody.children.length === max;
 };
 
 removeRow.onclick = () => {
-  if (appendRow.disabled) {
-    appendRow.disabled = false;
-  }
+  appendRow.disabled = false;
 
   tbody.children[0].remove();
 
-  if (tbody.children.length === 2) {
-    removeRow.disabled = true;
-  }
+  removeRow.disabled = tbody.children.length === min;
 };
 
 appendColumn.onclick = () => {
-  if (removeColumn.disabled) {
-    removeColumn.disabled = false;
-  }
+  removeColumn.disabled = false;
 
   for (let i = 0; i < tbody.children.length; i++) {
     const td = tbody.children[i].cells[0];
@@ -41,21 +33,15 @@ appendColumn.onclick = () => {
     td.before(td.cloneNode(true));
   }
 
-  if (tbody.children[0].cells.length === 10) {
-    appendColumn.disabled = true;
-  }
+  appendColumn.disabled = tbody.children[0].cells.length === max;
 };
 
 removeColumn.onclick = () => {
-  if (appendColumn.disabled) {
-    appendColumn.disabled = false;
-  }
+  appendColumn.disabled = false;
 
   for (let i = 0; i < tbody.children.length; i++) {
     tbody.children[i].cells[0].remove();
   }
 
-  if (tbody.children[0].cells.length === 2) {
-    removeColumn.disabled = true;
-  }
+  removeColumn.disabled = tbody.children[0].cells.length === min;
 };
