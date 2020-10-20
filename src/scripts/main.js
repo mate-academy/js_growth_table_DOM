@@ -14,49 +14,41 @@ const max = 10;
 container.addEventListener('click', event => {
   const btn = event.target;
 
-  if ([...btn.classList].includes('append-row')) {
+  if (btn.classList.contains('append-row')) {
     table.rows[0].before(table.rows[0].cloneNode(true));
+
+    table.rows.length < max
+      ? appendRowBtn.disabled = false
+      : appendRowBtn.disabled = true;
   }
 
-  if ([...btn.classList].includes('remove-row')) {
+  if (btn.classList.contains('remove-row')) {
     table.rows[0].remove();
+
+    table.rows.length > min
+      ? removeRowBtn.disabled = false
+      : removeRowBtn.disabled = true;
   }
 
-  if ([...btn.classList].includes('append-column')) {
+  if (btn.classList.contains('append-column')) {
     for (let i = 0; i < table.rows.length; i++) {
       const cell = table.rows[i].cells[0];
 
       cell.before(table.rows[0].cells[0].cloneNode(true));
     }
+
+    table.rows[0].children.length < max
+      ? appendColumnBtn.disabled = false
+      : appendColumnBtn.disabled = true;
   }
 
-  if ([...btn.classList].includes('remove-column')) {
+  if (btn.classList.contains('remove-column')) {
     for (let i = 0; i < table.rows.length; i++) {
       table.rows[i].cells[0].remove();
     }
-  }
 
-  if (table.rows.length < max) {
-    appendRowBtn.disabled = false;
-  } else {
-    appendRowBtn.disabled = true;
-  }
-
-  if (table.rows.length > min) {
-    removeRowBtn.disabled = false;
-  } else {
-    removeRowBtn.disabled = true;
-  }
-
-  if (table.rows[0].children.length < max) {
-    appendColumnBtn.disabled = false;
-  } else {
-    appendColumnBtn.disabled = true;
-  }
-
-  if (table.rows[0].children.length > min) {
-    removeColumnBtn.disabled = false;
-  } else {
-    removeColumnBtn.disabled = true;
+    table.rows[0].children.length > min
+      ? removeColumnBtn.disabled = false
+      : removeColumnBtn.disabled = true;
   }
 });
