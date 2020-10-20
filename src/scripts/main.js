@@ -1,6 +1,8 @@
 'use strict';
 
 const tableBody = document.querySelector('.field').firstElementChild;
+const rows = [...tableBody.children];
+
 const appendRow = document.querySelector('.append-row');
 const removeRow = document.querySelector('.remove-row');
 const appendColumn = document.querySelector('.append-column');
@@ -33,8 +35,6 @@ removeRow.addEventListener('click', () => {
 });
 
 appendColumn.addEventListener('click', () => {
-  const rows = [...tableBody.children];
-
   for (let i = 0; i < rows.length; i++) {
     rows[i].append(document.createElement('td'));
   }
@@ -46,8 +46,6 @@ appendColumn.addEventListener('click', () => {
 });
 
 removeColumn.addEventListener('click', () => {
-  const rows = [...tableBody.children];
-
   for (let i = 0; i < rows.length; i++) {
     rows[i].lastElementChild.remove();
   }
