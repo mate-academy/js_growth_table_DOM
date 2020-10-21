@@ -18,20 +18,16 @@ addRowButton.addEventListener('click', (event) => {
   }
 
   tableBody.append(row);
-  removeRowButton.disabled = false;
 
-  if (tableBody.rows.length >= maxLength) {
-    addRowButton.disabled = true;
-  }
+  removeRowButton.disabled = false;
+  addRowButton.disabled = tableBody.rows.length >= maxLength;
 });
 
 removeRowButton.addEventListener('click', (event) => {
   tableBody.removeChild(tableBody.lastElementChild);
-  addRowButton.disabled = false;
 
-  if (tableBody.rows.length <= minLength) {
-    removeRowButton.disabled = true;
-  }
+  addRowButton.disabled = false;
+  removeRowButton.disabled = tableBody.rows.length <= minLength;
 });
 
 addColumnButton.addEventListener('click', (event) => {
@@ -40,10 +36,7 @@ addColumnButton.addEventListener('click', (event) => {
   }
 
   removeColumnButton.disabled = false;
-
-  if (tableBody.rows[0].cells.length >= maxLength) {
-    addColumnButton.disabled = true;
-  }
+  addColumnButton.disabled = tableBody.rows[0].cells.length >= maxLength;
 });
 
 removeColumnButton.addEventListener('click', (event) => {
@@ -52,8 +45,5 @@ removeColumnButton.addEventListener('click', (event) => {
   }
 
   addColumnButton.disabled = false;
-
-  if (tableBody.rows[0].cells.length <= minLength) {
-    removeColumnButton.disabled = true;
-  }
+  removeColumnButton.disabled = tableBody.rows[0].cells.length <= minLength;
 });
