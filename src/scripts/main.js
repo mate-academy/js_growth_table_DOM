@@ -6,15 +6,16 @@ const appendColumn = document.querySelector('.append-column');
 const removeColumn = document.querySelector('.remove-column');
 const field = document.querySelector('.field');
 const rows = field.rows;
-const max = 10;
-const min = 2;
+
+const maxGrowthCount = 10;
+const minGrowthCount = 2;
 
 appendRow.addEventListener('click', () => {
   removeRow.disabled = false;
 
   field.append(rows[0].cloneNode(true));
 
-  if (rows.length === max) {
+  if (rows.length === maxGrowthCount) {
     appendRow.disabled = true;
   }
 });
@@ -24,7 +25,7 @@ removeRow.addEventListener('click', () => {
 
   rows[rows.length - 1].remove();
 
-  if (rows.length === min) {
+  if (rows.length === minGrowthCount) {
     removeRow.disabled = true;
   }
 });
@@ -35,7 +36,7 @@ appendColumn.addEventListener('click', () => {
   [...rows].forEach(row => {
     row.append(document.createElement('td'));
 
-    if (row.cells.length === max) {
+    if (row.cells.length === maxGrowthCount) {
       appendColumn.disabled = true;
     }
   });
@@ -47,7 +48,7 @@ removeColumn.addEventListener('click', () => {
   [...rows].forEach(row => {
     row.cells[row.cells.length - 1].remove();
 
-    if (row.cells.length === min) {
+    if (row.cells.length === minGrowthCount) {
       removeColumn.disabled = true;
     }
   });
