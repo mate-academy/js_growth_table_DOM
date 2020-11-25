@@ -69,7 +69,7 @@ describe('Table', () => {
     cy.get('@columns').should('have.length', 2)
   });
 
-  it('remove row button should be disabled', () => {
+  it('remove row button should be disabled when only 2 rows exist', () => {
     cy.get('.remove-row').click().click();
     cy.get('.remove-row').should('be.disabled');
   });
