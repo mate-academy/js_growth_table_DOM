@@ -1,37 +1,44 @@
 'use strict';
 
-Cypress.Commands.add('multiClick',
-(selector) => {
-  for (let n = 0; n < 7; n++) {
+Cypress.Commands.add('clickButton',
+(selector, times) => {
+  for (let n = 0; n < times; n++) {
     cy.get(selector).click( {force: true} );
   }
 });
 
 describe('Table', () => {
   beforeEach(() => {
-    cy.visit('/');
+    cy.visit('');
     cy.get('tbody > tr').as('rows');
     cy.get('tbody :nth-child(1) :nth-child(n)').as('columns');
-    cy.get('.remove-row').click().as('rmRow');
-    cy.get('.remove-column').click().as('rmColumn');
   });
 
   it('should have 4 rows by default', () => {
-    cy.get('@rows').should('have.length', 4)
+    cy.get('@rows').should('have.length', 4);
+  });
+
+  it('should add 1 row by click', () => {
+    cy.get('.append-row').click();
+    cy.get('@rows').should('have.length', 5);
   });
 
   it('should have 4 columns by default', () => {
-    cy.get('@columns').should('have.length', 4)
+    cy.get('@columns').should('have.length', 4);
   });
 
-  it.only('should have max 10 columns', () => {
-    cy.multiClick('.append-column');
-    cy.get('tbody > :nth-child(1) > :nth-child(n)')
-      .should('have.length', 10)
+  it('should add 1 column by click', () => {
+    cy.get('.append-column').click();
+    cy.get('@columns').should('have.length', 5);
+  });
+
+  it('should have max 10 columns', () => {
+    cy.clickButton('.append-column', 7);
+    cy.get('@columns').should('have.length', 10)
   });
 
   it('add column button should be disabled after 10 column', () => {
-    cy.multiClick('.append-column')
+    cy.clickButton('.append-column', 7)
     cy.get('.append-column').should('be.disabled');
   });
 
@@ -41,34 +48,34 @@ describe('Table', () => {
   });
 
   it('should have max 10 rows', () => {
-    cy.multiClick('.append-row')
+    cy.clickButton('.append-row', 7)
     cy.get(':nth-child(7) > :nth-child(1)').should('exist');
   });
 
   it('add row button should be disabled after 10 rows', () => {
-    cy.multiClick('.append-row');
+    cy.clickButton('.append-row', 7);
     cy.get('.append-row').should('be.disabled');
   });
 
-  it.only('should remove one row', () => {
-    cy.get('@rmRow');
+  it('should remove one row', () => {
+    cy.get('.remove-row').click();
     cy.get('@rows').should('have.length', 3)
   });
 
-  it.only('should have 2 columns and 2 rows minimum', () => {
-    cy.get('@rmRow').click();
-    cy.get('@rmColumn').click();
+  it('should have 2 columns and 2 rows minimum', () => {
+    cy.get('.remove-row').click().click();
+    cy.get('.remove-column').click().click();
     cy.get('@rows').should('have.length', 2)
     cy.get('@columns').should('have.length', 2)
   });
 
-  it.only('remove row button should be disabled', () => {
-    cy.get('@rmRow').click();
+  it('remove row button should be disabled', () => {
+    cy.get('.remove-row').click().click();
     cy.get('.remove-row').should('be.disabled');
   });
 
   it('remove column button should be disabled', () => {
-    cy.get('@rmColumn').click();
+    cy.get('.remove-column').click().click();
     cy.get('.remove-column').should('be.disabled');
   });
 });
