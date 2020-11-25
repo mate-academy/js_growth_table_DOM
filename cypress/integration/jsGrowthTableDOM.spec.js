@@ -74,7 +74,7 @@ describe('Table', () => {
     cy.get('.remove-row').should('be.disabled');
   });
 
-  it('remove column button should be disabled', () => {
+  it('remove column button should be disabled when only 2 columns exist', () => {
     cy.get('.remove-column').click().click();
     cy.get('.remove-column').should('be.disabled');
   });
