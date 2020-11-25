@@ -9,7 +9,7 @@ Cypress.Commands.add('clickButton',
 
 describe('Table', () => {
   beforeEach(() => {
-    cy.visit('');
+    cy.visit('/');
     cy.get('tbody > tr').as('rows');
     cy.get('tbody :nth-child(1) :nth-child(n)').as('columns');
   });
