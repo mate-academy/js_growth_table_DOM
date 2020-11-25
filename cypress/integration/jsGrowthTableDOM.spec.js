@@ -39,6 +39,7 @@ describe('Table', () => {
   });
 
   it('add column button should be disabled after 10 column', () => {
+    // 4 columns by default and click 7 times to add 7 columns
     cy.clickButton('.append-column', 7)
     cy.get('.append-column').should('be.disabled');
   });
@@ -49,11 +50,13 @@ describe('Table', () => {
   });
 
   it('should have max 10 rows', () => {
+    // 4 columns by default and click 7 times to add 7 rows
     cy.clickButton('.append-row', 7)
     cy.get(':nth-child(7) > :nth-child(1)').should('exist');
   });
 
   it('add row button should be disabled after 10 rows', () => {
+    // 4 columns by default and click 7 times to add 7 rows
     cy.clickButton('.append-row', 7);
     cy.get('.append-row').should('be.disabled');
   });
@@ -70,12 +73,14 @@ describe('Table', () => {
     cy.get('@columns').should('have.length', 2)
   });
 
-  it('remove row button should be disabled when only 2 rows exist', () => {
+  it(`remove row button should be disabled
+      when only 2 rows exist`, () => {
     cy.get('.remove-row').click().click();
     cy.get('.remove-row').should('be.disabled');
   });
 
-  it('remove column button should be disabled when only 2 columns exist', () => {
+  it(`remove column button should be disabled
+      when only 2 columns exist`, () => {
     cy.get('.remove-column').click().click();
     cy.get('.remove-column').should('be.disabled');
   });
