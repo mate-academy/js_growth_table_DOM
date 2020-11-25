@@ -33,6 +33,7 @@ describe('Table', () => {
   });
 
   it('should have max 10 columns', () => {
+    // 4 columns by default and click 7 times to add 7 columns
     cy.clickButton('.append-column', 7);
     cy.get('@columns').should('have.length', 10)
   });
