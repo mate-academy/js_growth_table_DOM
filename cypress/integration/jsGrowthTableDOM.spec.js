@@ -39,8 +39,8 @@ describe('Table', () => {
   });
 
   it('add column button should be disabled after 10 column', () => {
-    // 4 columns by default and click 7 times to add 7 columns
-    cy.clickButton('.append-column', 7)
+    // 4 columns by default and click 6 times to add 6 columns
+    cy.clickButton('.append-column', 6)
     cy.get('.append-column').should('be.disabled');
   });
 
@@ -52,12 +52,12 @@ describe('Table', () => {
   it('should have max 10 rows', () => {
     // 4 columns by default and click 7 times to add 7 rows
     cy.clickButton('.append-row', 7)
-    cy.get(':nth-child(7) > :nth-child(1)').should('exist');
+    cy.get('@rows').should('have.length', 10)
   });
 
   it('add row button should be disabled after 10 rows', () => {
-    // 4 columns by default and click 7 times to add 7 rows
-    cy.clickButton('.append-row', 7);
+    // 4 columns by default and click 6 times to add 6 rows
+    cy.clickButton('.append-row', 6);
     cy.get('.append-row').should('be.disabled');
   });
 
