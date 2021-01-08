@@ -16,7 +16,7 @@ container.addEventListener('click', (e) => {
   const lastRow = table.rows[table.rows.length - 1];
 
   switch (true) {
-    case (elem === appendRow) :
+    case (elem === appendRow && !appendRow.disabled) :
       tBody.append(lastRow.cloneNode(true));
 
       evalSize(rows, appendRow, removeRow);
@@ -28,7 +28,7 @@ container.addEventListener('click', (e) => {
       evalSize(rows, appendRow, removeRow);
       break;
 
-    case (elem === appendCol) :
+    case (elem === appendCol && !appendCol.disabled) :
       [...rows].forEach(row => {
         const clone = row.lastElementChild.cloneNode(true);
 
