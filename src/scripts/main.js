@@ -5,17 +5,19 @@ const addRow = document.querySelector('.append-row');
 const delRow = document.querySelector('.remove-row');
 const addCol = document.querySelector('.append-column');
 const delCol = document.querySelector('.remove-column');
+const sizeMin = 2;
+const sizeMax = 10;
 
 addRow.addEventListener('click', () => {
   const clone = tableBody.firstElementChild.cloneNode(true);
 
   tableBody.append(clone);
-  buttonCheck();
+  buttonCheck(sizeMin, sizeMax);
 });
 
 delRow.addEventListener('click', () => {
   tableBody.lastElementChild.remove();
-  buttonCheck();
+  buttonCheck(sizeMin, sizeMax);
 });
 
 addCol.addEventListener('click', () => {
@@ -24,31 +26,31 @@ addCol.addEventListener('click', () => {
 
     return e.append(clone);
   });
-  buttonCheck();
+  buttonCheck(sizeMin, sizeMax);
 });
 
 delCol.addEventListener('click', () => {
   [...tableBody.children].map(e => e.lastElementChild.remove());
-  buttonCheck();
+  buttonCheck(sizeMin, sizeMax);
 });
 
-function buttonCheck() {
+function buttonCheck(firstParam, secondParam) {
   const colLength = [...tableBody.children][0].children.length;
   const rowLength = tableBody.children.length;
 
-  rowLength === 10
+  rowLength === secondParam
     ? addRow.disabled = true
     : addRow.disabled = false;
 
-  rowLength === 2
+  rowLength === firstParam
     ? delRow.disabled = true
     : delRow.disabled = false;
 
-  colLength === 10
+  colLength === secondParam
     ? addCol.disabled = true
     : addCol.disabled = false;
 
-  colLength === 2
+  colLength === firstParam
     ? delCol.disabled = true
     : delCol.disabled = false;
 }
