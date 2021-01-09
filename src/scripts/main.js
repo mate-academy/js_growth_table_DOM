@@ -1,45 +1,60 @@
 'use strict';
 
-const content = document.querySelector('.container');
+const tableBody = document.querySelector('tbody');
+const allTR = [...tableBody.children];
+const addRow = document.querySelector('.append-row');
+const delRow = document.querySelector('.remove-row');
+const addCol = document.querySelector('.append-column');
+const delCol = document.querySelector('.remove-column');
 
-function rebuildTable(target) {
-  const tableMain = document.querySelector('.field');
-  const parentTR = tableMain.children[0];
-  const allTR = [...document.querySelectorAll('tr')];
+addRow.addEventListener('click', () => {
+  const clone = tableBody.firstElementChild.cloneNode(true);
 
-  if (target.classList.contains('append-row')
-    && parentTR.children.length < 10) {
-    const cloneTR = parentTR.firstChild.cloneNode(true);
+  tableBody.append(clone);
+  buttonCheck();
+});
 
-    parentTR.append(cloneTR);
+delRow.addEventListener('click', () => {
+  tableBody.lastElementChild.remove();
+  buttonCheck();
+});
+
+addCol.addEventListener('click', () => {
+  allTR.map(e => {
+    const clone = allTR[0].firstElementChild.cloneNode();
+
+    return e.append(clone);
+  });
+  buttonCheck();
+});
+
+delCol.addEventListener('click', () => {
+  allTR.map(e => e.lastElementChild.remove());
+  buttonCheck();
+});
+
+function buttonCheck() {
+  if (tableBody.children.length === 10) {
+    addRow.disabled = true;
+  } else {
+    addRow.disabled = false;
   }
 
-  if (target.classList.contains('remove-row')
-    && parentTR.children.length > 2) {
-    parentTR.lastChild.remove();
+  if (tableBody.children.length === 2) {
+    delRow.disabled = true;
+  } else {
+    delRow.disabled = false;
   }
 
-  if (target.classList.contains('append-column')
-    && allTR[0].children.length < 10) {
-    for (let i = 0; i < allTR.length; i++) {
-      const cloneTD = allTR[0].firstElementChild.cloneNode(true);
-
-      allTR[i].append(cloneTD);
-    }
+  if (allTR[0].children.length === 10) {
+    addCol.disabled = true;
+  } else {
+    addCol.disabled = false;
   }
 
-  if (target.classList.contains('remove-column')
-    && allTR[0].children.length > 2) {
-    allTR.map(element => element.lastChild.remove());
+  if (allTR[0].children.length === 2) {
+    delCol.disabled = true;
+  } else {
+    delCol.disabled = false;
   }
 }
-
-content.addEventListener('click', (e) => {
-  const item = e.target;
-
-  if (item.tagName !== 'BUTTON') {
-    return;
-  }
-
-  rebuildTable(item);
-});
