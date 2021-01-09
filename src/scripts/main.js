@@ -1,7 +1,6 @@
 'use strict';
 
 const tableBody = document.querySelector('tbody');
-const allTR = [...tableBody.children];
 const addRow = document.querySelector('.append-row');
 const delRow = document.querySelector('.remove-row');
 const addCol = document.querySelector('.append-column');
@@ -20,8 +19,8 @@ delRow.addEventListener('click', () => {
 });
 
 addCol.addEventListener('click', () => {
-  allTR.map(e => {
-    const clone = allTR[0].firstElementChild.cloneNode();
+  [...tableBody.children].map(e => {
+    const clone = [...tableBody.children][0].firstElementChild.cloneNode();
 
     return e.append(clone);
   });
@@ -29,7 +28,7 @@ addCol.addEventListener('click', () => {
 });
 
 delCol.addEventListener('click', () => {
-  allTR.map(e => e.lastElementChild.remove());
+  [...tableBody.children].map(e => e.lastElementChild.remove());
   buttonCheck();
 });
 
@@ -46,13 +45,13 @@ function buttonCheck() {
     delRow.disabled = false;
   }
 
-  if (allTR[0].children.length === 10) {
+  if ([...tableBody.children][0].children.length === 10) {
     addCol.disabled = true;
   } else {
     addCol.disabled = false;
   }
 
-  if (allTR[0].children.length === 2) {
+  if ([...tableBody.children][0].children.length === 2) {
     delCol.disabled = true;
   } else {
     delCol.disabled = false;
