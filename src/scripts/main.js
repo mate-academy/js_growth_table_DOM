@@ -34,23 +34,23 @@ delCol.addEventListener('click', () => {
   buttonCheck(sizeMin, sizeMax);
 });
 
-function buttonCheck(firstParam, secondParam) {
+function buttonCheck(min, max) {
   const colLength = [...tableBody.children][0].children.length;
   const rowLength = tableBody.children.length;
 
-  rowLength === secondParam
+  rowLength === max
     ? addRow.disabled = true
     : addRow.disabled = false;
 
-  rowLength === firstParam
+  rowLength === min
     ? delRow.disabled = true
     : delRow.disabled = false;
 
-  colLength === secondParam
+  colLength === max
     ? addCol.disabled = true
     : addCol.disabled = false;
 
-  colLength === firstParam
+  colLength === min
     ? delCol.disabled = true
     : delCol.disabled = false;
 }
