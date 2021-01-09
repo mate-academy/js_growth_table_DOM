@@ -33,6 +33,8 @@ delCol.addEventListener('click', () => {
 });
 
 function buttonCheck() {
+  const colLength = [...tableBody.children][0].children.length;
+
   if (tableBody.children.length === 10) {
     addRow.disabled = true;
   } else {
@@ -45,13 +47,13 @@ function buttonCheck() {
     delRow.disabled = false;
   }
 
-  if ([...tableBody.children][0].children.length === 10) {
+  if (colLength === 10) {
     addCol.disabled = true;
   } else {
     addCol.disabled = false;
   }
 
-  if ([...tableBody.children][0].children.length === 2) {
+  if (colLength === 2) {
     delCol.disabled = true;
   } else {
     delCol.disabled = false;
