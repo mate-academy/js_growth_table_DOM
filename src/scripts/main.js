@@ -34,28 +34,21 @@ delCol.addEventListener('click', () => {
 
 function buttonCheck() {
   const colLength = [...tableBody.children][0].children.length;
+  const rowLength = tableBody.children.length;
 
-  if (tableBody.children.length === 10) {
-    addRow.disabled = true;
-  } else {
-    addRow.disabled = false;
-  }
+  rowLength === 10
+    ? addRow.disabled = true
+    : addRow.disabled = false;
 
-  if (tableBody.children.length === 2) {
-    delRow.disabled = true;
-  } else {
-    delRow.disabled = false;
-  }
+  rowLength === 2
+    ? delRow.disabled = true
+    : delRow.disabled = false;
 
-  if (colLength === 10) {
-    addCol.disabled = true;
-  } else {
-    addCol.disabled = false;
-  }
+  colLength === 10
+    ? addCol.disabled = true
+    : addCol.disabled = false;
 
-  if (colLength === 2) {
-    delCol.disabled = true;
-  } else {
-    delCol.disabled = false;
-  }
+  colLength === 2
+    ? delCol.disabled = true
+    : delCol.disabled = false;
 }
