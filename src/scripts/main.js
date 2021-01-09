@@ -16,10 +16,8 @@ addRow.addEventListener('click', e => {
 
   const rowToAdd = tableBody.children[tableBody.children.length - 1];
 
-  if (rowsCount <= 10) {
-    tableBody.append(rowToAdd.cloneNode(true));
-    deleteRow.removeAttribute('disabled');
-  }
+  tableBody.append(rowToAdd.cloneNode(true));
+  deleteRow.removeAttribute('disabled');
 
   if (rowsCount === 10) {
     e.target.setAttribute('disabled', 'true');
@@ -31,10 +29,8 @@ deleteRow.addEventListener('click', e => {
 
   const rowToDelete = tableBody.children[tableBody.children.length - 1];
 
-  if (rowsCount >= 2) {
-    tableBody.removeChild(rowToDelete);
-    addRow.removeAttribute('disabled');
-  }
+  tableBody.removeChild(rowToDelete);
+  addRow.removeAttribute('disabled');
 
   if (rowsCount === 2) {
     e.target.setAttribute('disabled', 'true');
@@ -44,13 +40,11 @@ deleteRow.addEventListener('click', e => {
 addColumn.addEventListener('click', e => {
   columnsCount++;
 
-  if (columnsCount <= 10) {
-    for (const each of tableBody.children) {
-      const cellToAdd = each.lastElementChild;
+  for (const each of tableBody.children) {
+    const cellToAdd = each.lastElementChild;
 
-      each.append(cellToAdd.cloneNode(true));
-      deleteColumn.removeAttribute('disabled');
-    }
+    each.append(cellToAdd.cloneNode(true));
+    deleteColumn.removeAttribute('disabled');
   }
 
   if (columnsCount === 10) {
@@ -61,13 +55,11 @@ addColumn.addEventListener('click', e => {
 deleteColumn.addEventListener('click', e => {
   columnsCount--;
 
-  if (columnsCount >= 2) {
-    for (const each of tableBody.children) {
-      const cellToRemove = each.lastElementChild;
+  for (const each of tableBody.children) {
+    const cellToRemove = each.lastElementChild;
 
-      each.removeChild(cellToRemove);
-      addColumn.removeAttribute('disabled');
-    }
+    each.removeChild(cellToRemove);
+    addColumn.removeAttribute('disabled');
   }
 
   if (columnsCount === 2) {
