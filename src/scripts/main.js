@@ -4,39 +4,31 @@ const appendRow = document.querySelector('.append-row');
 const appendCol = document.querySelector('.append-column');
 const removeRow = document.querySelector('.remove-row');
 const removeCol = document.querySelector('.remove-column');
+const table = document.querySelector('tbody');
 
 appendRow.addEventListener('click', () => {
-  const list = document.querySelectorAll('tr');
-  const table = document.querySelector('tbody');
-
-  table.append(list[0].cloneNode(true));
+  table.append(table.children[0].cloneNode(true));
   checkLength();
 });
 
 appendCol.addEventListener('click', () => {
-  const list = document.querySelectorAll('tr');
-
-  list.forEach(row => {
-    row.children[0].before(row.children[0].cloneNode(true));
+  [...table.children].forEach(cell => {
+    cell.append(cell.lastElementChild.cloneNode(true));
   });
 
   checkLength();
 });
 
 removeCol.addEventListener('click', () => {
-  const list = document.querySelectorAll('tr');
-
-  list.forEach(row => {
-    row.children[0].remove();
+  [...table.children].forEach(cell => {
+    cell.lastElementChild.remove();
   });
 
   checkLength();
 });
 
 removeRow.addEventListener('click', () => {
-  const list = document.querySelectorAll('tr');
-
-  list[list.length - 1].remove();
+  table.children[0].remove();
 
   checkLength();
 });
