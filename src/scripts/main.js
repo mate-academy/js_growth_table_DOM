@@ -7,7 +7,7 @@ const removeCol = document.querySelector('.remove-column');
 const table = document.querySelector('tbody');
 
 appendRow.addEventListener('click', () => {
-  table.append(table.children[0].cloneNode(true));
+  table.append(table.lastElementChild.cloneNode(true));
   checkLength();
 });
 
@@ -28,7 +28,7 @@ removeCol.addEventListener('click', () => {
 });
 
 removeRow.addEventListener('click', () => {
-  table.children[0].remove();
+  table.lastElementChild.remove();
 
   checkLength();
 });
