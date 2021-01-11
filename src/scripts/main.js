@@ -8,8 +8,7 @@ const table = document.querySelector('.field');
 const tableBody = table.children[0];
 const rows = tableBody.rows;
 let rowsCount = rows.length;
-const columns = tableBody.children;
-let columnsCount = columns.length;
+let columnsCount = tableBody.children[0].cells.length;
 
 addRow.addEventListener('click', e => {
   rowsCount++;
