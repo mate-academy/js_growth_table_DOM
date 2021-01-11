@@ -23,7 +23,7 @@ Some rules:
 - The min count of rows or columns is 2.
 - If the count of columns or rows reaches maximum or minimum, set disabled the corresponding button.
 
-As always, on JS Advanced course you do not need to change the HTML layout or CSS styles.
+Asways, on JS Advanced course you do not need to change the HTML layout or CSS styles.
 
 Examples:
 ![10x10](./src/images/10x10.png)
