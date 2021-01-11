@@ -8,6 +8,12 @@ const rowRemoverButton = document.querySelector('.remove-row');
 const columnAppenderButton = document.querySelector('.append-column');
 const columnRemoverButton = document.querySelector('.remove-column');
 
+function toDisableButton(item, limit, button) {
+  if (item.length === limit) {
+    button.setAttribute('disabled', 'true');
+  }
+}
+
 function toAddRow() {
   rowAppenderButton.addEventListener('click', () => {
     if (rows.length < 10) {
@@ -16,13 +22,8 @@ function toAddRow() {
       table.append(copyRow);
     }
 
-    if (rows.length === 10) {
-      rowAppenderButton.setAttribute('disabled', 'true');
-    }
-
-    if (rows.length > 2) {
-      rowRemoverButton.removeAttribute('disabled');
-    }
+    toDisableButton(rows, 10, rowAppenderButton);
+    rowRemoverButton.removeAttribute('disabled');
   });
 }
 
@@ -32,13 +33,8 @@ function toRemoveRow() {
       rows[rows.length - 1].remove();
     }
 
-    if (rows.length === 2) {
-      rowRemoverButton.setAttribute('disabled', 'true');
-    }
-
-    if (rows.length < 10) {
-      rowAppenderButton.removeAttribute('disabled');
-    }
+    toDisableButton(rows, 2, rowRemoverButton);
+    rowAppenderButton.removeAttribute('disabled');
   });
 }
 
@@ -51,13 +47,8 @@ function toAddColumn() {
         item.append(copyDate);
       }
 
-      if (item.children.length === 10) {
-        columnAppenderButton.setAttribute('disabled', 'true');
-      }
-
-      if (item.children.length > 2) {
-        columnRemoverButton.removeAttribute('disabled');
-      }
+      toDisableButton(item.children, 10, columnAppenderButton);
+      columnRemoverButton.removeAttribute('disabled');
     });
   });
 }
@@ -69,13 +60,8 @@ function toRemoveColumn() {
         item.lastElementChild.remove();
       }
 
-      if (item.children.length === 2) {
-        columnRemoverButton.setAttribute('disabled', 'true');
-      }
-
-      if (item.children.length < 10) {
-        columnAppenderButton.removeAttribute('disabled');
-      }
+      toDisableButton(item.children, 2, columnRemoverButton);
+      columnAppenderButton.removeAttribute('disabled');
     });
   });
 }
