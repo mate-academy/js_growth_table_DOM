@@ -10,17 +10,17 @@ const columnRemoverButton = document.querySelector('.remove-column');
 
 function toAddRow() {
   rowAppenderButton.addEventListener('click', () => {
-    if (table.children.length < 10) {
+    if (rows.length < 10) {
       const copyRow = itemOfRows.cloneNode(true);
 
       table.append(copyRow);
     }
 
-    if (table.children.length === 10) {
+    if (rows.length === 10) {
       rowAppenderButton.setAttribute('disabled', 'true');
     }
 
-    if (table.children.length > 2) {
+    if (rows.length > 2) {
       rowRemoverButton.removeAttribute('disabled');
     }
   });
@@ -32,7 +32,7 @@ function toRemoveRow() {
       rows[rows.length - 1].remove();
     }
 
-    if (table.children.length === 2) {
+    if (rows.length === 2) {
       rowRemoverButton.setAttribute('disabled', 'true');
     }
 
