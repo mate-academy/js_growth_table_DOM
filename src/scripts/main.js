@@ -7,13 +7,15 @@ const appendColumn = document.querySelector('.append-column');
 const removeColumn = document.querySelector('.remove-column');
 let rows = tableBody.children.length;
 let columns = tableBody.firstElementChild.children.length;
+const minSize = 2;
+const maxSize = 10;
 
 appendRow.addEventListener('click', () => {
   tableBody.append(tableBody.firstElementChild.cloneNode(true));
   rows++;
   removeRow.disabled = false;
 
-  if (rows === 10) {
+  if (rows === maxSize) {
     appendRow.disabled = true;
   }
 });
@@ -23,7 +25,7 @@ removeRow.addEventListener('click', () => {
   rows--;
   appendRow.disabled = false;
 
-  if (rows === 2) {
+  if (rows === minSize) {
     removeRow.disabled = true;
   }
 });
@@ -35,7 +37,7 @@ appendColumn.addEventListener('click', ev => {
   columns++;
   removeColumn.disabled = false;
 
-  if (columns === 10) {
+  if (columns === maxSize) {
     appendColumn.disabled = true;
   }
 });
@@ -45,7 +47,7 @@ removeColumn.addEventListener('click', ev => {
   columns--;
   appendColumn.disabled = false;
 
-  if (columns === 2) {
+  if (columns === minSize) {
     removeColumn.disabled = true;
   }
 });
