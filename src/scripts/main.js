@@ -1,53 +1,53 @@
 'use strict';
 
 const field = document.querySelector('.field tbody');
-const appR = document.querySelector('.append-row');
-const remR = document.querySelector('.remove-row');
-const appC = document.querySelector('.append-column');
-const remC = document.querySelector('.remove-column');
+const appendRowButton = document.querySelector('.append-row');
+const removeRowButton = document.querySelector('.remove-row');
+const appendColumnButton = document.querySelector('.append-column');
+const removeColumnButton = document.querySelector('.remove-column');
 const tr = document.querySelector('tr');
 const td = document.querySelector('td');
-const maxAdd = 10;
-const minRem = 2;
+const maxCellCount = 10;
+const minCellCount = 2;
 
-appR.addEventListener('click', () => {
+appendRowButton.addEventListener('click', () => {
   field.append(tr.cloneNode(true));
 
-  if (field.children.length === maxAdd) {
-    appR.disabled = true;
+  if (field.children.length === maxCellCount) {
+    appendRowButton.disabled = true;
   }
 
-  remR.disabled = false;
+  removeRowButton.disabled = false;
 });
 
-remR.addEventListener('click', () => {
+removeRowButton.addEventListener('click', () => {
   field.lastElementChild.remove();
 
-  if (field.children.length === minRem) {
-    remR.disabled = true;
+  if (field.children.length === minCellCount) {
+    removeRowButton.disabled = true;
   }
-  appR.disabled = false;
+  appendRowButton.disabled = false;
 });
 
-appC.addEventListener('click', () => {
+appendColumnButton.addEventListener('click', () => {
   document.querySelectorAll('tr').forEach(el => {
     el.append(td.cloneNode(true));
   });
 
-  if (tr.childElementCount === maxAdd) {
-    appC.disabled = true;
+  if (tr.childElementCount === maxCellCount) {
+    appendColumnButton.disabled = true;
   }
 
-  remC.disabled = false;
+  removeColumnButton.disabled = false;
 });
 
-remC.addEventListener('click', () => {
+removeColumnButton.addEventListener('click', () => {
   document.querySelectorAll('tr').forEach(el => {
     el.lastElementChild.remove();
   });
 
-  if (tr.childElementCount === minRem) {
-    remC.disabled = true;
+  if (tr.childElementCount === minCellCount) {
+    removeColumnButton.disabled = true;
   }
-  appC.disabled = false;
+  appendColumnButton.disabled = false;
 });
