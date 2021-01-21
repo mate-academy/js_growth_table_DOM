@@ -1,6 +1,5 @@
 'use strict';
 
-//const table = document.querySelector('tbody');
 const container = document.querySelector('.container');
 const appendRowBtn = document.querySelector('.append-row');
 const removeRowBtn = document.querySelector('.remove-row');
@@ -8,7 +7,7 @@ const appendColBtn = document.querySelector('.append-column');
 const removeColBtn = document.querySelector('.remove-column');
 
 container.addEventListener('click', (e) => {
-  const table = document.querySelector('tbody');
+  const table = container.querySelector('tbody');
 
   if (e.target.tagName !== 'BUTTON') {
     return;
@@ -16,11 +15,10 @@ container.addEventListener('click', (e) => {
 
   if (e.target.classList.contains('append-row')) {
     const row = document.createElement('tr');
+    const rowsArr = table.rows[0].querySelectorAll('td');
 
-    for (let i = 0; i < table.rows[0].querySelectorAll('td').length; i++) {
-      const cell = document.createElement('td');
-
-      row.append(cell);
+    for (const el of rowsArr) {
+      row.append(el.cloneNode(true));
     }
 
     table.append(row);
@@ -32,35 +30,25 @@ container.addEventListener('click', (e) => {
 
   const limitRows = table.rows.length;
 
-  limitRows === 10
-    ? appendRowBtn.setAttribute('disabled', 'disabled')
-    : appendRowBtn.disabled = false;
-
-  limitRows === 2
-    ? removeRowBtn.setAttribute('disabled', 'disabled')
-    : removeRowBtn.disabled = false;
+  appendRowBtn.disabled = limitRows > 9;
+  removeRowBtn.disabled = limitRows < 3;
 
   if (e.target.classList.contains('append-column')) {
-    for (let i = 0; i < table.rows.length; i++) {
+    for (const el of table.rows) {
       const cell = document.createElement('td');
 
-      table.rows[i].append(cell);
+      el.append(cell);
     }
   }
 
   if (e.target.classList.contains('remove-column')) {
-    for (let i = 0; i < table.rows.length; i++) {
-      table.rows[i].cells[table.rows[0].cells.length - 1].remove();
+    for (const el of table.rows) {
+      el.cells[table.rows[0].cells.length - 1].remove();
     }
   }
 
-  const limitCells = table.rows[0].cells.length;
+  const amountCells = table.rows[0].cells.length;
 
-  limitCells === 10
-    ? appendColBtn.setAttribute('disabled', 'disabled')
-    : appendColBtn.disabled = false;
-
-  limitCells === 2
-    ? removeColBtn.setAttribute('disabled', 'disabled')
-    : removeColBtn.disabled = false;
+  appendColBtn.disabled = amountCells > 9;
+  removeColBtn.disabled = amountCells < 3;
 });
