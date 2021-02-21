@@ -2,7 +2,6 @@
 
 const tbody = document.querySelector('tbody');
 const row = document.getElementsByTagName('tr');
-// const [...row] = [...row];
 
 const addRowBtn = document.querySelector('.append-row');
 const removeRowBtn = document.querySelector('.remove-row');
