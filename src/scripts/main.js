@@ -9,20 +9,22 @@ const addColumnBtn = document.querySelector('.append-column');
 const removeColumnBtn = document.querySelector('.remove-column');
 
 const td = document.createElement('td');
+const maxLength = 10;
+const minLength = 2;
 
 addRowBtn.onclick = (btn) => {
   const rowClone = tbody.firstChild.cloneNode(true);
 
   tbody.appendChild(rowClone);
 
-  btn.target.disabled = (row.length === 10);
+  btn.target.disabled = (row.length === maxLength);
   removeRowBtn.disabled = false;
 };
 
 removeRowBtn.onclick = (btn) => {
   tbody.lastElementChild.remove();
 
-  btn.target.disabled = (row.length === 2);
+  btn.target.disabled = (row.length === minLength);
   addRowBtn.disabled = false;
 };
 
@@ -31,7 +33,7 @@ addColumnBtn.onclick = (btn) => {
     e.append(td.cloneNode());
   });
 
-  btn.target.disabled = ([...row][0].childElementCount === 10);
+  btn.target.disabled = ([...row][0].childElementCount === maxLength);
   removeColumnBtn.disabled = false;
 };
 
@@ -40,6 +42,6 @@ removeColumnBtn.onclick = (btn) => {
     e.children[0].remove();
   });
 
-  btn.target.disabled = ([...row][0].childElementCount === 2);
+  btn.target.disabled = ([...row][0].childElementCount === minLength);
   addColumnBtn.disabled = false;
 };
