@@ -12,7 +12,7 @@ function addRow() {
 
   tbody.append(newRow);
 
-  if (tbody.children.length === 10) {
+  if (tbody.children.length >= 10) {
     buttonAddRow.disabled = true;
   }
 
@@ -40,7 +40,7 @@ function addColumn() {
     buttonRemoveColumn.disabled = false;
   }
 
-  if (row.children.length === 10) {
+  if (row.children.length >= 10) {
     buttonAddColumn.disabled = true;
   }
 }
