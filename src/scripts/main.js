@@ -7,6 +7,8 @@ const removeColumn = document.querySelector('.remove-column');
 
 const table = document.querySelector('tbody');
 const tableRow = document.querySelector('tr');
+const minElements = 2;
+const maxElements = 10;
 
 function addRow(e) {
   if (e.target === appendRow) {
@@ -14,7 +16,7 @@ function addRow(e) {
     removeRow.disabled = false;
   };
 
-  if (table.children.length >= 10) {
+  if (table.children.length >= maxElements) {
     appendRow.disabled = true;
   }
 }
@@ -25,7 +27,7 @@ function deleteRow(e) {
     appendRow.disabled = false;
   };
 
-  if (table.children.length === 2) {
+  if (table.children.length === minElements) {
     removeRow.disabled = true;
   }
 }
@@ -41,7 +43,7 @@ function addColumn(e) {
     removeColumn.disabled = false;
   };
 
-  if (tableRow.children.length >= 10) {
+  if (tableRow.children.length >= maxElements) {
     appendColumn.disabled = true;
   }
 }
@@ -54,7 +56,7 @@ function deleteColumn(e) {
     appendColumn.disabled = false;
   };
 
-  if (tableRow.children.length === 2) {
+  if (tableRow.children.length === minElements) {
     removeColumn.disabled = true;
   }
 }
