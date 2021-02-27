@@ -8,6 +8,7 @@ const removeColumnButton = document.querySelector('.remove-column');
 function addRow() {
   const field = document.querySelector('.field tbody');
 
+  removeRowButton.disabled = false;
   field.append(field.children[0].cloneNode(true));
 
   if (field.children.length >= 10) {
@@ -19,6 +20,7 @@ function removeRow() {
   const field = document.querySelector('.field tbody');
   const row = document.querySelector('.field tbody tr');
 
+  appendRowButton.disabled = false;
   row.remove();
 
   if (field.children.length < 3) {
@@ -28,6 +30,8 @@ function removeRow() {
 
 function addColumn() {
   const rows = document.querySelectorAll('tr');
+
+  removeColumnButton.disabled = false;
 
   rows.forEach(cell => cell.children[0].before(
     cell.children[0].cloneNode(true)
@@ -42,6 +46,7 @@ function removeColumn() {
   const rows = document.querySelectorAll('tr');
 
   rows.forEach(cell => cell.children[0].remove());
+  appendColumnButton.disabled = false;
 
   if (rows[0].cells.length < 3) {
     removeColumnButton.disabled = true;
