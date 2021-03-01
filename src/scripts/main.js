@@ -5,48 +5,51 @@ const removeRow = document.querySelector('.remove-row');
 const appendColumn = document.querySelector('.append-column');
 const removeColumn = document.querySelector('.remove-column');
 
-const table = document.querySelector('tbody');
+const tableBody = document.querySelector('tbody');
 const tableRow = document.querySelector('tr');
 const minElements = 3;
 const maxElements = 10;
 
-function addRow(e) {
-  table.append(tableRow.cloneNode('cloned'));
+function addRow() {
   removeRow.disabled = false;
+  tableBody.append(tableRow.cloneNode('cloned'));
 
-  if (table.children.length === maxElements) {
+  if (tableBody.children.length === maxElements) {
     appendRow.disabled = true;
   }
 }
 
-function deleteRow(e) {
-  table.children[table.children.length - 1].remove();
+function deleteRow() {
   appendRow.disabled = false;
+  tableBody.children[tableBody.children.length - 1].remove();
 
-  if (table.children.length < minElements) {
+  if (tableBody.children.length < minElements) {
     removeRow.disabled = true;
   }
 }
 
-function addColumn(e) {
-  [...table.rows].forEach(
+function addColumn() {
+  removeColumn.disabled = false;
+
+  [...tableBody.rows].forEach(
     row => {
       const clonedElement = row.cells[0].cloneNode(true);
 
       row.insertBefore(clonedElement, row.cells[0]);
-    });
-  removeColumn.disabled = false;
+    }
+  );
 
   if (tableRow.children.length === maxElements) {
     appendColumn.disabled = true;
   }
 }
 
-function deleteColumn(e) {
-  [...table.rows].forEach(
+function deleteColumn() {
+  appendColumn.disabled = false;
+
+  [...tableBody.rows].forEach(
     row => row.children[row.children.length - 1].remove()
   );
-  appendColumn.disabled = false;
 
   if (tableRow.children.length < minElements) {
     removeColumn.disabled = true;
