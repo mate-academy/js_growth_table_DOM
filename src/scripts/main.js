@@ -52,7 +52,7 @@ removeColumn.addEventListener('click', () => {
   appendColumn.disabled = false;
 
   for (let i = 0; i < fieldRows.length; i++) {
-    field.rows[i].deleteCell(i - 1);
+    field.rows[i].deleteCell(-1);
   }
 
   if (firstFieldCells.length <= minValue) {
