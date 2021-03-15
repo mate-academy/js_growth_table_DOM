@@ -11,15 +11,15 @@ const tr = document.querySelector('tr');
 const field = document.querySelector('.field');
 const fieldRows = field.rows;
 const firstFieldCells = field.rows[0].cells;
-const maxCount = 10;
-const minCount = 2;
+const maxElements = 10;
+const minElements = 2;
 
 appendRowButton.addEventListener('click', () => {
   removeRowButton.disabled = false;
 
   tbody.append(tr.cloneNode(true));
 
-  if (fieldRows.length >= maxCount) {
+  if (fieldRows.length >= maxElements) {
     appendRowButton.disabled = true;
   }
 });
@@ -29,7 +29,7 @@ removeRowButton.addEventListener('click', () => {
 
   field.deleteRow(0);
 
-  if (fieldRows.length <= minCount) {
+  if (fieldRows.length <= minElements) {
     removeRowButton.disabled = true;
   }
 });
@@ -41,7 +41,7 @@ appendColumnButton.addEventListener('click', () => {
     field.rows[i].insertAdjacentHTML('beforeend', '<td></td>');
   }
 
-  if (firstFieldCells.length >= maxCount) {
+  if (firstFieldCells.length >= maxElements) {
     appendColumnButton.disabled = true;
   }
 });
@@ -53,7 +53,7 @@ removeColumnButton.addEventListener('click', () => {
     field.rows[i].deleteCell(-1);
   }
 
-  if (firstFieldCells.length <= minCount) {
+  if (firstFieldCells.length <= minElements) {
     removeColumnButton.disabled = true;
   }
 });
