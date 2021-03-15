@@ -8,15 +8,15 @@ const removeRowButton = document.querySelector('.remove-row');
 const appendColumnButton = document.querySelector('.append-column');
 const removeColumnButton = document.querySelector('.remove-column');
 
-const max = 10;
-const min = 2;
+const maxСоuntOfRowsOrColumns = 10;
+const minСоuntOfRowsOrColumns = 2;
 
 function appendRow() {
   const row = tbody.children[0].cloneNode(true);
 
   tbody.append(row);
 
-  if (tbody.children.length >= max) {
+  if (tbody.children.length >= maxСоuntOfRowsOrColumns) {
     appendRowButton.disabled = true;
   }
 
@@ -26,7 +26,7 @@ function appendRow() {
 function removeRow() {
   tbody.lastElementChild.remove();
 
-  if (tbody.children.length <= min) {
+  if (tbody.children.length <= minСоuntOfRowsOrColumns) {
     removeRowButton.disabled = true;
   }
 
@@ -34,31 +34,31 @@ function removeRow() {
 }
 
 function appendColumn() {
-  for (let i = 0; i < tbody.children.length; i++) {
+  [...tbody.children].map(child => {
     const column = document.createElement('td');
 
-    tbody.children[i].append(column);
-  }
+    child.append(column);
+  });
 
-  if (rows.children.length >= max) {
+  if (rows.children.length >= maxСоuntOfRowsOrColumns) {
     appendColumnButton.disabled = true;
   }
 
-  if (rows.children.length >= min) {
+  if (rows.children.length >= minСоuntOfRowsOrColumns) {
     removeColumnButton.disabled = false;
   }
 }
 
 function removeColumn() {
-  for (let i = 0; i < tbody.children.length; i++) {
-    tbody.children[i].lastElementChild.remove();
-  }
+  [...tbody.children].map(child => {
+    child.lastElementChild.remove();
+  });
 
-  if (rows.children.length <= max) {
+  if (rows.children.length <= maxСоuntOfRowsOrColumns) {
     appendColumnButton.disabled = false;
   }
 
-  if (rows.children.length <= min) {
+  if (rows.children.length <= minСоuntOfRowsOrColumns) {
     removeColumnButton.disabled = true;
   }
 }
