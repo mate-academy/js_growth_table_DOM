@@ -4,6 +4,8 @@ const appendRowButton = document.querySelector('.append-row');
 const appendColumnButton = document.querySelector('.append-column');
 const removeRowButton = document.querySelector('.remove-row');
 const removeColumnButton = document.querySelector('.remove-column');
+const maxCount = 10;
+const minCount = 2;
 
 function appendRow() {
   const tbody = document.querySelector('tbody');
@@ -11,7 +13,7 @@ function appendRow() {
   removeRowButton.disabled = false;
   tbody.append(tbody.children[0].cloneNode(true));
 
-  if (tbody.children.length >= 10) {
+  if (tbody.children.length >= maxCount) {
     appendRowButton.disabled = true;
   }
 }
@@ -22,7 +24,7 @@ function removeRow() {
   appendRowButton.disabled = false;
   tbody.children[0].remove();
 
-  if (tbody.children.length === 2) {
+  if (tbody.children.length === minCount) {
     removeRowButton.disabled = true;
   }
 }
@@ -36,7 +38,7 @@ function appendColumn() {
     row.append(row.children[0].cloneNode(true));
   }
 
-  if (rows[0].children.length >= 10) {
+  if (rows[0].children.length >= maxCount) {
     appendColumnButton.disabled = true;
   }
 }
@@ -50,7 +52,7 @@ function removeColumn() {
     row.children[0].remove();
   }
 
-  if (rows[0].children.length === 2) {
+  if (rows[0].children.length === minCount) {
     removeColumnButton.disabled = true;
   }
 }
