@@ -4,48 +4,34 @@ const table = document.querySelector('.field');
 const tableBody = document.querySelector('tbody');
 const rows = table.rows;
 
-const maxCount = 10;
-const minCount = 2;
+const maxSizeTable = 10;
+const minSizeTable = 2;
 
 const appendRowButton = document.querySelector('.append-row');
 const removeRowButton = document.querySelector('.remove-row');
 const appendColumnButton = document.querySelector('.append-column');
 const removeColumnButton = document.querySelector('.remove-column');
 
-function append(cells, removeButton, addButton) {
-  if (cells.length >= minCount) {
-    removeButton.removeAttribute('disabled');
-  }
-
-  if (cells.length === maxCount) {
-    addButton.setAttribute('disabled', true);
-  }
-}
-
-function remove(cells, removeButton, addButton) {
-  if (cells.length === minCount) {
-    removeButton.setAttribute('disabled', true);
-  }
-
-  if (cells.length <= maxCount) {
-    addButton.removeAttribute('disabled');
-  }
-}
-
 function appendRow() {
   const insertRow = rows[rows.length - 1].cloneNode(true);
 
   tableBody.append(insertRow);
 
-  append(
-    rows, removeRowButton, appendRowButton
-  );
+  removeRowButton.disabled = false;
+
+  if (rows.length === maxSizeTable) {
+    appendRowButton.disabled = true;
+  }
 }
 
 function removeRow() {
   table.deleteRow(rows.length - 1);
 
-  remove(rows, removeRowButton, appendRowButton);
+  appendRowButton.disabled = false;
+
+  if (rows.length === minSizeTable) {
+    removeRowButton.disabled = true;
+  }
 }
 
 function appendColumn() {
@@ -55,9 +41,11 @@ function appendColumn() {
     row.insertCell(indexToInsert);
   }
 
-  append(
-    rows[0].cells, removeColumnButton, appendColumnButton
-  );
+  removeColumnButton.disabled = false;
+
+  if (rows[0].cells.length === maxSizeTable) {
+    appendColumnButton.disabled = true;
+  }
 }
 
 function removeColumn() {
@@ -67,7 +55,11 @@ function removeColumn() {
     row.deleteCell(indexToDelete);
   }
 
-  remove(rows[0].cells, removeColumnButton, appendColumnButton);
+  appendColumnButton.disabled = false;
+
+  if (rows[0].cells.length === minSizeTable) {
+    removeColumnButton.disabled = true;
+  }
 }
 
 appendRowButton.addEventListener('click', appendRow);
