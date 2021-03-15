@@ -2,60 +2,58 @@
 
 // write code here
 
-const appendRow = document.querySelector('.append-row');
-const removeRow = document.querySelector('.remove-row');
-const appendColumn = document.querySelector('.append-column');
-const removeColumn = document.querySelector('.remove-column');
+const appendRowButton = document.querySelector('.append-row');
+const removeRowButton = document.querySelector('.remove-row');
+const appendColumnButton = document.querySelector('.append-column');
+const removeColumnButton = document.querySelector('.remove-column');
+const tbody = document.querySelector('tbody');
+const tr = document.querySelector('tr');
 const field = document.querySelector('.field');
 const fieldRows = field.rows;
 const firstFieldCells = field.rows[0].cells;
-const maxValue = 10;
-const minValue = 2;
+const maxCount = 10;
+const minCount = 2;
 
-appendRow.addEventListener('click', () => {
-  removeRow.disabled = false;
+appendRowButton.addEventListener('click', () => {
+  removeRowButton.disabled = false;
 
-  field.insertRow();
+  tbody.append(tr.cloneNode(true));
 
-  for (let i = 0; i < firstFieldCells.length; i++) {
-    field.rows[field.rows.length - 1].insertCell();
-  }
-
-  if (fieldRows.length >= maxValue) {
-    appendRow.disabled = true;
+  if (fieldRows.length >= maxCount) {
+    appendRowButton.disabled = true;
   }
 });
 
-removeRow.addEventListener('click', () => {
-  appendRow.disabled = false;
+removeRowButton.addEventListener('click', () => {
+  appendRowButton.disabled = false;
 
   field.deleteRow(0);
 
-  if (fieldRows.length <= minValue) {
-    removeRow.disabled = true;
+  if (fieldRows.length <= minCount) {
+    removeRowButton.disabled = true;
   }
 });
 
-appendColumn.addEventListener('click', () => {
-  removeColumn.disabled = false;
+appendColumnButton.addEventListener('click', () => {
+  removeColumnButton.disabled = false;
 
   for (let i = 0; i < fieldRows.length; i++) {
     field.rows[i].insertAdjacentHTML('beforeend', '<td></td>');
   }
 
-  if (firstFieldCells.length >= maxValue) {
-    appendColumn.disabled = true;
+  if (firstFieldCells.length >= maxCount) {
+    appendColumnButton.disabled = true;
   }
 });
 
-removeColumn.addEventListener('click', () => {
-  appendColumn.disabled = false;
+removeColumnButton.addEventListener('click', () => {
+  appendColumnButton.disabled = false;
 
   for (let i = 0; i < fieldRows.length; i++) {
     field.rows[i].deleteCell(-1);
   }
 
-  if (firstFieldCells.length <= minValue) {
-    removeColumn.disabled = true;
+  if (firstFieldCells.length <= minCount) {
+    removeColumnButton.disabled = true;
   }
 });
