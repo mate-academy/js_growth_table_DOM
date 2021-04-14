@@ -7,40 +7,40 @@ const removeColumn = document.querySelector('.remove-column');
 const magicButton = document.querySelector('.container');
 
 magicButton.addEventListener('click', (e) => {
-  const addRowButton = e.target.classList.contains('append-row');
-  const removeRowButton = e.target.classList.contains('remove-row');
-  const addColumnButton = e.target.classList.contains('append-column');
-  const removeColumnButton = e.target.classList.contains('remove-column');
+  switch (e.target.classList[0]) {
+    case 'append-row':
+      const list = document.querySelector('tbody');
+      const row = document.createElement('tr');
+      const count = document.querySelector('tr').children.length;
 
-  if (addRowButton) {
-    const list = document.querySelector('.field');
-    const row = document.createElement('tr');
-    const count = document.querySelector('tr').children.length;
+      for (let i = 0; i < count; i++) {
+        const td = document.createElement('td');
 
-    for (let i = 0; i < count; i++) {
-      const td = document.createElement('td');
+        row.append(td);
+      }
+      list.append(row);
 
-      row.append(td);
-    }
-    list.append(row);
-  }
+      break;
 
-  if (removeRowButton) {
-    const tr = document.querySelectorAll('tr');
+    case 'remove-row':
+      const tr = document.querySelectorAll('tr');
 
-    tr[tr.length - 1].remove();
-  }
+      tr[tr.length - 1].remove();
 
-  if (addColumnButton) {
-    [...document.querySelectorAll('tr')].forEach(item => {
-      item.append(document.createElement('td'));
-    });
-  }
+      break;
 
-  if (removeColumnButton) {
-    [...document.querySelectorAll('tr')].forEach(item => {
-      item.lastChild.remove();
-    });
+    case 'append-column':
+      [...document.querySelectorAll('tr')].forEach(item => {
+        item.append(document.createElement('td'));
+      });
+
+      break;
+
+    case 'remove-column':
+      [...document.querySelectorAll('tr')].forEach(item => {
+        item.children[item.children.length - 1].remove();
+      });
+      break;
   }
 
   addRow.disabled = (document.querySelectorAll('tr').length > 9)
