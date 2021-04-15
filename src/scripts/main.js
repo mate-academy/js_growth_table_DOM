@@ -6,6 +6,34 @@ const addColumn = document.querySelector('.append-column');
 const removeColumn = document.querySelector('.remove-column');
 const magicButton = document.querySelector('.container');
 
+const disColumn = () => {
+  addColumn.disabled = (document.querySelector('tr').children.length > 9)
+    ? true
+    : (document.querySelector('tr').children.length > 2)
+      ? false
+      : null;
+
+  removeColumn.disabled = (document.querySelector('tr').children.length > 2)
+    ? false
+    : (document.querySelector('tr').children.length < 3)
+      ? true
+      : null;
+};
+
+const disRow = () => {
+  addRow.disabled = (document.querySelectorAll('tr').length > 9)
+    ? true
+    : (document.querySelectorAll('tr').length > 2)
+      ? false
+      : null;
+
+  removeRow.disabled = (document.querySelectorAll('tr').length > 2)
+    ? false
+    : (document.querySelectorAll('tr').length < 3)
+      ? true
+      : null;
+};
+
 magicButton.addEventListener('click', (e) => {
   switch (e.target.classList[0]) {
     case 'append-row':
@@ -19,51 +47,28 @@ magicButton.addEventListener('click', (e) => {
         row.append(td);
       }
       list.append(row);
-
+      disRow();
       break;
 
     case 'remove-row':
       const tr = document.querySelectorAll('tr');
 
       tr[tr.length - 1].remove();
-
+      disRow();
       break;
 
     case 'append-column':
       [...document.querySelectorAll('tr')].forEach(item => {
         item.append(document.createElement('td'));
       });
-
+      disColumn();
       break;
 
     case 'remove-column':
       [...document.querySelectorAll('tr')].forEach(item => {
         item.children[item.children.length - 1].remove();
       });
+      disColumn();
       break;
   }
-
-  addRow.disabled = (document.querySelectorAll('tr').length > 9)
-    ? true
-    : (document.querySelectorAll('tr').length > 2)
-      ? false
-      : null;
-
-  removeRow.disabled = (document.querySelectorAll('tr').length > 2)
-    ? false
-    : (document.querySelectorAll('tr').length < 3)
-      ? true
-      : null;
-
-  addColumn.disabled = (document.querySelector('tr').children.length > 9)
-    ? true
-    : (document.querySelector('tr').children.length > 2)
-      ? false
-      : null;
-
-  removeColumn.disabled = (document.querySelector('tr').children.length > 2)
-    ? false
-    : (document.querySelector('tr').children.length < 3)
-      ? true
-      : null;
 });
