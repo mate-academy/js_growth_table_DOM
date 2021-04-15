@@ -7,36 +7,56 @@ const removeRowButton = document.querySelector('.remove-row');
 const appendColumnButton = document.querySelector('.append-column');
 const removeColumnButton = document.querySelector('.remove-column');
 
-const min = 2;
-const max = 10;
-
 container.addEventListener('click', ev => {
   const button = ev.target.closest('.button');
 
-  if (!button || !container.contains(button) || button.disabled) {
+  if (!button || !container.contains(button)) {
     return;
-  }
-
-  const rows = document.querySelectorAll('tr');
-
-  if (button.classList.contains('append-row')) {
-    table.tBodies[0].append(rows[rows.length - 1].cloneNode(true));
-  } else if (button.classList.contains('remove-row')) {
-    table.deleteRow(-1);
-  } else if (button.classList.contains('append-column')) {
-    rows.forEach(row => {
-      row.append(row.children[0].cloneNode(true));
-    });
-  } else if (button.classList.contains('remove-column')) {
-    rows.forEach(row => {
-      row.children[0].remove();
-    });
   }
 
   updateButtonState();
 });
 
+appendRowButton.addEventListener('click', ev => {
+  if (ev.target !== appendRowButton || ev.target.disabled) {
+    return;
+  }
+
+  table.tBodies[0].append(table.rows[table.rows.length - 1].cloneNode(true));
+});
+
+removeRowButton.addEventListener('click', ev => {
+  if (ev.target !== removeRowButton || ev.target.disabled) {
+    return;
+  }
+
+  table.deleteRow(-1);
+});
+
+appendColumnButton.addEventListener('click', ev => {
+  if (ev.target !== appendColumnButton || appendColumnButton.disabled) {
+    return;
+  }
+
+  [...table.rows].forEach(row => {
+    row.append(row.lastElementChild.cloneNode(true));
+  });
+});
+
+removeColumnButton.addEventListener('click', ev => {
+  if (ev.target !== removeColumnButton || removeColumnButton.disabled) {
+    return;
+  }
+
+  [...table.rows].forEach(row => {
+    row.lastElementChild.remove();
+  });
+});
+
 function updateButtonState() {
+  const min = 2;
+  const max = 10;
+
   appendRowButton.disabled = table.rows.length === max;
   removeRowButton.disabled = table.rows.length === min;
   appendColumnButton.disabled = table.rows[0].childElementCount === max;
