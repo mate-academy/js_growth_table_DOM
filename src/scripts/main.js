@@ -34,7 +34,7 @@ removeRowButton.addEventListener('click', ev => {
 });
 
 appendColumnButton.addEventListener('click', ev => {
-  if (ev.target !== appendColumnButton || appendColumnButton.disabled) {
+  if (ev.target !== appendColumnButton || ev.target.disabled) {
     return;
   }
 
@@ -44,7 +44,7 @@ appendColumnButton.addEventListener('click', ev => {
 });
 
 removeColumnButton.addEventListener('click', ev => {
-  if (ev.target !== removeColumnButton || removeColumnButton.disabled) {
+  if (ev.target !== removeColumnButton || ev.target.disabled) {
     return;
   }
 
