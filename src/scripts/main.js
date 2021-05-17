@@ -1,41 +1,39 @@
 'use strict';
 
-const field = document.querySelector('.field tbody');
+const container = document.querySelector('.container');
+const field = container.querySelector('.field tbody');
 
 const appendRow = document.querySelector('.append-row');
 const removeRow = document.querySelector('.remove-row');
 const appendColumn = document.querySelector('.append-column');
 const removeColumn = document.querySelector('.remove-column');
 
-appendRow.addEventListener('click', e => {
-  field.append(field.children[0].cloneNode(true));
+container.addEventListener('click', e => {
+  const button = e.target.closest('.button');
 
-  checkButton();
-});
-
-removeRow.addEventListener('click', e => {
-  field.firstChild.remove();
-
-  checkButton();
-});
-
-appendColumn.addEventListener('click', e => {
-  for (const child of field.children) {
-    child.append(field.children[0].children[0].cloneNode(true));
+  if (!button) {
+    return;
   }
 
-  checkButton();
-});
-
-removeColumn.addEventListener('click', e => {
-  for (const child of field.children) {
-    child.firstChild.remove();
+  switch (button.classList[0]) {
+    case 'append-row':
+      field.append(field.children[0].cloneNode(true));
+      break;
+    case 'remove-row':
+      field.firstChild.remove();
+      break;
+    case 'append-column':
+      for (const child of field.children) {
+        child.append(field.children[0].children[0].cloneNode(true));
+      }
+      break;
+    case 'remove-column':
+      for (const child of field.children) {
+        child.firstChild.remove();
+      }
+      break;
   }
 
-  checkButton();
-});
-
-function checkButton() {
   appendRow.toggleAttribute('disabled',
     field.children.length === 10);
 
@@ -47,4 +45,4 @@ function checkButton() {
 
   removeColumn.toggleAttribute('disabled',
     field.children[0].children.length === 2);
-}
+});
