@@ -15,19 +15,19 @@ container.addEventListener('click', e => {
     return;
   }
 
-  switch (button.classList[0]) {
-    case 'append-row':
+  switch (button) {
+    case appendRow:
       field.append(field.children[0].cloneNode(true));
       break;
-    case 'remove-row':
+    case removeRow:
       field.firstChild.remove();
       break;
-    case 'append-column':
+    case appendColumn:
       for (const child of field.children) {
         child.append(field.children[0].children[0].cloneNode(true));
       }
       break;
-    case 'remove-column':
+    case removeColumn:
       for (const child of field.children) {
         child.firstChild.remove();
       }
