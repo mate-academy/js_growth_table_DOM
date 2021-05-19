@@ -30,55 +30,43 @@ const buttonStrategies = {
 function removeColumn() {
   const currentLength = table.rows[0].cells.length;
 
-  if (currentLength === minCount) {
-    removeColumnButton.disabled = true;
-
-    return;
+  if (currentLength > minCount) {
+    [...table.rows].forEach(element => {
+      element.deleteCell(0);
+    });
+    removeColumnButton.disabled = table.rows[0].cells.length === minCount;
+    addColumnButton.disabled = false;
   }
-
-  [...table.rows].forEach(element => {
-    element.deleteCell(0);
-  });
-
-  addColumnButton.disabled = false;
 }
 
 function addColumn() {
   const currentLength = table.rows[0].cells.length;
 
-  if (currentLength === maxCount) {
-    addColumnButton.disabled = true;
-
-    return;
+  if (currentLength < maxCount) {
+    [...table.rows].forEach(element => {
+      element.insertCell(0);
+    });
+    addColumnButton.disabled = table.rows[0].cells.length === maxCount;
+    removeColumnButton.disabled = false;
   }
-
-  [...table.rows].forEach(element => {
-    element.insertCell(0);
-  });
-  removeColumnButton.disabled = false;
 }
 
 function removeRow() {
   const currentLength = table.rows.length;
 
-  if (currentLength === minCount) {
-    removeRowButton.disabled = true;
-
-    return;
+  if (currentLength > minCount) {
+    table.deleteRow(0);
+    removeRowButton.disabled = table.rows.length === minCount;
+    addRowButton.disabled = false;
   }
-
-  table.deleteRow(0);
-  addRowButton.disabled = false;
 }
 
 function addRow() {
   const currentLength = table.rows.length;
 
-  if (currentLength === maxCount) {
-    addRowButton.disabled = true;
-
-    return;
+  if (currentLength < maxCount) {
+    table.tBodies[0].append(table.rows[0].cloneNode(true));
+    addRowButton.disabled = table.rows.length === maxCount;
+    removeRowButton.disabled = false;
   }
-  table.tBodies[0].append(table.rows[0].cloneNode(true));
-  removeRowButton.disabled = false;
 }
