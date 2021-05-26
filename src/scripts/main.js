@@ -29,27 +29,8 @@ document.addEventListener('click', e => {
       break;
   }
 
-  if (table.rows.length === 10) {
-    buttonAppendRow.disabled = true;
-  } else {
-    buttonAppendRow.disabled = false;
-  }
-
-  if (table.rows.length === 2) {
-    buttonRemoveRow.disabled = true;
-  } else {
-    buttonRemoveRow.disabled = false;
-  }
-
-  if (table.rows[0].cells.length === 10) {
-    buttonAppendColumn.disabled = true;
-  } else {
-    buttonAppendColumn.disabled = false;
-  }
-
-  if (table.rows[0].cells.length === 2) {
-    buttonRemoveColumn.disabled = true;
-  } else {
-    buttonRemoveColumn.disabled = false;
-  }
+  buttonAppendRow.disabled = table.rows.length === 10;
+  buttonRemoveRow.disabled = table.rows.length === 2;
+  buttonAppendColumn.disabled = table.rows[0].cells.length === 10;
+  buttonRemoveColumn.disabled = table.rows[0].cells.length === 2;
 });
