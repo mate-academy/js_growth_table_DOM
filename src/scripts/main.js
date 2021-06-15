@@ -1,60 +1,60 @@
 'use strict';
 
-const table = document.querySelector('.field');
+const table = document.querySelector('body');
+const field = document.querySelector('.field');
+
 const addRow = document.querySelector('.append-row');
 const removeRow = document.querySelector('.remove-row');
 const addColumn = document.querySelector('.append-column');
 const removeColumn = document.querySelector('.remove-column');
 
-addRow.addEventListener('click', () => {
-  if (table.lastElementChild.rows.length >= 10) {
-    return;
-  }
+table.addEventListener('click', (e) => {
+  const lastRow = field.lastElementChild.lastElementChild;
 
-  const elementRow = document.createElement('tr');
-  const currentCells = [...table.lastElementChild.lastElementChild.children];
+  switch (true) {
+    case e.target === addRow:
+      if (field.lastElementChild.rows.length >= 9) {
+        addRow.disabled = true;
+      }
 
-  table.lastElementChild.appendChild(elementRow);
+      field.lastElementChild.appendChild(lastRow.cloneNode(true));
+      removeRow.disabled = false;
+      break;
 
-  for (const cell of currentCells) {
-    elementRow.appendChild(cell.cloneNode());
-  }
-});
+    case e.target === removeRow:
+      if (field.lastElementChild.rows.length <= 3) {
+        removeRow.disabled = true;
+      } else {
+        addRow.disabled = false;
+      }
+      lastRow.remove();
+      break;
 
-removeRow.addEventListener('click', () => {
-  if (table.lastElementChild.rows.length <= 2) {
-    return;
-  }
+    case e.target === addColumn:
 
-  const lastRow = table.lastElementChild.lastElementChild;
+      if (lastRow.cells.length >= 9) {
+        addColumn.disabled = true;
+      }
 
-  lastRow.remove();
-});
+      for (const row of [...document.querySelectorAll('tr')]) {
+        row.appendChild(document.createElement('td'));
+      }
 
-addColumn.addEventListener('click', () => {
-  if (table.lastElementChild.lastElementChild.cells.length >= 10) {
-    return;
-  }
+      removeColumn.disabled = false;
+      break;
 
-  const rows = [...table.lastElementChild.children];
+    case e.target === removeColumn:
 
-  for (const row of rows) {
-    const item = document.createElement('td');
+      if (field.lastElementChild.lastElementChild.cells.length <= 3) {
+        removeColumn.disabled = true;
+      } else {
+        addColumn.disabled = false;
+      }
 
-    row.append(item);
-  }
-});
+      for (const row of [...document.querySelectorAll('tr')]) {
+        const lastCell = row.lastElementChild;
 
-removeColumn.addEventListener('click', () => {
-  if (table.lastElementChild.lastElementChild.children.length <= 2) {
-    return;
-  }
-
-  const rows = [...table.lastElementChild.children];
-
-  for (const row of rows) {
-    const lastColumn = row.lastElementChild;
-
-    lastColumn.remove();
+        lastCell.remove();
+      }
   }
 });
