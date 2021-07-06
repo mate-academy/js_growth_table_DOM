@@ -1,14 +1,16 @@
 'use strict';
 
-const container = document.querySelector('.container');
 const table = document.querySelector('.field');
+const appendRow = document.querySelector('.append-row');
+const removeRow = document.querySelector('.remove-row');
+const appendColumn = document.querySelector('.append-column');
+const removeColumn = document.querySelector('.remove-column');
 const maxRows = 10;
 const maxColumns = 10;
 const minRows = 2;
 const minColumns = 2;
-const clickHandlers = new Map();
 
-clickHandlers.set('append-row', () => {
+appendRow.addEventListener('click', () => {
   if (table.rows.length >= maxRows) {
     return;
   }
@@ -24,7 +26,7 @@ clickHandlers.set('append-row', () => {
   document.querySelector('.remove-row').disabled = false;
 });
 
-clickHandlers.set('remove-row', () => {
+removeRow.addEventListener('click', () => {
   table.rows[table.rows.length - 1].remove();
 
   if (table.rows.length <= minRows) {
@@ -34,7 +36,7 @@ clickHandlers.set('remove-row', () => {
   document.querySelector('.append-row').disabled = false;
 });
 
-clickHandlers.set('append-column', () => {
+appendColumn.addEventListener('click', () => {
   if (table.rows[0].cells.length >= maxColumns) {
     return;
   }
@@ -50,7 +52,7 @@ clickHandlers.set('append-column', () => {
   document.querySelector('.remove-column').disabled = false;
 });
 
-clickHandlers.set('remove-column', () => {
+removeColumn.addEventListener('click', () => {
   for (const row of table.rows) {
     row.cells[row.cells.length - 1].remove();
   }
@@ -61,11 +63,3 @@ clickHandlers.set('remove-column', () => {
 
   document.querySelector('.append-column').disabled = false;
 });
-
-container.onclick = function(e) {
-  if (!e.target.classList.contains('button')) {
-    return;
-  }
-
-  clickHandlers.get(e.target.classList[0])();
-};
