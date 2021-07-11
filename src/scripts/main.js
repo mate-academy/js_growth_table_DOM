@@ -1,38 +1,41 @@
 'use strict';
 
-const container = document.querySelector('.container');
 const table = document.querySelector('tbody');
+const row = table.rows[0];
+const ceil = table.rows[0].children[0];
 const maxColumnAndRows = 10;
 const minCulumnAndRows = 2;
+const buttonAppendRow = document.querySelector('.append-row');
+const buttonRemoveRow = document.querySelector('.remove-row');
+const buttonRemoveColumn = document.querySelector('.remove-column');
+const buttonAppendColumn = document.querySelector('.append-column ');
 
-container.addEventListener('click', e => {
-  const item = e.target.closest('.button');
-  const row = table.rows[0];
-  const ceil = table.rows[0].children[0];
-  const buttonAppendRow = document.querySelector('.append-row');
-  const buttonRemoveRow = document.querySelector('.remove-row');
-  const buttonRemoveColumn = document.querySelector('.remove-column');
-  const buttonAppendColumn = document.querySelector('.append-column ');
+buttonAppendRow.addEventListener('click', () => {
+  table.append(row.cloneNode(true));
+  checkDisabled();
+});
 
-  if (!item || !container.contains(item)) {
-    return;
-  }
+buttonRemoveRow.addEventListener('click', () => {
+  row.remove();
+  checkDisabled();
+});
 
-  switch (item.classList[0]) {
-    case 'append-row':
-      table.append(row.cloneNode(true));
-      break;
-    case 'remove-row':
-      row.remove();
-      break;
-    case 'append-column':
-      [...table.rows].forEach(itemRow => itemRow.append(ceil.cloneNode(true)));
-      break;
-    case 'remove-column':
-      [...table.rows].forEach(itemColumn => itemColumn.children[0].remove());
-  }
+buttonAppendColumn.addEventListener('click', () => {
+  [...table.rows].forEach(itemRow => itemRow.append(ceil.cloneNode(true)));
+  checkDisabled();
+});
 
+buttonRemoveColumn.addEventListener('click', () => {
+  [...table.rows].forEach(itemColumn => itemColumn.children[0].remove());
+  checkDisabled();
+});
+
+function checkDisabled() {
   buttonAppendRow.disabled = table.rows.length >= maxColumnAndRows
+    ? 'true'
+    : '';
+
+  buttonRemoveRow.disabled = table.rows.length <= minCulumnAndRows
     ? 'true'
     : '';
 
@@ -41,12 +44,8 @@ container.addEventListener('click', e => {
       ? 'true'
       : '';
 
-  buttonRemoveRow.disabled = table.rows.length <= minCulumnAndRows
-    ? 'true'
-    : '';
-
   buttonRemoveColumn.disabled
     = table.rows[0].children.length <= minCulumnAndRows
       ? 'true'
       : '';
-});
+};
