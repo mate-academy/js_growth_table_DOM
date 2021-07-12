@@ -16,7 +16,7 @@ buttonAppendRow.addEventListener('click', () => {
 });
 
 buttonRemoveRow.addEventListener('click', () => {
-  row.remove();
+  table.rows[0].remove();
   checkDisabled();
 });
 
