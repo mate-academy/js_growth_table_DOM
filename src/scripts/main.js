@@ -6,8 +6,8 @@ const appendColumn = document.querySelector('.append-column');
 const removeColumn = document.querySelector('.remove-column');
 const field = document.querySelector('.field');
 let tableRow = document.querySelector('tr');
-const maxRows = 10;
-const maxColumns = 10;
+const maxRows = 9;
+const maxColumns = 9;
 const minRows = 3;
 const minColumns = 3;
 
