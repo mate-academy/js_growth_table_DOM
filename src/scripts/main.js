@@ -1,7 +1,7 @@
 'use strict';
 
 const table = document.querySelector('tbody');
-const row = table.rows[0];
+const row = table.children[0];
 const ceil = table.rows[0].children[0];
 const maxColumnAndRows = 10;
 const minCulumnAndRows = 2;
@@ -16,7 +16,7 @@ buttonAppendRow.addEventListener('click', () => {
 });
 
 buttonRemoveRow.addEventListener('click', () => {
-  table.rows[0].remove();
+  table.lastChild.remove();
   checkDisabled();
 });
 
