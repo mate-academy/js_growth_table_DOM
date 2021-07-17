@@ -13,16 +13,19 @@ const minSize = 2;
 addRow.addEventListener('click', () => {
   removeRow.disabled = false;
 
-  const row = table.querySelector('tr');
-  const newRow = document.createElement('tr');
+  let rowCounter = table.querySelectorAll('tr').length;
 
-  for (let i = 0; i < row.children.length; i++) {
-    newRow.append(document.createElement('td'));
+  if (rowCounter !== maxSize) {
+    const row = table.querySelector('tr');
+    const newRow = document.createElement('tr');
+
+    for (let i = 0; i < row.children.length; i++) {
+      newRow.append(document.createElement('td'));
+    }
+
+    table.append(newRow);
+    rowCounter++;
   }
-
-  table.append(newRow);
-
-  const rowCounter = table.querySelectorAll('tr').length;
 
   if (rowCounter === maxSize) {
     addRow.disabled = true;
@@ -32,9 +35,12 @@ addRow.addEventListener('click', () => {
 removeRow.addEventListener('click', () => {
   addRow.disabled = false;
 
-  table.querySelector('tr').remove();
+  let rowCounter = table.querySelectorAll('tr').length;
 
-  const rowCounter = table.querySelectorAll('tr').length;
+  if (rowCounter !== minSize) {
+    table.querySelector('tr').remove();
+    rowCounter--;
+  }
 
   if (rowCounter === minSize) {
     removeRow.disabled = true;
@@ -45,12 +51,14 @@ addColumn.addEventListener('click', () => {
   removeColumn.disabled = false;
 
   const rows = table.querySelectorAll('tr');
+  let columnCounter = rows[0].querySelectorAll('td').length;
 
-  for (const row of rows) {
-    row.append(document.createElement('td'));
+  if (columnCounter !== maxSize) {
+    for (const row of rows) {
+      row.append(document.createElement('td'));
+    }
+    columnCounter++;
   }
-
-  const columnCounter = rows[0].querySelectorAll('td').length;
 
   if (columnCounter === maxSize) {
     addColumn.disabled = true;
@@ -61,12 +69,15 @@ removeColumn.addEventListener('click', () => {
   addColumn.disabled = false;
 
   const rows = table.querySelectorAll('tr');
+  let columnCounter = rows[0].querySelectorAll('td').length;
 
-  for (const row of rows) {
-    row.querySelector('td').remove();
+  if (columnCounter !== minSize) {
+    for (const row of rows) {
+      row.querySelector('td').remove();
+    }
+
+    columnCounter--;
   }
-
-  const columnCounter = rows[0].querySelectorAll('td').length;
 
   if (columnCounter === minSize) {
     removeColumn.disabled = true;
