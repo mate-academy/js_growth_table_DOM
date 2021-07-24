@@ -4,6 +4,7 @@ const addRow = document.querySelector('.append-row');
 const removeRow = document.querySelector('.remove-row');
 const addColumn = document.querySelector('.append-column');
 const removeColumn = document.querySelector('.remove-column');
+
 const container = document.querySelector('.container');
 
 const table = document.querySelector('.field');
@@ -17,67 +18,77 @@ container.addEventListener('click', () => {
   let rowCounter = table.querySelectorAll('tr').length;
   let columnCounter = rows[0].querySelectorAll('td').length;
 
-  if (event.target.classList.contains('append-row')) {
-    removeRow.disabled = false;
+  switch (true) {
+    case event.target.classList.contains('append-row button'): {
+      removeRow.disabled = false;
 
-    if (rowCounter !== maxSize) {
-      const row = table.querySelector('tr');
-      const newRow = document.createElement('tr');
+      if (rowCounter !== maxSize) {
+        const row = table.querySelector('tr');
+        const newRow = document.createElement('tr');
 
-      for (let i = 0; i < row.children.length; i++) {
-        newRow.append(document.createElement('td'));
+        for (let i = 0; i < row.children.length; i++) {
+          newRow.append(document.createElement('td'));
+        }
+
+        table.append(newRow);
+        rowCounter++;
       }
 
-      table.append(newRow);
-      rowCounter++;
+      break;
     }
 
-    if (rowCounter === maxSize) {
-      addRow.disabled = true;
+    case event.target.classList.contains('remove-row'): {
+      addRow.disabled = false;
+
+      if (rowCounter !== minSize) {
+        table.querySelector('tr').remove();
+        rowCounter--;
+      }
+
+      break;
+    }
+
+    case event.target.classList.contains('append-column'): {
+      removeColumn.disabled = false;
+
+      if (columnCounter !== maxSize) {
+        for (const row of rows) {
+          row.append(document.createElement('td'));
+        }
+        columnCounter++;
+      }
+
+      break;
+    }
+
+    case event.target.classList.contains('remove-column'): {
+      addColumn.disabled = false;
+
+      if (columnCounter !== minSize) {
+        for (const row of rows) {
+          row.querySelector('td').remove();
+        }
+
+        columnCounter--;
+      }
+
+      break;
     }
   }
 
-  if (event.target.classList.contains('remove-row')) {
-    addRow.disabled = false;
-
-    if (rowCounter !== minSize) {
-      table.querySelector('tr').remove();
-      rowCounter--;
-    }
-
-    if (rowCounter === minSize) {
-      removeRow.disabled = true;
-    }
+  if (rowCounter === maxSize) {
+    addRow.disabled = true;
   }
 
-  if (event.target.classList.contains('append-column')) {
-    removeColumn.disabled = false;
-
-    if (columnCounter !== maxSize) {
-      for (const row of rows) {
-        row.append(document.createElement('td'));
-      }
-      columnCounter++;
-    }
-
-    if (columnCounter === maxSize) {
-      addColumn.disabled = true;
-    }
+  if (rowCounter === minSize) {
+    removeRow.disabled = true;
   }
 
-  if (event.target.classList.contains('remove-column')) {
-    addColumn.disabled = false;
+  if (columnCounter === maxSize) {
+    addColumn.disabled = true;
+  }
 
-    if (columnCounter !== minSize) {
-      for (const row of rows) {
-        row.querySelector('td').remove();
-      }
-
-      columnCounter--;
-    }
-
-    if (columnCounter === minSize) {
-      removeColumn.disabled = true;
-    }
+  if (columnCounter === minSize) {
+    removeColumn.disabled = true;
   }
 });
