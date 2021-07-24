@@ -19,7 +19,7 @@ container.addEventListener('click', () => {
   let columnCounter = rows[0].querySelectorAll('td').length;
 
   switch (true) {
-    case event.target.classList.contains('append-row button'): {
+    case event.target.classList.contains('append-row'): {
       removeRow.disabled = false;
 
       if (rowCounter !== maxSize) {
