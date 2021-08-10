@@ -6,62 +6,64 @@ const rowRemove = document.querySelector('.remove-row');
 const columnAppend = document.querySelector('.append-column');
 const columnRemove = document.querySelector('.remove-column');
 const table = document.querySelector('table');
-const max = 9;
-const min = 3;
+const container = document.querySelector('.container');
+const MAX = 9;
+const MIN = 3;
 
-columnAppend.addEventListener('click', (e) => {
+container.addEventListener('click', (e) => {
   const trAll = document.querySelectorAll('tr');
-
-  if (table.rows[0].cells.length >= max) {
-    columnAppend.disabled = true;
-  }
-
-  for (const i of trAll) {
-    i.insertAdjacentHTML('beforeend', `<td></td>`);
-  }
-
-  columnRemove.disabled = false;
-});
-
-rowAppend.addEventListener('click', (e) => {
   const tr = document.querySelector('tr');
   const row = document.createElement('tr');
 
-  if (table.rows.length >= max) {
-    rowAppend.disabled = true;
+  switch (e.target) {
+    case columnAppend:
+      if (table.rows[0].cells.length >= MAX) {
+        columnAppend.disabled = true;
+      }
+
+      for (const i of trAll) {
+        i.insertAdjacentHTML('beforeend', `<td></td>`);
+      }
+
+      columnRemove.disabled = false;
+      break;
+
+    case rowAppend:
+      if (table.rows.length >= MAX) {
+        rowAppend.disabled = true;
+      }
+
+      for (let i = 0; i < tr.cells.length; i++) {
+        const td = document.createElement('td');
+
+        row.append(td);
+      }
+
+      table.append(row);
+
+      rowRemove.disabled = false;
+      break;
+
+    case rowRemove:
+      if (table.rows.length <= MIN) {
+        rowRemove.disabled = true;
+      }
+
+      table.rows[0].remove();
+
+      rowAppend.disabled = false;
+      break;
+
+    case columnRemove:
+      if (table.rows[0].cells.length <= MIN) {
+        columnRemove.disabled = true;
+      }
+
+      for (const i of trAll) {
+        i.children[0].remove();
+      }
+
+      columnAppend.disabled = false;
+      break;
   }
-
-  for (let i = 0; i < tr.cells.length; i++) {
-    const td = document.createElement('td');
-
-    row.append(td);
-  }
-
-  table.append(row);
-
-  rowRemove.disabled = false;
-});
-
-rowRemove.addEventListener('click', (e) => {
-  if (table.rows.length <= min) {
-    rowRemove.disabled = true;
-  }
-
-  table.rows[0].remove();
-
-  rowAppend.disabled = false;
-});
-
-columnRemove.addEventListener('click', (e) => {
-  const trAll = document.querySelectorAll('tr');
-
-  if (table.rows[0].cells.length <= min) {
-    columnRemove.disabled = true;
-  }
-
-  for (const i of trAll) {
-    i.children[0].remove();
-  }
-
-  columnAppend.disabled = false;
 });
