@@ -30,8 +30,6 @@ document.querySelector('.container').addEventListener('click', (e) => {
       break;
     case addCol:
       numOfCols++;
-      numOfCols === 10 ? addCol.disabled = true : addCol.disabled = false;
-      numOfCols === 2 ? removeCol.disabled = true : removeCol.disabled = false;
 
       let allRows = [...document.querySelectorAll('tr')];
 
@@ -43,8 +41,6 @@ document.querySelector('.container').addEventListener('click', (e) => {
 
       table.prepend(...allRows);
 
-      numOfCols === 10 ? addCol.disabled = true : addCol.disabled = false;
-      numOfCols === 2 ? removeCol.disabled = true : removeCol.disabled = false;
       break;
     case removeCol:
       numOfCols--;
