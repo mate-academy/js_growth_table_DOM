@@ -42,6 +42,10 @@ removeRow.addEventListener('click', (e) => {
 addColumn.addEventListener('click', (e) => {
   const arrRows = [...tableBody[0].rows];
 
+  arrRows.forEach((row) => {
+    row.insertCell(-1);
+  });
+
   const lengthCells = arrRows[0].cells.length;
 
   removeDisabled((lengthCells > minElements), removeColumn);
