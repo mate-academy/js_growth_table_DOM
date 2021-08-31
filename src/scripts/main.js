@@ -2,7 +2,7 @@
 
 const tbody = document.querySelector('tbody');
 
-const buttons = document.querySelectorAll('button');
+const container = document.querySelector('.container');
 
 const appendRowButton = document.querySelector('.append-row');
 
@@ -71,22 +71,20 @@ function removeColumn() {
   }
 }
 
-for (const button of buttons) {
-  button.addEventListener('click', (e) => {
-    if (e.target.classList.contains('append-row')) {
-      addRow();
-    }
+container.addEventListener('click', (e) => {
+  const targetClassList = e.target.classList;
 
-    if (e.target.classList.contains('remove-row')) {
-      removeRow();
-    }
+  switch (true) {
+    case e.target.classList.contains('append-row'):
+      return addRow();
 
-    if (e.target.classList.contains('append-column')) {
-      addColumn();
-    }
+    case targetClassList.contains('remove-row'):
+      return removeRow();
 
-    if (e.target.classList.contains('remove-column')) {
-      removeColumn();
-    }
-  });
-}
+    case targetClassList.contains('append-column'):
+      return addColumn();
+
+    case targetClassList.contains('remove-column'):
+      return removeColumn();
+  }
+});
