@@ -19,26 +19,10 @@ function addRow() {
   const row = tbody.querySelector('tr').cloneNode(true);
 
   tbody.append(row);
-
-  if (rows.length >= 10) {
-    appendRowButton.setAttribute('disabled', 'disabled');
-  }
-
-  if (removeRowButton.hasAttribute('disabled')) {
-    removeRowButton.removeAttribute('disabled');
-  }
 }
 
 function removeRow() {
   tbody.lastElementChild.remove();
-
-  if (rows.length <= 2) {
-    removeRowButton.setAttribute('disabled', 'disabled');
-  }
-
-  if (appendRowButton.hasAttribute('disabled')) {
-    appendRowButton.removeAttribute('disabled');
-  }
 }
 
 function addColumn() {
@@ -47,6 +31,54 @@ function addColumn() {
 
     tr.append(td);
   }
+}
+
+function removeColumn() {
+  for (const tr of rows) {
+    tr.lastElementChild.remove();
+  }
+}
+
+container.addEventListener('click', (e) => {
+  if (!e.target.classList.contains('button')) {
+    return;
+  }
+
+  switch (e.target) {
+    case appendRowButton:
+      addRow();
+      break;
+
+    case removeRowButton:
+      removeRow();
+      break;
+
+    case appendColumnButton:
+      addColumn();
+      break;
+
+    case removeColumnButton:
+      removeColumn();
+      break;
+  }
+
+  if (rows.length >= 10) {
+    appendRowButton.setAttribute('disabled', 'disabled');
+
+    return;
+  }
+
+  if (removeRowButton.hasAttribute('disabled')) {
+    removeRowButton.removeAttribute('disabled');
+  }
+
+  if (rows.length <= 2) {
+    removeRowButton.setAttribute('disabled', 'disabled');
+  }
+
+  if (appendRowButton.hasAttribute('disabled')) {
+    appendRowButton.removeAttribute('disabled');
+  }
 
   if (removeColumnButton.hasAttribute('disabled')) {
     removeColumnButton.removeAttribute('disabled');
@@ -54,12 +86,8 @@ function addColumn() {
 
   if (columns.length >= 10) {
     appendColumnButton.setAttribute('disabled', 'disabled');
-  }
-}
 
-function removeColumn() {
-  for (const tr of rows) {
-    tr.lastElementChild.remove();
+    return;
   }
 
   if (appendColumnButton.hasAttribute('disabled')) {
@@ -68,23 +96,5 @@ function removeColumn() {
 
   if (columns.length <= 2) {
     removeColumnButton.setAttribute('disabled', 'disabled');
-  }
-}
-
-container.addEventListener('click', (e) => {
-  const targetClassList = e.target.classList;
-
-  switch (true) {
-    case e.target.classList.contains('append-row'):
-      return addRow();
-
-    case targetClassList.contains('remove-row'):
-      return removeRow();
-
-    case targetClassList.contains('append-column'):
-      return addColumn();
-
-    case targetClassList.contains('remove-column'):
-      return removeColumn();
   }
 });
