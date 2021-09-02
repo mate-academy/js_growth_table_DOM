@@ -25,29 +25,10 @@ container.addEventListener('click', (e) => {
       break;
     default:
       break;
-  };
+  }
 
-  if (table.rows[0].children.length >= 10) {
-    appendColumn.disabled = true;
-  } else {
-    appendColumn.disabled = false;
-  };
-
-  if (table.rows.length >= 10) {
-    appendRow.disabled = true;
-  } else {
-    appendRow.disabled = false;
-  };
-
-  if (table.rows.length <= 2) {
-    removeRow.disabled = true;
-  } else {
-    removeRow.disabled = false;
-  };
-
-  if (table.rows[0].children.length <= 2) {
-    removeColumn.disabled = true;
-  } else {
-    removeColumn.disabled = false;
-  };
+  appendColumn.disabled = table.rows[0].children.length >= 10;
+  appendRow.disabled = table.rows.length >= 10;
+  removeRow.disabled = table.rows.length <= 2;
+  removeColumn.disabled = table.rows[0].children.length <= 2;
 });
