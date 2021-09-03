@@ -1,5 +1,6 @@
 'use strict';
 
+const container = document.querySelector('.container');
 const table = document.querySelector('.field');
 const tableBody = table.querySelector('tbody');
 
@@ -8,70 +9,49 @@ const btnRemoveRow = document.querySelector('.remove-row');
 const btnAppendColummn = document.querySelector('.append-column');
 const btnRemoveColummn = document.querySelector('.remove-column');
 
-btnAppendRow.addEventListener('click', () => {
-  if (tableBody.rows.length < 10) {
-    const newRow = document.createElement('tr');
+container.addEventListener('click', (e) => {
+  const btn = e.target;
 
-    for (let i = 0; i < tableBody.rows[0].cells.length; i++) {
-      const newCell = document.createElement('td');
+  switch (btn) {
+    case btnAppendRow:
+      if (tableBody.rows.length < 10) {
+        const newRow = document.createElement('tr');
 
-      newRow.insertAdjacentElement('beforeend', newCell);
-    }
+        for (let i = 0; i < tableBody.rows[0].cells.length; i++) {
+          const newCell = document.createElement('td');
 
-    tableBody.insertAdjacentElement('beforeend', newRow);
+          newRow.insertAdjacentElement('beforeend', newCell);
+        }
+
+        tableBody.insertAdjacentElement('beforeend', newRow);
+      }
+      break;
+
+    case btnRemoveRow:
+      if (tableBody.rows.length > 2) {
+        tableBody.lastElementChild.remove();
+      }
+      break;
+
+    case btnAppendColummn:
+      if (tableBody.rows[0].cells.length < 10) {
+        [...tableBody.rows].forEach(row => {
+          row.insertAdjacentHTML('beforeend', `<td></td>`);
+        });
+      }
+      break;
+
+    case btnRemoveColummn:
+      if (tableBody.rows[0].cells.length > 2) {
+        [...tableBody.rows].forEach(row => {
+          row.lastElementChild.remove();
+        });
+      }
+      break;
   }
 
-  if (tableBody.rows.length === 10) {
-    btnAppendRow.setAttribute('disabled', 'disabled');
-  }
-
-  if (tableBody.rows.length > 2) {
-    btnRemoveRow.removeAttribute('disabled');
-  }
-});
-
-btnRemoveRow.addEventListener('click', () => {
-  if (tableBody.rows.length > 2) {
-    tableBody.lastElementChild.remove();
-  }
-
-  if (tableBody.rows.length === 2) {
-    btnRemoveRow.setAttribute('disabled', 'disabled');
-  }
-
-  if (tableBody.rows.length < 10) {
-    btnAppendRow.removeAttribute('disabled');
-  }
-});
-
-btnAppendColummn.addEventListener('click', () => {
-  if (tableBody.rows[0].cells.length < 10) {
-    [...tableBody.rows].forEach(row => {
-      row.insertAdjacentHTML('beforeend', `<td></td>`);
-    });
-  }
-
-  if (tableBody.rows[0].cells.length === 10) {
-    btnAppendColummn.setAttribute('disabled', 'disabled');
-  }
-
-  if (tableBody.rows[0].cells.length > 2) {
-    btnRemoveColummn.removeAttribute('disabled');
-  }
-});
-
-btnRemoveColummn.addEventListener('click', () => {
-  if (tableBody.rows[0].cells.length > 2) {
-    [...tableBody.rows].forEach(row => {
-      row.lastElementChild.remove();
-    });
-  }
-
-  if (tableBody.rows[0].cells.length === 2) {
-    btnRemoveColummn.setAttribute('disabled', 'disabled');
-  }
-
-  if (tableBody.rows[0].cells.length < 10) {
-    btnAppendColummn.removeAttribute('disabled');
-  }
+  btnAppendRow.disabled = tableBody.rows.length >= 10;
+  btnRemoveRow.disabled = tableBody.rows.length <= 2;
+  btnAppendColummn.disabled = tableBody.rows[0].cells.length >= 10;
+  btnRemoveColummn.disabled = tableBody.rows[0].cells.length <= 2;
 });
