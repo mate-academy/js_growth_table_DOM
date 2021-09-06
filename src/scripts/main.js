@@ -47,54 +47,36 @@ container.addEventListener('click', (e) => {
   switch (e.target) {
     case appendRowButton:
       addRow();
-      break;
+
+      return setDisabledButton();
 
     case removeRowButton:
       removeRow();
-      break;
+
+      return setDisabledButton();
 
     case appendColumnButton:
       addColumn();
-      break;
+
+      return setDisabledButton();
 
     case removeColumnButton:
       removeColumn();
-      break;
-  }
 
-  if (rows.length >= 10) {
-    appendRowButton.setAttribute('disabled', 'disabled');
-
-    return;
-  }
-
-  if (removeRowButton.hasAttribute('disabled')) {
-    removeRowButton.removeAttribute('disabled');
-  }
-
-  if (rows.length <= 2) {
-    removeRowButton.setAttribute('disabled', 'disabled');
-  }
-
-  if (appendRowButton.hasAttribute('disabled')) {
-    appendRowButton.removeAttribute('disabled');
-  }
-
-  if (removeColumnButton.hasAttribute('disabled')) {
-    removeColumnButton.removeAttribute('disabled');
-  }
-
-  if (columns.length >= 10) {
-    appendColumnButton.setAttribute('disabled', 'disabled');
-
-    return;
-  }
-
-  if (appendColumnButton.hasAttribute('disabled')) {
-    appendColumnButton.removeAttribute('disabled');
-  }
-
-  if (columns.length <= 2) {
-    removeColumnButton.setAttribute('disabled', 'disabled');
+      return setDisabledButton();
   }
 });
+
+function setDisabledButton() {
+  appendRowButton.disabled = false;
+  appendRowButton.disabled = rows.length >= 10;
+
+  removeRowButton.disabled = false;
+  removeRowButton.disabled = rows.length <= 2;
+
+  appendColumnButton.disabled = false;
+  appendColumnButton.disabled = columns.length >= 10;
+
+  removeColumnButton.disabled = false;
+  removeColumnButton.disabled = columns.length <= 2;
+}
