@@ -18,36 +18,33 @@ const removeColumnButton = document.querySelector('.remove-column');
 container.addEventListener('click', (e) => {
   const item = e.target;
 
-  switch (true) {
-    case item.classList.contains('append-row') && tableItems.length < 10:
-      tableBody.append(tableItems[0].cloneNode(true));
-      removeRowButton.disabled = false;
-      break;
+  if (item.classList.contains('append-row') && tableItems.length < 10) {
+    tableBody.append(tableItems[0].cloneNode(true));
+    removeRowButton.disabled = false;
+  } else if (item.classList.contains('remove-row') && tableItems.length > 2) {
+    tableBody.lastElementChild.remove();
+    appendRowButton.disabled = false;
+  } else if (item.classList.contains('append-column')
+  && tableItems[0].children.length < 10) {
+    for (const row of tableItems) {
+      const copy = row.lastElementChild.cloneNode(true);
 
-    case item.classList.contains('remove-row') && tableItems.length > 2:
-      tableBody.lastElementChild.remove();
-      appendRowButton.disabled = false;
-      break;
-
-    case item.classList.contains('append-column')
-      && tableItems[0].children.length < 10:
-      for (const row of tableItems) {
-        const copy = row.lastElementChild.cloneNode(true);
-
-        row.append(copy);
-      }
-      removeColumnButton.disabled = false;
-      break;
-
-    case item.classList.contains('remove-column')
-      && tableItems[0].children.length > 2:
-      for (const row of tableItems) {
-        row.lastElementChild.remove();
-      }
-      appendColumnButton.disabled = false;
-      break;
-
-    default:
-      item.setAttribute('disabled', '');
+      row.append(copy);
+    }
+    removeColumnButton.disabled = false;
+  } else if (item.classList.contains('append-column')
+  && tableItems[0].children.length < 10) {
+    for (const row of tableItems) {
+      row.lastElementChild.remove();
+    }
+    appendColumnButton.disabled = false;
+  } else if (item.classList.contains('remove-column')
+  && tableItems[0].children.length > 2) {
+    for (const row of tableItems) {
+      row.lastElementChild.remove();
+    }
+    appendColumnButton.disabled = false;
+  } else {
+    item.setAttribute('disabled', '');
   }
 });
