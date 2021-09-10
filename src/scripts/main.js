@@ -16,35 +16,36 @@ const removeRowButton = document.querySelector('.remove-row');
 const removeColumnButton = document.querySelector('.remove-column');
 
 container.addEventListener('click', (e) => {
-  const item = e.target;
+  const buttonName = e.target.classList[0];
 
-  if (item.classList.contains('append-row') && tableItems.length < 10) {
-    tableBody.append(tableItems[0].cloneNode(true));
-    removeRowButton.disabled = false;
-  } else if (item.classList.contains('remove-row') && tableItems.length > 2) {
-    tableBody.lastElementChild.remove();
-    appendRowButton.disabled = false;
-  } else if (item.classList.contains('append-column')
-  && tableItems[0].children.length < 10) {
-    for (const row of tableItems) {
-      const copy = row.lastElementChild.cloneNode(true);
+  switch (buttonName) {
+    case 'append-row':
+      tableBody.append(tableItems[0].cloneNode(true));
+      break;
 
-      row.append(copy);
-    }
-    removeColumnButton.disabled = false;
-  } else if (item.classList.contains('append-column')
-  && tableItems[0].children.length < 10) {
-    for (const row of tableItems) {
-      row.lastElementChild.remove();
-    }
-    appendColumnButton.disabled = false;
-  } else if (item.classList.contains('remove-column')
-  && tableItems[0].children.length > 2) {
-    for (const row of tableItems) {
-      row.lastElementChild.remove();
-    }
-    appendColumnButton.disabled = false;
-  } else {
-    item.setAttribute('disabled', '');
+    case 'remove-row':
+      tableBody.lastElementChild.remove();
+      break;
+
+    case 'append-column':
+      for (const row of tableItems) {
+        const copy = row.lastElementChild.cloneNode(true);
+
+        row.append(copy);
+      }
+      break;
+
+    case 'remove-column':
+      for (const row of tableItems) {
+        row.lastElementChild.remove();
+      }
   }
+
+  appendColumnButton.disabled = tableItems[0].children.length >= 10;
+
+  removeColumnButton.disabled = tableItems[0].children.length <= 2;
+
+  appendRowButton.disabled = tableItems.length >= 10;
+
+  removeRowButton.disabled = tableItems.length <= 2;
 });
