@@ -30,6 +30,6 @@ document.body.addEventListener('click', (e) => {
 
   appendRow.disabled = [...field.children].length > 9;
   removeRow.disabled = [...field.children].length < 3;
-  appendColumn.disabled = [...field.children[0].children].length < 3;
-  removeColumn.disabled = [...field.children[0].children].length > 9;
+  appendColumn.disabled = [...field.children[0].children].length > 9;
+  removeColumn.disabled = [...field.children[0].children].length < 3;
 });
