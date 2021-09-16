@@ -15,11 +15,23 @@ appendRow.addEventListener('click', (el) => {
 
     table.append(newRow);
   }
+
+  removeRow.disabled = false;
+
+  if (table.rows.length === max) {
+    appendRow.disabled = true;
+  }
 });
 
 removeRow.addEventListener('click', (el) => {
   if (table.rows.length > 2) {
     table.deleteRow(0);
+  }
+
+  appendRow.disabled = false;
+
+  if (table.rows.length === min) {
+    removeRow.disabled = true;
   }
 });
 
@@ -37,6 +49,12 @@ appendColumn.addEventListener('click', (el) => {
         row.children[table.rows[0].cells.length - 1]);
     }
   }
+
+  removeColumn.disabled = false;
+
+  if (count === max) {
+    appendColumn.disabled = true;
+  }
 });
 
 removeColumn.addEventListener('click', (el) => {
@@ -50,5 +68,11 @@ removeColumn.addEventListener('click', (el) => {
     for (const row of table.rows) {
       row.deleteCell(0);
     }
+  }
+
+  appendColumn.disabled = false;
+
+  if (count === min) {
+    removeColumn.disabled = true;
   }
 });
