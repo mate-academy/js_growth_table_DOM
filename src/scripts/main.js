@@ -50,6 +50,8 @@ appendColumn.addEventListener('click', (el) => {
     }
   }
 
+  count++;
+
   removeColumn.disabled = false;
 
   if (count === max) {
@@ -69,6 +71,8 @@ removeColumn.addEventListener('click', (el) => {
       row.deleteCell(0);
     }
   }
+
+  count--;
 
   appendColumn.disabled = false;
 
