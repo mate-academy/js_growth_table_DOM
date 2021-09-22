@@ -6,6 +6,8 @@ const removeRow = document.querySelector('.remove-row');
 const appendColumn = document.querySelector('.append-column');
 const removeColumn = document.querySelector('.remove-column');
 const table = document.querySelector('table');
+let appendColumnCount = 0;
+let removeColumnCount = 0;
 const min = 2;
 const max = 10;
 
@@ -15,34 +17,20 @@ appendRow.addEventListener('click', (el) => {
 
     table.append(newRow);
   }
-
-  removeRow.disabled = false;
-
-  if (table.rows.length === max) {
-    appendRow.disabled = true;
-  }
 });
 
 removeRow.addEventListener('click', (el) => {
   if (table.rows.length > 2) {
     table.deleteRow(0);
   }
-
-  appendRow.disabled = false;
-
-  if (table.rows.length === min) {
-    removeRow.disabled = true;
-  }
 });
 
 appendColumn.addEventListener('click', (el) => {
-  let count = 0;
-
   for (const row of table.rows) {
-    count = row.cells.length;
+    appendColumnCount = row.cells.length;
   }
 
-  if (count < max) {
+  if (appendColumnCount < max) {
     for (const row of table.rows) {
       row.insertBefore(
         row.children[0].cloneNode(true),
@@ -50,33 +38,43 @@ appendColumn.addEventListener('click', (el) => {
     }
   }
 
-  count++;
-
-  removeColumn.disabled = false;
-
-  if (count === max) {
-    appendColumn.disabled = true;
-  }
+  appendColumnCount++;
 });
 
 removeColumn.addEventListener('click', (el) => {
-  let count = 0;
-
   for (const row of table.rows) {
-    count = row.cells.length;
+    removeColumnCount = row.cells.length;
   }
 
-  if (count > min) {
+  if (removeColumnCount > min) {
     for (const row of table.rows) {
       row.deleteCell(0);
     }
   }
 
-  count--;
+  removeColumnCount--;
+});
 
-  appendColumn.disabled = false;
+document.addEventListener('click', (ev) => {
+  switch (ev.target) {
+    case appendRow:
+      appendRow.disabled = table.rows.length === max;
+      removeRow.disabled = false;
+      break;
 
-  if (count === min) {
-    removeColumn.disabled = true;
+    case removeRow:
+      removeRow.disabled = table.rows.length === min;
+      appendRow.disabled = false;
+      break;
+
+    case appendColumn:
+      appendColumn.disabled = appendColumnCount === max;
+      removeColumn.disabled = false;
+      break;
+
+    case removeColumn:
+      removeColumn.disabled = removeColumnCount === min;
+      appendColumn.disabled = false;
+      break;
   }
 });
