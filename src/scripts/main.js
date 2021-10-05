@@ -9,6 +9,11 @@ const removeColumn = document.querySelector('.remove-column');
 appendRow.addEventListener('click', () => {
   const tr = document.querySelector('tr');
   const trClone = tr.cloneNode(true);
+  const trAll = document.querySelectorAll('tr');
+
+  if (trAll.length >= 10) {
+    return;
+  }
 
   table.append(trClone);
 });
@@ -16,7 +21,7 @@ appendRow.addEventListener('click', () => {
 removeRow.addEventListener('click', () => {
   const trAll = document.querySelectorAll('tr');
 
-  if (trAll.length < 2) {
+  if (trAll.length < 3) {
     return;
   }
 
@@ -29,6 +34,10 @@ appendColunm.addEventListener('click', () => {
   const trAll = document.querySelectorAll('tr');
   const td = document.querySelector('td');
 
+  if (trAll[0].children.length >= 10) {
+    return;
+  }
+
   [...trAll].forEach(item => {
     const tdClone = td.cloneNode(true);
 
@@ -39,7 +48,7 @@ appendColunm.addEventListener('click', () => {
 removeColumn.addEventListener('click', () => {
   const tr = document.querySelector('tr');
 
-  if (tr.children.length < 2) {
+  if (tr.children.length < 3) {
     return;
   };
 
