@@ -3,81 +3,53 @@
 const minCell = 2;
 const maxCell = 10;
 const table = document.querySelector('tbody');
+const container = document.querySelector('.container');
 const appendRow = document.querySelector('.append-row');
 const removeRow = document.querySelector('.remove-row');
 const appendColumn = document.querySelector('.append-column');
 const removeColumn = document.querySelector('.remove-column');
 
-appendRow.addEventListener('click', () => {
-  if (table.children.length < maxCell) {
-    const trNew = document.createElement('tr');
-    let row = '';
-
-    for (let i = 0; i < table.children[0].children.length; i++) {
-      row += `<td></td>\n`;
-    };
-
-    trNew.innerHTML = row;
-    table.append(trNew);
-
-    if (removeRow.disabled) {
-      removeRow.disabled = false;
-    };
-
-    if (table.children.length === maxCell) {
-      appendRow.disabled = true;
-    };
-  };
-});
-
-removeRow.addEventListener('click', () => {
-  if (table.children.length > minCell) {
-    table.lastElementChild.remove();
-
-    if (appendRow.disabled) {
-      appendRow.disabled = false;
-    };
-
-    if (table.children.length === minCell) {
-      removeRow.disabled = true;
-    };
-  };
-});
-
-appendColumn.addEventListener('click', () => {
+container.addEventListener('click', (events) => {
   const trTegs = document.querySelectorAll('tr');
 
-  if (trTegs[0].children.length < maxCell) {
-    trTegs.forEach((teTeg) => {
-      const newTeg = document.createElement('td');
+  switch (events.target.classList[0]) {
+    case 'append-row':
+      if (table.children.length < maxCell) {
+        const trNew = document.createElement('tr');
+        let row = '';
 
-      teTeg.append(newTeg);
-    });
+        for (let i = 0; i < table.children[0].children.length; i++) {
+          row += `<td></td>\n`;
+        };
 
-    if (removeColumn.disabled) {
-      removeColumn.disabled = false;
-    };
+        trNew.innerHTML = row;
+        table.append(trNew);
+      }
 
-    if (trTegs[0].children.length === maxCell) {
-      appendColumn.disabled = true;
-    };
-  };
-});
+      break;
 
-removeColumn.addEventListener('click', () => {
-  const trTegs = document.querySelectorAll('tr');
+    case 'remove-row':
+      table.lastElementChild.remove();
+      break;
 
-  if (trTegs[0].children.length > minCell) {
-    trTegs.forEach((trTeg) => {
-      trTeg.lastElementChild.remove();
-    });
-  };
+    case 'append-column':
+      if (trTegs[0].children.length < maxCell) {
+        trTegs.forEach((teTeg) => {
+          const newTeg = document.createElement('td');
 
-  if (appendColumn.disabled) {
-    appendColumn.disabled = false;
-  };
+          teTeg.append(newTeg);
+        });
+      }
 
-  if (trTegs[0].children.length === minCell) {
-    removeColumn.disabled = true;
-  };
+      break;
+
+    case 'remove-column':
+      trTegs.forEach((trTeg) => {
+        trTeg.lastElementChild.remove();
+      });
+  }
+  appendColumn.disabled = trTegs[0].children.length === maxCell;
+  removeColumn.disabled = trTegs[0].children.length === minCell;
+  appendRow.disabled = table.children.length === maxCell;
+  removeRow.disabled = table.children.length === minCell;
 });
