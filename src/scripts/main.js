@@ -8,6 +8,7 @@ const rowLess = document.querySelector('.remove-row');
 const colPlus = document.querySelector('.append-column');
 const colLess = document.querySelector('.remove-column');
 
+// utility functions
 function addRow() {
   const newRow = document.createElement('tr');
 
@@ -20,22 +21,35 @@ function addRow() {
   tBody.append(newRow);
 }
 
+function addColumn() {
+  [...tBody.rows].forEach(row => {
+    row.insertAdjacentHTML('beforeend', `<td></td>`);
+  });
+};
+
+function removeRow() {
+  tBody.lastElementChild.remove();
+};
+
+function removeColumn() {
+  [...tBody.rows].forEach(row => {
+    row.lastElementChild.remove();
+  });
+};
+
+// onclick processing
 document.body.addEventListener('click', ev => {
   if (!ev.target.closest('button')) {
     return;
   }
 
-  const tRows = [...tBody.rows];
-
   switch (ev.target) {
     case rowLess:
-      tBody.lastElementChild.remove();
+      removeRow();
       break;
 
     case colLess:
-      tRows.forEach(row => {
-        row.lastElementChild.remove();
-      });
+      removeColumn();
       break;
 
     case rowPlus:
@@ -43,10 +57,7 @@ document.body.addEventListener('click', ev => {
       break;
 
     case colPlus:
-      tRows.forEach(row => {
-        // row.append(document.createElement('td'));
-        row.insertAdjacentHTML('beforeend', `<td></td>`);
-      });
+      addColumn();
       break;
   }
 
