@@ -24,9 +24,9 @@ let countOfColumns = 0;
 table.addEventListener('click', (e) => {
   switch (e.target) {
     case appendRow:
+      countOfRows++;
       removeRow.disabled = false;
       appendRow.disabled = countOfRows === 10;
-      countOfRows++;
 
       const newRow = document.createElement('tr');
       const row = document.querySelector('tr');
