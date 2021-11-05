@@ -1,7 +1,7 @@
 'use strict';
 
 // write code here
-const table = document.querySelector('.field');
+const table = document.querySelector('.container');
 const appendRow = document.querySelector('.append-row');
 const removeRow = document.querySelector('.remove-row');
 const appendColumn = document.querySelector('.append-column');
@@ -21,73 +21,48 @@ let countOfColumns = 0;
   countOfColumns++;
 });
 
-appendRow.addEventListener('click', (e) => {
-  if (countOfRows < 10) {
-    removeRow.disabled = false;
+table.addEventListener('click', (e) => {
+  switch (e.target) {
+    case appendRow:
+      countOfRows++;
+      removeRow.disabled = false;
+      appendRow.disabled = countOfRows === 10;
+      const newRow = document.createElement('tr');
+      const row = document.querySelector('tr');
+      const tableBody = document.querySelector('tbody');
+      [...row.children].map(index => {
+        const cell = document.createElement('td');
+        newRow.append(cell);
+        tableBody.append(newRow);
+      });
+      break;
 
-    const newRow = document.createElement('tr');
+    case removeRow:
+      countOfRows--;
+      appendRow.disabled = false;
+      removeRow.disabled = countOfRows === 2;
+      document.querySelector('tr').remove();
+      break;
 
-    countOfRows++;
+    case appendColumn:
+      countOfColumns++;
+      removeColumn.disabled = false;
+      appendColumn.disabled = countOfColumns === 10;
+      const rows = document.querySelectorAll('tr');
+      [...rows].forEach(item => {
+        const cell = document.createElement('td');
+        row.append(cell);
+      });
+      break;
 
-    const row = document.querySelector('tr');
-
-    [...row.children].map(item => {
-      const cell = document.createElement('td');
-
-      newRow.append(cell);
-
-      if (countOfRows === 10) {
-        appendRow.disabled = true;
-      }
-    });
-    table.append(newRow);
-  }
-});
-
-removeRow.addEventListener('click', (e) => {
-  if (countOfRows > 2) {
-    appendRow.disabled = false;
-    countOfRows--;
-    document.querySelector('tr').remove();
-
-    if (countOfRows === 2) {
-      removeRow.disabled = true;
-    }
-  }
-});
-
-appendColumn.addEventListener('click', (e) => {
-  if (countOfColumns < 10) {
-    removeColumn.disabled = false;
-    countOfColumns++;
-
-    const rows = document.querySelectorAll('tr');
-
-    [...rows].forEach(row => {
-      const cell = document.createElement('td');
-
-      row.append(cell);
-
-      if (countOfColumns === 10) {
-        appendColumn.disabled = true;
-      }
-    });
-  }
-});
-
-removeColumn.addEventListener('click', (e) => {
-  if (countOfColumns > 2) {
-    countOfColumns--;
-    appendColumn.disabled = false;
-
-    const rows = document.querySelectorAll('tr');
-
-    [...rows].forEach(row => {
-      row.lastElementChild.remove();
-    });
-
-    if (countOfColumns === 2) {
-      removeColumn.disabled = true;
-    }
+    case removeColumn:
+      countOfColumns--;
+      appendColumn.disabled = false;
+      removeColumn.disabled = countOfColumns === 2;
+      const rowsLastElement = document.querySelectorAll('tr');
+      [...rowsLastElement].map(item => {
+        rowsLastElement.lastElementChild.remove();
+      });
+      break;
   }
 });
