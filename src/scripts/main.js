@@ -27,11 +27,14 @@ table.addEventListener('click', (e) => {
       countOfRows++;
       removeRow.disabled = false;
       appendRow.disabled = countOfRows === 10;
+
       const newRow = document.createElement('tr');
       const row = document.querySelector('tr');
       const tableBody = document.querySelector('tbody');
+
       [...row.children].map(index => {
         const cell = document.createElement('td');
+
         newRow.append(cell);
         tableBody.append(newRow);
       });
@@ -48,9 +51,12 @@ table.addEventListener('click', (e) => {
       countOfColumns++;
       removeColumn.disabled = false;
       appendColumn.disabled = countOfColumns === 10;
+
       const rows = document.querySelectorAll('tr');
-      [...rows].forEach(item => {
+
+      [...rows].forEach(row => {
         const cell = document.createElement('td');
+
         row.append(cell);
       });
       break;
@@ -59,8 +65,10 @@ table.addEventListener('click', (e) => {
       countOfColumns--;
       appendColumn.disabled = false;
       removeColumn.disabled = countOfColumns === 2;
+
       const rowsLastElement = document.querySelectorAll('tr');
-      [...rowsLastElement].map(item => {
+
+      [...rowsLastElement].map(rowsLastElement => {
         rowsLastElement.lastElementChild.remove();
       });
       break;
