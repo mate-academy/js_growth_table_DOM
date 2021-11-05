@@ -24,15 +24,15 @@ let countOfColumns = 0;
 table.addEventListener('click', (e) => {
   switch (e.target) {
     case appendRow:
-      countOfRows++;
       removeRow.disabled = false;
       appendRow.disabled = countOfRows === 10;
+      countOfRows++;
 
       const newRow = document.createElement('tr');
       const row = document.querySelector('tr');
       const tableBody = document.querySelector('tbody');
 
-      [...row.children].map(index => {
+      [...row.children].forEach(index => {
         const cell = document.createElement('td');
 
         newRow.append(cell);
@@ -68,7 +68,7 @@ table.addEventListener('click', (e) => {
 
       const rowsLastElement = document.querySelectorAll('tr');
 
-      [...rowsLastElement].map(rowsLastElement => {
+      [...rowsLastElement].forEach(rowsLastElement => {
         rowsLastElement.lastElementChild.remove();
       });
       break;
