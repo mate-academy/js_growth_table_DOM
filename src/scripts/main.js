@@ -15,24 +15,18 @@ function tableSetup(action) {
       e.lastElementChild.remove();
     }
 
-    [...e.children].length < 10
-      ? appendColumn.disabled = false : appendColumn.disabled = true;
-
-    [...e.children].length <= 2
-      ? removeColumn.disabled = true : removeColumn.disabled = false;
+    appendColumn.disabled = [...e.children].length >= 10;
+    removeColumn.disabled = [...e.children].length <= 2;
   });
 
-  [...field.children].length < 10
-    ? appendRow.disabled = false : appendRow.disabled = true;
-
-  [...field.children].length <= 2
-    ? removeRow.disabled = true : removeRow.disabled = false;
+  appendRow.disabled = [...field.children].length >= 10;
+  removeRow.disabled = [...field.children].length <= 2;
 };
 
 container.addEventListener('click', (e) => {
   switch (e.target) {
     case appendRow:
-      if (appendRow.disabled  === false) {
+      if (appendRow.disabled === false) {
         field.insertBefore(field.lastElementChild.cloneNode(true),
           field.lastElementChild);
       }
