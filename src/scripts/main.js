@@ -16,12 +16,11 @@ container.addEventListener('click', (e) => {
   }
 
   const table = document.querySelector('table');
+  const lastRow = table.rows[table.rows.length - 1];
 
   if (e.target === appendRowButton
   && appendRowButton.disabled === false) {
-    const rowCopy = table.rows[0];
-
-    table.insertAdjacentHTML('beforeend', `${rowCopy.outerHTML}`);
+    table.insertAdjacentHTML('beforeend', `${lastRow.outerHTML}`);
 
     if (table.rows.length === 10) {
       appendRowButton.disabled = true;
@@ -30,8 +29,6 @@ container.addEventListener('click', (e) => {
 
   if (e.target === removeRowButton
   && removeRowButton.disabled === false) {
-    const lastRow = table.rows[table.rows.length - 1];
-
     lastRow.remove();
 
     if (table.rows.length === 2) {
