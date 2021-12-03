@@ -25,6 +25,10 @@ container.addEventListener('click', (e) => {
     if (table.rows.length === 10) {
       appendRowButton.disabled = true;
     }
+
+    if (table.rows.length > 2) {
+      removeRowButton.disabled = false;
+    }
   }
 
   if (e.target === removeRowButton
@@ -33,6 +37,10 @@ container.addEventListener('click', (e) => {
 
     if (table.rows.length === 2) {
       removeRowButton.disabled = true;
+    }
+
+    if (table.rows.length < 10) {
+      appendRowButton.disabled = false;
     }
   }
 
@@ -50,6 +58,10 @@ container.addEventListener('click', (e) => {
     if (table.rows[0].cells.length === 10) {
       appendColumnButton.disabled = true;
     }
+
+    if (table.rows[0].cells.length > 2) {
+      removeColumnButton.disabled = false;
+    }
   }
 
   if (e.target === removeColumnButton
@@ -63,6 +75,10 @@ container.addEventListener('click', (e) => {
 
     if (table.rows[0].cells.length === 2) {
       removeColumnButton.disabled = true;
+    }
+
+    if (table.rows[0].cells.length < 10) {
+      appendColumnButton.disabled = false;
     }
   }
 });
