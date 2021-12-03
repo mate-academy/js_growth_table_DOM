@@ -22,6 +22,7 @@ Some rules:
 - The max count of rows or columns is 10.
 - The min count of rows or columns is 2.
 - If the count of columns or rows reaches maximum or minimum, set disabled the corresponding button.
+- If the count of columns or rows can be changed again (after reaching maximum or minimum), set enabled the corresponding button.
 
 As always, on JS Advanced course you do not need to change the HTML layout or CSS styles.
 
