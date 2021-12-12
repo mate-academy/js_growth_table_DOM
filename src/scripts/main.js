@@ -14,7 +14,7 @@ let amountColumn = table.rows[0].cells.length;
 document.addEventListener('click', e => {
   const item = e.target;
 
-  if (!item.closest('button') || amountRows === max || amountColumn === max) {
+  if (!item.closest('button') || item.disabled === true) {
     return;
   }
 
