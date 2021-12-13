@@ -15,14 +15,14 @@ div.addEventListener('click', (events) => {
     const colsLength = table.rows[0].cells.length;
     const limitRow = table.rows.length;
 
-    if (limitRow <= 10) {
+    if (limitRow <= 9) {
       const newRow = table.insertRow(-1);
 
       for (let i = 0; i < colsLength; i++) {
         newRow.insertCell(-1);
       }
 
-      if (limitRow === 10) {
+      if (limitRow === 9) {
         buttonClick.classList.add('disabled');
         buttonClick.style.background = 'grey';
       }
