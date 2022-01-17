@@ -18,73 +18,47 @@ container.addEventListener('click', function tableSizeManipulation(action) {
   let numberOfRows = tBody.rows.length;
   let numberOfColumns = tBody.rows[0].children.length;
 
-  // append rows
-  if (target.textContent === '+'
-    && target.classList.contains('append-row')) {
-    tBody.prepend(rows.cloneNode(true));
-    numberOfRows++;
+  switch (target) {
+    case buttonAddRow:
+      tBody.prepend(rows.cloneNode(true));
+      numberOfRows++;
+
+      break;
+
+    case buttonRemoveRow:
+      tBody.deleteRow(0);
+      numberOfRows--;
+
+      break;
+
+    case buttonAddColumn:
+      for (let i = 0; i < tBody.rows.length; i++) {
+        const copy = tBody.rows[i].cells[0].cloneNode(true);
+
+        tBody.rows[i].lastElementChild.before(copy);
+      }
+
+      numberOfColumns++;
+
+      break;
+
+    case buttonRemoveColumn:
+      for (let i = 0; i < tBody.rows.length; i++) {
+        const column = tBody.rows[i].cells[0].cloneNode(true);
+
+        tBody.rows[i].cells[0].remove(column);
+      }
+
+      numberOfColumns--;
+
+      break;
   }
 
-  if (numberOfRows > maxNumOfRowsAndColLimit) {
-    buttonAddRow.disabled = true;
-  }
+  buttonAddRow.disabled = numberOfRows > maxNumOfRowsAndColLimit;
 
-  // remove rows
-  if (target.textContent === '-'
-    && target.classList.contains('remove-row')) {
-    tBody.deleteRow(0);
-    numberOfRows--;
-  }
+  buttonRemoveRow.disabled = numberOfRows <= minNumOfRowsAndColLimit;
 
-  if (numberOfRows < maxNumOfRowsAndColLimit) {
-    buttonAddRow.disabled = false;
-  }
+  buttonAddColumn.disabled = numberOfColumns > maxNumOfRowsAndColLimit;
 
-  if (numberOfRows <= minNumOfRowsAndColLimit) {
-    buttonRemoveRow.disabled = true;
-  }
-
-  if (numberOfRows > minNumOfRowsAndColLimit) {
-    buttonRemoveRow.disabled = false;
-  }
-
-  // append columns
-  if (target.textContent === '+'
-    && target.classList.contains('append-column')) {
-    for (let i = 0; i < tBody.rows.length; i++) {
-      const copy = tBody.rows[i].cells[0].cloneNode(true);
-
-      tBody.rows[i].lastElementChild.before(copy);
-    }
-
-    numberOfColumns++;
-  }
-
-  if (numberOfColumns > maxNumOfRowsAndColLimit) {
-    buttonAddColumn.disabled = true;
-  }
-
-  // remove columns
-  if (target.textContent === '-'
-    && target.classList.contains('remove-column')) {
-    for (let i = 0; i < tBody.rows.length; i++) {
-      const column = tBody.rows[i].cells[0].cloneNode(true);
-
-      tBody.rows[i].cells[0].remove(column);
-    }
-
-    numberOfColumns--;
-  }
-
-  if (numberOfColumns <= maxNumOfRowsAndColLimit) {
-    buttonAddColumn.disabled = false;
-  }
-
-  if (numberOfColumns <= minNumOfRowsAndColLimit) {
-    buttonRemoveColumn.disabled = true;
-  }
-
-  if (numberOfColumns > minNumOfRowsAndColLimit) {
-    buttonRemoveColumn.disabled = false;
-  }
+  buttonRemoveColumn.disabled = numberOfColumns <= minNumOfRowsAndColLimit;
 });
