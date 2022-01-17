@@ -1,6 +1,7 @@
 'use strict';
 
 const table = document.querySelector('tbody');
+const body = document.querySelector('body');
 const btnPlusRow = document.querySelector('.append-row');
 const btnMinRow = document.querySelector('.remove-row');
 const btnPlusCol = document.querySelector('.append-column');
@@ -13,9 +14,7 @@ const addRow = function(e) {
   btnMinRow.removeAttribute('disabled');
   table.appendChild(a);
 
-  if (tr.length === 10) {
-    btnPlusRow.setAttribute('disabled', 'disabled');
-  }
+  btnPlusRow.disabled = tr.length === 10;
 };
 
 const addColumn = function(e) {
@@ -24,9 +23,7 @@ const addColumn = function(e) {
   for (let i = 0; i < tr.length; i++) {
     const b = tr[0].lastElementChild.cloneNode(true);
 
-    if (tr[0].children.length === 10) {
-      btnPlusCol.setAttribute('disabled', 'disabled');
-    }
+    btnPlusCol.disabled = tr[0].children.length === 10;
     tr[i].append(b);
   }
 };
@@ -37,9 +34,7 @@ const minRow = function(e) {
 
   tr[0].remove();
 
-  if (tr.length === 2) {
-    btnMinRow.setAttribute('disabled', 'disabled');
-  }
+  btnMinRow.disabled = tr.length === 2;
 };
 
 const minCol = function(e) {
@@ -50,12 +45,22 @@ const minCol = function(e) {
     table.children[x].lastElementChild.remove();
   }
 
-  if (tr[0].children.length === 2) {
-    btnMinCol.setAttribute('disabled', 'disabled');
-  }
+  btnMinCol.disabled = tr[0].children.length === 2;
 };
 
-btnPlusRow.addEventListener('click', addRow);
-btnPlusCol.addEventListener('click', addColumn);
-btnMinRow.addEventListener('click', minRow);
-btnMinCol.addEventListener('click', minCol);
+body.addEventListener('click', function(e) {
+  switch (e.target) {
+    case btnPlusRow:
+      addRow();
+      break;
+    case btnPlusCol:
+      addColumn();
+      break;
+    case btnMinRow:
+      minRow();
+      break;
+    case btnMinCol:
+      minCol();
+      break;
+  }
+});
