@@ -5,74 +5,53 @@ const addRow = document.querySelector('.append-row');
 const remRow = document.querySelector('.remove-row');
 const addCol = document.querySelector('.append-column');
 const remCol = document.querySelector('.remove-column');
+const container = document.querySelector('.container');
 
-const appendRow = () => {
-  const rowCount = table.children.length;
+let rowCount = table.children.length;
+let colCount = table.firstElementChild.children.length;
 
-  if (rowCount < 10) {
-    const cloneRow = table.firstElementChild.cloneNode(true);
+container.addEventListener('click', (e) => {
+  const target = e.target.classList[0];
 
-    table.append(cloneRow);
+  switch (target) {
+    case 'append-row':
+      if (rowCount < 10) {
+        const cloneRow = table.firstElementChild.cloneNode(true);
+
+        table.append(cloneRow);
+      }
+      rowCount++;
+      break;
+
+    case 'remove-row':
+      if (rowCount > 2) {
+        table.lastElementChild.remove();
+      }
+      rowCount--;
+      break;
+
+    case 'append-column':
+      if (colCount < 10) {
+        for (let i = 0; i < rowCount; i++) {
+          const cell = document.createElement('td');
+
+          table.children[i].append(cell);
+        }
+      }
+      colCount++;
+      break;
+
+    case 'remove-column':
+      if (colCount > 2) {
+        for (let i = 0; i < rowCount; i++) {
+          table.children[i].lastElementChild.remove();
+        }
+      }
+      colCount--;
+      break;
   }
-
-  if (rowCount >= 10) {
-    addRow.disabled = true;
-  } else {
-    remRow.disabled = null;
-  }
-};
-
-const deleteRow = () => {
-  const rowCount = table.children.length;
-
-  if (rowCount > 2) {
-    table.lastElementChild.remove();
-  }
-
-  if (rowCount <= 2) {
-    remRow.disabled = true;
-  } else {
-    addRow.disabled = null;
-  }
-};
-
-const appendCol = () => {
-  const colCount = table.firstElementChild.children.length;
-  const rowCount = table.children.length;
-
-  if (colCount < 10) {
-    for (let i = 0; i < rowCount; i++) {
-      const cell = document.createElement('td');
-
-      table.children[i].append(cell);
-    }
-  }
-
-  if (colCount >= 10) {
-    addCol.disabled = true;
-  } else {
-    remCol.disabled = null;
-  }
-};
-
-const deleteCol = () => {
-  const colCount = table.firstElementChild.children.length;
-  const rowCount = table.children.length;
-
-  if (colCount > 2) {
-    for (let i = 0; i < rowCount; i++) {
-      table.children[i].lastElementChild.remove();
-    }
-  }
-
-  if (colCount <= 2) {
-    remCol.disabled = true;
-  } else {
-    addCol.disabled = null;
-  }
-};
-
-addRow.addEventListener('click', appendRow);
-remRow.addEventListener('click', deleteRow);
-addCol.addEventListener('click', appendCol);
-remCol.addEventListener('click', deleteCol);
+  addCol.disabled = colCount === 10;
+  remCol.disabled = colCount === 2;
+  addRow.disabled = rowCount === 10;
+  remRow.disabled = rowCount === 2;
+});
