@@ -2,11 +2,12 @@
 
 const table = document.querySelector('tbody');
 const body = document.querySelector('body');
+
+const tr = table.children;
 const btnPlusRow = document.querySelector('.append-row');
 const btnMinRow = document.querySelector('.remove-row');
 const btnPlusCol = document.querySelector('.append-column');
 const btnMinCol = document.querySelector('.remove-column');
-const tr = table.children;
 
 const addRow = function(e) {
   const a = tr[0].cloneNode(true);
