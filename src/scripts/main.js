@@ -4,38 +4,65 @@ const appendRow = document.querySelector('.append-row');
 const removeRow = document.querySelector('.remove-row');
 const appendColumn = document.querySelector('.append-column');
 const removeColumn = document.querySelector('.remove-column');
+const container = document.querySelector('.container');
+const tr = document.querySelector('tr');
 const table = document.querySelector('.field');
 
-appendRow.addEventListener('click', (e) => {
-  const row = document.createElement('tr');
-  const el = document.createElement('td');
-  const el1 = document.createElement('td');
-  const el2 = document.createElement('td');
-  const el3 = document.createElement('td');
-  row.append(el,el1,el2,el3);
-  if (table.children[0].children.length < 12) {
-    table.children[0].append(row);
+container.addEventListener('click', (e) => {
+  if (e.target === removeColumn) {
+    if (table.children[0].children[0].children.length >= 10) {
+      appendColumn.disabled = false;
+    }
+    if (table.children[0].children[0].children.length > 2) {
+      for (const i of table.children[0].children) {
+        i.lastChild.remove();
+      }
+    } else {
+      removeColumn.disabled = true;
+    }
   }
-});
 
-removeRow.addEventListener('click', (e) => {
-  if (table.children[0].children.length > 2)
-  table.children[0].lastChild.remove();
-});
+  if (e.target === removeRow) {
+    if (table.children[0].children.length >= 10) {
+      appendRow.disabled = false;
+    }
+    if (table.children[0].children.length > 2) {
+      table.children[0].lastChild.remove();
+    } else {
+      removeRow.disabled = true;
+    }
+  }
 
-removeColumn.addEventListener('click', (e) => {
-  if (table.children[0].children[0].children.length > 2) {
-    for (let i of table.children[0].children) {
-      i.lastChild.remove();
+  if (e.target === appendRow) {
+    const row = document.createElement('tr');
+    if (table.children[0].children.length > 1) {
+      removeRow.disabled = false;
+    }
+    for (let i = 0; i < tr.children.length; i++) {
+      const td = document.createElement('td');
+      row.append(td);
+    }
+  
+    if (table.children[0].children.length < 10) {
+      table.children[0].append(row);
+    } else {
+      appendRow.disabled = true;
+    }
+  }
+
+  if (e.target === appendColumn) {
+    if (table.children[0].children[0].children.length > 1) {
+      removeColumn.disabled = false;
+    }
+    if (table.children[0].children[0].children.length < 10) {
+      for (const i of table.children[0].children) {
+        const el = document.createElement('td');
+  
+        i.append(el);
+      }
+    } else {
+      appendColumn.disabled = true;
     }
   }
 });
 
-appendColumn.addEventListener('click', (e) => {
-  if (table.children[0].children[0].children.length < 12) {
-    for (let i of table.children[0].children) {
-      const el = document.createElement('td');
-      i.append(el);
-    }
-  }
-});
