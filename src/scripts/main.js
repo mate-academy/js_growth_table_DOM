@@ -45,6 +45,7 @@ addColumnButton.addEventListener('click', addColumn);
 
 function addColumn() {
   if (cols < 10) {
+    removeColumnButton.disabled = false;
     cols++;
 
     for (let i = 0; i < rows; i++) {
@@ -56,7 +57,7 @@ function addColumn() {
   }
 
   if (cols === 10) {
-    addColumnButton[0].disabled = true;
+    addColumnButton.disabled = true;
   }
 }
 
