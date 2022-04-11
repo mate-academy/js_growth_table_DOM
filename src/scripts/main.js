@@ -9,44 +9,65 @@ container.addEventListener('click', e => {
 
   const table = document.querySelector('.field');
   const rows = document.querySelectorAll('tr');
-  const addRow = document.querySelector('.append-row');
-  const removeRow = document.querySelector('.remove-row');
-  const addCol = document.querySelector('.append-column');
-  const removeCol = document.querySelector('.remove-column');
+  const addRowButton = document.querySelector('.append-row');
+  const removeRowButton = document.querySelector('.remove-row');
+  const addColButton = document.querySelector('.append-column');
+  const removeColButton = document.querySelector('.remove-column');
 
-  let rowMax = rows.length;
-  let colMax = rows[0].children.length;
+  let rowLength = rows.length;
+  let colHeight = rows[0].children.length;
+
+  const rowMax = 9;
+  const rowMin = 3;
+  const colMax = 9;
+  const colMin = 3;
+
+  function addRow () {
+    const clone = rows[0].cloneNode(true);
+
+    table.firstElementChild.append(clone);
+    rowLength++;
+  };
+
+  function removeRow() {
+    table.firstElementChild.lastElementChild.remove();
+    rowLength--;
+  };
+
+  function addCol() {
+    for (let i = 0; i < rows.length; i++) {
+      rows[i].insertAdjacentHTML('afterbegin', '<td></td>');
+    }
+    colHeight++;
+  };
+
+  function removeCol() {
+    for (let i = 0; i < rows.length; i++) {
+      rows[i].lastElementChild.remove();
+    }
+    colHeight--;
+  }
 
   switch (e.target.classList[0]) {
     case 'append-row':
-      const clone = rows[0].cloneNode(true);
-
-      table.firstElementChild.append(clone);
-      rowMax++;
+      addRow();
       break;
 
     case 'remove-row':
-      table.firstElementChild.lastElementChild.remove();
-      rowMax--;
+      removeRow();
       break;
 
     case 'append-column':
-      for (let i = 0; i < rows.length; i++) {
-        rows[i].insertAdjacentHTML('afterbegin', '<td></td>');
-      }
-      colMax++;
+      addCol();
       break;
 
     case 'remove-column':
-      for (let i = 0; i < rows.length; i++) {
-        rows[i].lastElementChild.remove();
-      }
-      colMax--;
+      removeCol();
       break;
   };
 
-  addRow.disabled = rowMax > 9;
-  removeRow.disabled = rowMax < 3;
-  addCol.disabled = colMax > 9;
-  removeCol.disabled = colMax < 3;
+  addRowButton.disabled = rowLength > rowMax;
+  removeRowButton.disabled = rowLength < rowMin;
+  addColButton.disabled = colHeight > colMax;
+  removeColButton.disabled = colHeight < colMin;
 })
