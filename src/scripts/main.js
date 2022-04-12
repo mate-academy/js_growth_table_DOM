@@ -35,6 +35,10 @@ document.addEventListener('click', ev => {
       rows.forEach(el => {
         el.firstElementChild.outerHTML = '';
       });
+      break;
+    
+    default:
+      break;
   }
 
   appendRow.disabled = countRows === 10;
