@@ -18,6 +18,11 @@ function addCol() {
     return;
   }
 
+  if (colsInitial >= colMax - 1) {
+    buttonAddCol.disabled = true;
+    buttonRemoveCol.disabled = false;
+  }
+
   for (const tr of table.querySelectorAll('tr')) {
     const td = document.createElement('td');
 
@@ -31,6 +36,11 @@ function removeCol() {
 
   if (colsInitial <= colMin) {
     return;
+  }
+
+  if (colsInitial <= colMin + 1) {
+    buttonAddCol.disabled = false;
+    buttonRemoveCol.disabled = true;
   }
 
   for (const tr of table.querySelectorAll('tr')) {
@@ -47,6 +57,11 @@ function addRow() {
     return;
   }
 
+  if (rowsInitial >= rowMax - 1) {
+    buttonAddRow.disabled = true;
+    buttonRemoveRow.disabled = false;
+  }
+
   const tbody = table.querySelector('tbody');
   const tr = table.querySelector('tr').cloneNode(true);
 
@@ -58,6 +73,11 @@ function removeRow() {
 
   if (rowsInitial <= rowMin) {
     return;
+  }
+
+  if (rowsInitial <= rowMin + 1) {
+    buttonAddRow.disabled = false;
+    buttonRemoveRow.disabled = true;
   }
 
   const tbody = table.querySelector('tbody');
