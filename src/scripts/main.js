@@ -8,20 +8,17 @@ const removeRowButton = document.querySelector('.remove-row');
 const addColumnButton = document.querySelector('.append-column');
 const removeColumnButton = document.querySelector('.remove-column');
 const startCount = 4;
+const maxLength = 10;
+const minLength = 2;
+
 let countOfRows = startCount;
 let countOfColumns = startCount;
 
-page.addEventListener('click', e => {
-  const activeButton = e.target.matches('.button');
-
-  if (!activeButton) {
-    return;
-  }
-
+const changesSize = (button) => {
   const row = tBody.lastElementChild;
   const rows = [...table.rows];
 
-  switch (e.target.classList[0]) {
+  switch (button) {
     case 'append-row':
       tBody.append(row.cloneNode(true));
       countOfRows++;
@@ -40,27 +37,18 @@ page.addEventListener('click', e => {
       break;
   }
 
-  switch (!!countOfRows) {
-    case countOfRows === 10:
-      addRowButton.disabled = true;
-      break;
-    case countOfRows === 2:
-      removeRowButton.disabled = true;
-      break;
-    default:
-      addRowButton.disabled = null;
-      removeRowButton.disabled = null;
+  addRowButton.disabled = countOfRows === maxLength;
+  removeRowButton.disabled = countOfRows === minLength;
+  addColumnButton.disabled = countOfColumns === maxLength;
+  removeColumnButton.disabled = countOfColumns === minLength;
+};
+
+page.addEventListener('click', e => {
+  const activeButton = e.target.matches('.button');
+
+  if (!activeButton) {
+    return;
   }
 
-  switch (!!countOfColumns) {
-    case countOfColumns === 10:
-      addColumnButton.disabled = true;
-      break;
-    case countOfColumns === 2:
-      removeColumnButton.disabled = true;
-      break;
-    default:
-      addColumnButton.disabled = null;
-      removeColumnButton.disabled = null;
-  }
+  changesSize(e.target.classList[0]);
 });
