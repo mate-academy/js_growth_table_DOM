@@ -33,7 +33,6 @@ container.addEventListener('click', e => {
       break;
 
     case 'append-column':
-
       [...tableRows].map(row => {
         row.append(row.cells[0].cloneNode(true), row.children[0]);
       });
@@ -47,6 +46,9 @@ container.addEventListener('click', e => {
       });
 
       columnCount--;
+      break;
+
+    default:
       break;
   }
 
