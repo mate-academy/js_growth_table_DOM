@@ -17,22 +17,22 @@ const removeColumnButton = document.querySelector('.remove-column');
 const container = document.querySelector('.container');
 
 container.addEventListener('click', e => {
-  const button = e.target.classList[0];
+  const button = e.target;
 
   switch (button) {
-    case 'append-row':
+    case addRowButton:
       tableBody.append(tableRows[0].cloneNode(true));
 
       rowCount++;
       break;
 
-    case 'remove-row':
+    case removeRowButton:
       tableRows[0].remove();
 
       rowCount--;
       break;
 
-    case 'append-column':
+    case addColumnButton:
       [...tableRows].map(row => {
         row.append(row.cells[0].cloneNode(true), row.children[0]);
       });
@@ -40,7 +40,7 @@ container.addEventListener('click', e => {
       columnCount++;
       break;
 
-    case 'remove-column':
+    case removeColumnButton:
       [...tableRows].map(row => {
         row.cells[0].remove();
       });
