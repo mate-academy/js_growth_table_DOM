@@ -8,6 +8,13 @@ const tbody = document.querySelector('tbody');
 
 appendColumPlus.addEventListener('click', e => {
   const trRow = document.querySelectorAll('tr');
+  const tdsInRow = trRow[0].querySelectorAll('td').length;
+
+  if (tdsInRow === 9) {
+    appendColumPlus.setAttribute('disabled', true);
+  }
+
+  removeColum.removeAttribute('disabled');
 
   trRow.forEach(el => {
     const td = document.createElement('td');
@@ -18,12 +25,24 @@ appendColumPlus.addEventListener('click', e => {
 
 appendRowPlus.addEventListener('click', e => {
   const trRow = document.querySelectorAll('tr');
+  removeRow.removeAttribute('disabled');
+
+  if (trRow.length === 9) {
+    appendRowPlus.setAttribute('disabled', true);
+  }
 
   tbody.append(trRow[trRow.length - 1].cloneNode(true));
 });
 
 removeColum.addEventListener('click', e => {
   const trRow = document.querySelectorAll('tr');
+
+  const tdsInRow = trRow[0].querySelectorAll('td').length;
+
+  if (tdsInRow === 3) {
+    removeColum.setAttribute('disabled', true);
+  }
+  appendColumPlus.removeAttribute('disabled');
 
   trRow.forEach(el => {
     const td = el.querySelector('td');
@@ -33,7 +52,12 @@ removeColum.addEventListener('click', e => {
 });
 
 removeRow.addEventListener('click', e => {
-  const trRow = document.querySelector('tr');
+  const trRow = document.querySelectorAll('tr');
+  appendRowPlus.removeAttribute('disabled');
 
-  trRow.remove();
+  if (trRow.length === 3) {
+    removeRow.setAttribute('disabled', true);
+  }
+
+  trRow[0].remove();
 });
