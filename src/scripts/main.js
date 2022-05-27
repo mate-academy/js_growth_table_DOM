@@ -34,27 +34,8 @@ document.addEventListener('click', (e) => {
       break;
   }
 
-  if (tbody.rows.length >= max) {
-    appendRow.disabled = true;
-  } else {
-    appendRow.disabled = false;
-  }
-
-  if (tbody.rows.length <= min) {
-    removeRow.disabled = true;
-  } else {
-    removeRow.disabled = false;
-  }
-
-  if (tbody.querySelector('tr').children.length >= max) {
-    appendColumn.disabled = true;
-  } else {
-    appendColumn.disabled = false;
-  }
-
-  if (tbody.querySelector('tr').children.length <= min) {
-    removeColumn.disabled = true;
-  } else {
-    removeColumn.disabled = false;
-  }
+  appendColumn.disabled = tbody.querySelector('tr').children.length >= max;
+  removeColumn.disabled = tbody.querySelector('tr').children.length <= min;
+  appendRow.disabled = tbody.rows.length >= max;
+  removeRow.disabled = tbody.rows.length <= min;
 });
