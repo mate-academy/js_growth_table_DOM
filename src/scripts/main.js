@@ -42,9 +42,8 @@ remCol.addEventListener('click', (e) => {
 
 appRow.addEventListener('click', (e) => {
   const tabRow = document.querySelector('tr');
-  const rowClone = tabRow.cloneNode(true);
 
-  tBody.appendChild(rowClone);
+  tBody.appendChild(tabRow.cloneNode(true));
 
   if (tBody.childElementCount === 3) {
     remRow.disabled = false;
