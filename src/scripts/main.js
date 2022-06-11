@@ -6,62 +6,37 @@ const remRow = document.querySelector('.remove-row');
 const appCol = document.querySelector('.append-column');
 const remCol = document.querySelector('.remove-column');
 
-appCol.addEventListener('click', (e) => {
+document.querySelector('.container').addEventListener('click', (e) => {
   const tabRows = document.querySelectorAll('tr');
-
-  for (const row of tabRows) {
-    const td = document.createElement('td');
-
-    row.appendChild(td);
-
-    if (row.childElementCount === 3) {
-      remCol.disabled = false;
-    }
-
-    if (row.childElementCount === 10) {
-      appCol.disabled = true;
-    }
-  }
-});
-
-remCol.addEventListener('click', (e) => {
-  const tabRows = document.querySelectorAll('tr');
-
-  for (const row of tabRows) {
-    row.removeChild(row.lastChild);
-
-    if (row.childElementCount === 2) {
-      remCol.disabled = true;
-    }
-
-    if (row.childElementCount === 9) {
-      appCol.disabled = false;
-    }
-  }
-});
-
-appRow.addEventListener('click', (e) => {
   const tabRow = document.querySelector('tr');
 
-  tBody.appendChild(tabRow.cloneNode(true));
+  switch (e.target) {
+    case appCol:
 
-  if (tBody.childElementCount === 3) {
-    remRow.disabled = false;
+      for (const row of tabRows) {
+        const td = document.createElement('td');
+
+        row.appendChild(td);
+      }
+      break;
+
+    case remCol:
+      for (const row of tabRows) {
+        row.removeChild(row.lastChild);
+      }
+      break;
+
+    case appRow:
+      tBody.appendChild(tabRow.cloneNode(true));
+      break;
+
+    case remRow:
+      tBody.removeChild(tBody.lastChild);
   }
 
-  if (tBody.childElementCount === 10) {
-    appRow.disabled = true;
-  }
-});
+  remCol.disabled = tabRow.childElementCount === 2;
+  appCol.disabled = tabRow.childElementCount === 10;
+  remRow.disabled = tBody.childElementCount === 2;
+  appRow.disabled = tBody.childElementCount === 10;
 
-remRow.addEventListener('click', (e) => {
-  tBody.removeChild(tBody.lastChild);
-
-  if (tBody.childElementCount === 2) {
-    remRow.disabled = true;
-  }
-
-  if (tBody.childElementCount === 9) {
-    appRow.disabled = false;
-  }
 });
