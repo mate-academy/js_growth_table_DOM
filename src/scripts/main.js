@@ -41,27 +41,8 @@ document.addEventListener('click', e => {
     columnCounter = column.children.length;
   };
 
-  if (rowCounter === 10) {
-    buttonAddRow.disabled = true;
-  } else {
-    buttonAddRow.disabled = false;
-  }
-
-  if (rowCounter === 2) {
-    buttonRemoveRow.disabled = true;
-  } else {
-    buttonRemoveRow.disabled = false;
-  }
-
-  if (columnCounter === 10) {
-    buttonAddColumn.disabled = true;
-  } else {
-    buttonAddColumn.disabled = false;
-  }
-
-  if (columnCounter === 2) {
-    buttonRemoveColumn.disabled = true;
-  } else {
-    buttonRemoveColumn.disabled = false;
-  }
+  buttonAddRow.disabled = rowCounter === 10;
+  buttonRemoveRow.disabled = rowCounter === 2;
+  buttonAddColumn.disabled = columnCounter === 10;
+  buttonRemoveColumn.disabled = columnCounter === 2;
 });
