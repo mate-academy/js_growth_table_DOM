@@ -3,6 +3,11 @@
 const container = document.querySelector('.container');
 const tbody = document.querySelector('tbody');
 
+const addRowButton = container.querySelector('.append-row');
+const removeRowButton = container.querySelector('.remove-row');
+const addColumnButton = container.querySelector('.append-column');
+const removeColumnButton = container.querySelector('.remove-column');
+
 container.addEventListener('click', (e) => action(e));
 
 function action(e) {
@@ -13,7 +18,7 @@ function action(e) {
   }
 
   switch (e.target) {
-    case container.querySelector('.append-row'):
+    case addRowButton:
       const tr = document.createElement('tr');
       const trLength = tbody.lastElementChild.querySelectorAll('td').length;
 
@@ -24,37 +29,27 @@ function action(e) {
       tbody.insertAdjacentElement('beforeend', tr);
       break;
 
-    case container.querySelector('.remove-row'):
+    case removeRowButton:
       tbody.lastElementChild.remove();
       break;
 
-    case container.querySelector('.append-column'):
+    case addColumnButton:
       const td = document.createElement('td');
 
       list.forEach(el => el.append(td.cloneNode()));
       break;
 
-    case container.querySelector('.remove-column'):
+    case removeColumnButton:
       list.forEach(el => el.lastElementChild.remove());
       break;
   }
 
-  buttonDisabler();
+  processButtonStatuses();
 }
 
-function buttonDisabler() {
+function processButtonStatuses() {
   const columnLength = tbody.querySelectorAll('tr').length;
   const rowLength = tbody.firstElementChild.querySelectorAll('td').length;
-
-  const addRowButton = container.querySelector('.append-row');
-  const removeRowButton = container.querySelector('.remove-row');
-  const addColumnButton = container.querySelector('.append-column');
-  const removeColumnButton = container.querySelector('.remove-column');
-
-  addRowButton.disabled = '';
-  removeRowButton.disabled = '';
-  addColumnButton.disabled = '';
-  removeColumnButton.disabled = '';
 
   addRowButton.disabled = columnLength >= 10;
   removeRowButton.disabled = columnLength <= 2;
