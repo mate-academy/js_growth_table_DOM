@@ -2,81 +2,81 @@
 
 // write code here
 
-document.querySelector('.append-column')
-  .addEventListener('click', () => {
+const buttons = [...document.querySelectorAll('.button')];
+
+for (let j = 0; j < buttons.length; j++) {
+  buttons[j].addEventListener('click', (e) => {
+    const field = document.querySelector('.field').children[0];
     const trs = document.getElementsByTagName('tr');
 
-    if (document.getElementsByTagName('tr')[0].childElementCount < 10) {
-      for (let i = 0; i < trs.length; i++) {
-        trs[i].appendChild(document.createElement('td'));
-      }
-    }
+    switch (buttons[j].className) {
+      case 'append-row button':
+        if (field.childElementCount < 10) {
+          const len = document.getElementsByTagName('tr')[0].children.length;
+          const tr = document.createElement('tr');
 
-    if (document.getElementsByTagName('tr')[0].childElementCount === 10) {
-      document.querySelector('.append-column').disabled = true;
-    }
+          for (let i = 0; i < len; i++) {
+            tr.appendChild(document.createElement('td'));
+          }
 
-    if (document.getElementsByTagName('tr')[0].childElementCount > 2) {
-      document.querySelector('.remove-column').disabled = false;
-    }
-  });
+          field.appendChild(tr);
 
-document.querySelector('.remove-column')
-  .addEventListener('click', () => {
-    const trs = document.getElementsByTagName('tr');
+          if (field.childElementCount === 10) {
+            document.querySelector('.append-row').disabled = true;
+          }
 
-    if (document.getElementsByTagName('tr')[0].childElementCount > 2) {
-      for (let i = 0; i < trs.length; i++) {
-        trs[i].removeChild(trs[i].children[trs[i].children.length - 1]);
-      }
+          if (field.childElementCount > 2) {
+            document.querySelector('.remove-row').disabled = false;
+          }
+        }
 
-      if (document.getElementsByTagName('tr')[0].childElementCount === 2) {
-        document.querySelector('.remove-column').disabled = true;
-      }
+        break;
 
-      if (document.getElementsByTagName('tr')[0].childElementCount < 10) {
-        document.querySelector('.append-column').disabled = false;
-      }
-    }
-  });
+      case 'remove-row button':
+        if (field.childElementCount > 2) {
+          field.removeChild(field.children[0]);
+        }
 
-document.querySelector('.append-row')
-  .addEventListener('click', () => {
-    const field = document.querySelector('.field').children[0];
+        if (field.childElementCount < 10) {
+          document.querySelector('.append-row').disabled = false;
+        }
 
-    if (field.childElementCount < 10) {
-      const len = document.getElementsByTagName('tr')[0].children.length;
-      const tr = document.createElement('tr');
+        if (field.childElementCount === 2) {
+          document.querySelector('.remove-row').disabled = true;
+        }
+        break;
 
-      for (let i = 0; i < len; i++) {
-        tr.appendChild(document.createElement('td'));
-      }
+      case 'append-column button':
+        if (document.getElementsByTagName('tr')[0].childElementCount < 10) {
+          for (let i = 0; i < trs.length; i++) {
+            trs[i].appendChild(document.createElement('td'));
+          }
+        }
 
-      field.appendChild(tr);
+        if (document.getElementsByTagName('tr')[0].childElementCount === 10) {
+          document.querySelector('.append-column').disabled = true;
+        }
 
-      if (field.childElementCount === 10) {
-        document.querySelector('.append-row').disabled = true;
-      }
+        if (document.getElementsByTagName('tr')[0].childElementCount > 2) {
+          document.querySelector('.remove-column').disabled = false;
+        }
+        break;
 
-      if (field.childElementCount > 2) {
-        document.querySelector('.remove-row').disabled = false;
-      }
-    }
-  });
+      case 'remove-column button':
+        if (document.getElementsByTagName('tr')[0].childElementCount > 2) {
+          for (let i = 0; i < trs.length; i++) {
+            trs[i].removeChild(trs[i].children[trs[i].children.length - 1]);
+          }
 
-document.querySelector('.remove-row')
-  .addEventListener('click', () => {
-    const field = document.querySelector('.field').children[0];
+          if (document.getElementsByTagName('tr')[0].childElementCount === 2) {
+            document.querySelector('.remove-column').disabled = true;
+          }
 
-    if (field.childElementCount > 2) {
-      field.removeChild(field.children[0]);
-    }
-
-    if (field.childElementCount < 10) {
-      document.querySelector('.append-row').disabled = false;
-    }
-
-    if (field.childElementCount === 2) {
-      document.querySelector('.remove-row').disabled = true;
+          if (document.getElementsByTagName('tr')[0].childElementCount < 10) {
+            document.querySelector('.append-column').disabled = false;
+          }
+        }
+        break;
     }
   });
+}
