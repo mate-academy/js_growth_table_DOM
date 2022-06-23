@@ -5,47 +5,47 @@ const appendRow = document.querySelector('.append-row');
 const removeRow = document.querySelector('.remove-row');
 const appendColumn = document.querySelector('.append-column');
 const removeColumn = document.querySelector('.remove-column');
+const container = document.querySelector('.container');
 const table = document.querySelector('.field');
 const rows = table.rows;
 
-appendRow.addEventListener('click', () => {
-  table.append(table.rows[0].cloneNode(true));
-  removeRow.disabled = false;
+container.addEventListener('click', (et) => {
+  const target = et.target.closest('.button');
 
-  if (table.rows.length >= 10) {
-    appendRow.disabled = true;
-  };
-});
-
-removeRow.addEventListener('click', () => {
-  table.rows[1].remove();
-  appendRow.disabled = false;
-
-  if (table.rows.length <= 2) {
-    removeRow.disabled = true;
-  };
-});
-
-appendColumn.addEventListener('click', () => {
-  removeColumn.disabled = false;
-
-  for (const row of rows) {
-    row.append(row.cells[0].cloneNode(true));
-
-    if (row.cells.length >= 10) {
-      appendColumn.disabled = true;
-    };
+  if (!target || target.disabled) {
+    return;
   }
-});
 
-removeColumn.addEventListener('click', () => {
-  appendColumn.disabled = false;
+  switch (target) {
+    case appendRow:
+      table.append(table.rows[0].cloneNode(true));
+      removeRow.disabled = false;
+      appendRow.disabled = table.rows.length >= 10;
+      break;
 
-  for (const row of rows) {
-    row.cells[1].remove();
+    case removeRow:
+      table.rows[1].remove();
+      appendRow.disabled = false;
+      removeRow.disabled = table.rows.length <= 2;
+      break;
 
-    if (row.cells.length <= 2) {
-      removeColumn.disabled = true;
-    };
+    case appendColumn:
+      removeColumn.disabled = false;
+
+      for (const row of rows) {
+        row.append(row.cells[0].cloneNode(true));
+        appendColumn.disabled = row.cells.length >= 10;
+      };
+      break;
+
+    case removeColumn:
+      appendColumn.disabled = false;
+
+      for (const row of rows) {
+        row.cells[1].remove();
+
+        removeColumn.disabled = row.cells.length <= 2;
+      };
+      break;
   }
 });
