@@ -1,82 +1,61 @@
 'use strict';
 
-// write code here
+const appendRow = document.querySelector('.append-row');
+const removeRow = document.querySelector('.remove-row');
+const appendColumn = document.querySelector('.append-column');
+const removeColumn = document.querySelector('.remove-column');
 
-const buttons = [...document.querySelectorAll('.button')];
+document.querySelector('.container').addEventListener('click', (e) => {
+  const field = document.querySelector('.field').children[0];
+  const trs = document.getElementsByTagName('tr');
 
-for (let j = 0; j < buttons.length; j++) {
-  buttons[j].addEventListener('click', (e) => {
-    const field = document.querySelector('.field').children[0];
-    const trs = document.getElementsByTagName('tr');
+  switch (e.target) {
+    case appendRow:
+      if (field.childElementCount < 10) {
+        const len = document.getElementsByTagName('tr')[0].children.length;
+        const tr = document.createElement('tr');
 
-    switch (buttons[j].className) {
-      case 'append-row button':
-        if (field.childElementCount < 10) {
-          const len = document.getElementsByTagName('tr')[0].children.length;
-          const tr = document.createElement('tr');
-
-          for (let i = 0; i < len; i++) {
-            tr.appendChild(document.createElement('td'));
-          }
-
-          field.appendChild(tr);
-
-          if (field.childElementCount === 10) {
-            document.querySelector('.append-row').disabled = true;
-          }
-
-          if (field.childElementCount > 2) {
-            document.querySelector('.remove-row').disabled = false;
-          }
+        for (let i = 0; i < len; i++) {
+          tr.appendChild(document.createElement('td'));
         }
 
-        break;
+        field.appendChild(tr);
+      }
 
-      case 'remove-row button':
-        if (field.childElementCount > 2) {
-          field.removeChild(field.children[0]);
+      break;
+
+    case removeRow:
+      if (field.childElementCount > 2) {
+        field.removeChild(field.children[0]);
+      }
+      break;
+
+    case appendColumn:
+      if (document.getElementsByTagName('tr')[0].childElementCount < 10) {
+        for (let i = 0; i < trs.length; i++) {
+          trs[i].appendChild(document.createElement('td'));
         }
+      }
+      break;
 
-        if (field.childElementCount < 10) {
-          document.querySelector('.append-row').disabled = false;
+    case removeColumn:
+      if (document.getElementsByTagName('tr')[0].childElementCount > 2) {
+        for (let i = 0; i < trs.length; i++) {
+          trs[i].removeChild(trs[i].children[trs[i].children.length - 1]);
         }
+      }
+      break;
+  }
 
-        if (field.childElementCount === 2) {
-          document.querySelector('.remove-row').disabled = true;
-        }
-        break;
+  document.querySelector('.remove-row').disabled
+    = field.childElementCount === 2;
 
-      case 'append-column button':
-        if (document.getElementsByTagName('tr')[0].childElementCount < 10) {
-          for (let i = 0; i < trs.length; i++) {
-            trs[i].appendChild(document.createElement('td'));
-          }
-        }
+  document.querySelector('.append-row').disabled
+    = field.childElementCount === 10;
 
-        if (document.getElementsByTagName('tr')[0].childElementCount === 10) {
-          document.querySelector('.append-column').disabled = true;
-        }
+  document.querySelector('.append-column').disabled
+    = document.getElementsByTagName('tr')[0].childElementCount === 10;
 
-        if (document.getElementsByTagName('tr')[0].childElementCount > 2) {
-          document.querySelector('.remove-column').disabled = false;
-        }
-        break;
-
-      case 'remove-column button':
-        if (document.getElementsByTagName('tr')[0].childElementCount > 2) {
-          for (let i = 0; i < trs.length; i++) {
-            trs[i].removeChild(trs[i].children[trs[i].children.length - 1]);
-          }
-
-          if (document.getElementsByTagName('tr')[0].childElementCount === 2) {
-            document.querySelector('.remove-column').disabled = true;
-          }
-
-          if (document.getElementsByTagName('tr')[0].childElementCount < 10) {
-            document.querySelector('.append-column').disabled = false;
-          }
-        }
-        break;
-    }
-  });
-}
+  document.querySelector('.remove-column').disabled
+    = document.getElementsByTagName('tr')[0].childElementCount === 2;
+});
