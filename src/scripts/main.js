@@ -25,7 +25,7 @@ appendRow.addEventListener('click', () => {
 });
 
 removeRow.addEventListener('click', () => {
-  tableBody.rows[rowsCount - 1].remove();
+  tableBody.deleteRow(-1);
   rowsCount--;
 
   minMaxCheck(rowsCount, appendRow, removeRow);
