@@ -23,6 +23,14 @@ Some rules:
 - The min count of rows or columns is 2.
 - If the count of columns or rows reaches maximum or minimum, set disabled the corresponding button.
 - If the count of columns or rows can be changed again (after reaching maximum or minimum), set enabled the corresponding button.
+- Нажмите на кнопку с классом `append-row`, чтобы добавить новую строку в таблицу.
+- Нажмите на кнопку с классом `remove-row`, чтобы удалить последнюю строку из таблицы.
+- Нажмите на кнопку с классом `append-column`, чтобы добавить новый столбец в таблицу.
+- Нажмите на кнопку с классом `remove-column`, чтобы удалить последний столбец из таблицы.
+- Максимальное количество строк или столбцов – 10.
+- Минимальное количество строк или столбцов равно 2.
+- Если количество столбцов или строк достигает максимального или минимального значения, отключите соответствующую кнопку.
+- Если количество столбцов или строк может быть изменено снова (после достижения максимума или минимума), включите соответствующую кнопку.
 
 As always, on JS Advanced course you do not need to change the HTML layout or CSS styles.
 
