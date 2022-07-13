@@ -29,17 +29,13 @@ removeRowBut.addEventListener('click', (e) => {
 });
 
 addColBut.addEventListener('click', (e) => {
-  for (const row of rows.children) {
-    row.append(row.children[0].cloneNode(true));
-  }
+  [...rows.children].forEach(el => el.append(el.children[0].cloneNode(true)));
 
   isEnough();
 });
 
 removeColBut.addEventListener('click', (e) => {
-  for (const row of rows.children) {
-    row.removeChild(row.children[0]);
-  }
+  [...rows.children].forEach(el => el.removeChild(el.children[0]));
 
   isEnough();
 });
