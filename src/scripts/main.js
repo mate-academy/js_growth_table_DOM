@@ -35,27 +35,21 @@ document.addEventListener('click', (e) => {
       break;
   }
 
-  if (tbody.rows.length >= maxCount) {
-    appendRow.disabled = true;
-  } else {
-    appendRow.disabled = false;
-  }
+  const shouldAddRowBeDisabled = tbody.rows.length >= maxCount;
 
-  if (tbody.rows.length <= minCount) {
-    removeRow.disabled = true;
-  } else {
-    removeRow.disabled = false;
-  }
+  appendRow.disabled = shouldAddRowBeDisabled;
 
-  if (tbody.querySelector('tr').children.length >= maxCount) {
-    appendColumn.disabled = true;
-  } else {
-    appendColumn.disabled = false;
-  }
+  const shouldRemoveRowBeDisabled = tbody.rows.length <= minCount;
 
-  if (tbody.querySelector('tr').children.length <= minCount) {
-    removeColumn.disabled = true;
-  } else {
-    removeColumn.disabled = false;
-  }
+  removeRow.disabled = shouldRemoveRowBeDisabled;
+
+  const shouldAddColumnBeDisabled = tbody.querySelector('tr')
+    .children.length >= maxCount;
+
+  appendColumn.disabled = shouldAddColumnBeDisabled;
+
+  const shouldRemoveColumnBeDisabled = tbody.querySelector('tr')
+    .children.length <= minCount;
+
+  removeColumn.disabled = shouldRemoveColumnBeDisabled;
 });
