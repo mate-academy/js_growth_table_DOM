@@ -73,7 +73,9 @@ container.addEventListener('click', (e) => {
         const rows = table.rows;
 
         for (let i = 0; i < rows.length; i++) {
-          rows[i].lastChild.remove();
+          const x = rows[i].getElementsByTagName('TD')[2];
+
+          x.remove();
         }
       }
 
