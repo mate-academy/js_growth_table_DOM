@@ -3,7 +3,7 @@
 const max = 10;
 const min = 2;
 
-const table = document.querySelector('.field');
+const table = document.querySelector('.field>tbody');
 const appendRow = document.querySelector('.append-row');
 const removeRow = document.querySelector('.remove-row');
 const appendColumn = document.querySelector('.append-column');
