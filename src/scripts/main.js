@@ -15,13 +15,16 @@ document.addEventListener('click', (e) => {
     case appendRow:
       table.append(listTr.cloneNode(true));
       break;
+
     case removeRow:
       listTr.remove();
       break;
+
     case appendColumn:
 
       [...table.rows].forEach(el => el.append(listTd.cloneNode(true)));
       break;
+
     case removeColumn:
       [...table.rows].forEach(el => el.firstElementChild.remove());
       break;
