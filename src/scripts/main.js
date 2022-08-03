@@ -39,21 +39,12 @@ btnRemovedCol.addEventListener('click', () => {
 function checkRow() {
   const rows = document.querySelectorAll('tr');
 
-  rows.length >= 10
-    ? btnAppendRow.disabled = true
-    : btnAppendRow.disabled = false;
-
-  rows.length <= 2
-    ? btnRemovedRow.disabled = true
-    : btnRemovedRow.disabled = false;
+  btnAppendRow.disabled = rows.length >= 10;
+  btnRemovedRow.disabled =  rows.length <= 2;
 }
 
 function checkCol(rows) {
-  rows[0].children.length >= 10
-    ? btnAppendCol.disabled = true
-    : btnAppendCol.disabled = false;
 
-  rows[0].children.length <= 2
-    ? btnRemovedCol.disabled = true
-    : btnRemovedCol.disabled = false;
+  btnAppendCol.disabled = rows[0].children.length >= 10;
+  btnRemovedCol.disabled = rows[0].children.length <= 2;
 }
