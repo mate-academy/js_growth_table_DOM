@@ -45,27 +45,11 @@ document.addEventListener('click', (e) => {
     columnsLimit--;
   }
 
-  if (rowsLimit > limitUp) {
-    appendRow.disabled = true;
-  } else {
-    appendRow.disabled = false;
-  }
+  appendRow.disabled = rowsLimit > limitUp;
 
-  if (rowsLimit < limitDown) {
-    removeRow.disabled = true;
-  } else {
-    removeRow.disabled = false;
-  }
+  removeRow.disabled = rowsLimit < limitDown;
 
-  if (columnsLimit > limitUp) {
-    appendColumn.disabled = true;
-  } else {
-    appendColumn.disabled = false;
-  }
+  appendColumn.disabled = columnsLimit > limitUp;
 
-  if (columnsLimit < limitDown) {
-    removeColumn.disabled = true;
-  } else {
-    removeColumn.disabled = false;
-  }
+  removeColumn.disabled = columnsLimit < limitDown;
 });
