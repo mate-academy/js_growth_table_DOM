@@ -61,27 +61,32 @@ function changeTable(click) {
       break;
   }
 
+  const columnAppend = document.querySelector('.append-column');
+  const columnRemove = document.querySelector('.remove-column');
+  const rowAppend = document.querySelector('.append-row');
+  const rowRemove = document.querySelector('.remove-row');
+
   if (currentCol === maxCol) {
-    document.querySelector('.append-column').setAttribute('disabled', true);
+    columnAppend.disabled = true;
   } else if (currentCol === maxCol - 1) {
-    document.querySelector('.append-column').removeAttribute('disabled');
+    columnAppend.disabled = false;
   }
 
   if (currentCol === minCol) {
-    document.querySelector('.remove-column').setAttribute('disabled', true);
+    columnRemove.disabled = true;
   } else if (currentCol === minCol + 1) {
-    document.querySelector('.remove-column').removeAttribute('disabled');
+    columnRemove.disabled = false;
   }
 
   if (currentRow === maxRow) {
-    document.querySelector('.append-row').setAttribute('disabled', true);
+    rowAppend.disabled = true;
   } else if (currentRow === maxRow - 1) {
-    document.querySelector('.append-row').removeAttribute('disabled');
+    rowAppend.disabled = false;
   }
 
   if (currentRow === minRow) {
-    document.querySelector('.remove-row').setAttribute('disabled', true);
+    rowRemove.disabled = true;
   } else if (currentRow === minRow + 1) {
-    document.querySelector('.remove-row').removeAttribute('disabled');
+    rowRemove.disabled = false;
   }
 }
