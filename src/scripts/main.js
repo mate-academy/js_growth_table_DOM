@@ -15,7 +15,7 @@ appendRow.addEventListener('click', (even) => {
 
     listOfTr[0].insertAdjacentHTML('beforebegin', tr);
     removeRow.disabled = false;
-    even.target.disabled = listOfTr.length === 9
+    even.target.disabled = listOfTr.length === 9;
   }
 });
 
@@ -25,16 +25,15 @@ removeRow.addEventListener('click', (even) => {
   if (listOfTr.length > 2) {
     listOfTr[0].remove();
     appendRow.disabled = false;
-    even.target.disabled = listOfTr.length === 3
+    even.target.disabled = listOfTr.length === 3;
   }
 });
-
 
 appendColumn.addEventListener('click', (even) => {
   const listOfTr = document.body.querySelectorAll('tr');
 
   if (listOfTr[0].children.length < 10) {
-    for (let item of listOfTr) {
+    for (const item of listOfTr) {
       const tr = item.children[0].outerHTML;
 
       item.insertAdjacentHTML('beforeend', tr);
@@ -48,7 +47,7 @@ removeColumn.addEventListener('click', (even) => {
   const listOfTr = document.body.querySelectorAll('tr');
 
   if (listOfTr[0].children.length > 2) {
-    for (let item of listOfTr) {
+    for (const item of listOfTr) {
       item.children[0].outerHTML = '';
     }
     appendColumn.disabled = false;
