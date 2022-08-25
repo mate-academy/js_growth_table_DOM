@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-return */
 'use strict';
 
 const tbody = document.querySelector('tbody');
@@ -9,12 +10,6 @@ const buttonAppendColumn = document.querySelector('.append-column');
 const buttonRemoveColumn = document.querySelector('.remove-column');
 
 buttonAppendRow.addEventListener('click', () => {
-  if (tbody.children.length === 10) {
-    buttonAppendRow.disabled = true;
-
-    return;
-  };
-
   if (tbody.children.length < 10) {
     buttonRemoveRow.disabled = false;
 
@@ -22,29 +17,29 @@ buttonAppendRow.addEventListener('click', () => {
 
     tbody.append(element);
   }
+
+  if (tbody.children.length === 10) {
+    buttonAppendRow.disabled = true;
+
+    return;
+  };
 });
 
 buttonRemoveRow.addEventListener('click', () => {
+  if (tbody.children.length > 2) {
+    buttonAppendRow.disabled = false;
+    tbody.lastElementChild.remove();
+  }
+
   if (tbody.children.length === 2) {
     buttonRemoveRow.disabled = true;
 
     return;
   }
-
-  if (tbody.children.length > 2) {
-    buttonAppendRow.disabled = false;
-    tbody.lastElementChild.remove();
-  }
 });
 
 buttonAppendColumn.addEventListener('click', () => {
   const rows = document.querySelectorAll('tr');
-
-  if (rows[0].children.length >= 10) {
-    buttonAppendColumn.disabled = true;
-
-    return;
-  };
 
   if (rows[0].children.length < 10) {
     buttonRemoveColumn.disabled = false;
@@ -53,16 +48,16 @@ buttonAppendColumn.addEventListener('click', () => {
       row.append(row.lastElementChild.cloneNode(true));
     });
   }
+
+  if (rows[0].children.length === 10) {
+    buttonAppendColumn.disabled = true;
+
+    return;
+  };
 });
 
 buttonRemoveColumn.addEventListener('click', () => {
   const rows = document.querySelectorAll('tr');
-
-  if (rows[0].children.length <= 2) {
-    buttonRemoveColumn.disabled = true;
-
-    return;
-  };
 
   if (rows[0].children.length > 2) {
     buttonAppendColumn.disabled = false;
@@ -71,4 +66,10 @@ buttonRemoveColumn.addEventListener('click', () => {
       row.lastElementChild.remove();
     });
   }
+
+  if (rows[0].children.length === 2) {
+    buttonRemoveColumn.disabled = true;
+
+    return;
+  };
 });
