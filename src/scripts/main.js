@@ -2,54 +2,36 @@
 
 const appendRow = document.querySelector('.append-row');
 const removeRow = document.querySelector('.remove-row');
-const appendCol = document.querySelector('.append-column');
-const removeCol = document.querySelector('.remove-column');
+const appendColumn = document.querySelector('.append-column');
+const removeColumn = document.querySelector('.remove-column');
+const tbody = document.querySelector('tbody');
 
-appendRow.addEventListener('click', (e) => {
-  const listTr = document.querySelectorAll('tr');
+document.addEventListener('click', (e) => {
+  const target = e.target.closest('.button');
 
-  if (listTr.length < 10) {
-    const tr = listTr[0].outerHTML;
-
-    listTr[0].insertAdjacentHTML('beforebegin', tr);
-    removeRow.disabled = false;
-    e.target.disabled = listTr.length === 9;
+  if (!target || target.disabled) {
+    return;
   }
-});
 
-removeRow.addEventListener('click', (e) => {
-  const listTr = document.querySelectorAll('tr');
+  switch (target) {
+    case appendRow:
+      tbody.append(tbody.querySelector('tr').cloneNode(true));
+      break;
+    case removeRow:
+      tbody.querySelector('tr').remove();
+      break;
+    case appendColumn:
+      const cell = document.querySelector('td');
 
-  if (listTr.length > 2) {
-    listTr[0].remove();
-    appendRow.disabled = false;
-    e.target.disabled = listTr.length === 3;
+      [...tbody.rows].forEach(row => row.append(cell.cloneNode(true)));
+      break;
+    case removeColumn:
+      [...tbody.rows].forEach(row1 => row1.firstElementChild.remove());
+      break;
   }
-});
 
-appendCol.addEventListener('click', (e) => {
-  const listTr = document.querySelectorAll('tr');
-
-  if (listTr[0].children.length < 10) {
-    for (const item of listTr) {
-      const tr = item.children[0].outerHTML;
-
-      item.insertAdjacentHTML('beforeend', tr);
-    }
-
-    removeCol.disabled = false;
-    e.target.disabled = listTr[0].children.length === 10;
-  }
-});
-
-removeCol.addEventListener('click', (e) => {
-  const listTr = document.querySelectorAll('tr');
-
-  if (listTr[0].children.length > 2) {
-    for (const item of listTr) {
-      item.children[0].outerHTML = '';
-    }
-    appendCol.disabled = false;
-    e.target.disabled = listTr[0].children.length === 2;
-  }
+  appendColumn.disabled = tbody.querySelector('tr').children.length >= 10;
+  removeColumn.disabled = tbody.querySelector('tr').children.length <= 2;
+  appendRow.disabled = tbody.rows.length >= 10;
+  removeRow.disabled = tbody.rows.length <= 2;
 });
