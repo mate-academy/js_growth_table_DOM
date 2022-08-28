@@ -7,7 +7,7 @@ const removeColButt = document.querySelector('.remove-column');
 
 const fieldBody = document.querySelector('tbody');
 
-const handler = e => {
+const tableClickHandler = e => {
   const targetElem = e.target.closest('.button');
 
   if (!targetElem) {
@@ -17,33 +17,35 @@ const handler = e => {
   const oldRows = document.querySelectorAll('tr').length;
   const oldCols = document.querySelectorAll('td').length / oldRows;
 
-  if (targetElem === appendRowButt) {
-    const tr = document.createElement('tr');
+  switch (targetElem) {
+    case appendRowButt:
+      const tr = document.createElement('tr');
 
-    fieldBody.append(tr);
+      fieldBody.append(tr);
 
-    for (let i = 0; i < oldCols; i++) {
-      tr.innerHTML += '<td></td>';
-    }
-  };
+      for (let i = 0; i < oldCols; i++) {
+        tr.innerHTML += '<td></td>';
+      }
+      break;
 
-  if (targetElem === removeRowButt) {
-    const lastRowInTable = fieldBody.lastElementChild;
+    case removeRowButt:
+      const lastRowInTable = fieldBody.lastElementChild;
 
-    lastRowInTable.remove();
-  };
+      lastRowInTable.remove();
+      break;
 
-  if (targetElem === appendColButt) {
-    for (const row of fieldBody.children) {
-      row.insertAdjacentHTML('beforeend', `<td></td>`);
-    }
-  };
+    case appendColButt:
+      for (const row of fieldBody.children) {
+        row.insertAdjacentHTML('beforeend', `<td></td>`);
+      }
+      break;
 
-  if (targetElem === removeColButt) {
-    for (const row of fieldBody.children) {
-      row.lastElementChild.remove();
-    }
-  };
+    case removeColButt:
+      for (const row of fieldBody.children) {
+        row.lastElementChild.remove();
+      }
+      break;
+  }
 
   // Checking tableRows length;
   const rowsCount = document.querySelectorAll('tr').length;
@@ -66,4 +68,4 @@ const handler = e => {
     : removeColButt.removeAttribute('disabled');
 };
 
-document.addEventListener('click', handler);
+document.addEventListener('click', tableClickHandler);
