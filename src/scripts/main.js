@@ -6,6 +6,8 @@ const removeRow = document.querySelector('.remove-row');
 const removeColumn = document.querySelector('.remove-column');
 const appendColumn = document.querySelector('.append-column');
 const buttons = document.querySelectorAll('.button');
+const trLength = document.querySelectorAll('tr').length;
+const trChildren = document.querySelector('tr').children.length;
 
 const columns = document.querySelectorAll('tr')
 const maxLength = 10;
@@ -34,15 +36,15 @@ buttons.forEach(button => {
         });
         break;
 
-        case removeColumn:
-          document.querySelectorAll('td:last-child')
+      case removeColumn:
+        document.querySelectorAll('td:last-child')
           .forEach(td => td.remove());
-          break;
+        break;
     }
 
-    appendRow.disabled = document.querySelectorAll('tr').length >= maxLength;
-    removeRow.disabled = document.querySelectorAll('tr').length <= minLength;
-    appendColumn.disabled = document.querySelector('tr').children.length >= maxLength;
-    removeColumn.disabled = document.querySelector('tr').children.length <= minLength;
-  })
-})
+    appendRow.disabled = trLength >= maxLength;
+    removeRow.disabled = trLength <= minLength;
+    appendColumn.disabled = trChildren >= maxLength;
+    removeColumn.disabled = trChildren <= minLength;
+  });
+});
