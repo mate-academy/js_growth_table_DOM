@@ -11,74 +11,87 @@ function addRow(e) {
   const tr = table.querySelector('tr');
 
   const createTd = (count) => {
-    let str = '';
-    for (let i = 0; i < count; i++){
-      str += '<td></td>'
+    let cells = '';
+
+    for (let i = 0; i < count; i++) {
+      cells += '<td></td>';
     }
 
-    return str;
-  }
+    return cells;
+  };
 
   table.insertAdjacentHTML('beforeend', `
     <tr>${createTd(tr.children.length)}</tr>
-  `)
+  `);
 };
 
 function removeRow(e) {
   const removeTr = table.lastElementChild;
+
   removeTr.remove();
 };
 
 function addColumn(e) {
   const tr = table.querySelectorAll('tr');
+
   [...tr].map(x => {
     const td = document.createElement('td');
-    x.append(td)
+
+    x.append(td);
+
     return x;
   });
 };
 
 function removeColumn(e) {
   const tr = table.querySelectorAll('tr');
+
   [...tr].map(x => {
     const td = x.lastElementChild;
+
     td.remove();
   });
 };
 
 function attribute(e) {
-  if (table.querySelectorAll('tr').length === 10) {
-    document.querySelector('.append-row').setAttribute('disabled', '');
+  const rows = table.querySelectorAll('tr');
+  const collumns = table.querySelector('tr').children;
+  const appendRowButton = document.querySelector('.append-row');
+  const removeRowButton = document.querySelector('.remove-row');
+  const removeColButton = document.querySelector('.remove-column');
+  const appendColButton = document.querySelector('.append-column');
+
+  if (rows.length === 10) {
+    appendRowButton.setAttribute('disabled', '');
   }
 
-  if (table.querySelectorAll('tr').length < 10) {
-    document.querySelector('.append-row').removeAttribute('disabled');
+  if (rows.length < 10) {
+    appendRowButton.removeAttribute('disabled');
   }
 
-  if (table.querySelectorAll('tr').length === 2) {
-    document.querySelector('.remove-row').setAttribute('disabled', '');
+  if (rows.length === 2) {
+    removeRowButton.setAttribute('disabled', '');
   }
 
-  if (table.querySelectorAll('tr').length > 2) {
-    document.querySelector('.remove-row').removeAttribute('disabled');
+  if (rows.length > 2) {
+    removeRowButton.removeAttribute('disabled');
   }
 
-  if (table.querySelector('tr').children.length === 2) {
-    document.querySelector('.remove-column').setAttribute('disabled', '');
+  if (collumns.length === 2) {
+    removeColButton.setAttribute('disabled', '');
   }
 
-  if (table.querySelector('tr').children.length === 10) {
-    document.querySelector('.append-column').setAttribute('disabled', '');
+  if (collumns.length === 10) {
+    appendColButton.setAttribute('disabled', '');
   }
 
-  if (table.querySelector('tr').children.length > 2) {
-    document.querySelector('.remove-column').removeAttribute('disabled');
+  if (collumns.length > 2) {
+    removeColButton.removeAttribute('disabled');
   }
 
-  if (table.querySelector('tr').children.length < 10) {
-    document.querySelector('.append-column').removeAttribute('disabled');
+  if (collumns.length < 10) {
+    appendColButton.removeAttribute('disabled');
   }
-
 };
 
 buttonAppendRow.addEventListener('click', addRow);
@@ -86,5 +99,3 @@ buttonRemoveRow.addEventListener('click', removeRow);
 buttonAppendColumn.addEventListener('click', addColumn);
 buttonRomoveColumn.addEventListener('click', removeColumn);
 container.addEventListener('click', attribute);
-
-
