@@ -8,17 +8,19 @@ const appendColumnButton = document.querySelector('.append-column');
 const removeColumnButton = document.querySelector('.remove-column');
 
 root.addEventListener('click', () => {
-  const buttons = event.target.closest('.button');
+  const button = event.target.closest('.button');
   const rowsElements = table.querySelectorAll('tr');
   let rowsCount = table.querySelectorAll('tr').length;
   let columnsCount = table.querySelectorAll('td').length / rowsCount;
+  const maxSize = 10;
+  const minSize = 2;
 
-  if (!buttons || !root.contains(buttons)) {
+  if (!button || !root.contains(button)) {
     return;
   }
 
-  switch (true) {
-    case event.target.matches('.append-row'):
+  switch (button) {
+    case appendRowButton:
       table.firstElementChild.insertAdjacentHTML('beforeend', `
       <tr>
         ${'<td></td>'.repeat(columnsCount)}
@@ -27,24 +29,24 @@ root.addEventListener('click', () => {
       rowsCount++;
       break;
 
-    case event.target.matches('.remove-row'):
+    case removeRowButton:
       table.firstElementChild.lastElementChild.remove();
       rowsCount--;
       break;
 
-    case event.target.matches('.append-column'):
+    case appendColumnButton:
       [...rowsElements]
         .map(row => row.insertAdjacentHTML('beforeend', `<td></td>`));
       columnsCount++;
       break;
 
-    case event.target.matches('.remove-column'):
+    case removeColumnButton:
       [...rowsElements].map(row => row.lastElementChild.remove());
       columnsCount--;
   }
 
-  appendRowButton.disabled = rowsCount >= 10;
-  removeRowButton.disabled = rowsCount <= 2;
-  appendColumnButton.disabled = columnsCount >= 10;
-  removeColumnButton.disabled = columnsCount <= 2;
+  appendRowButton.disabled = rowsCount >= maxSize;
+  removeRowButton.disabled = rowsCount <= minSize;
+  appendColumnButton.disabled = columnsCount >= maxSize;
+  removeColumnButton.disabled = columnsCount <= minSize;
 });
