@@ -60,36 +60,38 @@ function attribute(e) {
   const removeRowButton = document.querySelector('.remove-row');
   const removeColButton = document.querySelector('.remove-column');
   const appendColButton = document.querySelector('.append-column');
+  const maxLength = 10;
+  const minLength = 2;
 
-  if (rows.length === 10) {
+  if (rows.length === maxLength) {
     appendRowButton.setAttribute('disabled', '');
   }
 
-  if (rows.length < 10) {
+  if (rows.length < maxLength) {
     appendRowButton.removeAttribute('disabled');
   }
 
-  if (rows.length === 2) {
+  if (rows.length === minLength) {
     removeRowButton.setAttribute('disabled', '');
   }
 
-  if (rows.length > 2) {
+  if (rows.length > minLength) {
     removeRowButton.removeAttribute('disabled');
   }
 
-  if (collumns.length === 2) {
+  if (collumns.length === minLength) {
     removeColButton.setAttribute('disabled', '');
   }
 
-  if (collumns.length === 10) {
+  if (collumns.length === maxLength) {
     appendColButton.setAttribute('disabled', '');
   }
 
-  if (collumns.length > 2) {
+  if (collumns.length > minLength) {
     removeColButton.removeAttribute('disabled');
   }
 
-  if (collumns.length < 10) {
+  if (collumns.length < maxLength) {
     appendColButton.removeAttribute('disabled');
   }
 };
