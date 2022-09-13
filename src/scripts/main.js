@@ -7,15 +7,18 @@ const appendRow = document.querySelector('.append-row');
 const removeRow = document.querySelector('.remove-row');
 
 const addColumn = () => {
-  if (table.firstElementChild.children.length < 10) {
-    for (let i = 0; i < table.children.length; i++) {
+  const conditionAddCol = table.firstElementChild.children.length;
+  const tableLenght = table.children.length;
+
+  if (conditionAddCol < 10) {
+    for (let i = 0; i < tableLenght; i++) {
       const cell = document.createElement('td');
 
       table.children[i].insertAdjacentElement('beforeend', cell);
     };
 
-    switch (table.firstElementChild.children.length) {
-      case 10:
+    switch (conditionAddCol) {
+      case 9:
         appendColumn.setAttribute('disabled', true);
         break;
       case 3:
@@ -25,16 +28,19 @@ const addColumn = () => {
   };
 };
 const deleteColumn = () => {
-  if (table.firstElementChild.children.length > 2) {
-    for (let i = 0; i < table.children.length; i++) {
+  const conditionDeleteCol = table.firstElementChild.children.length;
+  const tableLenght = table.children.length;
+
+  if (conditionDeleteCol > 2) {
+    for (let i = 0; i < tableLenght; i++) {
       table.children[i].lastElementChild.remove();
     };
 
-    switch (table.firstElementChild.children.length) {
+    switch (conditionDeleteCol) {
       case 9:
         appendColumn.removeAttribute('disabled');
         break;
-      case 2:
+      case 3:
         removeColumn.setAttribute('disabled', true);
         break;
     }
@@ -42,13 +48,15 @@ const deleteColumn = () => {
 };
 
 const addRow = () => {
-  if (table.children.length < 10) {
+  const tableLenght = table.children.length;
+
+  if (tableLenght < 10) {
     const newRow = table.firstElementChild.cloneNode(true);
 
     table.insertAdjacentElement('beforeend', newRow);
 
-    switch (table.children.length) {
-      case 10:
+    switch (tableLenght) {
+      case 9:
         appendRow.setAttribute('disabled', true);
         break;
       case 3:
@@ -58,14 +66,16 @@ const addRow = () => {
   };
 };
 const deleteRow = () => {
-  if (table.children.length > 2) {
+  const tableLenght = table.children.length;
+
+  if (tableLenght > 2) {
     table.lastElementChild.remove();
 
-    switch (table.children.length) {
+    switch (tableLenght) {
       case 9:
         appendRow.removeAttribute('disabled');
         break;
-      case 2:
+      case 3:
         removeRow.setAttribute('disabled', true);
         break;
     }
