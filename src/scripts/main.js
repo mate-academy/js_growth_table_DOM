@@ -7,11 +7,13 @@ const removeRow = document.querySelector('.remove-row');
 const removeColumn = document.querySelector('.remove-column');
 
 appendRow.addEventListener('click', e => {
-  if (tbody.children.length === 2) {
+  const value = tbody.children.length;
+
+  if (value === 2) {
     removeRow.removeAttribute('disabled');
   }
 
-  if (tbody.children.length < 10) {
+  if (value < 10) {
     const item = document.querySelector('tbody tr');
     const newRow = document.createElement('tr');
 
@@ -22,7 +24,7 @@ appendRow.addEventListener('click', e => {
     tbody.append(newRow);
   }
 
-  if (tbody.children.length === 10) {
+  if (value === 9) {
     appendRow.setAttribute('disabled', 'disabled');
   }
 });
@@ -31,47 +33,53 @@ appendColumn.addEventListener('click', e => {
   const trs = document.querySelectorAll('tbody tr');
 
   trs.forEach(element => {
-    if (element.children.length === 2) {
+    const value = element.children.length;
+
+    if (value === 2) {
       removeColumn.removeAttribute('disabled');
     }
 
-    if (element.children.length < 10) {
-      element.insertAdjacentHTML('beforeend', `<td></td>`);
+    if (value === 9) {
+      appendColumn.setAttribute('disabled', 'disabled');
     }
 
-    if (element.children.length === 10) {
-      appendColumn.setAttribute('disabled', 'disabled');
+    if (value < 10) {
+      element.insertAdjacentHTML('beforeend', `<td></td>`);
     }
   });
 });
 
 removeRow.addEventListener('click', e => {
-  if (tbody.children.length === 10) {
+  const value = tbody.children.length;
+  if (value === 3) {
+    removeRow.setAttribute('disabled', 'disabled');
+  }
+
+  if (value === 10) {
     appendRow.removeAttribute('disabled');
   }
 
-  if (tbody.children.length > 2) {
+  if (value > 2) {
     tbody.lastElementChild.remove();
   }
 
-  if (tbody.children.length === 2) {
-    removeRow.setAttribute('disabled', 'disabled');
-  }
 });
 
 removeColumn.addEventListener('click', e => {
   const trs = document.querySelectorAll('tbody tr');
 
   trs.forEach(element => {
-    if (element.children.length === 10) {
+    const value = element.children.length;
+
+    if (value === 10) {
       appendColumn.removeAttribute('disabled');
     }
 
-    if (element.children.length > 2) {
+    if (value > 2) {
       element.lastElementChild.remove();
     }
 
-    if (element.children.length === 2) {
+    if (value === 3) {
       removeColumn.setAttribute('disabled', 'disabled');
     }
   });
