@@ -48,11 +48,13 @@ appendColumn.addEventListener('click', e => {
     rows[i].append(cell);
   }
 
-  if (rows[0].cells.length === 10) {
+  const rowCells = rows[0].cells.length;
+
+  if (rowCells === 10) {
     disabled(appendColumn);
   }
 
-  if (rows[0].cells.length > 2) {
+  if (rowCells > 2) {
     active(removeColumn);
   }
 });
@@ -62,11 +64,13 @@ removeColumn.addEventListener('click', e => {
     rows[i].lastElementChild.remove();
   }
 
-  if (rows[0].cells.length === 2) {
+  const rowCells2 = rows[0].cells.length;
+
+  if (rowCells2 === 2) {
     disabled(removeColumn);
   }
 
-  if (rows[0].cells.length < 10) {
+  if (rowCells2 < 10) {
     active(appendColumn);
   }
 });
