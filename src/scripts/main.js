@@ -1,6 +1,6 @@
 'use strict';
 
-const table = document.querySelector('.field tbody');
+const table = document.querySelector('.field');
 const addRow = document.querySelector('.append-row');
 const removeRow = document.querySelector('.remove-row');
 const addColumn = document.querySelector('.append-column');
