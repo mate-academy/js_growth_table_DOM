@@ -13,7 +13,9 @@ const removeColumn = document.querySelector('.remove-column');
 addRow.addEventListener('click', () => {
   const lastRow = tableRows.lastElementChild;
 
-  if (tableRows.children.length === 9) {
+  const childrenLength = tableRows.children.length;
+
+  if (childrenLength === 9) {
     tableRows.append(lastRow.cloneNode(true));
     addRow.disabled = true;
   } else {
@@ -28,7 +30,9 @@ addRow.addEventListener('click', () => {
 removeRow.addEventListener('click', () => {
   const lastRow = tableRows.lastElementChild;
 
-  if (tableRows.children.length === 3) {
+  const childrenLength = tableRows.children.length;
+
+  if (childrenLength === 3) {
     lastRow.remove();
     removeRow.disabled = true;
   } else {
