@@ -6,11 +6,14 @@ const removeRow = document.querySelector('.remove-row');
 const addColumn = document.querySelector('.append-column');
 const removeColumn = document.querySelector('.remove-column');
 
+const maxLength = 10;
+const minLength = 2;
+
 addRow.addEventListener('click', () => {
-  if (table.rows.length < 10) {
+  if (table.rows.length < maxLength) {
     table.insertAdjacentHTML('afterbegin', table.rows[0].outerHTML);
 
-    if (table.rows.length === 9) {
+    if (table.rows.length === maxLength - 1) {
       addRow.setAttribute('disabled', true);
     }
 
@@ -19,7 +22,7 @@ addRow.addEventListener('click', () => {
 });
 
 removeRow.addEventListener('click', () => {
-  if (table.rows.length > 2) {
+  if (table.rows.length > minLength) {
     table.deleteRow(0);
 
     if (table.rows.length === 2) {
@@ -31,7 +34,7 @@ removeRow.addEventListener('click', () => {
 });
 
 addColumn.addEventListener('click', () => {
-  if (table.rows[0].cells.length < 10) {
+  if (table.rows[0].cells.length < maxLength) {
     const tr = table.querySelectorAll('tr');
 
     for (let i = 0; i < table.rows.length; i++) {
@@ -40,7 +43,7 @@ addColumn.addEventListener('click', () => {
       tr[i].append(td);
     }
 
-    if (table.rows[0].cells.length === 9) {
+    if (table.rows[0].cells.length === maxLength - 1) {
       addColumn.setAttribute('disabled', true);
     }
 
@@ -49,14 +52,14 @@ addColumn.addEventListener('click', () => {
 });
 
 removeColumn.addEventListener('click', () => {
-  if (table.rows[0].cells.length > 2) {
+  if (table.rows[0].cells.length > minLength) {
     const row = table.rows;
 
     for (let i = 0; i < row.length; i++) {
       row[i].deleteCell(0);
     }
 
-    if (table.rows[0].cells.length === 2) {
+    if (table.rows[0].cells.length === minLength) {
       removeColumn.setAttribute('disabled', true);
     }
 
