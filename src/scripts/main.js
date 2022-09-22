@@ -2,18 +2,15 @@
 
 const minCells = 2;
 const maxCells = 10;
-let currentRows = 0;
-let currentColumns = 0;
-
 const appendRow = document.querySelector('.append-row');
 const removeRow = document.querySelector('.remove-row');
 const appendColumn = document.querySelector('.append-column');
 const removeColumn = document.querySelector('.remove-column');
 const table = document.querySelector('.field');
 
-currentRows = table.querySelectorAll('tr').length;
+let currentRows = table.querySelectorAll('tr').length;
 
-currentColumns = table.querySelectorAll('td').length
+let currentColumns = table.querySelectorAll('td').length
   / table.querySelectorAll('tr').length;
 
 appendRow.addEventListener('click', (e) => {
@@ -55,27 +52,39 @@ removeColumn.addEventListener('click', (e) => {
 });
 
 function checkBorderForRows() {
-  if (currentRows === minCells) {
-    removeRow.setAttribute('disabled', true);
-    appendRow.removeAttribute('disabled');
-  } else if (currentRows === maxCells) {
-    appendRow.setAttribute('disabled', true);
-    removeRow.removeAttribute('disabled');
-  } else {
-    appendRow.removeAttribute('disabled');
-    removeRow.removeAttribute('disabled');
+  switch (currentRows) {
+    case minCells:
+      removeRow.setAttribute('disabled', true);
+      appendRow.removeAttribute('disabled');
+      break;
+
+    case maxCells:
+      appendRow.setAttribute('disabled', true);
+      removeRow.removeAttribute('disabled');
+      break;
+
+    default:
+      appendRow.removeAttribute('disabled');
+      removeRow.removeAttribute('disabled');
+      break;
   }
 };
 
 function checkBorderForColumns() {
-  if (currentColumns === minCells) {
-    removeColumn.setAttribute('disabled', true);
-    appendColumn.removeAttribute('disabled');
-  } else if (currentColumns === maxCells) {
-    appendColumn.setAttribute('disabled', true);
-    removeColumn.removeAttribute('disabled');
-  } else {
-    appendColumn.removeAttribute('disabled');
-    removeColumn.removeAttribute('disabled');
+  switch (currentColumns) {
+    case minCells:
+      removeColumn.setAttribute('disabled', true);
+      appendColumn.removeAttribute('disabled');
+      break;
+
+    case maxCells:
+      appendColumn.setAttribute('disabled', true);
+      removeColumn.removeAttribute('disabled');
+      break;
+
+    default:
+      appendColumn.removeAttribute('disabled');
+      removeColumn.removeAttribute('disabled');
+      break;
   }
 };
