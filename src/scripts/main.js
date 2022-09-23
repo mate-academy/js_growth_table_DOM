@@ -13,7 +13,7 @@ addRow.addEventListener('click', () => {
   if (table.rows.length < maxLength) {
     table.insertAdjacentHTML('afterbegin', table.rows[0].outerHTML);
 
-    if (table.rows.length === maxLength - 1) {
+    if (table.rows.length === maxLength) {
       addRow.setAttribute('disabled', true);
     }
 
@@ -25,7 +25,7 @@ removeRow.addEventListener('click', () => {
   if (table.rows.length > minLength) {
     table.deleteRow(0);
 
-    if (table.rows.length === 2) {
+    if (table.rows.length === minLength) {
       removeRow.setAttribute('disabled', true);
     }
 
@@ -43,7 +43,7 @@ addColumn.addEventListener('click', () => {
       tr[i].append(td);
     }
 
-    if (table.rows[0].cells.length === maxLength - 1) {
+    if (table.rows[0].cells.length === maxLength) {
       addColumn.setAttribute('disabled', true);
     }
 
