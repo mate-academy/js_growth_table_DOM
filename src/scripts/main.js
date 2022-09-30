@@ -15,11 +15,11 @@ buttonRowAppend.addEventListener('click', (e) => {
     const currentRows = [...document.querySelectorAll('tr')].length;
 
     if (currentRows > 2) {
-      buttonRowRemove.style.background = null;
+      buttonRowRemove.disabled = false;
     }
 
     if (currentRows === 10) {
-      buttonRowAppend.style.background = 'grey';
+      buttonRowAppend.disabled = true;
     }
   }
 });
@@ -34,11 +34,11 @@ buttonRowRemove.addEventListener('click', (e) => {
     const currentRows = [...document.querySelectorAll('tr')].length;
 
     if (currentRows === 2) {
-      buttonRowRemove.style.background = 'grey';
+      buttonRowRemove.disabled = true;
     }
 
     if (currentRows < 10) {
-      buttonRowAppend.style.background = null;
+      buttonRowAppend.disabled = false;
     }
   }
 });
@@ -54,11 +54,11 @@ buttonColumnAppend.addEventListener('click', (e) => {
     const currentCol = [...document.querySelectorAll('tr')][0].children.length;
 
     if (currentCol > 2) {
-      buttonColumnRemove.style.background = null;
+      buttonColumnRemove.disabled = false;
     }
 
     if (currentCol === 10) {
-      buttonColumnAppend.style.background = 'grey';
+      buttonColumnAppend.disabled = true;
     }
   }
 });
@@ -74,11 +74,11 @@ buttonColumnRemove.addEventListener('click', (e) => {
     const currentCol = [...document.querySelectorAll('tr')][0].children.length;
 
     if (currentCol === 2) {
-      buttonColumnRemove.style.background = 'grey';
+      buttonColumnRemove.disabled = true;
     }
 
     if (currentCol < 10) {
-      buttonColumnAppend.style.background = null;
+      buttonColumnAppend.disabled = false;
     }
   }
 });
