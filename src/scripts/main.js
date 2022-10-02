@@ -7,12 +7,12 @@ const buttonColumnRemove = document.querySelector('.remove-column');
 
 buttonRowAppend.addEventListener('click', () => {
   const tableBody = document.querySelector('tbody');
-  const tableRows = [...document.querySelectorAll('tr')];
+  const tableRows = document.querySelectorAll('tr');
 
   if (tableRows.length < 10) {
     tableBody.insertAdjacentHTML('beforeend', tableRows[0].outerHTML);
 
-    const currentRows = [...document.querySelectorAll('tr')].length;
+    const currentRows = document.querySelectorAll('tr').length;
 
     if (currentRows > 2) {
       buttonRowRemove.disabled = false;
@@ -31,7 +31,7 @@ buttonRowRemove.addEventListener('click', () => {
     tableRows[0].remove();
   }
 
-  const currentRows = [...document.querySelectorAll('tr')].length;
+  const currentRows = document.querySelectorAll('tr').length;
 
   if (currentRows === 2) {
     buttonRowRemove.disabled = true;
@@ -43,14 +43,14 @@ buttonRowRemove.addEventListener('click', () => {
 });
 
 buttonColumnAppend.addEventListener('click', () => {
-  const tableRows = [...document.querySelectorAll('tr')];
+  const tableRows = document.querySelectorAll('tr');
 
   if (tableRows[0].children.length < 10) {
     tableRows.forEach((cells) => {
       cells.insertAdjacentHTML('beforeend', cells.children[0].outerHTML);
     });
 
-    const currentCol = [...document.querySelectorAll('tr')][0].children.length;
+    const currentCol = document.querySelector('tr').children.length;
 
     if (currentCol > 2) {
       buttonColumnRemove.disabled = false;
@@ -71,7 +71,7 @@ buttonColumnRemove.addEventListener('click', () => {
     }
   }
 
-  const currentCol = [...document.querySelectorAll('tr')][0].children.length;
+  const currentCol = document.querySelector('tr').children.length;
 
   if (currentCol === 2) {
     buttonColumnRemove.disabled = true;
