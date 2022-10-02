@@ -5,9 +5,9 @@ const buttonRowRemove = document.querySelector('.remove-row');
 const buttonColumnAppend = document.querySelector('.append-column');
 const buttonColumnRemove = document.querySelector('.remove-column');
 
-buttonRowAppend.addEventListener('click', (e) => {
-  const tableRows = [...document.querySelectorAll('tr')];
+buttonRowAppend.addEventListener('click', () => {
   const tableBody = document.querySelector('tbody');
+  const tableRows = [...document.querySelectorAll('tr')];
 
   if (tableRows.length < 10) {
     tableBody.insertAdjacentHTML('beforeend', tableRows[0].outerHTML);
@@ -24,26 +24,25 @@ buttonRowAppend.addEventListener('click', (e) => {
   }
 });
 
-buttonRowRemove.addEventListener('click', (e) => {
-  const tableRows = [...document.querySelectorAll('tr')];
-  const tableBody = document.querySelector('tbody');
+buttonRowRemove.addEventListener('click', () => {
+  const tableRows = document.querySelectorAll('tr');
 
   if (tableRows.length > 2) {
-    tableBody.firstChild.remove();
+    tableRows[0].remove();
+  }
 
-    const currentRows = [...document.querySelectorAll('tr')].length;
+  const currentRows = [...document.querySelectorAll('tr')].length;
 
-    if (currentRows === 2) {
-      buttonRowRemove.disabled = true;
-    }
+  if (currentRows === 2) {
+    buttonRowRemove.disabled = true;
+  }
 
-    if (currentRows < 10) {
-      buttonRowAppend.disabled = false;
-    }
+  if (currentRows < 10) {
+    buttonRowAppend.disabled = false;
   }
 });
 
-buttonColumnAppend.addEventListener('click', (e) => {
+buttonColumnAppend.addEventListener('click', () => {
   const tableRows = [...document.querySelectorAll('tr')];
 
   if (tableRows[0].children.length < 10) {
@@ -63,22 +62,22 @@ buttonColumnAppend.addEventListener('click', (e) => {
   }
 });
 
-buttonColumnRemove.addEventListener('click', (e) => {
-  const tableRows = [...document.querySelectorAll('tr')];
+buttonColumnRemove.addEventListener('click', () => {
+  const tableRows = document.querySelectorAll('tr');
 
   if (tableRows[0].children.length > 2) {
-    tableRows.forEach((cells) => {
-      cells.firstChild.remove();
-    });
-
-    const currentCol = [...document.querySelectorAll('tr')][0].children.length;
-
-    if (currentCol === 2) {
-      buttonColumnRemove.disabled = true;
+    for (const [key] of tableRows.entries()) {
+      tableRows[key].children[0].remove();
     }
+  }
 
-    if (currentCol < 10) {
-      buttonColumnAppend.disabled = false;
-    }
+  const currentCol = [...document.querySelectorAll('tr')][0].children.length;
+
+  if (currentCol === 2) {
+    buttonColumnRemove.disabled = true;
+  }
+
+  if (currentCol < 10) {
+    buttonColumnAppend.disabled = false;
   }
 });
