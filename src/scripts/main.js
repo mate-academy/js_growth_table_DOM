@@ -4,24 +4,28 @@ const appendRow = document.querySelector('.append-row');
 const removeRow = document.querySelector('.remove-row');
 const appendColumn = document.querySelector('.append-column');
 const removeColumn = document.querySelector('.remove-column');
-const table = document.querySelector('.field').childNodes[1];
+const table = document.querySelector('.field');
+const maxRows = 10;
+const minRows = 2;
+const maxColumn = 10;
+const minColumn = 2;
 
 appendRow.addEventListener('click', () => {
-  const newRow = table.children[0].cloneNode(true);
+  const newRow = table.rows[0].cloneNode(true);
 
   removeRow.removeAttribute('disabled');
   table.append(newRow);
 
-  if (table.children.length === 10) {
+  if (table.rows.length === maxRows) {
     appendRow.setAttribute('disabled', true);
   }
 });
 
 removeRow.addEventListener('click', () => {
   appendRow.removeAttribute('disabled');
-  table.children[0].remove();
+  table.rows[0].remove();
 
-  if (table.children.length === 2) {
+  if (table.rows.length === minRows) {
     removeRow.setAttribute('disabled', true);
   }
 });
@@ -29,12 +33,12 @@ removeRow.addEventListener('click', () => {
 appendColumn.addEventListener('click', () => {
   removeColumn.removeAttribute('disabled');
 
-  [...table.children].forEach(row => {
-    const cell = row.children[0].cloneNode(true);
+  [...table.rows].forEach(rowLocal => {
+    const cellClone = table.rows[0].cells[0].cloneNode(true);
 
-    row.append(cell);
+    rowLocal.append(cellClone);
 
-    if (row.children.length === 10) {
+    if (rowLocal.cells.length === maxColumn) {
       appendColumn.setAttribute('disabled', true);
     }
   });
@@ -43,10 +47,10 @@ appendColumn.addEventListener('click', () => {
 removeColumn.addEventListener('click', () => {
   appendColumn.removeAttribute('disabled');
 
-  [...table.children].forEach(row => {
-    row.children[0].remove();
+  [...table.rows].forEach(rowLocal => {
+    rowLocal.children[0].remove();
 
-    if (row.children.length === 2) {
+    if (rowLocal.cells.length === minColumn) {
       removeColumn.setAttribute('disabled', true);
     }
   });
