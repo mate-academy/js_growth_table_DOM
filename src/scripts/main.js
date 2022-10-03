@@ -1,8 +1,6 @@
 'use strict';
 
 const table = document.querySelector('tbody');
-const rows = document.querySelectorAll('tr');
-
 const newRow = document.querySelector('.append-row');
 const removeRow = document.querySelector('.remove-row');
 
@@ -10,6 +8,7 @@ const newCol = document.querySelector('.append-column');
 const removeCol = document.querySelector('.remove-column');
 
 newRow.addEventListener('click', function() {
+
   if (table.children.length < 10) {
     removeRow.disabled = false;
     newRow.disabled = false;
@@ -34,6 +33,8 @@ removeRow.addEventListener('click', function() {
 });
 
 newCol.addEventListener('click', function() {
+  const rows = document.querySelectorAll('tr');
+
   if (rows[0].children.length < 10) {
     newCol.disabled = false;
     removeCol.disabled = false;
@@ -49,6 +50,8 @@ newCol.addEventListener('click', function() {
 });
 
 removeCol.addEventListener('click', function() {
+  const rows = document.querySelectorAll('tr');
+
   if (rows[0].children.length > 2) {
     newCol.disabled = false;
     removeCol.disabled = false;
