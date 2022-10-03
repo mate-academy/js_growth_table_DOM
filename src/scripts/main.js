@@ -6,7 +6,7 @@ const appendColumn = document.querySelector('.append-column');
 const removeColumn = document.querySelector('.remove-column');
 const rows = document.querySelector('.field').rows;
 
-appendRow.addEventListener('click', (e) => {
+appendRow.addEventListener('click', () => {
   rows[rows.length - 1].after(rows[rows.length - 1].cloneNode(true));
 
   if (rows.length === 10) {
@@ -18,7 +18,7 @@ appendRow.addEventListener('click', (e) => {
   }
 });
 
-removeRow.addEventListener('click', (e) => {
+removeRow.addEventListener('click', () => {
   rows[rows.length - 1].remove();
 
   if (rows.length === 2) {
@@ -30,7 +30,7 @@ removeRow.addEventListener('click', (e) => {
   }
 });
 
-appendColumn.addEventListener('click', (e) => {
+appendColumn.addEventListener('click', () => {
   [...rows].forEach(row =>
     row.lastElementChild.after(row.lastElementChild.cloneNode(true)));
 
@@ -43,7 +43,7 @@ appendColumn.addEventListener('click', (e) => {
   }
 });
 
-removeColumn.addEventListener('click', (e) => {
+removeColumn.addEventListener('click', () => {
   [...rows].forEach(row => row.lastElementChild.remove());
 
   if (rows[0].cells.length === 2) {
