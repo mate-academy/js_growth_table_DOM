@@ -1,58 +1,56 @@
 'use strict';
 
-function resizingTable(e) {
-  const button = e.target.closest('.button');
+const appendRow = document.querySelector('.append-row');
+const removeRow = document.querySelector('.remove-row');
+const appendColumn = document.querySelector('.append-column');
+const removeColumn = document.querySelector('.remove-column');
+const rows = document.querySelector('.field').rows;
 
-  if (!button) {
-    return;
+appendRow.addEventListener('click', (e) => {
+  rows[rows.length - 1].after(rows[rows.length - 1].cloneNode(true));
+
+  if (rows.length === 10) {
+    appendRow.disabled = true;
   }
 
-  const table = document.querySelector('.field');
-  const rows = table.rows;
-  const arrayRows = [...rows];
-
-  if (button.classList.contains('append-row')) {
-    rows[rows.length - 1].after(rows[rows.length - 1].cloneNode(true));
-
-    if (rows.length === 10) {
-      button.disabled = true;
-    }
-
-    if (rows.length === 3) {
-      document.querySelector('.remove-row').disabled = false;
-    }
-  } else if (button.classList.contains('remove-row')) {
-    rows[rows.length - 1].remove();
-
-    if (rows.length === 2) {
-      button.disabled = true;
-    }
-
-    if (rows.length === 9) {
-      document.querySelector('.append-row').disabled = false;
-    }
-  } else if (button.classList.contains('append-column')) {
-    arrayRows.forEach(row =>
-      row.lastElementChild.after(row.lastElementChild.cloneNode(true)));
-
-    if (rows[0].cells.length === 10) {
-      button.disabled = true;
-    }
-
-    if (rows[0].cells.length === 3) {
-      document.querySelector('.remove-column').disabled = false;
-    }
-  } else {
-    arrayRows.forEach(row => row.lastElementChild.remove());
-
-    if (rows[0].cells.length === 2) {
-      button.disabled = true;
-    }
-
-    if (rows[0].cells.length === 9) {
-      document.querySelector('.append-column').disabled = false;
-    }
+  if (rows.length === 3) {
+    removeRow.disabled = false;
   }
-}
+});
 
-document.body.addEventListener('click', resizingTable);
+removeRow.addEventListener('click', (e) => {
+  rows[rows.length - 1].remove();
+
+  if (rows.length === 2) {
+    removeRow.disabled = true;
+  }
+
+  if (rows.length === 9) {
+    appendRow.disabled = false;
+  }
+});
+
+appendColumn.addEventListener('click', (e) => {
+  [...rows].forEach(row =>
+    row.lastElementChild.after(row.lastElementChild.cloneNode(true)));
+
+  if (rows[0].cells.length === 10) {
+    appendColumn.disabled = true;
+  }
+
+  if (rows[0].cells.length === 3) {
+    removeColumn.disabled = false;
+  }
+});
+
+removeColumn.addEventListener('click', (e) => {
+  [...rows].forEach(row => row.lastElementChild.remove());
+
+  if (rows[0].cells.length === 2) {
+    removeColumn.disabled = true;
+  }
+
+  if (rows[0].cells.length === 9) {
+    appendColumn.disabled = false;
+  }
+});
