@@ -4,6 +4,8 @@ const rows = document.getElementsByTagName('tr');
 
 const appendRowButton = document.querySelector('.append-row');
 
+
+
 appendRowButton.addEventListener('click', () => {
   const table = document.querySelector('tbody');
 
@@ -11,7 +13,9 @@ appendRowButton.addEventListener('click', () => {
 
   table.append(rowToAppend);
 
-  if (rows.length > 9) {
+  const rowsQuantity = rows.length;
+
+  if (rowsQuantity > 9) {
     appendRowButton.setAttribute('disabled', 'true');
   }
 
@@ -27,7 +31,9 @@ removeRowButton.addEventListener('click', () => {
 
   rowToRemove.remove();
 
-  if (rows.length < 3) {
+  const rowsQuantity = rows.length;
+
+  if (rowsQuantity < 3) {
     removeRowButton.setAttribute('disabled', 'true');
   }
 
@@ -46,8 +52,9 @@ appendColumnButton.addEventListener('click', () => {
   }
 
   const existingRow = document.querySelector('tr');
+  const existingRowLength = existingRow.children.length;
 
-  if (existingRow.children.length > 9) {
+  if (existingRowLength > 9) {
     appendColumnButton.setAttribute('disabled', 'true');
   }
 
@@ -66,8 +73,9 @@ removeColumnButton.addEventListener('click', () => {
   }
 
   const existingRow = document.querySelector('tr');
+  const existingRowLength = existingRow.children.length;
 
-  if (existingRow.children.length < 3) {
+  if (existingRowLength < 3) {
     removeColumnButton.setAttribute('disabled', 'true');
   }
 
