@@ -6,6 +6,14 @@ const removeColumn = document.querySelector('.remove-column');
 const removeRow = document.querySelector('.remove-row');
 const appendRow = document.querySelector('.append-row');
 
+function examination(maxLength, button, maxOrMin) {
+  if (maxLength === maxOrMin) {
+    button.disabled = true;
+  } else {
+    button.disabled = false;
+  }
+}
+
 appendColumn.addEventListener('click', () => {
   const coloms = [...document.querySelectorAll('tr')];
 
@@ -13,13 +21,19 @@ appendColumn.addEventListener('click', () => {
     return;
   }
 
+  removeColumn.disabled = false;
+
   coloms.forEach(x => {
     x.insertAdjacentHTML('afterbegin', `<td></td>`);
   });
+
+  examination(coloms[0].children.length, appendColumn, 10);
 });
 
 removeColumn.addEventListener('click', () => {
   const coloms = [...document.querySelectorAll('tr')];
+
+  appendColumn.disabled = false;
 
   if (coloms[0].children.length === 2) {
     return;
@@ -28,6 +42,8 @@ removeColumn.addEventListener('click', () => {
   coloms.forEach(x => {
     x.children[x.children.length - 1].remove();
   });
+
+  examination(coloms[0].children.length, removeColumn, 2);
 });
 
 appendRow.addEventListener('click', () => {
@@ -38,7 +54,11 @@ appendRow.addEventListener('click', () => {
     return;
   }
 
+  removeRow.disabled = false;
+
   tbody.insertAdjacentHTML('beforeend', colom.innerHTML);
+
+  examination(coloms.length, appendRow, 9);
 });
 
 removeRow.addEventListener('click', () => {
@@ -48,5 +68,9 @@ removeRow.addEventListener('click', () => {
     return;
   }
 
+  appendRow.disabled = false;
+
   coloms[coloms.length - 1].remove();
+
+  examination(coloms.length, removeRow, 3);
 });
