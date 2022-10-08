@@ -1,7 +1,6 @@
 'use strict';
 
 const container = document.querySelector('.container');
-// const btn = document.querySelectorAll('button');
 const table = document.querySelector('tbody');
 const remColBut = document.querySelector('.remove-column');
 const remRowBut = document.querySelector('.remove-row');
@@ -16,22 +15,6 @@ container.onclick = function(ev) {
   }
 
   if (target.classList.contains('remove-row')) {
-    deleteRow();
-  }
-
-  if (target.classList.contains('append-row')) {
-    appendRow();
-  }
-
-  if (target.classList.contains('append-column')) {
-    appendColumn();
-  }
-
-  if (target.classList.contains('remove-column')) {
-    deleteColumn();
-  }
-
-  function deleteRow() {
     appendRowBut.disabled = false;
 
     if (table.rows.length > 2) {
@@ -43,7 +26,7 @@ container.onclick = function(ev) {
     }
   }
 
-  function appendRow() {
+  if (target.classList.contains('append-row')) {
     remRowBut.disabled = false;
 
     if (table.rows.length < 10) {
@@ -59,7 +42,7 @@ container.onclick = function(ev) {
     }
   }
 
-  function appendColumn() {
+  if (target.classList.contains('append-column')) {
     remColBut.disabled = false;
 
     if (table.rows[0].cells.length < 10) {
@@ -73,14 +56,15 @@ container.onclick = function(ev) {
     }
   }
 
-  function deleteColumn() {
+  if (target.classList.contains('remove-column')) {
+    appendColBut.disabled = false;
+
     const lastCol = table.rows[0].cells.length;
 
     if (lastCol > 2) {
       for (let i = 0; i < table.rows.length; i++) {
         table.rows[i].deleteCell(lastCol - 1);
       }
-      appendColBut.disabled = false;
     }
 
     if (lastCol < 4) {
