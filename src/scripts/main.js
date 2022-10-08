@@ -16,61 +16,50 @@ function examination(maxLength, button, maxOrMin) {
 
 appendColumn.addEventListener('click', () => {
   const coloms = [...document.querySelectorAll('tr')];
-
-  if (coloms[0].children.length === 10) {
-    return;
-  }
+  const amountTr = coloms[0].children.length;
 
   removeColumn.disabled = false;
 
-  coloms.forEach(x => {
-    x.insertAdjacentHTML('afterbegin', `<td></td>`);
+  coloms.forEach(colom => {
+    colom.insertAdjacentHTML('afterbegin', `<td></td>`);
   });
 
-  examination(coloms[0].children.length, appendColumn, 10);
+  examination(amountTr, appendColumn, 9);
 });
 
 removeColumn.addEventListener('click', () => {
   const coloms = [...document.querySelectorAll('tr')];
+  const amountTr = coloms[0].children.length;
 
   appendColumn.disabled = false;
 
-  if (coloms[0].children.length === 2) {
-    return;
-  }
-
-  coloms.forEach(x => {
-    x.children[x.children.length - 1].remove();
+  coloms.forEach(colom => {
+    colom.children[colom.children.length - 1].remove();
   });
 
-  examination(coloms[0].children.length, removeColumn, 2);
+  examination(amountTr, removeColumn, 3);
 });
 
 appendRow.addEventListener('click', () => {
-  const colom = document.querySelector('tr');
   const coloms = [...document.querySelectorAll('tr')];
+  const amountColoms = coloms.length;
 
-  if (coloms.length === 10) {
-    return;
-  }
+  const colom = document.querySelector('tr');
 
   removeRow.disabled = false;
 
   tbody.insertAdjacentHTML('beforeend', colom.innerHTML);
 
-  examination(coloms.length, appendRow, 9);
+  examination(amountColoms, appendRow, 9);
 });
 
 removeRow.addEventListener('click', () => {
   const coloms = [...document.querySelectorAll('tr')];
-
-  if (coloms.length === 2) {
-    return;
-  }
+  const amountColoms = coloms.length;
 
   appendRow.disabled = false;
 
-  coloms[coloms.length - 1].remove();
+  coloms[amountColoms - 1].remove();
 
-  examination(coloms.length, removeRow, 3);
+  examination(amountColoms, removeRow, 3);
 });
