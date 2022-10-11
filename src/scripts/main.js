@@ -2,10 +2,12 @@
 
 const container = document.querySelector('.container');
 const tBody = document.querySelector('.field > tbody');
+const maxCellsCount = 10;
+const minCellsCount = 2;
 
 const addColumn = () => {
   for (const row of tBody.rows) {
-    if (row.cells.length === 10) {
+    if (row.cells.length === maxCellsCount) {
       return;
     }
 
@@ -17,7 +19,7 @@ const addColumn = () => {
 
 const removeColumn = () => {
   for (const row of tBody.rows) {
-    if (row.cells.length === 2) {
+    if (row.cells.length === minCellsCount) {
       return;
     }
 
@@ -28,7 +30,7 @@ const removeColumn = () => {
 };
 
 const addRow = () => {
-  if (tBody.rows.length === 10) {
+  if (tBody.rows.length === maxCellsCount) {
     return;
   }
 
@@ -38,7 +40,7 @@ const addRow = () => {
 };
 
 const removeRow = () => {
-  if (tBody.rows.length === 2) {
+  if (tBody.rows.length === minCellsCount) {
     return;
   }
 
@@ -48,11 +50,11 @@ const removeRow = () => {
 };
 
 const buttonSwitcher = (colCount, rowCount) => {
-  if (colCount === 2) {
+  if (colCount === minCellsCount) {
     const button = document.querySelector('.remove-column');
 
     button.disabled = true;
-  } else if (colCount === 10) {
+  } else if (colCount === maxCellsCount) {
     const button = document.querySelector('.append-column');
 
     button.disabled = true;
@@ -64,11 +66,11 @@ const buttonSwitcher = (colCount, rowCount) => {
     buttonAppend.disabled = false;
   }
 
-  if (rowCount === 2) {
+  if (rowCount === minCellsCount) {
     const button = document.querySelector('.remove-row');
 
     button.disabled = true;
-  } else if (rowCount === 10) {
+  } else if (rowCount === maxCellsCount) {
     const button = document.querySelector('.append-row');
 
     button.disabled = true;
