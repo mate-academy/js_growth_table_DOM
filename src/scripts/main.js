@@ -10,23 +10,21 @@ const removeColumn = document.querySelector('.remove-column');
 const minCount = 2;
 const maxCount = 10;
 
-// Event for adding rows
-appendRow.addEventListener('click', () => {
+const addRow = () => {
   const newRow = tableBody.lastElementChild.cloneNode(true);
 
   tableBody.append(newRow);
 
-  if (tableBody.children.length === 10) {
+  if (tableBody.children.length === maxCount) {
     appendRow.disabled = true;
   }
 
   if (tableBody.children.length > minCount) {
     removeRow.disabled = false;
   }
-});
+};
 
-// Event for removing rows
-removeRow.addEventListener('click', () => {
+const deleteRow = () => {
   tableBody.lastElementChild.remove();
 
   if (tableBody.children.length === minCount) {
@@ -36,10 +34,9 @@ removeRow.addEventListener('click', () => {
   if (tableBody.children.length < maxCount) {
     appendRow.disabled = false;
   }
-});
+};
 
-// Event for adding columns
-appendColumn.addEventListener('click', () => {
+const addCell = () => {
   const rows = [...tableBody.children];
 
   rows.forEach(row => {
@@ -55,10 +52,9 @@ appendColumn.addEventListener('click', () => {
       removeColumn.disabled = false;
     }
   });
-});
+};
 
-// Event for removing columns
-removeColumn.addEventListener('click', () => {
+const deleteCell = () => {
   const rows = [...tableBody.children];
 
   rows.forEach(row => {
@@ -72,4 +68,9 @@ removeColumn.addEventListener('click', () => {
       removeColumn.disabled = true;
     }
   });
-});
+};
+
+appendRow.addEventListener('click', addRow);
+removeRow.addEventListener('click', deleteRow);
+appendColumn.addEventListener('click', addCell);
+removeColumn.addEventListener('click', deleteCell);
