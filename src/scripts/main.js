@@ -2,10 +2,10 @@
 
 const container = document.querySelector('.container');
 const table = document.querySelector('tbody');
-const remColBut = document.querySelector('.remove-column');
-const remRowBut = document.querySelector('.remove-row');
-const appendColBut = document.querySelector('.append-column');
-const appendRowBut = document.querySelector('.append-row');
+const removeColumnButton = document.querySelector('.remove-column');
+const removeRowButton = document.querySelector('.remove-row');
+const appendColumnButton = document.querySelector('.append-column');
+const appendRowButton = document.querySelector('.append-row');
 
 container.onclick = function(ev) {
   const target = ev.target;
@@ -15,19 +15,19 @@ container.onclick = function(ev) {
   }
 
   if (target.classList.contains('remove-row')) {
-    appendRowBut.disabled = false;
+    appendRowButton.disabled = false;
 
     if (table.rows.length > 2) {
       table.deleteRow(table.rows.length - 1);
     }
 
     if (table.rows.length < 3) {
-      remRowBut.disabled = true;
+      removeRowButton.disabled = true;
     }
   }
 
   if (target.classList.contains('append-row')) {
-    remRowBut.disabled = false;
+    removeRowButton.disabled = false;
 
     if (table.rows.length < 10) {
       const row = table.insertRow(table.rows.length);
@@ -38,12 +38,12 @@ container.onclick = function(ev) {
     }
 
     if (table.rows.length === 10) {
-      appendRowBut.disabled = true;
+      appendRowButton.disabled = true;
     }
   }
 
   if (target.classList.contains('append-column')) {
-    remColBut.disabled = false;
+    removeColumnButton.disabled = false;
 
     if (table.rows[0].cells.length < 10) {
       for (let i = 0; i < table.rows.length; i++) {
@@ -52,12 +52,12 @@ container.onclick = function(ev) {
     }
 
     if (table.rows[0].cells.length === 10) {
-      appendColBut.disabled = true;
+      appendColumnButton.disabled = true;
     }
   }
 
   if (target.classList.contains('remove-column')) {
-    appendColBut.disabled = false;
+    appendColumnButton.disabled = false;
 
     const lastCol = table.rows[0].cells.length;
 
@@ -68,7 +68,7 @@ container.onclick = function(ev) {
     }
 
     if (lastCol < 4) {
-      remColBut.disabled = true;
+      removeColumnButton.disabled = true;
     }
   }
 };
