@@ -5,11 +5,15 @@ const removeRow = document.querySelector('.remove-row');
 const addColumn = document.querySelector('.append-column');
 const removeColumn = document.querySelector('.remove-column');
 const table = document.querySelector('tbody');
+const minCountRows = 2;
+const minCountColumns = 2;
+const maxCountRows = 10;
+const maxCountColumns = 10;
 
 addRow.addEventListener('click', e => {
   table.append(table.lastElementChild.cloneNode(true));
 
-  if (table.children.length >= 10) {
+  if (table.children.length >= maxCountRows) {
     addRow.disabled = true;
   }
 
@@ -19,7 +23,7 @@ addRow.addEventListener('click', e => {
 removeRow.addEventListener('click', e => {
   table.lastElementChild.remove();
 
-  if (table.children.length <= 2) {
+  if (table.children.length <= minCountRows) {
     removeRow.disabled = true;
   }
 
@@ -31,7 +35,7 @@ addColumn.addEventListener('click', e => {
     elem.append(elem.lastElementChild.cloneNode(true));
   });
 
-  if (table.firstChild.children.length >= 10) {
+  if (table.firstChild.children.length >= maxCountColumns) {
     addColumn.disabled = true;
   }
 
@@ -43,7 +47,7 @@ removeColumn.addEventListener('click', e => {
     elem.lastElementChild.remove();
   });
 
-  if (table.firstChild.children.length <= 2) {
+  if (table.firstChild.children.length <= minCountColumns) {
     removeColumn.disabled = true;
   }
 
