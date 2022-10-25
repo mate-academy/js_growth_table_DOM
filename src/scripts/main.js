@@ -12,8 +12,11 @@ const table = document.querySelector('.field').tBodies[0];
 const rows = () => [...table.rows];
 const lastRow = () => table.lastElementChild;
 
+const minLength = 2;
+const maxLength = 10;
+
 addRow.addEventListener('click', () => {
-  if (rows().length < 10) {
+  if (rows().length < maxLength) {
     table.append(lastRow().cloneNode(true));
     removeRow.disabled = false;
   }
@@ -22,7 +25,7 @@ addRow.addEventListener('click', () => {
 });
 
 removeRow.addEventListener('click', () => {
-  if (rows().length > 2) {
+  if (rows().length > minLength) {
     lastRow().remove();
     addRow.disabled = false;
   }
@@ -31,7 +34,7 @@ removeRow.addEventListener('click', () => {
 });
 
 addCol.addEventListener('click', () => {
-  if (lastRow().cells.length < 10) {
+  if (lastRow().cells.length < maxLength) {
     rows().forEach(row => {
       const newCell = row.lastElementChild.cloneNode(true);
 
@@ -44,7 +47,7 @@ addCol.addEventListener('click', () => {
 });
 
 removeCol.addEventListener('click', () => {
-  if (lastRow().cells.length > 2) {
+  if (lastRow().cells.length > minLength) {
     rows().forEach(row => {
       row.lastElementChild.remove();
     });
@@ -57,25 +60,25 @@ removeCol.addEventListener('click', () => {
 function disable(button) {
   switch (button) {
     case addRow:
-      if (rows().length === 10) {
+      if (rows().length === maxLength) {
         addRow.disabled = true;
       };
       break;
 
     case removeRow:
-      if (rows().length === 2) {
+      if (rows().length === minLength) {
         removeRow.disabled = true;
       };
       break;
 
     case addCol:
-      if (lastRow().cells.length === 10) {
+      if (lastRow().cells.length === maxLength) {
         addCol.disabled = true;
       }
       break;
 
     case removeCol:
-      if (lastRow().cells.length === 2) {
+      if (lastRow().cells.length === minLength) {
         removeCol.disabled = true;
       }
   }
