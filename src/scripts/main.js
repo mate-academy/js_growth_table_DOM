@@ -15,13 +15,13 @@ document.addEventListener('click', events => {
   }
 
   if (target.classList.contains('append-row')) {
-    const tr = document.createElement('tr');
+    const tabelRow = document.createElement('tr');
 
     for (let i = 0; i < countColumn; i++) {
-      tr.append(document.createElement('td'));
+      tabelRow.append(document.createElement('td'));
     }
 
-    tbody.append(tr);
+    tbody.append(tabelRow);
     countRow++;
   }
 
@@ -45,15 +45,15 @@ document.addEventListener('click', events => {
     countColumn--;
   }
 
-  [ ...buttons ].find(c => c.classList.contains('remove-row'))
+  [ ...buttons ].find(b => b.classList.contains('remove-row'))
     .disabled = countRow <= minLimit;
 
-  [ ...buttons ].find(c => c.classList.contains('append-row'))
+  [ ...buttons ].find(b => b.classList.contains('append-row'))
     .disabled = countRow >= maxLimit;
 
-  [ ...buttons ].find(c => c.classList.contains('remove-column'))
+  [ ...buttons ].find(b => b.classList.contains('remove-column'))
     .disabled = countColumn <= minLimit;
 
-  [ ...buttons ].find(c => c.classList.contains('append-column'))
+  [ ...buttons ].find(b => b.classList.contains('append-column'))
     .disabled = countColumn >= maxLimit;
 });
