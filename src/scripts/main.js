@@ -9,18 +9,21 @@ const field = container.querySelector('table').firstElementChild;
 const rows = document.getElementsByTagName('tr');
 
 appendRow.addEventListener('click', () => {
-  if (rows.length >= 9) {
+  field.append(field.firstElementChild.cloneNode(true));
+
+  if (rows.length >= 10) {
     appendRow.disabled = true;
   }
-  field.append(field.firstElementChild.cloneNode(true));
   removeRow.disabled = false;
 });
 
 removeRow.addEventListener('click', () => {
-  if (rows.length <= 3) {
+  field.firstElementChild.remove();
+
+  if (rows.length <= 2) {
     removeRow.disabled = true;
   }
-  field.firstElementChild.remove();
+
   appendRow.disabled = false;
 });
 
