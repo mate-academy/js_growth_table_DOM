@@ -11,42 +11,27 @@ const maxLength = 10;
 document.body.addEventListener('click', (e) => {
   if (e.target === addRow) {
     addNewRow();
-    delRow.disabled = false;
   }
 
   if (e.target === delRow) {
     deleteRow();
-    addRow.disabled = false;
   }
 
   if (e.target === addColumn) {
     addNewColumn();
-    delColumn.disabled = false;
   }
 
   if (e.target === delColumn) {
     deleteColumn();
-    addColumn.disabled = false;
   }
 
   const rowsLength = table.children.length;
   const columnsLength = table.children[0].children.length;
 
-  if (rowsLength >= maxLength) {
-    addRow.disabled = true;
-  }
-
-  if (rowsLength <= minLength) {
-    delRow.disabled = true;
-  }
-
-  if (columnsLength >= maxLength) {
-    addColumn.disabled = true;
-  }
-
-  if (columnsLength <= minLength) {
-    delColumn.disabled = true;
-  }
+  addRow.disabled = rowsLength >= maxLength;
+  delRow.disabled = rowsLength <= minLength;
+  addColumn.disabled = columnsLength >= maxLength;
+  delColumn.disabled = columnsLength <= minLength;
 });
 
 function addNewRow() {
