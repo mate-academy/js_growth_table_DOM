@@ -1,18 +1,18 @@
 'use strict';
 
-const getE = (element) => document.querySelector(element);
+const getElement = (element) => document.querySelector(element);
 const modeOn = (element) => element.removeAttribute('disabled');
 const modeOff = (element) => element.setAttribute('disabled', '');
 
-const addRow = getE('.append-row');
-const removeRow = getE('.remove-row');
-const addColumn = getE('.append-column');
-const removeColumn = getE('.remove-column');
+const addRow = getElement('.append-row');
+const removeRow = getElement('.remove-row');
+const addColumn = getElement('.append-column');
+const removeColumn = getElement('.remove-column');
 
-const tbody = getE('tbody');
-const cell = getE('td');
+const tbody = getElement('tbody');
+const cell = getElement('td');
 
-const allRows = document.getElementsByTagName('tr');
+const allRows = document.getElementlementsByTagName('tr');
 
 const minRowsLength = 2;
 const maxRowsLength = 10;
