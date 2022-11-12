@@ -1,0 +1,374 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 13,
+    "passes": 3,
+    "pending": 0,
+    "failures": 10,
+    "start": "2022-11-12T17:09:06.276Z",
+    "end": "2022-11-12T17:09:58.092Z",
+    "duration": 51364,
+    "testsRegistered": 13,
+    "passPercent": 23.076923076923077,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "4580b5b2-e8de-4c60-9ee4-790febd39ce1",
+      "title": "",
+      "fullFile": "cypress\\integration\\jsGrowthTableDOM.spec.js",
+      "file": "cypress\\integration\\jsGrowthTableDOM.spec.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "f1a827f8-a02f-47fb-865b-06546c4c7c02",
+          "title": "Table",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "should have 4 rows by default",
+              "fullTitle": "Table should have 4 rows by default",
+              "timedOut": null,
+              "duration": 334,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('@rows').should('have.length', 4);",
+              "err": {},
+              "uuid": "4bc2b8f3-5235-4146-bd7f-6f49746b30bf",
+              "parentUUID": "f1a827f8-a02f-47fb-865b-06546c4c7c02",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should add 1 row by click",
+              "fullTitle": "Table should add 1 row by click",
+              "timedOut": null,
+              "duration": 4675,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('.append-row').click();\ncy.get('@rows').should('have.length', 5);",
+              "err": {
+                "message": "AssertionError: Timed out retrying: Not enough elements found. Found '4', expected '5'.",
+                "estack": "AssertionError: Timed out retrying: Not enough elements found. Found '4', expected '5'.\n    at Context.eval (http://localhost:8080/__cypress/tests?p=cypress\\integration\\jsGrowthTableDOM.spec.js:117:21)",
+                "diff": "- 4\n+ 5\n"
+              },
+              "uuid": "98b8a805-4952-409f-a54c-ea7d8ebf0c2c",
+              "parentUUID": "f1a827f8-a02f-47fb-865b-06546c4c7c02",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should have 4 columns by default",
+              "fullTitle": "Table should have 4 columns by default",
+              "timedOut": null,
+              "duration": 468,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('@columns').should('have.length', 4);",
+              "err": {},
+              "uuid": "a200e02c-cc26-4cf0-9b4a-edb92f3fa96b",
+              "parentUUID": "f1a827f8-a02f-47fb-865b-06546c4c7c02",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should add 1 column by click",
+              "fullTitle": "Table should add 1 column by click",
+              "timedOut": null,
+              "duration": 1731,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('.append-column').click();\ncy.get('@columns').should('have.length', 5);",
+              "err": {},
+              "uuid": "548df62d-6b0f-4768-9dc3-1807bfda6e2d",
+              "parentUUID": "f1a827f8-a02f-47fb-865b-06546c4c7c02",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should have max 10 columns",
+              "fullTitle": "Table should have max 10 columns",
+              "timedOut": null,
+              "duration": 5145,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "// 4 columns by default and click 7 times to add 7 columns\ncy.clickButton('.append-column', 7);\ncy.get('@columns').should('have.length', 10);",
+              "err": {
+                "message": "AssertionError: Timed out retrying: Too many elements found. Found '11', expected '10'.",
+                "estack": "AssertionError: Timed out retrying: Too many elements found. Found '11', expected '10'.\n    at Context.eval (http://localhost:8080/__cypress/tests?p=cypress\\integration\\jsGrowthTableDOM.spec.js:129:24)",
+                "diff": "- 11\n+ 10\n"
+              },
+              "uuid": "2379ab69-0dcd-4875-af93-953d690c2047",
+              "parentUUID": "f1a827f8-a02f-47fb-865b-06546c4c7c02",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "add column button should be disabled after 10 column",
+              "fullTitle": "Table add column button should be disabled after 10 column",
+              "timedOut": null,
+              "duration": 4861,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "// 4 columns by default and click 6 times to add 6 columns\ncy.clickButton('.append-column', 6);\ncy.get('.append-column').should('be.disabled');",
+              "err": {
+                "message": "AssertionError: Timed out retrying: expected '<button.append-column.button>' to be 'disabled'",
+                "estack": "AssertionError: Timed out retrying: expected '<button.append-column.button>' to be 'disabled'\n    at Context.eval (http://localhost:8080/__cypress/tests?p=cypress\\integration\\jsGrowthTableDOM.spec.js:134:30)",
+                "diff": null
+              },
+              "uuid": "eee917fe-7ec7-4033-b0a1-8abe051ddcaf",
+              "parentUUID": "f1a827f8-a02f-47fb-865b-06546c4c7c02",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should remove one column",
+              "fullTitle": "Table should remove one column",
+              "timedOut": null,
+              "duration": 4832,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('.remove-column').click();\ncy.get('@columns').should('have.length', 3);",
+              "err": {
+                "message": "AssertionError: Timed out retrying: Too many elements found. Found '4', expected '3'.",
+                "estack": "AssertionError: Timed out retrying: Too many elements found. Found '4', expected '3'.\n    at Context.eval (http://localhost:8080/__cypress/tests?p=cypress\\integration\\jsGrowthTableDOM.spec.js:138:24)",
+                "diff": "- 4\n+ 3\n"
+              },
+              "uuid": "fa5f811f-0ba9-4f46-a536-bcd0ab4e9d47",
+              "parentUUID": "f1a827f8-a02f-47fb-865b-06546c4c7c02",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should have max 10 rows",
+              "fullTitle": "Table should have max 10 rows",
+              "timedOut": null,
+              "duration": 4952,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "// 4 columns by default and click 7 times to add 7 rows\ncy.clickButton('.append-row', 7);\ncy.get('@rows').should('have.length', 10);",
+              "err": {
+                "message": "AssertionError: Timed out retrying: Not enough elements found. Found '4', expected '10'.",
+                "estack": "AssertionError: Timed out retrying: Not enough elements found. Found '4', expected '10'.\n    at Context.eval (http://localhost:8080/__cypress/tests?p=cypress\\integration\\jsGrowthTableDOM.spec.js:143:21)",
+                "diff": "- 4\n+ 10\n"
+              },
+              "uuid": "d1b86c42-a225-4f2d-baea-68051ebc382e",
+              "parentUUID": "f1a827f8-a02f-47fb-865b-06546c4c7c02",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "add row button should be disabled after 10 rows",
+              "fullTitle": "Table add row button should be disabled after 10 rows",
+              "timedOut": null,
+              "duration": 5171,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "// 4 columns by default and click 6 times to add 6 rows\ncy.clickButton('.append-row', 6);\ncy.get('.append-row').should('be.disabled');",
+              "err": {
+                "message": "AssertionError: Timed out retrying: expected '<button.append-row.button>' to be 'disabled'",
+                "estack": "AssertionError: Timed out retrying: expected '<button.append-row.button>' to be 'disabled'\n    at Context.eval (http://localhost:8080/__cypress/tests?p=cypress\\integration\\jsGrowthTableDOM.spec.js:148:27)",
+                "diff": null
+              },
+              "uuid": "a516904b-00c6-4d1e-a4ef-d405e2b58d34",
+              "parentUUID": "f1a827f8-a02f-47fb-865b-06546c4c7c02",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should remove one row",
+              "fullTitle": "Table should remove one row",
+              "timedOut": null,
+              "duration": 4574,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('.remove-row').click();\ncy.get('@rows').should('have.length', 3);",
+              "err": {
+                "message": "AssertionError: Timed out retrying: Expected to find element: `tbody > tr`, but never found it.",
+                "estack": "AssertionError: Timed out retrying: Expected to find element: `tbody > tr`, but never found it.\n    at Context.eval (http://localhost:8080/__cypress/tests?p=cypress\\integration\\jsGrowthTableDOM.spec.js:152:21)",
+                "diff": null
+              },
+              "uuid": "4a1063a2-9d4d-4af1-8da7-4852799a40c3",
+              "parentUUID": "f1a827f8-a02f-47fb-865b-06546c4c7c02",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should have 2 columns and 2 rows minimum",
+              "fullTitle": "Table should have 2 columns and 2 rows minimum",
+              "timedOut": null,
+              "duration": 4960,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('.remove-row').click().click();\ncy.get('.remove-column').click().click();\ncy.get('@rows').should('have.length', 2);\ncy.get('@columns').should('have.length', 2);",
+              "err": {
+                "message": "CypressError: Timed out retrying: `cy.click()` failed because this element:\n\n`<button class=\"remove-row button\">-</button>`\n\nis being covered by another element:\n\n`<button class=\"remove-column button\">-</button>`\n\nFix this problem, or use {force: true} to disable error checking.\n\nhttps://on.cypress.io/element-cannot-be-interacted-with",
+                "estack": "CypressError: Timed out retrying: `cy.click()` failed because this element:\n\n`<button class=\"remove-row button\">-</button>`\n\nis being covered by another element:\n\n`<button class=\"remove-column button\">-</button>`\n\nFix this problem, or use {force: true} to disable error checking.\n\nhttps://on.cypress.io/element-cannot-be-interacted-with\n    at $Cy.ensureDescendents (http://localhost:8080/__cypress/runner/cypress_runner.js:161307:26)\n    at ensureDescendents (http://localhost:8080/__cypress/runner/cypress_runner.js:149871:8)\n    at ensureDescendentsAndScroll (http://localhost:8080/__cypress/runner/cypress_runner.js:149878:14)\n    at ensureElIsNotCovered (http://localhost:8080/__cypress/runner/cypress_runner.js:150007:5)\n    at runAllChecks (http://localhost:8080/__cypress/runner/cypress_runner.js:150148:52)\n    at retryActionability (http://localhost:8080/__cypress/runner/cypress_runner.js:150163:16)\n    at tryCatcher (http://localhost:8080/__cypress/runner/cypress_runner.js:10325:23)\n    at Function.Promise.attempt.Promise.try (http://localhost:8080/__cypress/runner/cypress_runner.js:7599:29)\n    at tryFn (http://localhost:8080/__cypress/runner/cypress_runner.js:165556:21)\n    at whenStable (http://localhost:8080/__cypress/runner/cypress_runner.js:165594:12)\n    at http://localhost:8080/__cypress/runner/cypress_runner.js:165089:16\n    at tryCatcher (http://localhost:8080/__cypress/runner/cypress_runner.js:10325:23)\n    at Promise._settlePromiseFromHandler (http://localhost:8080/__cypress/runner/cypress_runner.js:8260:31)\n    at Promise._settlePromise (http://localhost:8080/__cypress/runner/cypress_runner.js:8317:18)\n    at Promise._settlePromise0 (http://localhost:8080/__cypress/runner/cypress_runner.js:8362:10)\n    at Promise._settlePromises (http://localhost:8080/__cypress/runner/cypress_runner.js:8442:18)\nFrom Your Spec Code:\n    at Context.eval (http://localhost:8080/__cypress/tests?p=cypress\\integration\\jsGrowthTableDOM.spec.js:155:35)",
+                "diff": null
+              },
+              "uuid": "0f7bedda-6b8d-4022-9ca1-de5be472dc73",
+              "parentUUID": "f1a827f8-a02f-47fb-865b-06546c4c7c02",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "remove row button should be disabled\n      when only 2 rows exist",
+              "fullTitle": "Table remove row button should be disabled\n      when only 2 rows exist",
+              "timedOut": null,
+              "duration": 4650,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('.remove-row').click().click();\ncy.get('.remove-row').should('be.disabled');",
+              "err": {
+                "message": "CypressError: Timed out retrying: `cy.click()` failed because this element:\n\n`<button class=\"remove-row button\">-</button>`\n\nis being covered by another element:\n\n`<button class=\"remove-column button\">-</button>`\n\nFix this problem, or use {force: true} to disable error checking.\n\nhttps://on.cypress.io/element-cannot-be-interacted-with",
+                "estack": "CypressError: Timed out retrying: `cy.click()` failed because this element:\n\n`<button class=\"remove-row button\">-</button>`\n\nis being covered by another element:\n\n`<button class=\"remove-column button\">-</button>`\n\nFix this problem, or use {force: true} to disable error checking.\n\nhttps://on.cypress.io/element-cannot-be-interacted-with\n    at $Cy.ensureDescendents (http://localhost:8080/__cypress/runner/cypress_runner.js:161307:26)\n    at ensureDescendents (http://localhost:8080/__cypress/runner/cypress_runner.js:149871:8)\n    at ensureDescendentsAndScroll (http://localhost:8080/__cypress/runner/cypress_runner.js:149878:14)\n    at ensureElIsNotCovered (http://localhost:8080/__cypress/runner/cypress_runner.js:150007:5)\n    at runAllChecks (http://localhost:8080/__cypress/runner/cypress_runner.js:150148:52)\n    at retryActionability (http://localhost:8080/__cypress/runner/cypress_runner.js:150163:16)\n    at tryCatcher (http://localhost:8080/__cypress/runner/cypress_runner.js:10325:23)\n    at Function.Promise.attempt.Promise.try (http://localhost:8080/__cypress/runner/cypress_runner.js:7599:29)\n    at tryFn (http://localhost:8080/__cypress/runner/cypress_runner.js:165556:21)\n    at whenStable (http://localhost:8080/__cypress/runner/cypress_runner.js:165594:12)\n    at http://localhost:8080/__cypress/runner/cypress_runner.js:165089:16\n    at tryCatcher (http://localhost:8080/__cypress/runner/cypress_runner.js:10325:23)\n    at Promise._settlePromiseFromHandler (http://localhost:8080/__cypress/runner/cypress_runner.js:8260:31)\n    at Promise._settlePromise (http://localhost:8080/__cypress/runner/cypress_runner.js:8317:18)\n    at Promise._settlePromise0 (http://localhost:8080/__cypress/runner/cypress_runner.js:8362:10)\n    at Promise._settlePromises (http://localhost:8080/__cypress/runner/cypress_runner.js:8442:18)\nFrom Your Spec Code:\n    at Context.eval (http://localhost:8080/__cypress/tests?p=cypress\\integration\\jsGrowthTableDOM.spec.js:161:35)",
+                "diff": null
+              },
+              "uuid": "bffb5e7f-c183-4f85-a17c-a083e02d85f7",
+              "parentUUID": "f1a827f8-a02f-47fb-865b-06546c4c7c02",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "remove column button should be disabled\n      when only 2 columns exist",
+              "fullTitle": "Table remove column button should be disabled\n      when only 2 columns exist",
+              "timedOut": null,
+              "duration": 5011,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('.remove-column').click().click();\ncy.get('.remove-column').should('be.disabled');",
+              "err": {
+                "message": "AssertionError: Timed out retrying: expected '<button.remove-column.button>' to be 'disabled'",
+                "estack": "AssertionError: Timed out retrying: expected '<button.remove-column.button>' to be 'disabled'\n    at Context.eval (http://localhost:8080/__cypress/tests?p=cypress\\integration\\jsGrowthTableDOM.spec.js:166:30)",
+                "diff": null
+              },
+              "uuid": "c39bc84d-0770-4882-8954-1d44e4d3988d",
+              "parentUUID": "f1a827f8-a02f-47fb-865b-06546c4c7c02",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "4bc2b8f3-5235-4146-bd7f-6f49746b30bf",
+            "a200e02c-cc26-4cf0-9b4a-edb92f3fa96b",
+            "548df62d-6b0f-4768-9dc3-1807bfda6e2d"
+          ],
+          "failures": [
+            "98b8a805-4952-409f-a54c-ea7d8ebf0c2c",
+            "2379ab69-0dcd-4875-af93-953d690c2047",
+            "eee917fe-7ec7-4033-b0a1-8abe051ddcaf",
+            "fa5f811f-0ba9-4f46-a536-bcd0ab4e9d47",
+            "d1b86c42-a225-4f2d-baea-68051ebc382e",
+            "a516904b-00c6-4d1e-a4ef-d405e2b58d34",
+            "4a1063a2-9d4d-4af1-8da7-4852799a40c3",
+            "0f7bedda-6b8d-4022-9ca1-de5be472dc73",
+            "bffb5e7f-c183-4f85-a17c-a083e02d85f7",
+            "c39bc84d-0770-4882-8954-1d44e4d3988d"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 51364,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "6.2.1"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "raw_reports",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "5.1.0"
+    }
+  }
+}
