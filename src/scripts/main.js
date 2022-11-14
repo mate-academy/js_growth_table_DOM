@@ -7,7 +7,7 @@ const Btnrefs = {
   removeColumn: document.querySelector('.remove-column'),
 };
 
-const table = document.querySelector('table');
+const tableBody = document.querySelector('tbody');
 const tableRow = document.querySelector('tr');
 
 const container = document.querySelector('.container');
@@ -17,15 +17,15 @@ function growthTable(nameClass) {
     case 'append-row button':
       const cloneRow = tableRow.cloneNode(true);
 
-      table.appendChild(cloneRow);
+      tableBody.append(cloneRow);
       break;
 
     case 'remove-row button':
-      table.lastChild.remove();
+      tableBody.lastElementChild.remove();
       break;
 
     case 'append-column button':
-      Array.from(table.rows).forEach(row => {
+      Array.from(tableBody.rows).forEach(row => {
         const cell = row.cells[0];
         const cloneCell = cell.cloneNode(true);
 
@@ -33,7 +33,7 @@ function growthTable(nameClass) {
       });
       break;
     case 'remove-column button':
-      Array.from(table.rows).forEach(row => {
+      Array.from(tableBody.rows).forEach(row => {
         row.lastChild.remove();
       });
       break;
@@ -47,15 +47,15 @@ function onClick(e) {
 
   const button = e.target;
 
-  const rowLength = table.rows.length;
-  const columnLength = table.rows[0].cells.length;
+  growthTable(button.className);
+
+  const rowLength = tableBody.rows.length;
+  const columnLength = tableBody.rows[0].cells.length;
 
   Btnrefs.appendRow.disabled = rowLength >= 10;
   Btnrefs.removeRow.disabled = rowLength <= 2;
   Btnrefs.appendColumn.disabled = columnLength >= 10;
   Btnrefs.removeColumn.disabled = columnLength <= 2;
-
-  growthTable(button.className);
 }
 
 container.addEventListener('click', onClick);
