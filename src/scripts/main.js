@@ -2,60 +2,62 @@
 
 const container = document.querySelector('.container');
 const table = document.querySelector('.field');
-const addRow = document.querySelector('.append-row');
-const removeRov = document.querySelector('.remove-row');
-const addColumn = document.querySelector('.append-column');
-const removeColumn = document.querySelector('.remove-column');
+const addRowButton = document.querySelector('.append-row');
+const removeRovButton = document.querySelector('.remove-row');
+const addColumnButton = document.querySelector('.append-column');
+const removeColumnButton = document.querySelector('.remove-column');
 
 container.addEventListener('click', ev => {
   const item = ev.target;
 
-  if (item.classList.contains('append-row')) {
-    removeRov.removeAttribute('disabled');
+  switch (true) {
+    case item.classList.contains('append-row'):
+      removeRovButton.removeAttribute('disabled');
 
-    const row = table.insertRow();
+      const row = table.insertRow();
 
-    for (let i = 0; i < table.rows[0].cells.length; i++) {
-      const cell = document.createElement('td');
+      for (let i = 0; i < table.rows[0].cells.length; i++) {
+        const cell = document.createElement('td');
 
-      row.append(cell);
-    }
+        row.append(cell);
+      }
 
-    if (table.rows.length >= 10) {
-      item.setAttribute('disabled', '');
-    }
-  }
+      if (table.rows.length >= 10) {
+        item.setAttribute('disabled', '');
+      }
+      break;
 
-  if (item.classList.contains('remove-row')) {
-    addRow.removeAttribute('disabled');
-    table.children[0].lastElementChild.remove();
+    case item.classList.contains('remove-row'):
+      addRowButton.removeAttribute('disabled');
+      table.children[0].lastElementChild.remove();
 
-    if (table.rows.length <= 2) {
-      item.setAttribute('disabled', '');
-    }
-  }
+      if (table.rows.length <= 2) {
+        item.setAttribute('disabled', '');
+      }
+      break;
 
-  if (item.classList.contains('append-column')) {
-    removeColumn.removeAttribute('disabled');
+    case item.classList.contains('append-column'):
+      removeColumnButton.removeAttribute('disabled');
 
-    for (let i = 0; i < table.rows.length; i++) {
-      table.rows[i].insertCell();
-    }
+      for (let i = 0; i < table.rows.length; i++) {
+        table.rows[i].insertCell();
+      }
 
-    if (table.rows[0].cells.length >= 10) {
-      item.setAttribute('disabled', '');
-    }
-  }
+      if (table.rows[0].cells.length >= 10) {
+        item.setAttribute('disabled', '');
+      }
+      break;
 
-  if (item.classList.contains('remove-column')) {
-    addColumn.removeAttribute('disabled');
+    case item.classList.contains('remove-column'):
+      addColumnButton.removeAttribute('disabled');
 
-    for (let i = 0; i < table.rows.length; i++) {
-      table.rows[i].lastElementChild.remove();
-    }
+      for (let i = 0; i < table.rows.length; i++) {
+        table.rows[i].lastElementChild.remove();
+      }
 
-    if (table.rows[0].cells.length <= 2) {
-      item.setAttribute('disabled', '');
-    }
+      if (table.rows[0].cells.length <= 2) {
+        item.setAttribute('disabled', '');
+      }
+      break;
   }
 });
