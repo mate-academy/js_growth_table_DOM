@@ -28,11 +28,11 @@ removeRow.addEventListener('click', function() {
 
   const row = tableRef.querySelectorAll('tr');
 
-  if (row.length > 2) {
-    tableRef.deleteRow(-1);
-  } else {
+  if (row.length < 4) {
     removeRow.setAttribute('disabled', 'disabled');
   }
+
+  tableRef.deleteRow(0);
 });
 
 removeColumn.addEventListener('click', function() {
