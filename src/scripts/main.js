@@ -25,7 +25,7 @@ appendRow.addEventListener('click', () => {
   removeRow.disabled = false;
 });
 
-removeRow.addEventListener('click', (ev) => {
+removeRow.addEventListener('click', () => {
   rowsNumber--;
   tbody.children[rowsNumber].remove();
 
@@ -36,7 +36,7 @@ removeRow.addEventListener('click', (ev) => {
   appendRow.disabled = false;
 });
 
-appendColumn.addEventListener('click', (ev) => {
+appendColumn.addEventListener('click', () => {
   columnNumber++;
 
   if (columnNumber >= 10) {
@@ -48,7 +48,7 @@ appendColumn.addEventListener('click', (ev) => {
   removeColumn.disabled = false;
 });
 
-removeColumn.addEventListener('click', (ev) => {
+removeColumn.addEventListener('click', () => {
   columnNumber--;
 
   if (columnNumber <= 2) {
