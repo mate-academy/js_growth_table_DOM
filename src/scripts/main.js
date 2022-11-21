@@ -1,6 +1,6 @@
 'use strict';
 
-const Btnrefs = {
+const buttonRefs = {
   appendRow: document.querySelector('.append-row'),
   removeRow: document.querySelector('.remove-row'),
   appendColumn: document.querySelector('.append-column'),
@@ -52,10 +52,10 @@ function onClick(e) {
   const rowLength = tableBody.rows.length;
   const columnLength = tableBody.rows[0].cells.length;
 
-  Btnrefs.appendRow.disabled = rowLength >= 10;
-  Btnrefs.removeRow.disabled = rowLength <= 2;
-  Btnrefs.appendColumn.disabled = columnLength >= 10;
-  Btnrefs.removeColumn.disabled = columnLength <= 2;
+  buttonRefs.appendRow.disabled = rowLength >= 10;
+  buttonRefs.removeRow.disabled = rowLength <= 2;
+  buttonRefs.appendColumn.disabled = columnLength >= 10;
+  buttonRefs.removeColumn.disabled = columnLength <= 2;
 }
 
 container.addEventListener('click', onClick);
