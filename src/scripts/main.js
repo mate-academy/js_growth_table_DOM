@@ -34,7 +34,7 @@ function growthTable(nameClass) {
       break;
     case 'remove-column button':
       Array.from(tableBody.rows).forEach(row => {
-        row.lastChild.remove();
+        row.cells[row.cells.length - 1].remove();
       });
       break;
   }
