@@ -85,5 +85,8 @@ buttonContainer.addEventListener('click', (e) => {
         }
       }
       break;
+
+    default:
+      throw new SyntaxError('Default!');
   }
 });
