@@ -9,13 +9,7 @@ buttonAppendRow.addEventListener('click', () => {
 
   if (tbody.children.length < 10) {
     const trFirst = document.querySelector('tr');
-    const tr = document.createElement('tr');
-
-    for (let i = 0; i < trFirst.children.length; i++) {
-      const column = document.createElement('td');
-
-      tr.append(column);
-    }
+    const tr = trFirst.cloneNode(true);
 
     tbody.append(tr);
   }
