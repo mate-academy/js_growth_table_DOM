@@ -5,6 +5,10 @@ const maxRow = 10;
 const minRow = 2;
 const maxColumn = 10;
 const minColumn = 2;
+const removeRowButton = buttonContainer.querySelector('.remove-row');
+const addRowButton = buttonContainer.querySelector('.append-row');
+const removeColBut = buttonContainer.querySelector('.remove-column');
+const addColButton = buttonContainer.querySelector('.append-column');
 
 buttonContainer.addEventListener('click', (e) => {
   const { target } = e;
@@ -26,8 +30,6 @@ buttonContainer.addEventListener('click', (e) => {
       }
 
       if (tbody.children.length > minRow) {
-        const removeRowButton = buttonContainer.querySelector('.remove-row');
-
         removeRowButton.removeAttribute('disabled');
       }
       break;
@@ -44,8 +46,6 @@ buttonContainer.addEventListener('click', (e) => {
       }
 
       if (tbody.children.length < maxRow) {
-        const addRowButton = buttonContainer.querySelector('.append-row');
-
         addRowButton.removeAttribute('disabled');
       }
       break;
@@ -68,8 +68,6 @@ buttonContainer.addEventListener('click', (e) => {
       }
 
       if (tbody.firstElementChild.children.length > minColumn) {
-        const removeColBut = buttonContainer.querySelector('.remove-column');
-
         removeColBut.removeAttribute('disabled');
       }
       break;
@@ -88,8 +86,6 @@ buttonContainer.addEventListener('click', (e) => {
       }
 
       if (tbody.firstElementChild.children.length < maxColumn) {
-        const addColButton = buttonContainer.querySelector('.append-column');
-
         addColButton.removeAttribute('disabled');
       }
       break;
