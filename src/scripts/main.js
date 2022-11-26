@@ -7,82 +7,90 @@ const maxColumn = 10;
 const minColumn = 2;
 
 buttonContainer.addEventListener('click', (e) => {
-  const target = e.target;
+  const { target } = e;
   const tbody = document.querySelector('.field tbody');
   const className = target.className.slice(0, -7);
 
   switch (className) {
     case 'append-row':
-      if (tbody.children.length < maxRow) {
-        const newRow = tbody.lastElementChild.cloneNode(true);
+      if (tbody.children.length >= maxRow) {
+        break;
+      }
 
-        tbody.append(newRow);
+      const newRow = tbody.lastElementChild.cloneNode(true);
 
-        if (tbody.children.length >= maxRow) {
-          target.setAttribute('disabled', true);
-        }
+      tbody.append(newRow);
 
-        if (tbody.children.length > minRow) {
-          const removeRowButton = buttonContainer.querySelector('.remove-row');
+      if (tbody.children.length >= maxRow) {
+        target.setAttribute('disabled', true);
+      }
 
-          removeRowButton.removeAttribute('disabled');
-        }
+      if (tbody.children.length > minRow) {
+        const removeRowButton = buttonContainer.querySelector('.remove-row');
+
+        removeRowButton.removeAttribute('disabled');
       }
       break;
 
     case 'remove-row':
-      if (tbody.children.length > minRow) {
-        tbody.lastElementChild.remove();
+      if (tbody.children.length <= minRow) {
+        break;
+      }
 
-        if (tbody.children.length <= minRow) {
-          target.setAttribute('disabled', true);
-        }
+      tbody.lastElementChild.remove();
 
-        if (tbody.children.length < maxRow) {
-          const addRowButton = buttonContainer.querySelector('.append-row');
+      if (tbody.children.length <= minRow) {
+        target.setAttribute('disabled', true);
+      }
 
-          addRowButton.removeAttribute('disabled');
-        }
+      if (tbody.children.length < maxRow) {
+        const addRowButton = buttonContainer.querySelector('.append-row');
+
+        addRowButton.removeAttribute('disabled');
       }
       break;
 
     case 'append-column':
-      if (tbody.firstElementChild.children.length < maxColumn) {
-        const allCollection = tbody.children;
+      if (tbody.firstElementChild.children.length >= maxColumn) {
+        break;
+      }
 
-        [...allCollection].forEach(tr => {
-          const newCeil = tr.lastElementChild.cloneNode(true);
+      const allCollection = tbody.children;
 
-          tr.append(newCeil);
-        });
+      [...allCollection].forEach(tr => {
+        const newCeil = tr.lastElementChild.cloneNode(true);
 
-        if (tbody.firstElementChild.children.length >= maxColumn) {
-          target.setAttribute('disabled', true);
-        }
+        tr.append(newCeil);
+      });
 
-        if (tbody.firstElementChild.children.length > minColumn) {
-          const removeColBut = buttonContainer.querySelector('.remove-column');
+      if (tbody.firstElementChild.children.length >= maxColumn) {
+        target.setAttribute('disabled', true);
+      }
 
-          removeColBut.removeAttribute('disabled');
-        }
+      if (tbody.firstElementChild.children.length > minColumn) {
+        const removeColBut = buttonContainer.querySelector('.remove-column');
+
+        removeColBut.removeAttribute('disabled');
       }
       break;
 
     case 'remove-column':
-      if (tbody.firstElementChild.children.length > minColumn) {
-        [...tbody.children].forEach(tr => {
-          tr.lastElementChild.remove();
-        });
+      if (tbody.firstElementChild.children.length <= minColumn) {
+        break;
+      }
 
-        if (tbody.firstElementChild.children.length <= minColumn) {
-          target.setAttribute('disabled', true);
-        }
+      [...tbody.children].forEach(tr => {
+        tr.lastElementChild.remove();
+      });
 
-        if (tbody.firstElementChild.children.length < maxColumn) {
-          const addColButton = buttonContainer.querySelector('.append-column');
+      if (tbody.firstElementChild.children.length <= minColumn) {
+        target.setAttribute('disabled', true);
+      }
 
-          addColButton.removeAttribute('disabled');
-        }
+      if (tbody.firstElementChild.children.length < maxColumn) {
+        const addColButton = buttonContainer.querySelector('.append-column');
+
+        addColButton.removeAttribute('disabled');
       }
       break;
 
