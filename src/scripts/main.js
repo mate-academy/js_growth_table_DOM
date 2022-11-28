@@ -37,6 +37,9 @@ function growthTable(nameClass) {
         row.cells[row.cells.length - 1].remove();
       });
       break;
+    default:
+      // eslint-disable-next-line no-throw-literal
+      throw 'Not a single case matched';
   }
 }
 
