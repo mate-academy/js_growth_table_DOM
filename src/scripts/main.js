@@ -53,8 +53,10 @@ appendColumn.addEventListener('click', function() {
   notDisable(removeColumn);
 
   for (let i = 0; i < tableRef.rows.length; i++) {
-    createCell(tableRef.rows[i].insertCell(tableRef.rows[i].cells.length),
-      i, 'col');
+    const cellCount = tableRef.rows[i].cells.length;
+    const rowCount = tableRef.rows[i].insertCell(cellCount);
+
+    createCell(rowCount, 'col');
   }
 
   if (tableRef.rows[0].cells.length > 9) {
