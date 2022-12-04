@@ -8,6 +8,8 @@ const tbody = document.querySelector('tbody');
 
 document.querySelector('.container').addEventListener('click', (e) => {
   const target = e.target;
+  const minNumbersBlocks = 2;
+  const maxNumbersBlocks = 10;
 
   if (target === btnAddRow) {
     addRow(tbody);
@@ -25,19 +27,19 @@ document.querySelector('.container').addEventListener('click', (e) => {
     delColumn(tbody);
   }
 
-  tbody.children.length >= 10
+  tbody.children.length >= maxNumbersBlocks
     ? btnAddRow.disabled = true
     : btnAddRow.disabled = false;
 
-  tbody.firstChild.children.length <= 2
+  tbody.firstChild.children.length <= minNumbersBlocks
     ? btnDelRow.disabled = true
     : btnDelRow.disabled = false;
 
-  tbody.firstChild.children.length >= 10
+  tbody.firstChild.children.length >= maxNumbersBlocks
     ? btnAddCol.disabled = true
     : btnAddCol.disabled = false;
 
-  tbody.children.length <= 2
+  tbody.children.length <= minNumbersBlocks
     ? btnDelCol.disabled = true
     : btnDelCol.disabled = false;
 });
