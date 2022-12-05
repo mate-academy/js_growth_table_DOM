@@ -11,20 +11,22 @@ document.querySelector('.container').addEventListener('click', (e) => {
   const minNumbersBlocks = 2;
   const maxNumbersBlocks = 10;
 
-  if (target === btnAddRow) {
-    addRow(tbody);
-  }
+  switch (target) {
+    case btnAddRow:
+      addRow(tbody);
+      break;
 
-  if (target === btnDelRow) {
-    delRow(tbody.children);
-  }
+    case btnDelRow:
+      delRow(tbody.children);
+      break;
 
-  if (target === btnAddCol) {
-    addColumn(tbody.children);
-  }
+    case btnAddCol:
+      addColumn(tbody.children);
+      break;
 
-  if (target === btnDelCol) {
-    delColumn(tbody);
+    case btnDelCol:
+      delColumn(tbody);
+      break;
   }
 
   tbody.children.length >= maxNumbersBlocks
