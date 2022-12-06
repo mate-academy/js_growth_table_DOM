@@ -29,21 +29,11 @@ document.querySelector('.container').addEventListener('click', (e) => {
       break;
   }
 
-  tbody.children.length >= maxNumbersBlocks
-    ? btnAddRow.disabled = true
-    : btnAddRow.disabled = false;
+  btnAddRow.disabled = tbody.children.length >= maxNumbersBlocks;
+  btnDelRow.disabled = tbody.firstChild.children.length <= minNumbersBlocks;
+  btnAddCol.disabled = tbody.firstChild.children.length >= maxNumbersBlocks;
+  btnDelCol.disabled = tbody.children.length <= minNumbersBlocks;
 
-  tbody.firstChild.children.length <= minNumbersBlocks
-    ? btnDelRow.disabled = true
-    : btnDelRow.disabled = false;
-
-  tbody.firstChild.children.length >= maxNumbersBlocks
-    ? btnAddCol.disabled = true
-    : btnAddCol.disabled = false;
-
-  tbody.children.length <= minNumbersBlocks
-    ? btnDelCol.disabled = true
-    : btnDelCol.disabled = false;
 });
 
 function addRow(item) {
