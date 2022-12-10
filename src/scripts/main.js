@@ -1,7 +1,7 @@
 'use strict';
 
 const tbody = document.querySelector('tbody');
-let allRows;
+let allRows = document.querySelectorAll('tr');
 
 const appendColumn = document.querySelector('.append-column');
 const removeColumn = document.querySelector('.remove-column');
@@ -12,19 +12,11 @@ const removeRow = document.querySelector('.remove-row');
 // add column
 
 appendColumn.addEventListener('click', e => {
-  allRows = document.querySelectorAll('tr');
-
   removeColumn.disabled = false;
-
-  if (allRows[0].children.length > 9) {
-    return;
-  }
 
   for (let i = 0; i < allRows.length; i++) {
     allRows[i].insertAdjacentHTML('beforeend', '<td></td>');
   }
-
-  allRows = document.querySelectorAll('tr');
 
   if (allRows[0].children.length === 10) {
     appendColumn.disabled = true;
@@ -34,13 +26,7 @@ appendColumn.addEventListener('click', e => {
 // remove column
 
 removeColumn.addEventListener('click', e => {
-  allRows = document.querySelectorAll('tr');
-
   appendColumn.disabled = false;
-
-  if (allRows[0].children.length < 3) {
-    return;
-  }
 
   for (let i = 0; i < allRows.length; i++) {
     allRows[i].lastElementChild.remove();
@@ -54,11 +40,7 @@ removeColumn.addEventListener('click', e => {
 // add row
 
 appendRow.addEventListener('click', e => {
-  allRows = document.querySelectorAll('tr');
-
-  if (allRows.length > 9) {
-    return;
-  }
+  removeRow.disabled = false;
 
   tbody.append(tbody.lastElementChild.cloneNode(true));
 
@@ -72,11 +54,7 @@ appendRow.addEventListener('click', e => {
 // remove row
 
 removeRow.addEventListener('click', e => {
-  allRows = document.querySelectorAll('tr');
-
-  if (allRows.length < 3) {
-    return;
-  }
+  appendRow.disabled = false;
 
   tbody.lastElementChild.remove();
 
