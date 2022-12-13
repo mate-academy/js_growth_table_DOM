@@ -6,7 +6,7 @@ const appendColumn = document.querySelector('.append-column');
 const removeColumn = document.querySelector('.remove-column');
 
 const rowsColection = document.getElementsByTagName('tr');
-const tableConteiner = document.querySelector('tableConteiner');
+const tableConteiner = document.querySelector('tbody');
 
 function addColumn() {
   for (const tr of rowsColection) {
