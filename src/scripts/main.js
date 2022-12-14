@@ -34,13 +34,7 @@ removeColumButton.addEventListener('click', e => {
   allCell.forEach((item) => {
     item.lastElementChild.remove();
 
-    if (item.children.length < maxCount) {
-      addColumButton.disabled = false;
-    }
-
-    if (item.children.length <= minCount) {
-      removeColumButton.disabled = true;
-    }
+    minMax(item);
   });
 });
 
@@ -52,12 +46,24 @@ addColumButton.addEventListener('click', e => {
 
     item.append(td);
 
-    if (item.children.length >= maxCount) {
-      addColumButton.disabled = true;
-    }
-
-    if (item.children.length > minCount) {
-      removeColumButton.disabled = false;
-    }
+    minMax(item);
   });
 });
+
+function minMax(item) {
+  if (item.children.length >= maxCount) {
+    addColumButton.disabled = true;
+  }
+
+  if (item.children.length > minCount) {
+    removeColumButton.disabled = false;
+  }
+
+  if (item.children.length < maxCount) {
+    addColumButton.disabled = false;
+  }
+
+  if (item.children.length <= minCount) {
+    removeColumButton.disabled = true;
+  }
+}
