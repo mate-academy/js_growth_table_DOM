@@ -13,34 +13,31 @@ document.addEventListener('click', e => {
   let cols = document.querySelector('.field tr').children.length;
   let rows = document.querySelectorAll('.field tr').length;
 
-  const type = button.className.split(' ').slice(0, -1).join();
+  const action = button.className.split(' ').slice(0, -1).join();
+  const typeAction = action.split('-')[0];
   const tbody = document.querySelector('.field tbody');
 
   const isDisabled = (rowAmount, colAmount, className) => {
     const direction = className.split('-').slice(1).join('');
-
     const amount = direction === 'row' ? rowAmount : colAmount;
+    const oppositeTypeAction = typeAction === 'append' ? 'remove' : 'append';
 
-    if (amount === minAmount || amount === maxAmount) {
+    if (amount === maxAmount || amount === minAmount) {
       button.disabled = true;
 
       return;
     }
 
-    if (amount === maxAmount) {
-      const btn = document.querySelector(`.append-${direction}`);
+    const btn = document.querySelector(`
+      .${oppositeTypeAction}-${direction}[disabled]
+    `);
 
-      btn.disabled = false;
-    }
-
-    if (amount === minAmount) {
-      const btn = document.querySelector(`.remove-${direction}`);
-
+    if (btn) {
       btn.disabled = false;
     }
   };
 
-  switch (type) {
+  switch (action) {
     case 'append-row':
       const tr = document.createElement('tr');
       const cells = [...Array(cols)].map(() => document.createElement('td'));
@@ -49,7 +46,7 @@ document.addEventListener('click', e => {
       tbody.append(tr);
       rows++;
 
-      isDisabled(rows, cols, type);
+      isDisabled(rows, cols, action);
 
       break;
 
@@ -62,7 +59,7 @@ document.addEventListener('click', e => {
 
       cols++;
 
-      isDisabled(rows, cols, type);
+      isDisabled(rows, cols, action);
 
       break;
 
@@ -70,7 +67,7 @@ document.addEventListener('click', e => {
       tbody.lastElementChild.remove();
       rows--;
 
-      isDisabled(rows, cols, type);
+      isDisabled(rows, cols, action);
 
       break;
 
@@ -78,6 +75,6 @@ document.addEventListener('click', e => {
       [...tbody.children].forEach(el => el.lastElementChild.remove());
       cols--;
 
-      isDisabled(rows, cols, type);
+      isDisabled(rows, cols, action);
   }
 });
