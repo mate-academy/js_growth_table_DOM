@@ -8,7 +8,7 @@ const addColBtn = document.querySelector('.append-column');
 const removeColBtn = document.querySelector('.remove-column');
 
 function addRow(table) {
-  table.firstElementChild.before(table.firstElementChild.cloneNode(true));
+  table.lastElementChild.after(table.lastElementChild.cloneNode(true));
 }
 
 function removeRow(table) {
@@ -18,12 +18,14 @@ function removeRow(table) {
 function addColumn(table) {
   Array.from(table.rows).forEach(row => row
     .lastElementChild
-    .after(row.lastElementChild.cloneNode(true)));
+    .after(row.lastElementChild.cloneNode(true))
+  );
 }
 
 function removeColumn(table) {
   Array.from(table.rows).forEach(row => row
-    .lastElementChild.remove());
+    .lastElementChild.remove()
+  );
 }
 
 function setAttrDisabled(el) {
@@ -36,52 +38,61 @@ function removeAttrDisabled(el) {
 
 field.addEventListener('click', (ev) => {
   const buttons = ev.target.closest('.button');
+  const lengthRows = tBody.rows.length;
+  const lengthCells = tBody.rows[0].cells.length;
 
   if (!buttons) {
     return;
   }
 
-  if (buttons.closest('.append-row')) {
-    if (tBody.rows.length < 10) {
-      addRow(tBody);
-      removeAttrDisabled(removeRowBtn);
-    }
+  const maxLengthRows = 9;
+  const minLengthRows = 3;
+  const maxLengthCol = 9;
+  const minLengthCol = 3;
 
-    if (tBody.rows.length === 10) {
-      setAttrDisabled(addRowBtn);
-    }
-  }
+  switch (buttons) {
+    case addRowBtn:
+      if (lengthRows <= maxLengthRows) {
+        addRow(tBody);
+        removeAttrDisabled(removeRowBtn);
+      }
 
-  if (buttons.closest('.remove-row')) {
-    if (tBody.rows.length <= 10) {
-      removeAttrDisabled(addRowBtn);
-      removeRow(tBody);
-    }
+      if (lengthRows === maxLengthRows) {
+        setAttrDisabled(addRowBtn);
+      }
+      break;
 
-    if (tBody.rows.length === 2) {
-      setAttrDisabled(removeRowBtn);
-    }
-  }
+    case removeRowBtn:
+      if (lengthRows >= minLengthRows) {
+        removeRow(tBody);
+        removeAttrDisabled(addRowBtn);
+      }
 
-  if (buttons.closest('.append-column')) {
-    if (tBody.rows[0].cells.length < 10) {
-      addColumn(tBody);
-      removeAttrDisabled(removeColBtn);
-    }
+      if (lengthRows <= minLengthRows) {
+        setAttrDisabled(removeRowBtn);
+      }
+      break;
 
-    if (tBody.rows[0].cells.length === 10) {
-      setAttrDisabled(addColBtn);
-    }
-  }
+    case addColBtn:
+      if (lengthCells <= maxLengthCol) {
+        addColumn(tBody);
+        removeAttrDisabled(removeColBtn);
+      }
 
-  if (buttons.closest('.remove-column')) {
-    if (tBody.rows[0].cells.length <= 10) {
-      removeAttrDisabled(addColBtn);
-      removeColumn(tBody);
-    }
+      if (lengthCells >= maxLengthCol) {
+        setAttrDisabled(addColBtn);
+      }
+      break;
 
-    if (tBody.rows[0].cells.length === 2) {
-      setAttrDisabled(removeColBtn);
-    }
+    case removeColBtn:
+      if (lengthCells >= minLengthCol) {
+        removeColumn(tBody);
+        removeAttrDisabled(addColBtn);
+      }
+
+      if (lengthCells <= minLengthCol) {
+        setAttrDisabled(removeColBtn);
+      }
+      break;
   }
 });
