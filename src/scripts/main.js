@@ -15,36 +15,32 @@ container.addEventListener('click', (action) => {
     case buttonCreateRow:
       buttonRemoveRow.disabled = false;
 
-      tableChild.children.length < 10
-        ? tableChild.append(tableChild.firstElementChild.cloneNode(true))
-        : buttonCreateRow.disabled = true;
+      buttonCreateRow.disabled = tableChild.children.length >= 9;
+      tableChild.append(tableChild.firstElementChild.cloneNode(true));
       break;
 
     case buttonRemoveRow:
       buttonCreateRow.disabled = false;
 
-      tableChild.children.length > 2
-        ? tableChild.lastElementChild.remove()
-        : buttonRemoveRow.disabled = true;
+      buttonRemoveRow.disabled = tableChild.children.length <= 3;
+      tableChild.lastElementChild.remove();
       break;
 
     case buttonCreateColumn:
       buttonRemoveColumn.disabled = false;
 
-      rowsCollection.forEach(function(row) {
-        row.children.length < 10
-          ? row.append(row.firstElementChild.cloneNode(true))
-          : buttonCreateColumn.disabled = true;
+      rowsCollection.forEach(row => {
+        buttonCreateColumn.disabled = row.children.length >= 9;
+        row.append(row.firstElementChild.cloneNode(true));
       });
       break;
 
     case buttonRemoveColumn:
       buttonCreateColumn.disabled = false;
 
-      rowsCollection.forEach(function(row) {
-        row.children.length > 2
-          ? row.lastElementChild.remove()
-          : buttonRemoveColumn.disabled = true;
+      rowsCollection.forEach(row => {
+        buttonRemoveColumn.disabled = row.children.length <= 3;
+        row.lastElementChild.remove();
       });
   }
 });
