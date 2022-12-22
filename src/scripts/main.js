@@ -26,8 +26,8 @@ addRow.addEventListener('click', () => {
 removeRow.addEventListener('click', () => {
   addRow.disabled = false;
 
-  if (bodyTable.children.length > 2) {
-    bodyTable.removeChild(bodyTable.lastChild);
+  if (bodyTable.children.length >= 2) {
+    bodyTable.removeChild(bodyTable.lastElementChild);
   }
 
   if (bodyTable.children.length === 2) {
