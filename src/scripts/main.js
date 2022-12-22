@@ -7,18 +7,21 @@ const removeColumn = document.querySelector('.remove-column');
 
 const bodyTable = document.querySelector('tbody');
 
+const min = 2;
+const max = 10;
+
 addRow.addEventListener('click', () => {
-  if (bodyTable.children.length <= 10) {
+  if (bodyTable.children.length <= max) {
     const clone = bodyTable.lastElementChild.cloneNode(true);
 
     bodyTable.appendChild(clone);
   }
 
-  if (bodyTable.children.length === 10) {
+  if (bodyTable.children.length === max) {
     addRow.disabled = true;
   }
 
-  if (bodyTable.children.length > 2) {
+  if (bodyTable.children.length > min) {
     removeRow.disabled = false;
   }
 });
@@ -26,11 +29,11 @@ addRow.addEventListener('click', () => {
 removeRow.addEventListener('click', () => {
   addRow.disabled = false;
 
-  if (bodyTable.children.length >= 2) {
+  if (bodyTable.children.length >= min) {
     bodyTable.removeChild(bodyTable.lastElementChild);
   }
 
-  if (bodyTable.children.length === 2) {
+  if (bodyTable.children.length === min) {
     removeRow.disabled = true;
   }
 });
@@ -41,11 +44,11 @@ addColumn.addEventListener('click', () => {
 
     removeColumn.disabled = false;
 
-    if (bodyTable.children[0].children.length === 10) {
+    if (bodyTable.children[0].children.length === max) {
       addColumn.disabled = true;
     }
 
-    if (bodyTable.children[0].children.length <= 10) {
+    if (bodyTable.children[0].children.length <= max) {
       bodyTable.children[i].appendChild(clone);
     }
   }
