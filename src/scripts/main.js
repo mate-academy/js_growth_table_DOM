@@ -3,8 +3,8 @@
 const table = document.querySelector('tbody');
 const addRowButton = document.querySelector('.append-row');
 const removeRowButton = document.querySelector('.remove-row');
-const addColumButton = document.querySelector('.append-column');
-const removeColumButton = document.querySelector('.remove-column');
+const addColumnButton = document.querySelector('.append-column');
+const removeColumnButton = document.querySelector('.remove-column');
 const maxCount = 10;
 const minCount = 2;
 
@@ -13,9 +13,7 @@ addRowButton.addEventListener('click', e => {
 
   table.prepend(table.lastElementChild.cloneNode(true));
 
-  if (table.children.length >= maxCount) {
-    addRowButton.disabled = true;
-  }
+  countForRowButton(table);
 });
 
 removeRowButton.addEventListener('click', e => {
@@ -23,22 +21,20 @@ removeRowButton.addEventListener('click', e => {
 
   table.lastElementChild.remove();
 
-  if (table.children.length <= minCount) {
-    removeRowButton.disabled = true;
-  }
+  countForRowButton(table);
 });
 
-removeColumButton.addEventListener('click', e => {
+removeColumnButton.addEventListener('click', e => {
   const allCell = document.querySelectorAll('tr');
 
   allCell.forEach((item) => {
     item.lastElementChild.remove();
 
-    minMax(item);
+    countForColumnButton(item);
   });
 });
 
-addColumButton.addEventListener('click', e => {
+addColumnButton.addEventListener('click', e => {
   const allCell = document.querySelectorAll('tr');
 
   allCell.forEach((item) => {
@@ -46,24 +42,34 @@ addColumButton.addEventListener('click', e => {
 
     item.append(td);
 
-    minMax(item);
+    countForColumnButton(item);
   });
 });
 
-function minMax(item) {
+function countForColumnButton(item) {
   if (item.children.length >= maxCount) {
-    addColumButton.disabled = true;
+    addColumnButton.disabled = true;
   }
 
   if (item.children.length > minCount) {
-    removeColumButton.disabled = false;
+    removeColumnButton.disabled = false;
   }
 
   if (item.children.length < maxCount) {
-    addColumButton.disabled = false;
+    addColumnButton.disabled = false;
   }
 
   if (item.children.length <= minCount) {
-    removeColumButton.disabled = true;
+    removeColumnButton.disabled = true;
+  }
+}
+
+function countForRowButton(item) {
+  if (item.children.length <= minCount) {
+    removeRowButton.disabled = true;
+  }
+
+  if (item.children.length >= maxCount) {
+    addRowButton.disabled = true;
   }
 }
