@@ -58,11 +58,11 @@ removeColumn.addEventListener('click', () => {
   for (let i = 0; i < bodyTable.children.length; i++) {
     addColumn.disabled = false;
 
-    if (bodyTable.children[0].children.length === 2) {
+    if (bodyTable.children[0].children.length === min) {
       removeColumn.disabled = true;
     }
 
-    if (bodyTable.children[0].children.length >= 2) {
+    if (bodyTable.children[0].children.length >= min) {
       bodyTable.children[i].removeChild(bodyTable.children[i].lastElementChild);
     }
   }
