@@ -6,6 +6,33 @@ const container = document.querySelector('.container');
 let rowsAmnt = table.rows.length;
 let colAmnt = table.rows[0].cells.length;
 
+function colTransf(cl) {
+  for (const el of table.rows) {
+    cl === 'append-column'
+      ? el.append(document.createElement('td'))
+      : el.cells[colAmnt - 1].remove();
+  };
+};
+
+function disabler(arr, min, max) {
+  for (const button of arr) {
+    switch (button.classList[0]) {
+      case 'append-row':
+        button.disabled = rowsAmnt >= max;
+        break;
+      case 'remove-row':
+        button.disabled = rowsAmnt <= min;
+        break;
+      case 'append-column':
+        button.disabled = colAmnt >= max;
+        break;
+      default:
+        button.disabled = colAmnt <= min;
+        break;
+    };
+  };
+};
+
 container.addEventListener('click', e => {
   const target = e.target;
 
@@ -22,28 +49,14 @@ container.addEventListener('click', e => {
   };
 
   if (target.classList.contains('append-column')) {
-    for (const el of table.rows) {
-      el.append(document.createElement('td'));
-    };
+    colTransf('append-column');
     colAmnt++;
   };
 
   if (target.classList.contains('remove-column')) {
-    for (const el of table.rows) {
-      el.cells[colAmnt - 1].remove();
-    };
+    colTransf('remove-column');
     colAmnt--;
   };
 
-  [...buttons].find(button => button.classList.contains('append-row'))
-    .disabled = rowsAmnt >= 10;
-
-  [...buttons].find(button => button.classList.contains('remove-row'))
-    .disabled = rowsAmnt <= 2;
-
-  [...buttons].find(button => button.classList.contains('append-column'))
-    .disabled = colAmnt >= 10;
-
-  [...buttons].find(button => button.classList.contains('remove-column'))
-    .disabled = colAmnt <= 2;
+  disabler([...buttons], 2, 10);
 });
