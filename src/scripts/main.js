@@ -41,14 +41,15 @@ removeRow.addEventListener('click', () => {
 addColumn.addEventListener('click', () => {
   for (let i = 0; i < bodyTable.children.length; i++) {
     const clone = bodyTable.children[i].lastElementChild.cloneNode();
+    const size = bodyTable.children[0].children.length;
 
     removeColumn.disabled = false;
 
-    if (bodyTable.children[0].children.length === max) {
+    if (size === max) {
       addColumn.disabled = true;
     }
 
-    if (bodyTable.children[0].children.length <= max) {
+    if (size <= max) {
       bodyTable.children[i].appendChild(clone);
     }
   }
@@ -58,11 +59,13 @@ removeColumn.addEventListener('click', () => {
   for (let i = 0; i < bodyTable.children.length; i++) {
     addColumn.disabled = false;
 
-    if (bodyTable.children[0].children.length === min) {
+    const size = bodyTable.children[0].children.length;
+
+    if (size === min) {
       removeColumn.disabled = true;
     }
 
-    if (bodyTable.children[0].children.length >= min) {
+    if (size >= min) {
       bodyTable.children[i].removeChild(bodyTable.children[i].lastElementChild);
     }
   }
