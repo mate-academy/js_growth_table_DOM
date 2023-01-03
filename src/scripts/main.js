@@ -7,6 +7,8 @@ const removeRow = document.querySelector('.remove-row');
 const table = document.querySelector('table');
 let colNumber = 4;
 let rowNumber = 4;
+const maxCellsNum = 10;
+const minCellsNum = 2;
 
 function createTable(row, col) {
   table.innerHTML = '';
@@ -26,11 +28,11 @@ function createTable(row, col) {
 const funcAddCol = () => {
   colNumber++;
 
-  if (colNumber >= 10) {
+  if (colNumber >= maxCellsNum) {
     appendCol.disabled = true;
   };
 
-  if (colNumber >= 2) {
+  if (colNumber >= minCellsNum) {
     removeCol.disabled = false;
   }
   createTable(rowNumber, colNumber);
@@ -39,11 +41,11 @@ const funcAddCol = () => {
 const funcRemCol = () => {
   colNumber--;
 
-  if (colNumber <= 10) {
+  if (colNumber <= maxCellsNum) {
     appendCol.disabled = false;
   };
 
-  if (colNumber <= 2) {
+  if (colNumber <= minCellsNum) {
     removeCol.disabled = true;
   }
   createTable(rowNumber, colNumber);
@@ -52,11 +54,11 @@ const funcRemCol = () => {
 const funcAddRow = () => {
   rowNumber++;
 
-  if (rowNumber >= 10) {
+  if (rowNumber >= maxCellsNum) {
     appendRow.disabled = true;
   };
 
-  if (rowNumber >= 2) {
+  if (rowNumber >= minCellsNum) {
     removeRow.disabled = false;
   }
   createTable(rowNumber, colNumber);
@@ -65,11 +67,11 @@ const funcAddRow = () => {
 const funcRemRow = () => {
   rowNumber--;
 
-  if (rowNumber <= 10) {
+  if (rowNumber <= maxCellsNum) {
     appendRow.disabled = false;
   };
 
-  if (rowNumber <= 2) {
+  if (rowNumber <= minCellsNum) {
     removeRow.disabled = true;
   }
   createTable(rowNumber, colNumber);
