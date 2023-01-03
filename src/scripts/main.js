@@ -9,21 +9,21 @@ const bodyTable = document.querySelector('tbody');
 
 const min = 2;
 const max = 10;
-const size = bodyTable.children.length;
-let sizeColumn = bodyTable.children[0].children.length;
 
 addRow.addEventListener('click', () => {
-  if (size <= max) {
+  if (bodyTable.children.length <= max) {
     const clone = bodyTable.lastElementChild.cloneNode(true);
 
     bodyTable.appendChild(clone);
   }
 
-  if (size === max) {
+  const sizeRow = bodyTable.children.length;
+
+  if (sizeRow === max) {
     addRow.disabled = true;
   }
 
-  if (size > min) {
+  if (sizeRow > min) {
     removeRow.disabled = false;
   }
 });
@@ -31,28 +31,29 @@ addRow.addEventListener('click', () => {
 removeRow.addEventListener('click', () => {
   addRow.disabled = false;
 
-  if (bodyTable.children.length >= min) {
-    bodyTable.removeChild(bodyTable.lastElementChild);
+  const sizeRow = bodyTable.children.length;
+
+  if (sizeRow - 1 === min) {
+    removeRow.disabled = true;
   }
 
-  if (bodyTable.children.length === min) {
-    removeRow.disabled = true;
+  if (sizeRow > min) {
+    bodyTable.removeChild(bodyTable.lastElementChild);
   }
 });
 
 addColumn.addEventListener('click', () => {
   for (let i = 0; i < bodyTable.children.length; i++) {
     const clone = bodyTable.children[i].lastElementChild.cloneNode();
-
-    sizeColumn = bodyTable.children[0].children.length;
+    const size = bodyTable.children[0].children.length;
 
     removeColumn.disabled = false;
 
-    if (sizeColumn === max) {
+    if (size === max) {
       addColumn.disabled = true;
     }
 
-    if (sizeColumn <= max) {
+    if (size <= max) {
       bodyTable.children[i].appendChild(clone);
     }
   }
@@ -61,13 +62,14 @@ addColumn.addEventListener('click', () => {
 removeColumn.addEventListener('click', () => {
   for (let i = 0; i < bodyTable.children.length; i++) {
     addColumn.disabled = false;
-    sizeColumn = bodyTable.children[0].children.length;
 
-    if (sizeColumn === min) {
+    const size = bodyTable.children[0].children.length;
+
+    if (size === min) {
       removeColumn.disabled = true;
     }
 
-    if (sizeColumn >= min) {
+    if (size >= min) {
       bodyTable.children[i].removeChild(bodyTable.children[i].lastElementChild);
     }
   }
