@@ -11,20 +11,22 @@ const maxCount = 10;
 
 appendRow.addEventListener('click', e => {
   remoweRow.disabled = false;
-
   tbody.append(tbody.lastElementChild.cloneNode(true));
 
-  if (tbody.children.length === maxCount) {
+  const rowsAmount = tbody.children.length;
+
+  if (rowsAmount === maxCount) {
     appendRow.disabled = true;
   }
 });
 
 remoweRow.addEventListener('click', e => {
   appendRow.disabled = false;
-
   tbody.lastElementChild.remove();
 
-  if (tbody.children.length === minCount) {
+  const rowsAmount = tbody.children.length;
+
+  if (rowsAmount === minCount) {
     remoweRow.disabled = true;
   }
 });
@@ -32,13 +34,17 @@ remoweRow.addEventListener('click', e => {
 appendColumn.addEventListener('click', e => {
   removeColumn.disabled = false;
 
-  for (let i = 0; i < tbody.children.length; i++) {
+  const rowsAmount = tbody.children.length;
+
+  for (let i = 0; i < rowsAmount; i++) {
     const td = document.createElement('td');
 
     tbody.children[i].append(td);
   }
 
-  if (tbody.firstChild.children.length === maxCount) {
+  const columnsAmount = tbody.firstChild.children.length;
+
+  if (columnsAmount === maxCount) {
     appendColumn.disabled = true;
   }
 });
@@ -46,13 +52,17 @@ appendColumn.addEventListener('click', e => {
 removeColumn.addEventListener('click', e => {
   appendColumn.disabled = false;
 
-  for (let i = 0; i < tbody.children.length; i++) {
+  const rowsAmount = tbody.children.length;
+
+  for (let i = 0; i < rowsAmount; i++) {
     const lastCell = tbody.children[i].lastElementChild;
 
     lastCell.remove();
   }
 
-  if (tbody.firstChild.children.length === minCount) {
+  const columnsAmount = tbody.firstChild.children.length;
+
+  if (columnsAmount === minCount) {
     removeColumn.disabled = true;
   }
 });
