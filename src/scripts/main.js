@@ -11,13 +11,13 @@ const min = 2;
 const max = 10;
 
 addRow.addEventListener('click', () => {
-  if (bodyTable.children.length <= max) {
+  const sizeRow = bodyTable.children.length;
+
+  if (sizeRow <= max) {
     const clone = bodyTable.lastElementChild.cloneNode(true);
 
     bodyTable.appendChild(clone);
   }
-
-  const sizeRow = bodyTable.children.length;
 
   if (sizeRow === max) {
     addRow.disabled = true;
