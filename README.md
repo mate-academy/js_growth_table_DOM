@@ -1,5 +1,5 @@
 1. Replace `<your_account>` with your Github username in the link
-    - [DEMO LINK](https://<your_account>.github.io/js_growth_table_DOM/)
+    - [DEMO LINK](https://Vasyliy22.github.io/js_growth_table_DOM/)
 2. Follow [this instructions](https://mate-academy.github.io/layout_task-guideline/)
     - Run `npm run test` command to test your code;
     - Run `npm run test:only -- -n` to run fast test ignoring linter;
@@ -18,7 +18,7 @@ Some rules:
 - Click on the button with class `append-row` should append a new row to the table.
 - Click on the button with class `remove-row` should remove the last row from the table.
 - Click on the button with class `append-column` should append a new column to the table.
-- Click on the button with class `remove-column` should remove the last column from the table.
+- Click on the button with class `remove-column` should remove the last column from the table. 
 - The max count of rows or columns is 10.
 - The min count of rows or columns is 2.
 - If the count of columns or rows reaches maximum or minimum, set disabled the corresponding button.
