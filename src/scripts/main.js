@@ -6,66 +6,85 @@ const removeRow = document.querySelector('.remove-row');
 const addColumn = document.querySelector('.append-column');
 const removeColumn = document.querySelector('.remove-column');
 const tableCell = document.createElement('td');
-const tableRow = document.body.getElementsByTagName('tr');
+const tableRows = document.body.getElementsByTagName('tr');
 const maxOfElements = 10;
 const minOfElements = 2;
 let countRows = table.rows.length;
 let countColumns = table.rows[0].cells.length;
 
-addRow.addEventListener('click', () => {
-  countRows++;
-  checkerOnEnable(countRows, addRow, removeRow);
-  addElement('row');
-});
+const createEventBtn = function add(button, removeItem, item) {
+  button.addEventListener('click', () => {
+    switch (button) {
+      case addRow:
+        countRows++;
+        checkerOnEnable(countRows, button, removeItem);
+        addElement(item);
+        break;
 
-addColumn.addEventListener('click', () => {
-  countColumns++;
-  checkerOnEnable(countColumns, addColumn, removeColumn);
-  addElement('column');
-});
+      case addColumn:
+        countColumns++;
+        checkerOnEnable(countColumns, button, removeItem);
+        addElement(item);
+        break;
 
-removeRow.addEventListener('click', () => {
-  countRows--;
-  checkerOnEnable(countRows, addRow, removeRow);
-  removeElement('row');
-});
+      case removeRow:
+        countRows--;
+        checkerOnEnable(countRows, removeItem, button);
+        removeElement(item);
+        break;
 
-removeColumn.addEventListener('click', () => {
-  countColumns--;
-  checkerOnEnable(countColumns, addColumn, removeColumn);
-  removeElement('column');
-});
+      case removeColumn:
+        countColumns--;
+        checkerOnEnable(countColumns, removeItem, button);
+        removeElement(item);
+        break;
+    }
+  });
+};
+
+createEventBtn(addRow, removeRow, 'row');
+createEventBtn(addColumn, removeColumn, 'column');
+createEventBtn(removeRow, addRow, 'row');
+createEventBtn(removeColumn, addColumn, 'column');
 
 function addElement(element) {
-  if (element === 'row') {
-    const row = table.rows[0];
+  switch (element) {
+    case 'row':
+      const row = table.rows[0];
+      const bodyTable = table.tBodies[0];
 
-    table.append(row.cloneNode(true));
-  }
+      bodyTable.append(row.cloneNode(true));
+      break;
+    case 'column':
+      const tableRowArr = [...tableRows];
 
-  if (element === 'column') {
-    const tableRowArr = [...tableRow];
-
-    tableRowArr.forEach(item => item.append(tableCell.cloneNode(true)));
+      tableRowArr.forEach(item => item.append(tableCell.cloneNode()));
+      break;
   }
 }
 
 function removeElement(element) {
-  if (element === 'row') {
-    const row = table.rows[table.rows.length - 1];
+  switch (element) {
+    case 'row':
+      const lastIndex = table.rows.length - 1;
+      const row = table.rows[lastIndex];
 
-    row.remove();
-  }
+      row.remove();
+      break;
 
-  if (element === 'column') {
-    const tableRowArr = [...tableRow];
+    case 'column':
+      const tableRowArr = [...tableRows];
 
-    tableRowArr.forEach(item => item.lastElementChild.remove());
+      tableRowArr.forEach(item => item.lastElementChild.remove());
+      break;
   }
 }
 
 function checkerOnEnable(countOfItems, addItem, removeItem) {
-  if (countOfItems < maxOfElements && countOfItems > minOfElements) {
+  const countBigger = countOfItems < maxOfElements;
+  const countLess = countOfItems > minOfElements;
+
+  if (countBigger && countLess) {
     addItem.disabled = false;
     removeItem.disabled = false;
   } else if (countOfItems === minOfElements) {
