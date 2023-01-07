@@ -7,40 +7,49 @@ const removeColumnBtn = document.querySelector('.remove-column');
 const field = document.querySelector('tbody');
 
 addRowBtn.addEventListener('click', () => {
-  if (field.rows.length === 10) {
-    return;
-  }
-
   const clone = field.rows[0].cloneNode(true);
 
   field.append(clone);
+
+  if (field.rows.length === 10) {
+    addRowBtn.setAttribute('disabled', 'true');
+  }
+
+  removeRowBtn.removeAttribute('disabled');
 });
 
 removeRowBtn.addEventListener('click', () => {
+  field.lastElementChild.remove();
+
   if (field.rows.length === 2) {
-    return;
+    removeRowBtn.setAttribute('disabled', 'true');
   }
-  field.lastChild.remove();
+
+  addRowBtn.removeAttribute('disabled');
 });
 
 addColumnBtn.addEventListener('click', () => {
-  if (field.firstChild.cells.length === 10) {
-    return;
-  }
-
   [...field.children].map((row) => {
     const newSquare = document.createElement('td');
 
     row.prepend(newSquare);
   });
+
+  if (field.rows[0].cells.length === 10) {
+    addColumnBtn.setAttribute('disabled', 'true');
+  }
+
+  removeColumnBtn.removeAttribute('disabled');
 });
 
 removeColumnBtn.addEventListener('click', () => {
-  if (field.firstChild.cells.length === 2) {
-    return;
+  [...field.children].map((row) => {
+    row.firstElementChild.remove();
+  });
+
+  if (field.rows[0].cells.length === 2) {
+    removeColumnBtn.setAttribute('disabled', 'true');
   }
 
-  [...field.children].map((row) => {
-    row.firstChild.remove();
-  });
+  addColumnBtn.removeAttribute('disabled');
 });
