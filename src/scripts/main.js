@@ -8,7 +8,7 @@ const [appendRow, removeRow, appendColumn, removeColumn]
   = document.querySelectorAll('.button');
 
 appendColumn.addEventListener('click', () => {
-  if (field.rows[0].cells.length >= MAX + 1) {
+  if (field.rows[0].cells.length >= MAX - 1) {
     appendColumn.disabled = true;
   }
 
@@ -30,13 +30,13 @@ removeColumn.addEventListener('click', () => {
     row.cells[0].remove();
   }
 
-  if (field.rows[0].cells.length <= MAX + 1) {
+  if (field.rows[0].cells.length <= MAX - 1) {
     appendColumn.disabled = false;
   }
 });
 
 appendRow.addEventListener('click', () => {
-  if (field.rows.length >= MAX + 1) {
+  if (field.rows.length >= MAX - 1) {
     appendRow.disabled = true;
   }
 
@@ -54,7 +54,7 @@ removeRow.addEventListener('click', () => {
 
   field.rows[0].remove();
 
-  if (field.rows.length <= MAX + 1) {
+  if (field.rows.length <= MAX - 1) {
     appendRow.disabled = false;
   }
 });
