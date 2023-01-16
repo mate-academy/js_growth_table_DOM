@@ -13,7 +13,7 @@ addRowButton.addEventListener('click', (e) => {
   removeRowButton.disabled = false;
   table.append(rows[0].cloneNode(true));
 
-  if (rows.length > 8) {
+  if (rows.length > 9) {
     e.target.disabled = true;
   }
 });
@@ -34,7 +34,7 @@ addColumnButton.addEventListener('click', (e) => {
     row.append(row.lastElementChild.cloneNode(false));
   }
 
-  if (rows[0].childElementCount > 8) {
+  if (rows[0].childElementCount > 9) {
     e.target.disabled = true;
   }
 });
