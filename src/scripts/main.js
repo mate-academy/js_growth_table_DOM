@@ -4,7 +4,8 @@ const appendRow = document.querySelector('.append-row');
 const removeRow = document.querySelector('.remove-row');
 const appendColumn = document.querySelector('.append-column');
 const removeColumn = document.querySelector('.remove-column');
-const table = document.querySelector('.field');
+const table = document.querySelector('.field tbody');
+// const tableBody = document.querySelector('.field tbody');
 const maxTableSize = 10;
 const minTableSize = 2;
 
