@@ -10,24 +10,36 @@ let rowsCount = table.rows.length;
 let colsCount = table.rows[0].cells.length;
 
 const disableRowsBtn = (value) => {
-  if (value === 2) {
-    removeRowBtn.setAttribute('disabled', true);
-  } else if (value === 10) {
-    appendRowBtn.setAttribute('disabled', true);
-  } else {
-    removeRowBtn.removeAttribute('disabled');
-    appendRowBtn.removeAttribute('disabled');
+  switch (value) {
+    case 2:
+      removeRowBtn.setAttribute('disabled', true);
+
+      break;
+    case 10:
+      appendRowBtn.setAttribute('disabled', true);
+
+      break;
+    default:
+      removeRowBtn.removeAttribute('disabled');
+      appendRowBtn.removeAttribute('disabled');
   }
 };
 
 const disableColsBtn = (value) => {
-  if (value === 2) {
-    removeColBtn.setAttribute('disabled', true);
-  } else if (value === 10) {
-    appendColBtn.setAttribute('disabled', true);
-  } else {
-    removeColBtn.removeAttribute('disabled');
-    appendColBtn.removeAttribute('disabled');
+  switch (value) {
+    case 2:
+      removeColBtn.setAttribute('disabled', true);
+
+      break;
+
+    case 10:
+      appendColBtn.setAttribute('disabled', true);
+
+      break;
+
+    default:
+      removeColBtn.removeAttribute('disabled');
+      appendColBtn.removeAttribute('disabled');
   }
 };
 
