@@ -8,6 +8,7 @@ container.addEventListener('click', e => {
   const item = e.target;
   const min = 2;
   const max = 10;
+  const step = 1;
 
   const rows = document.querySelectorAll('tr');
   const row = rows[rows.length - 1];
@@ -18,37 +19,43 @@ container.addEventListener('click', e => {
     case addRow:
       removeRow.removeAttribute('disabled');
 
-      rows.length === max
-        ? addRow.setAttribute('disabled', true)
-        : row.after(row.cloneNode(true));
+      if (rows.length + step >= max) {
+        addRow.setAttribute('disabled', true);
+      }
+
+      row.after(row.cloneNode(true));
       break;
 
     case removeRow:
       addRow.removeAttribute('disabled');
 
-      rows.length === min
-        ? removeRow.setAttribute('disabled', true)
-        : row.remove();
+      if (rows.length - step <= min) {
+        removeRow.setAttribute('disabled', true);
+      }
+      row.remove();
       break;
 
     case addCell:
       removeCell.removeAttribute('disabled');
 
-      cells.length === max
-        ? addCell.setAttribute('disabled', true)
-        : rows.forEach(person => {
-          const cell = document.createElement('td');
+      if (cells.length + step === max) {
+        addCell.setAttribute('disabled', true);
+      };
 
-          person.append(cell);
-        });
+      rows.forEach(person => {
+        const cell = document.createElement('td');
+
+        person.append(cell);
+      });
       break;
 
     case removeCell:
       addCell.removeAttribute('disabled');
 
-      cells.length === 2
-        ? removeCell.setAttribute('disabled', true)
-        : rows.forEach(person => person.lastElementChild.remove());
+      if (cells.length - step === min) {
+        removeCell.setAttribute('disabled', true);
+      }
+      rows.forEach(person => person.lastElementChild.remove());
       break;
 
     default:
