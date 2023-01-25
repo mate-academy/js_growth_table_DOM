@@ -1,6 +1,6 @@
 'use strict';
 
-const table = document.querySelector('tbody');
+const tableGrow = document.querySelector('tbody');
 const addRow = document.querySelector('.append-row');
 const removeRow = document.querySelector('.remove-row');
 const addColumn = document.querySelector('.append-column');
@@ -13,31 +13,32 @@ document.addEventListener('click', (e) => {
 
   switch (e.target) {
     case addRow:
-      const newRow = table.children[0].cloneNode(true);
+      const newRow = tableGrow.lastElementChild.cloneNode(true);
 
-      table.append(newRow);
+      tableGrow.append(newRow);
       break;
 
     case removeRow:
-      table.children[0].remove();
+      tableGrow.lastElementChild.remove();
       break;
 
     case addColumn:
-      [...table.children].forEach(el => {
-        const td = document.createElement('td');
+      [...tableGrow.children].forEach(el => {
+        const tab = document.createElement('td');
 
-        el.append(td);
+        el.append(tab);
       });
       break;
 
     case removeColumn:
-      [...table.children].forEach(el => {
-        el.children[0].remove();
+      [...tableGrow.children].forEach(el => {
+        el.lastElementChild.remove();
       });
       break;
   }
-  addRow.disabled = table.children.length === 10;
-  removeRow.disabled = table.children.length === 2;
-  addColumn.disabled = table.children[0].children.length === 10;
-  removeColumn.disabled = table.children[0].children.length === 2;
+
+  addRow.disabled = tableGrow.children.length === 10;
+  removeRow.disabled = tableGrow.children.length === 2;
+  addColumn.disabled = tableGrow.children[0].children.length === 10;
+  removeColumn.disabled = tableGrow.children[0].children.length === 2;
 });
