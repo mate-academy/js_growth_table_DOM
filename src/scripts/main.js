@@ -48,30 +48,22 @@ container.addEventListener('click', (e) => {
   };
 
   const newRowsLenght = rows.children.length;
-
-  appendColumn.style.display = '';
-  removeColumn.style.display = '';
-
-  switch (newRowsLenght) {
-    case 10:
-      appendColumn.style.display = 'none';
-      break;
-    case 2:
-      removeColumn.style.display = 'none';
-      break;
-  }
-
   const newColumnLenght = tbody.children.length;
+  const disabled = 'disabled';
 
-  appendRow.style.display = '';
-  removeRow.style.display = '';
+  appendColumn.removeAttribute(disabled);
+  removeColumn.removeAttribute(disabled);
+  appendRow.removeAttribute(disabled);
+  removeRow.removeAttribute(disabled);
 
-  switch (newColumnLenght) {
-    case 10:
-      appendRow.style.display = 'none';
-      break;
-    case 2:
-      removeRow.style.display = 'none';
-      break;
+  function addRow(a) {
+    if (newRowsLenght === 10 || newRowsLenght === 2) {
+      a.setAttribute(disabled, disabled);
+    }
+
+    if (newColumnLenght === 10 || newColumnLenght === 2) {
+      a.setAttribute(disabled, disabled);
+    }
   }
+  addRow(e.target);
 });
