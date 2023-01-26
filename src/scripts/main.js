@@ -56,14 +56,23 @@ container.addEventListener('click', (e) => {
   appendRow.removeAttribute(disabled);
   removeRow.removeAttribute(disabled);
 
-  function addRow(a) {
-    if (newRowsLenght === 10 || newRowsLenght === 2) {
-      a.setAttribute(disabled, disabled);
+  function disabledAttribute() {
+    if (newRowsLenght === 10) {
+      appendColumn.setAttribute(disabled, disabled);
     }
 
-    if (newColumnLenght === 10 || newColumnLenght === 2) {
-      a.setAttribute(disabled, disabled);
+    if (newRowsLenght === 2) {
+      removeColumn.setAttribute(disabled, disabled);
+    }
+
+    if (newColumnLenght === 10) {
+      appendRow.setAttribute(disabled, disabled);
+    }
+    
+    if (newColumnLenght === 2) {
+      removeRow.setAttribute(disabled, disabled);
     }
   }
-  addRow(e.target);
+
+  disabledAttribute();
 });
