@@ -6,21 +6,23 @@ const appendRowButton = document.querySelector('.append-row');
 const removeRowButton = document.querySelector('.remove-row');
 const appendColumnButton = document.querySelector('.append-column');
 const removeColumnButton = document.querySelector('.remove-column');
+const minCells = 2;
+const maxCells = 10;
 
 let rowNumber = growthTable.rows.length;
 let columnNumber = growthTable.rows[0].cells.length;
 
-appendRowButton.addEventListener('click', (e) => {
+appendRowButton.addEventListener('click', () => {
   const newRow = growthTable.rows[0].cloneNode(true);
 
   document.querySelector('tbody').appendChild(newRow);
   rowNumber++;
 
-  if (rowNumber === 10) {
+  if (rowNumber === maxCells) {
     appendRowButton.disabled = true;
   }
 
-  if (removeRowButton.disabled) {
+  if (rowNumber > minCells) {
     removeRowButton.disabled = false;
   }
 });
@@ -29,11 +31,11 @@ removeRowButton.addEventListener('click', (e) => {
   document.querySelector('tbody').removeChild(growthTable.rows[rowNumber - 1]);
   rowNumber--;
 
-  if (rowNumber === 2) {
+  if (rowNumber === minCells) {
     removeRowButton.disabled = true;
   }
 
-  if (appendRowButton.disabled) {
+  if (rowNumber < maxCells) {
     appendRowButton.disabled = false;
   }
 });
@@ -46,11 +48,11 @@ appendColumnButton.addEventListener('click', (e) => {
   });
   columnNumber++;
 
-  if (columnNumber === 10) {
+  if (columnNumber === maxCells) {
     appendColumnButton.disabled = true;
   }
 
-  if (removeColumnButton.disabled) {
+  if (columnNumber > minCells) {
     removeColumnButton.disabled = false;
   }
 });
@@ -61,11 +63,11 @@ removeColumnButton.addEventListener('click', (e) => {
   });
   columnNumber--;
 
-  if (columnNumber === 2) {
+  if (columnNumber === minCells) {
     removeColumnButton.disabled = true;
   }
 
-  if (appendColumnButton.disabled) {
+  if (columnNumber < maxCells) {
     appendColumnButton.disabled = false;
   }
 });
