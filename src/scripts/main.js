@@ -13,10 +13,12 @@ let rowNumber = growthTable.rows.length;
 let columnNumber = growthTable.rows[0].cells.length;
 
 appendRowButton.addEventListener('click', () => {
-  const newRow = growthTable.rows[0].cloneNode(true);
+  if (rowNumber !== maxCells) {
+    const newRow = growthTable.rows[0].cloneNode(true);
 
-  document.querySelector('tbody').appendChild(newRow);
-  rowNumber++;
+    document.querySelector('tbody').appendChild(newRow);
+    rowNumber++;
+  }
 
   if (rowNumber === maxCells) {
     appendRowButton.disabled = true;
@@ -28,8 +30,12 @@ appendRowButton.addEventListener('click', () => {
 });
 
 removeRowButton.addEventListener('click', (e) => {
-  document.querySelector('tbody').removeChild(growthTable.rows[rowNumber - 1]);
-  rowNumber--;
+  if (rowNumber !== minCells) {
+    document
+      .querySelector('tbody')
+      .removeChild(growthTable.rows[rowNumber - 1]);
+    rowNumber--;
+  }
 
   if (rowNumber === minCells) {
     removeRowButton.disabled = true;
@@ -41,12 +47,14 @@ removeRowButton.addEventListener('click', (e) => {
 });
 
 appendColumnButton.addEventListener('click', (e) => {
-  [...growthTable.rows].forEach((row) => {
-    const newCell = document.createElement('td');
+  if (columnNumber !== maxCells) {
+    [...growthTable.rows].forEach((row) => {
+      const newCell = document.createElement('td');
 
-    row.appendChild(newCell);
-  });
-  columnNumber++;
+      row.appendChild(newCell);
+    });
+    columnNumber++;
+  }
 
   if (columnNumber === maxCells) {
     appendColumnButton.disabled = true;
@@ -58,10 +66,12 @@ appendColumnButton.addEventListener('click', (e) => {
 });
 
 removeColumnButton.addEventListener('click', (e) => {
-  [...growthTable.rows].forEach((row) => {
-    row.deleteCell(columnNumber - 1);
-  });
-  columnNumber--;
+  if (columnNumber !== minCells) {
+    [...growthTable.rows].forEach((row) => {
+      row.deleteCell(columnNumber - 1);
+    });
+    columnNumber--;
+  }
 
   if (columnNumber === minCells) {
     removeColumnButton.disabled = true;
