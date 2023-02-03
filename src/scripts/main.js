@@ -1,55 +1,40 @@
 'use strict';
 
-const table = document.querySelector('tbody');
-const appendRow = document.querySelector('.append-row');
-const removeRow = document.querySelector('.remove-row');
-const appendColumn = document.querySelector('.append-column');
-const removeColumn = document.querySelector('.remove-column');
+const container = document.querySelector('.container');
+const table = container.querySelector('.field');
+const tBody = table.querySelector('tbody');
+const appendRow = container.querySelector('.append-row');
+const removeRow = container.querySelector('.remove-row');
+const appendColumn = container.querySelector('.append-column');
+const removeColumn = container.querySelector('.remove-column');
+const max = 10;
+const min = 2;
 
-appendRow.addEventListener('click', e => {
-  if (e.target.closest('append-row')) {
+container.addEventListener('click', e => {
+  if (!e.target.matches('button')) {
     return;
   }
 
-  const newRow = table.insertRow(table.rows.length);
+  if (e.target === appendRow) {
+    const newRow = tBody.lastElementChild.cloneNode(true);
 
-  for (let i = 0; i < table.rows[0].cells.length; i++) {
-    newRow.insertCell(i);
+    tBody.append(newRow);
   }
 
-  appendRow.disabled = table.rows.length === 10;
-  removeRow.disabled = false;
-});
-
-removeRow.addEventListener('click', e => {
-  if (e.target.closest('remove-row')) {
-    return;
+  if (e.target === removeRow) {
+    tBody.lastElementChild.remove();
   }
 
-  table.deleteRow(table.rows.length - 1);
-
-  removeRow.disabled = table.rows.length === 2;
-  appendRow.disabled = false;
-});
-
-appendColumn.addEventListener('click', e => {
-  if (e.target.closest('append-column')) {
-    return;
+  if (e.target === appendColumn) {
+    Array.from(tBody.rows).forEach(row => row.insertCell(row.cells.length));
   }
 
-  Array.from(table.rows).forEach(row => row.insertCell(row.cells.length));
-
-  appendColumn.disabled = table.rows[0].cells.length === 10;
-  removeColumn.disabled = false;
-});
-
-removeColumn.addEventListener('click', e => {
-  if (e.target.closest('remove-column')) {
-    return;
+  if (e.target === removeColumn) {
+    Array.from(tBody.rows).forEach(row => row.lastElementChild.remove());
   }
 
-  Array.from(table.rows).forEach(row => row.lastElementChild.remove());
-
-  removeColumn.disabled = table.rows[0].cells.length === 2;
-  appendColumn.disabled = false;
-});
+  appendRow.disabled = tBody.rows.length === max;
+  removeRow.disabled = tBody.rows.length === min;
+  appendColumn.disabled = tBody.rows[0].cells.length === max;
+  removeColumn.disabled = tBody.rows[0].cells.length === min;
+})
