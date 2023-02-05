@@ -22,6 +22,7 @@ const disableRowsBtn = (value) => {
     default:
       removeRowBtn.removeAttribute('disabled');
       appendRowBtn.removeAttribute('disabled');
+      break;
   }
 };
 
@@ -40,6 +41,7 @@ const disableColsBtn = (value) => {
     default:
       removeColBtn.removeAttribute('disabled');
       appendColBtn.removeAttribute('disabled');
+      break;
   }
 };
 
@@ -94,5 +96,8 @@ container.addEventListener('click', e => {
       break;
     case 'remove-column':
       disableColsBtn(removeColumn());
+      break;
+    default:
+      break;
   }
 });
