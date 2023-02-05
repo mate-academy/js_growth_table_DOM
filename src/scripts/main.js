@@ -13,11 +13,9 @@ const disableRowsBtn = (value) => {
   switch (value) {
     case 2:
       removeRowBtn.setAttribute('disabled', true);
-
       break;
     case 10:
       appendRowBtn.setAttribute('disabled', true);
-
       break;
     default:
       removeRowBtn.removeAttribute('disabled');
@@ -30,14 +28,10 @@ const disableColsBtn = (value) => {
   switch (value) {
     case 2:
       removeColBtn.setAttribute('disabled', true);
-
       break;
-
     case 10:
       appendColBtn.setAttribute('disabled', true);
-
       break;
-
     default:
       removeColBtn.removeAttribute('disabled');
       appendColBtn.removeAttribute('disabled');
