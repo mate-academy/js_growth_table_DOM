@@ -5,6 +5,8 @@ const buttonPlusRow = document.querySelector('.append-row');
 const buttonMinusRow = document.querySelector('.remove-row');
 const buttonPlusCol = document.querySelector('.append-column');
 const buttonMinusCol = document.querySelector('.remove-column');
+const maxLimit = 10;
+const minLimit = 2;
 
 function growthTable() {
   buttonPlusRow.addEventListener('click', (e) => {
@@ -12,8 +14,8 @@ function growthTable() {
       table.append(table.rows[0].cloneNode(true));
     }
 
-    buttonPlusRow.disabled = (table.rows.length === 10);
-    buttonMinusRow.disabled = (table.rows.length === 2);
+    buttonPlusRow.disabled = (table.rows.length === maxLimit);
+    buttonMinusRow.disabled = (table.rows.length === minLimit);
   });
 
   buttonMinusRow.addEventListener('click', (e) => {
@@ -21,8 +23,8 @@ function growthTable() {
       table.rows[0].remove();
     }
 
-    buttonPlusRow.disabled = (table.rows.length === 10);
-    buttonMinusRow.disabled = (table.rows.length === 2);
+    buttonPlusRow.disabled = (table.rows.length === maxLimit);
+    buttonMinusRow.disabled = (table.rows.length === minLimit);
   });
 
   buttonPlusCol.addEventListener('click', (e) => {
@@ -32,8 +34,8 @@ function growthTable() {
       }
     }
 
-    buttonPlusCol.disabled = (table.rows[0].cells.length === 10);
-    buttonMinusCol.disabled = (table.rows[0].cells.length === 2);
+    buttonPlusCol.disabled = (table.rows[0].cells.length === maxLimit);
+    buttonMinusCol.disabled = (table.rows[0].cells.length === minLimit);
   });
 
   buttonMinusCol.addEventListener('click', (e) => {
@@ -43,8 +45,8 @@ function growthTable() {
       }
     }
 
-    buttonPlusCol.disabled = (table.rows[0].cells.length === 10);
-    buttonMinusCol.disabled = (table.rows[0].cells.length === 2);
+    buttonPlusCol.disabled = (table.rows[0].cells.length === maxLimit);
+    buttonMinusCol.disabled = (table.rows[0].cells.length === minLimit);
   });
 }
 
