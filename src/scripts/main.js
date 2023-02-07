@@ -5,6 +5,7 @@ const min = 2;
 const max = 10;
 
 const table = document.querySelector('.field');
+const table0 = document.querySelector('.field').tBodies[0];
 let rows = table.querySelectorAll('tr');
 
 const appendRow = document.querySelector('.append-row');
@@ -19,19 +20,30 @@ appendRow.addEventListener('click', () => {
 
   rows = table.querySelectorAll('tr');
 
-  rows.length >= max
-    ? (appendRow.disabled = true)
-    : (removeRow.disabled = '');
+  if (rows.length >= max) {
+    appendRow.disabled = true;
+    removeRow.disabled = false;
+  }
+
+  if (rows.length < max) {
+    appendRow.disabled = false;
+  }
+
+  if (rows.length > min) {
+    removeRow.disabled = false;
+  }
 });
 
 removeRow.addEventListener('click', () => {
-  table.lastElementChild.remove();
+  table0.lastElementChild.remove();
 
-  rows = table.querySelectorAll('tr');
+  if (table0.children.length === 2) {
+    removeRow.disabled = true;
+  }
 
-  rows.length <= min
-    ? (removeRow.disabled = true)
-    : (appendRow.disabled = '');
+  if (table0.children.length < 10) {
+    appendRow.disabled = false;
+  }
 });
 
 appendColumn.addEventListener('click', () => {
@@ -40,9 +52,15 @@ appendColumn.addEventListener('click', () => {
 
     row.appendChild(newColumn);
 
-    row.childElementCount >= max
-      ? appendColumn.disabled = true
-      : removeColumn.disabled = '';
+    if (row.childElementCount >= max) {
+      appendColumn.disabled = true;
+      removeColumn.disabled = false;
+    }
+
+    if (row.childElementCount > min && row.childElementCount < max) {
+      appendColumn.disabled = false;
+      removeColumn.disabled = false;
+    }
   });
 });
 
@@ -50,8 +68,14 @@ removeColumn.addEventListener('click', () => {
   rows.forEach(row => {
     row.lastElementChild.remove();
 
-    row.childElementCount <= min
-      ? appendColumn.disabled = true
-      : removeColumn.disabled = '';
+    if (row.childElementCount <= min) {
+      appendColumn.disabled = false;
+      removeColumn.disabled = true;
+    }
+
+    if (row.childElementCount > min && row.childElementCount < max) {
+      appendColumn.disabled = false;
+      removeColumn.disabled = false;
+    }
   });
 });
