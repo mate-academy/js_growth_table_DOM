@@ -12,9 +12,11 @@ const minLength = 2;
 appendRow.addEventListener('click', e => {
   tbody.rows[0].after(tbody.rows[0].cloneNode(true));
 
-  if (tbody.rows.length === maxLength) {
+  if (tbody.rows.length >= maxLength) {
     appendRow.disabled = true;
   }
+
+  removeRow.disabled = false;
 });
 
 removeRow.addEventListener('click', e => {
@@ -22,9 +24,11 @@ removeRow.addEventListener('click', e => {
     tbody.rows[0].remove();
   }
 
-  if (tbody.rows.length === minLength) {
+  if (tbody.rows.length <= minLength) {
     removeRow.disabled = true;
   }
+
+  appendRow.disabled = false;
 });
 
 appendColumn.addEventListener('click', e => {
@@ -35,9 +39,11 @@ appendColumn.addEventListener('click', e => {
     column = { ...row.children };
   };
 
-  if (Object.keys(column).length === maxLength) {
+  if (Object.keys(column).length >= maxLength) {
     appendColumn.disabled = true;
-  };
+  }
+
+  removeColumn.disabled = false;
 });
 
 removeColumn.addEventListener('click', e => {
@@ -48,8 +54,10 @@ removeColumn.addEventListener('click', e => {
     column = { ...row.children };
   };
 
-  if (Object.keys(column).length === minLength) {
+  if (Object.keys(column).length <= minLength) {
     removeColumn.disabled = true;
-  };
+  }
+
+  appendColumn.disabled = false;
 });
 // write code here
