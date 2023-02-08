@@ -1,81 +1,52 @@
 'use strict';
 
-// write code here
-const min = 2;
-const max = 10;
-
-const table = document.querySelector('.field');
-const table0 = document.querySelector('.field').tBodies[0];
-let rows = table.querySelectorAll('tr');
-
 const appendRow = document.querySelector('.append-row');
 const removeRow = document.querySelector('.remove-row');
 const appendColumn = document.querySelector('.append-column');
 const removeColumn = document.querySelector('.remove-column');
+const field = document.querySelector('table').firstElementChild;
+const rows = document.getElementsByTagName('tr');
 
 appendRow.addEventListener('click', () => {
-  const newRow = rows[rows.length - 1].cloneNode(true);
+  field.append(field.firstElementChild.cloneNode(true));
 
-  table.append(newRow);
-
-  rows = table.querySelectorAll('tr');
-
-  if (rows.length >= max) {
+  if (rows.length >= 10) {
     appendRow.disabled = true;
-    removeRow.disabled = false;
   }
 
-  if (rows.length < max) {
-    appendRow.disabled = false;
-  }
-
-  if (rows.length > min) {
-    removeRow.disabled = false;
-  }
+  removeRow.disabled = false;
 });
 
 removeRow.addEventListener('click', () => {
-  table0.lastElementChild.remove();
+  field.firstElementChild.remove();
 
-  if (table0.children.length === 2) {
+  if (rows.length <= 2) {
     removeRow.disabled = true;
   }
 
-  if (table0.children.length < 10) {
-    appendRow.disabled = false;
-  }
+  appendRow.disabled = false;
 });
 
 appendColumn.addEventListener('click', () => {
-  rows.forEach(row => {
-    const newColumn = document.createElement('td');
+  for (const child of field.children) {
+    child.append(child.firstElementChild.cloneNode(true));
+  }
 
-    row.appendChild(newColumn);
+  if (rows[0].children.length >= 10) {
+    appendColumn.disabled = true;
+  }
 
-    if (row.childElementCount >= max) {
-      appendColumn.disabled = true;
-      removeColumn.disabled = false;
-    }
-
-    if (row.childElementCount > min && row.childElementCount < max) {
-      appendColumn.disabled = false;
-      removeColumn.disabled = false;
-    }
-  });
+  removeColumn.disabled = false;
 });
 
 removeColumn.addEventListener('click', () => {
-  rows.forEach(row => {
-    row.lastElementChild.remove();
+  for (const child of field.children) {
+    child.firstElementChild.remove();
+  }
 
-    if (row.childElementCount <= min) {
-      appendColumn.disabled = false;
-      removeColumn.disabled = true;
-    }
+  if (rows[0].children.length <= 2) {
+    removeColumn.disabled = true;
+  }
 
-    if (row.childElementCount > min && row.childElementCount < max) {
-      appendColumn.disabled = false;
-      removeColumn.disabled = false;
-    }
-  });
+  appendColumn.disabled = false;
 });
