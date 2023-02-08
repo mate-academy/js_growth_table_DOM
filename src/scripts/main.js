@@ -17,6 +17,12 @@ appendRow.addEventListener('click', () => {
 
     tbody.append(newTr);
   }
+
+  if (tbody.children.length >= 10) {
+    appendRow.disabled = true;
+  } else {
+    removeRow.disabled = false;
+  }
 });
 
 const removeRow = document.querySelector('.remove-row');
@@ -26,6 +32,12 @@ removeRow.addEventListener('click', () => {
 
   if (tbody.children.length > 2) {
     tbody.lastElementChild.remove();
+  }
+
+  if (tbody.children.length <= 2) {
+    removeRow.disabled = true;
+  } else {
+    appendRow.disabled = false;
   }
 });
 
@@ -43,6 +55,12 @@ appendColum.addEventListener('click', () => {
       el.append(item);
     }
   }
+
+  if (tr.children.length >= 10) {
+    appendColum.disabled = true;
+  } else {
+    removeColum.disabled = false;
+  }
 });
 
 const removeColum = document.querySelector('.remove-column');
@@ -56,5 +74,11 @@ removeColum.addEventListener('click', () => {
     for (const el of firstTr) {
       el.lastElementChild.remove();
     }
+  }
+
+  if (tr.children.length <= 2) {
+    removeColum.disabled = true;
+  } else {
+    appendColum.disabled = false;
   }
 });
