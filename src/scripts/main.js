@@ -22,25 +22,25 @@ container.addEventListener('click', e => {
   const minColumn = 2;
 
   switch (item) {
-    case appendRow:
+    case appendRow: {
       tableBody.append(tableBody.children[0].cloneNode(true));
 
       if (tableBody.children.length === maxRow) {
         appendRow.disabled = true;
       }
-
       break;
+    }
 
-    case removeRow:
+    case removeRow: {
       tableBody.deleteRow(0);
 
       if (tableBody.children.length === minRow) {
         removeRow.disabled = true;
       }
-
       break;
+    }
 
-    case appendColumn:
+    case appendColumn: {
       for (const row of rows) {
         row.children[0].after(row.children[0].cloneNode(true));
 
@@ -48,10 +48,10 @@ container.addEventListener('click', e => {
           appendColumn.disabled = true;
         }
       }
-
       break;
+    }
 
-    case removeColumn:
+    case removeColumn: {
       for (const row of rows) {
         row.deleteCell(0);
 
@@ -59,6 +59,7 @@ container.addEventListener('click', e => {
           removeColumn.disabled = true;
         }
       }
+    }
   }
 
   if (tableBody.children.length < maxRow) {
