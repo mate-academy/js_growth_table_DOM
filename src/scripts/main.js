@@ -1,76 +1,76 @@
 'use strict';
 
-const table = document.querySelector('table').tBodies[0];
-const addRow = document.querySelector('.append-row');
-const removeRow = document.querySelector('.remove-row');
-const addColumn = document.querySelector('.append-column');
-const removeColumn = document.querySelector('.remove-column');
-const minLimit = 2;
-const maxLimit = 10;
+const TABLE = document.querySelector('table').tBodies[0];
+const ADD_ROW = document.querySelector('.append-row');
+const REMOVE_ROW = document.querySelector('.remove-row');
+const ADD_COLUMN = document.querySelector('.append-column');
+const REMOVE_COLUMN = document.querySelector('.remove-column');
+const MIN_LIMIT = 2;
+const MAX_LIMIT = 10;
 
-addRow.addEventListener('click', e => {
-  const amountRows = table.children.length;
-  const amountCellsInRow = table.children[0].children.length;
-  const newRow = document.createElement('tr');
+ADD_ROW.addEventListener('click', e => {
+  const AMOUNT_ROWS = TABLE.children.length;
+  const AMOUNT_CELLS_IN_ROWS = TABLE.children[0].children.length;
+  const NEW_ROW = document.createElement('tr');
 
-  if (amountRows < maxLimit) {
-    for (let i = 0; i < amountCellsInRow; i++) {
-      const newCell = document.createElement('td');
+  if (AMOUNT_ROWS < MAX_LIMIT) {
+    for (let i = 0; i < AMOUNT_CELLS_IN_ROWS; i++) {
+      const NEW_CELL = document.createElement('td');
 
-      newRow.append(newCell);
+      NEW_ROW.append(NEW_CELL);
     }
 
-    removeRow.removeAttribute('disabled');
-    table.append(newRow);
+    REMOVE_ROW.removeAttribute('disabled');
+    TABLE.append(NEW_ROW);
   } else {
-    addRow.setAttribute('disabled', true);
+    ADD_ROW.setAttribute('disabled', true);
   }
 });
 
-removeRow.addEventListener('click', e => {
-  const amountRows = table.children.length;
+REMOVE_ROW.addEventListener('click', e => {
+  const AMOUNT_ROWS = TABLE.children.length;
 
-  if (amountRows > minLimit) {
-    const lastRow = table.lastElementChild;
+  if (AMOUNT_ROWS > MIN_LIMIT) {
+    const LAST_ROW = TABLE.lastElementChild;
 
-    addRow.removeAttribute('disabled');
-    lastRow.remove();
+    ADD_ROW.removeAttribute('disabled');
+    LAST_ROW.remove();
   } else {
-    removeRow.setAttribute('disabled', true);
+    REMOVE_ROW.setAttribute('disabled', true);
   }
 });
 
-addColumn.addEventListener('click', e => {
-  const amountRows = table.children.length;
-  const amountCellsInRow = table.children[0].children.length;
+ADD_COLUMN.addEventListener('click', e => {
+  const AMOUNT_ROWS = TABLE.children.length;
+  const AMOUNT_CELLS_IN_ROWS = TABLE.children[0].children.length;
 
-  if (amountCellsInRow < maxLimit) {
-    for (let i = 0; i < amountRows; i++) {
-      const newCell = document.createElement('td');
-      const currentRow = table.children[i];
+  if (AMOUNT_CELLS_IN_ROWS < MAX_LIMIT) {
+    for (let i = 0; i < AMOUNT_ROWS; i++) {
+      const NEW_CELL = document.createElement('td');
+      const CURRENT_ROW = TABLE.children[i];
 
-      currentRow.append(newCell);
+      CURRENT_ROW.append(NEW_CELL);
     }
 
-    removeColumn.removeAttribute('disabled');
+    REMOVE_COLUMN.removeAttribute('disabled');
   } else {
-    addColumn.setAttribute('disabled', true);
+    ADD_COLUMN.setAttribute('disabled', true);
   }
 });
 
-removeColumn.addEventListener('click', e => {
-  const amountRows = table.children.length;
-  const amountCellsInRow = table.children[0].children.length;
+REMOVE_COLUMN.addEventListener('click', e => {
+  const AMOUNT_ROWS = TABLE.children.length;
+  const AMOUNT_CELLS_IN_ROW = TABLE.children[0].children.length;
 
-  if (amountCellsInRow > minLimit) {
-    for (let i = 0; i < amountRows; i++) {
-      const lastCell = table.children[i].lastElementChild;
+  if (AMOUNT_CELLS_IN_ROW > MIN_LIMIT) {
+    for (let i = 0; i < AMOUNT_ROWS; i++) {
+      const LAST_CELL = TABLE.children[i].lastElementChild;
 
-      lastCell.remove();
+      LAST_CELL.remove();
     }
 
-    addColumn.removeAttribute('disabled');
+    ADD_COLUMN.removeAttribute('disabled');
   } else {
-    removeColumn.setAttribute('disabled', true);
+    REMOVE_COLUMN.setAttribute('disabled', true);
   }
 });
