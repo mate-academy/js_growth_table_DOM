@@ -9,10 +9,10 @@ const MAX = 10;
 const MIN = 2;
 
 function changeBtn(firstBtn, secondBtn) {
-  const dlina = firstBtn === appendRow || firstBtn === removeRow
+  const tableLength = firstBtn === appendRow || firstBtn === removeRow
     ? table.length : table[0].children.length;
 
-  if (dlina === MAX || dlina === MIN) {
+  if (tableLength === MAX || tableLength === MIN) {
     firstBtn.setAttribute('disabled', '');
   }
 
@@ -21,30 +21,30 @@ function changeBtn(firstBtn, secondBtn) {
   }
 }
 
-appendRow.addEventListener('click', () => {
+appendRow.addEventListener('click', (e) => {
   const el = table[0].cloneNode(true);
 
   table[0].parentElement.append(el);
-  changeBtn(appendRow, removeRow);
+  changeBtn(e.target, removeRow);
 });
 
-removeRow.addEventListener('click', () => {
+removeRow.addEventListener('click', (e) => {
   table[0].remove();
-  changeBtn(removeRow, appendRow);
+  changeBtn(e.target, appendRow);
 });
 
-appendColumn.addEventListener('click', () => {
+appendColumn.addEventListener('click', (e) => {
   for (const element of table) {
     const createCol = document.createElement('td');
 
     element.append(createCol);
   }
-  changeBtn(appendColumn, removeColumn);
+  changeBtn(e.target, removeColumn);
 });
 
-removeColumn.addEventListener('click', () => {
+removeColumn.addEventListener('click', (e) => {
   for (const element of table) {
     element.children[0].remove();
   }
-  changeBtn(removeColumn, appendColumn);
+  changeBtn(e.target, appendColumn);
 });
