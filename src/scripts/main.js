@@ -10,7 +10,7 @@ const buttonRemoveCol = document.getElementsByClassName('remove-column')[0];
 const minRowsNumber = 2;
 const maxRowsNumber = 10;
 
-buttonAddRow.addEventListener('click', e => {
+buttonAddRow.addEventListener('click', () => {
   const newRow = document.createElement('tr');
   const numberOfRows = body.firstElementChild.children.length;
 
@@ -27,7 +27,7 @@ buttonAddRow.addEventListener('click', e => {
   }
 });
 
-buttonRemoveRow.addEventListener('click', e => {
+buttonRemoveRow.addEventListener('click', () => {
   const row = document.querySelector('tr');
 
   row.remove();
@@ -38,7 +38,7 @@ buttonRemoveRow.addEventListener('click', e => {
   }
 });
 
-buttonRemoveCol.addEventListener('click', e => {
+buttonRemoveCol.addEventListener('click', () => {
   const rows = document.querySelectorAll('tr');
 
   for (const item of rows) {
@@ -51,7 +51,7 @@ buttonRemoveCol.addEventListener('click', e => {
   }
 });
 
-buttonAddCol.addEventListener('click', e => {
+buttonAddCol.addEventListener('click', () => {
   const rows = document.querySelectorAll('tr');
 
   buttonRemoveCol.removeAttribute('disabled');
