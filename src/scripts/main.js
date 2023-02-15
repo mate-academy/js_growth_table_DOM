@@ -10,39 +10,16 @@ const minCount = 2;
 let rowCount = fieldTable.rows.length;
 let columnCount = fieldTable.rows[0].cells.length;
 
-function disableButton(button) {
-  button.disabled = true;
-}
-
-function enableButton(button) {
-  button.disabled = false;
+function handleButton(button, value) {
+  button.disabled = value;
 }
 
 function updateButtonStates() {
-  if (rowCount === maxCount) {
-    disableButton(appendRowButton);
-  } else {
-    enableButton(appendRowButton);
-  }
-
-  if (rowCount === minCount) {
-    disableButton(removeRowButton);
-  } else {
-    enableButton(removeRowButton);
-  }
-
-  if (columnCount === maxCount) {
-    disableButton(appendColumnButton);
-  } else {
-    enableButton(appendColumnButton);
-  }
-
-  if (columnCount === minCount) {
-    disableButton(removeColumnButton);
-  } else {
-    enableButton(removeColumnButton);
-  }
-}
+  handleButton(appendRowButton, rowCount === maxCount);
+  handleButton(removeRowButton, rowCount === minCount);
+  handleButton(appendColumnButton, columnCount === maxCount);
+  handleButton(removeColumnButton, columnCount === minCount);
+};
 
 function appendRow() {
   const row = fieldTable.insertRow();
