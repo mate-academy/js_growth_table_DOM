@@ -1,42 +1,42 @@
 'use strict';
 
 const table = document.querySelector('.field');
-const addRow = document.querySelector('.append-row');
-const delRow = document.querySelector('.remove-row');
-const addCol = document.querySelector('.append-column');
-const delCol = document.querySelector('.remove-column');
-const max = 10;
-const min = 2;
+const addRowEl = document.querySelector('.append-row');
+const delRowEl = document.querySelector('.remove-row');
+const addColEl = document.querySelector('.append-column');
+const delColEl = document.querySelector('.remove-column');
+const MAXlines = 10;
+const MINlines = 2;
 
-addRow.addEventListener('click', () => {
+addRowEl.addEventListener('click', () => {
   const rowCount = table.rows.length;
   const cellCount = table.rows[0].cells.length;
   const row = table.insertRow(rowCount);
 
-  if (rowCount >= 10) {
+  if (rowCount >= MAXlines) {
     return;
   }
 
   for (let i = 0; i < cellCount; i++) {
     const cell = row.insertCell(i);
 
-    cell.innerHTML = '<td></td>';
+    cell.insertAdjacentHTML('beforeend', '<td></td>');
   }
 });
 
-delRow.addEventListener('click', () => {
+delRowEl.addEventListener('click', () => {
   const rowCount = table.rows.length;
 
-  if (rowCount <= min) {
+  if (rowCount <= MINlines) {
     return;
   }
   table.deleteRow(rowCount - 1);
 });
 
-addCol.addEventListener('click', () => {
+addColEl.addEventListener('click', () => {
   const cellCount = table.rows[0].cells.length;
 
-  if (cellCount >= max) {
+  if (cellCount >= MAXlines) {
     return;
   }
 
@@ -45,10 +45,10 @@ addCol.addEventListener('click', () => {
   }
 });
 
-delCol.addEventListener('click', () => {
+delColEl.addEventListener('click', () => {
   const cellCount = table.rows[0].cells.length;
 
-  if (cellCount <= min) {
+  if (cellCount <= MINlines) {
     return;
   }
 
