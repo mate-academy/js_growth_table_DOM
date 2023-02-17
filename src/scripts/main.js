@@ -2,41 +2,67 @@
 
 const container = document.querySelector('.container');
 const table = container.querySelector('.field');
-const thead = table.firstElementChild;
+
+const buttonRemoveRow = container.querySelector('.remove-row');
+const buttonAddRow = container.querySelector('.append-row');
+const buttonRemoveColumn = container.querySelector('.remove-column');
+const buttonAddColumn = container.querySelector('.append-column');
 
 container.addEventListener('click', (ev) => {
-  const button = ev.target;
-  const buttonClass = [...button.classList];
+  const buttonClass = [...ev.target.classList];
+  const tbody = table.firstElementChild;
+  const rows = tbody.querySelectorAll('tr');
 
   if (!buttonClass.includes('button')) {
     return;
   }
-
-  const rows = table.querySelectorAll('tr');
 
   switch (buttonClass[0]) {
     case 'append-column':
       rows.forEach(el => {
         el.append(el.lastElementChild.cloneNode());
       });
+      buttonRemoveColumn.removeAttribute('disabled');
       break;
 
     case 'remove-column':
-      if ([...rows[0].children].length > 1) {
-        rows.forEach(e => {
-          e.lastElementChild.remove();
-        });
-      }
+      rows.forEach(e => {
+        e.lastElementChild.remove();
+      });
+      buttonAddColumn.removeAttribute('disabled');
       break;
 
     case 'append-row':
-      thead.append(rows[0].cloneNode(true));
+      tbody.append(rows[0].cloneNode(true));
+      buttonRemoveRow.removeAttribute('disabled');
       break;
 
     case 'remove-row':
-      if (rows.length > 1) {
-        thead.lastElementChild.remove();
-      }
+      tbody.lastElementChild.remove();
+      buttonAddRow.removeAttribute('disabled');
       break;
   }
+
+  const rowsLength = [...tbody.children].length;
+  const columnLength = [...rows[0].children].length;
+
+  toggleDisableButton(rowsLength, columnLength)
 });
+
+function toggleDisableButton(rowLeng, columns) {
+  if (rowLeng === 2) {
+    buttonRemoveRow.setAttribute('disabled', 'true');
+  }
+
+  if (rowLeng === 10) {
+    buttonAddRow.setAttribute('disabled', 'true');
+  } 
+  
+  if (columns === 2) {
+    buttonRemoveColumn.setAttribute('disabled', 'true');
+  } 
+
+  if (columns === 10) {
+    buttonAddColumn.setAttribute('disabled', 'true');
+  } 
+}
