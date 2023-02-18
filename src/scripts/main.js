@@ -41,28 +41,36 @@ container.addEventListener('click', (ev) => {
       tbody.lastElementChild.remove();
       buttonAddRow.removeAttribute('disabled');
       break;
+
+    default: 
+      Error('no case');
   }
 
   const rowsLength = [...tbody.children].length;
   const columnLength = [...rows[0].children].length;
 
-  toggleDisableButton(rowsLength, columnLength)
+  toggleDisableButton(rowsLength, columnLength);
 });
 
 function toggleDisableButton(rowLeng, columns) {
-  if (rowLeng === 2) {
-    buttonRemoveRow.setAttribute('disabled', 'true');
+  switch(true) {
+    case rowLeng === 2:
+      buttonRemoveRow.setAttribute('disabled', 'true');
+      break;
+
+    case rowLeng === 10:
+      buttonAddRow.setAttribute('disabled', 'true');
+      break;
+
+    case columns === 2:
+      buttonRemoveColumn.setAttribute('disabled', 'true');
+      break;
+
+    case columns === 10:
+      buttonAddColumn.setAttribute('disabled', 'true');
+      break;
+
+    default: 
+      Error('no case');
   }
-
-  if (rowLeng === 10) {
-    buttonAddRow.setAttribute('disabled', 'true');
-  } 
-  
-  if (columns === 2) {
-    buttonRemoveColumn.setAttribute('disabled', 'true');
-  } 
-
-  if (columns === 10) {
-    buttonAddColumn.setAttribute('disabled', 'true');
-  } 
 }
