@@ -8,8 +8,12 @@ const buttonAddRow = container.querySelector('.append-row');
 const buttonRemoveColumn = container.querySelector('.remove-column');
 const buttonAddColumn = container.querySelector('.append-column');
 
+const maxSizeTable = 10;
+const minSizeTable = 2;
+
 container.addEventListener('click', (ev) => {
-  const buttonClass = [...ev.target.classList];
+  const button = ev.target;
+  const buttonClass = [...button.classList];
   const tbody = table.firstElementChild;
   const rows = tbody.querySelectorAll('tr');
 
@@ -17,12 +21,17 @@ container.addEventListener('click', (ev) => {
     return;
   }
 
+  const rowsCount = [...tbody.children].length;
+  const columnCount = [...rows[0].children].length;
+  const oneCell = 1;
+
   switch (buttonClass[0]) {
     case 'append-column':
       rows.forEach(el => {
         el.append(el.lastElementChild.cloneNode());
       });
       buttonRemoveColumn.removeAttribute('disabled');
+      addAtribute(button, maxSizeTable, (columnCount + oneCell));
       break;
 
     case 'remove-column':
@@ -30,47 +39,28 @@ container.addEventListener('click', (ev) => {
         e.lastElementChild.remove();
       });
       buttonAddColumn.removeAttribute('disabled');
+      addAtribute(button, minSizeTable, (columnCount - oneCell));
       break;
 
     case 'append-row':
       tbody.append(rows[0].cloneNode(true));
       buttonRemoveRow.removeAttribute('disabled');
+      addAtribute(button, maxSizeTable, (rowsCount + oneCell));
       break;
 
     case 'remove-row':
       tbody.lastElementChild.remove();
       buttonAddRow.removeAttribute('disabled');
+      addAtribute(button, minSizeTable, (rowsCount - oneCell));
       break;
 
-    default: 
-      Error('no case');
+    default:
+      throw new Error('no case');
   }
-
-  const rowsLength = [...tbody.children].length;
-  const columnLength = [...rows[0].children].length;
-
-  toggleDisableButton(rowsLength, columnLength);
 });
 
-function toggleDisableButton(rowLeng, columns) {
-  switch(true) {
-    case rowLeng === 2:
-      buttonRemoveRow.setAttribute('disabled', 'true');
-      break;
-
-    case rowLeng === 10:
-      buttonAddRow.setAttribute('disabled', 'true');
-      break;
-
-    case columns === 2:
-      buttonRemoveColumn.setAttribute('disabled', 'true');
-      break;
-
-    case columns === 10:
-      buttonAddColumn.setAttribute('disabled', 'true');
-      break;
-
-    default: 
-      Error('no case');
+function addAtribute(button, size, currentSize) {
+  if (size === currentSize) {
+    button.setAttribute('disabled', 'true');
   }
 }
