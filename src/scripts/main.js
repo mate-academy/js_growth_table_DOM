@@ -8,22 +8,6 @@ const removeColumnBtn = document.querySelector('.remove-column');
 let rowCount = table.rows.length;
 let columnCount = table.rows[0].cells.length;
 
-if (rowCount === 10) {
-  appendRowBtn.disabled = true;
-}
-
-if (rowCount === 2) {
-  removeRowBtn.disabled = true;
-}
-
-if (columnCount === 10) {
-  appendColumnBtn.disabled = true;
-}
-
-if (columnCount === 2) {
-  removeColumnBtn.disabled = true;
-}
-
 appendRowBtn.addEventListener('click', function() {
   if (rowCount < 10) {
     const row = table.insertRow();
