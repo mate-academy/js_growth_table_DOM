@@ -9,23 +9,32 @@ const minRows = 2;
 const minColumns = 2;
 
 container.addEventListener('click', e => {
-  if (e.target.className === 'append-row button') {
-    if (table.rows.length < maxRows) {
-      const row = table.insertRow(-1);
+  const className = e.target.className;
 
-      [...table.rows[0].cells].forEach((item, i) => row.insertCell(i));
-    }
-  } else if (e.target.className === 'remove-row button') {
-    if (table.rows.length > minRows) {
-      table.deleteRow(-1);
-    }
-  } else if (e.target.className === 'append-column button') {
-    if (table.rows[0].cells.length < maxColumns) {
-      [...table.rows].forEach((item, i) => table.rows[i].insertCell(-1));
-    }
-  } else if (e.target.className === 'remove-column button') {
-    if (table.rows[0].cells.length > minColumns) {
-      [...table.rows].forEach((item, i) => table.rows[i].deleteCell(-1));
-    }
+  switch (className) {
+    case 'append-row button':
+      if (table.rows.length < maxRows) {
+        const row = table.insertRow(-1);
+
+        [...table.rows[0].cells].forEach((_, i) => row.insertCell(i));
+      }
+      break;
+    case 'remove-row button':
+      if (table.rows.length > minRows) {
+        table.deleteRow(-1);
+      }
+      break;
+    case 'append-column button':
+      if (table.rows[0].cells.length < maxColumns) {
+        [...table.rows].forEach((_, i) => table.rows[i].insertCell(-1));
+      }
+      break;
+    case 'remove-column button':
+      if (table.rows[0].cells.length > minColumns) {
+        [...table.rows].forEach((_, i) => table.rows[i].deleteCell(-1));
+      }
+      break;
+    default:
+      break;
   }
 });
