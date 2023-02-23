@@ -11,8 +11,6 @@ const deleteRowButton = document.querySelector('.remove-row');
 
 const newPart = table.children[0].children[3];
 
-
-
 addColumnButton.addEventListener('click', () => addColumn());
 deleteColumnButton.addEventListener('click', () => deleteColumn());
 addRowButton.addEventListener('click', () => addRow());
@@ -51,9 +49,9 @@ function deleteColumn() {
 
 function addRow() {
   if (table.children.length < 10) {
-    let newRow = table.children[1];
+    const newRow = table.children[1];
+
     table.insertBefore(newRow.cloneNode(true), table.children[1]);
-    console.log(table.children[1])
     deleteRowButton.disabled = false;
   }
 
@@ -65,7 +63,6 @@ function addRow() {
 function deleteRow() {
   if (table.children.length > 2) {
     table.removeChild(table.children[0]);
-    console.log(table.children[0])
     addRowButton.disabled = false;
   }
 
