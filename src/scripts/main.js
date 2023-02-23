@@ -62,11 +62,13 @@ function addRow() {
 
 function deleteRow() {
   if (table.children.length > 2) {
-    table.children[0].parentNode.removeChild(table.children[0]);
+    table.removeChild(table.children[2]);
     addRowButton.disabled = false;
   }
 
   if (table.children.length === 2) {
+    console.log(table)
+    console.log(table.children)
     deleteRowButton.setAttribute('disabled', true);
   }
 }
