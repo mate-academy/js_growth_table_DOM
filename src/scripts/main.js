@@ -7,10 +7,13 @@ const removeRowButton = document.querySelector('.remove-row');
 const appendColumnButton = document.querySelector('.append-column');
 const removeColumnButton = document.querySelector('.remove-column');
 
+const maxLength = 10;
+const minLength = 2;
+
 appendRowButton.addEventListener('click', e => {
   fieldBody.append(fieldBody.lastElementChild.cloneNode(true));
 
-  if (fieldBody.row.length >= 10) {
+  if (fieldBody.row.length >= maxLength) {
     appendRowButton.disabled = true;
   }
 
@@ -20,7 +23,7 @@ appendRowButton.addEventListener('click', e => {
 removeRowButton.addEventListener('click', e => {
   fieldBody.lastElementChild.remove();
 
-  if (fieldBody.row.length <= 2) {
+  if (fieldBody.row.length <= minLength) {
     removeRowButton.disabled = true;
   }
 
