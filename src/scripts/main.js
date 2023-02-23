@@ -35,7 +35,7 @@ appendColumnButton.addEventListener('click', e => {
     row.append(row.lastElementChild.cloneNode(true));
   }
 
-  if (fieldBody.rows[0].cells.length >= 10) {
+  if (fieldBody.rows[0].cells.length >= maxLength) {
     appendColumnButton.disabled = true;
   }
 
