@@ -1,9 +1,12 @@
 'use strict';
 
-function growthTable(table, maxSize, minSize) {
+function growthTable(table) {
   document.addEventListener('click', (myEvent) => {
     let rowsCount = table.children.length;
     let columnCount = table.children[0].children.length;
+
+    const maxSize = 10;
+    const minSize = 2;
 
     const targetButton = '.' + myEvent.target.classList[0];
 
@@ -73,4 +76,4 @@ function growthTable(table, maxSize, minSize) {
 
 const myTable = document.querySelector('tbody');
 
-growthTable(myTable, 10, 2);
+growthTable(myTable);
