@@ -1,6 +1,6 @@
 'use strict';
 
-function growthTable(table) {
+function growthTable(table, maxSize, minSize) {
   // eslint-disable-next-line no-shadow
   document.addEventListener('click', (event) => {
     let rowsCount = table.children.length;
@@ -54,22 +54,24 @@ function growthTable(table) {
     removeDisabled(addColumn);
     removeDisabled(delColumn);
 
-    if (rowsCount === 10) {
+    if (rowsCount === maxSize) {
       setDisabled(addRow);
     }
 
-    if (rowsCount === 2) {
+    if (rowsCount === minSize) {
       setDisabled(delRow);
     }
 
-    if (columnCount === 10) {
+    if (columnCount === maxSize) {
       setDisabled(addColumn);
     }
 
-    if (columnCount === 2) {
+    if (columnCount === minSize) {
       setDisabled(delColumn);
     }
   });
 }
 
-growthTable(document.querySelector('tbody'));
+const myTable = document.querySelector('tbody');
+
+growthTable(myTable, 10, 2);
