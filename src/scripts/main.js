@@ -1,12 +1,11 @@
 'use strict';
 
 function growthTable(table, maxSize, minSize) {
-  // eslint-disable-next-line no-shadow
-  document.addEventListener('click', (event) => {
+  document.addEventListener('click', (myEvent) => {
     let rowsCount = table.children.length;
     let columnCount = table.children[0].children.length;
 
-    const targetButton = '.' + event.target.classList[0];
+    const targetButton = '.' + myEvent.target.classList[0];
 
     const addRow = '.' + document.querySelectorAll('button')[0].classList[0];
     const delRow = '.' + document.querySelectorAll('button')[1].classList[0];
