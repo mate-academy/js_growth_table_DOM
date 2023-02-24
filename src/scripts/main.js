@@ -6,7 +6,7 @@ function growthTable(table) {
     let rowsCount = table.children.length;
     let columnCount = table.children[0].children.length;
 
-    const classButton = event.target.className;
+    const classButton = '.' + event.target.classList[0];
 
     const addRow = '.' + document.querySelectorAll('button')[0].classList[0];
     const delRow = '.' + document.querySelectorAll('button')[1].classList[0];
@@ -20,19 +20,19 @@ function growthTable(table) {
       .setAttribute('disabled', '');
 
     switch (classButton) {
-      case 'append-row button' : {
+      case addRow : {
         table.append(table.children[0].cloneNode(true));
         rowsCount++;
         break;
       }
 
-      case 'remove-row button' : {
+      case delRow : {
         table.children[0].remove();
         rowsCount--;
         break;
       }
 
-      case 'append-column button' : {
+      case addColumn : {
         for (const i of table.children) {
           i.append(document.createElement('td'));
         }
@@ -40,7 +40,7 @@ function growthTable(table) {
         break;
       }
 
-      case 'remove-column button': {
+      case delColumn: {
         for (const i of table.children) {
           i.children[0].remove();
         }
