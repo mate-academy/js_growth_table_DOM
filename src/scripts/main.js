@@ -1,22 +1,34 @@
 'use strict';
 
 function growthTable(table) {
-  document.addEventListener('click', (evenFunc) => {
+  // eslint-disable-next-line no-shadow
+  document.addEventListener('click', (event) => {
     let rowsCount = table.children.length;
     let columnCount = table.children[0].children.length;
 
-    const classButton = evenFunc.target.className;
+    const classButton = event.target.className;
+
+    const addRow = '.' + document.querySelectorAll('button')[0].classList[0];
+    const delRow = '.' + document.querySelectorAll('button')[1].classList[0];
+    const addColumn = '.' + document.querySelectorAll('button')[2].classList[0];
+    const delColumn = '.' + document.querySelectorAll('button')[3].classList[0];
+
+    const removeDisabled = (inputClass) => document.querySelector(inputClass)
+      .removeAttribute('disabled');
+
+    const setDisabled = (inputClass) => document.querySelector(inputClass)
+      .setAttribute('disabled', '');
 
     switch (classButton) {
       case 'append-row button' : {
         table.append(table.children[0].cloneNode(true));
-        rowsCount = rowsCount + 1;
+        rowsCount++;
         break;
       }
 
       case 'remove-row button' : {
         table.children[0].remove();
-        rowsCount = rowsCount - 1;
+        rowsCount--;
         break;
       }
 
@@ -37,28 +49,25 @@ function growthTable(table) {
       }
     }
 
-    if (rowsCount <= 9) {
-      document.querySelector('.append-row').removeAttribute('disabled');
-    } else {
-      document.querySelector('.append-row').setAttribute('disabled', '');
+    removeDisabled(addRow);
+    removeDisabled(delRow);
+    removeDisabled(addColumn);
+    removeDisabled(delColumn);
+
+    if (rowsCount === 10) {
+      setDisabled(addRow);
     }
 
-    if (rowsCount >= 3) {
-      document.querySelector('.remove-row').removeAttribute('disabled');
-    } else {
-      document.querySelector('.remove-row').setAttribute('disabled', '');
+    if (rowsCount === 2) {
+      setDisabled(delRow);
     }
 
-    if (columnCount <= 9) {
-      document.querySelector('.append-column').removeAttribute('disabled');
-    } else {
-      document.querySelector('.append-column').setAttribute('disabled', '');
+    if (columnCount === 10) {
+      setDisabled(addColumn);
     }
 
-    if (columnCount >= 3) {
-      document.querySelector('.remove-column').removeAttribute('disabled');
-    } else {
-      document.querySelector('.remove-column').setAttribute('disabled', '');
+    if (columnCount === 2) {
+      setDisabled(delColumn);
     }
   });
 }
