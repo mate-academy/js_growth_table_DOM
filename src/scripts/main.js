@@ -14,17 +14,12 @@ const updateRows = () => {
 };
 
 const setMaxValue = (list, appendBtn, removeBtn) => {
-  if (list.length < 10) {
-    appendBtn.disabled = false;
-  } else {
-    appendBtn.disabled = true;
-  }
+  const minValue = 2;
+  const maxValue = 10;
 
-  if (list.length === 2) {
-    removeBtn.disabled = true;
-  } else {
-    removeBtn.disabled = false;
-  }
+  appendBtn.disabled = list.length >= maxValue;
+
+  removeBtn.disabled = list.length === minValue;
 };
 
 container.addEventListener('click', e => {
@@ -46,10 +41,10 @@ container.addEventListener('click', e => {
       break;
 
     case 'append-column button':
-      rows.map(({ children }) => {
+      rows.forEach(({ children }) => {
         const lastCell = children[children.length - 1];
 
-        return lastCell.after(lastCell.cloneNode(true));
+        lastCell.after(lastCell.cloneNode(true));
       });
       break;
 
@@ -63,7 +58,7 @@ container.addEventListener('click', e => {
 
     default: return;
   }
-  
+
   setMaxValue(rows, appendRowBtn, removeRowBtn);
 
   rows.forEach(({ children }) => {
