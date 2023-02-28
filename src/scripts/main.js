@@ -9,6 +9,24 @@ const removeRowBtn = document.querySelector('.remove-row');
 const appendColumnBtn = document.querySelector('.append-column');
 const removeColumnBtn = document.querySelector('.remove-column');
 
+const updateRows = () => {
+  return [...tbody.querySelectorAll('tr')];
+};
+
+const setMaxValue = (list, appendBtn, removeBtn) => {
+  if (list.length < 10) {
+    appendBtn.disabled = false;
+  } else {
+    appendBtn.disabled = true;
+  }
+
+  if (list.length === 2) {
+    removeBtn.disabled = true;
+  } else {
+    removeBtn.disabled = false;
+  }
+};
+
 container.addEventListener('click', e => {
   const newRow = tbody.children[0].cloneNode(true);
 
@@ -19,12 +37,12 @@ container.addEventListener('click', e => {
   switch (e.target.className) {
     case 'append-row button':
       tbody.append(newRow);
-      rows = [...tbody.querySelectorAll('tr')];
+      rows = updateRows();
       break;
 
     case 'remove-row button':
       tbody.deleteRow(rows.length - 1);
-      rows = [...tbody.querySelectorAll('tr')];
+      rows = updateRows();
       break;
 
     case 'append-column button':
@@ -45,32 +63,10 @@ container.addEventListener('click', e => {
 
     default: return;
   }
-
-  if (rows.length !== 11) {
-    appendRowBtn.disabled = false;
-  } else {
-    appendRowBtn.disabled = true;
-  }
-
-  if (rows.length === 2) {
-    removeRowBtn.disabled = true;
-  } else {
-    removeRowBtn.disabled = false;
-  }
+  
+  setMaxValue(rows, appendRowBtn, removeRowBtn);
 
   rows.forEach(({ children }) => {
-    const len = children.length;
-
-    if (len !== 10) {
-      appendColumnBtn.disabled = false;
-    } else {
-      appendColumnBtn.disabled = true;
-    }
-
-    if (len === 2) {
-      removeColumnBtn.disabled = true;
-    } else {
-      removeColumnBtn.disabled = false;
-    }
+    setMaxValue(children, appendColumnBtn, removeColumnBtn);
   });
 });
