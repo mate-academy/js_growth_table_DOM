@@ -21,7 +21,7 @@ document.addEventListener('click', (e) => {
     const amount = direction === 'row' ? rows : columns;
     const oppositeTypeAction = typeAction === 'append' ? 'remove' : 'append';
 
-    if (amount === maxItem || amount === minItem) {
+    if (amount >= maxItem || amount <= minItem) {
       press.disabled = true;
 
       return;
