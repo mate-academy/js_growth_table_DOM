@@ -7,7 +7,7 @@ const removeColumn = document.querySelector('.remove-column');
 
 const tBody = document.querySelector('tbody');
 
-const addRow = function() {
+const fnAppendRow = function() {
   if (tBody.children.length <= 10) {
     const row = document.querySelector('tr');
     const rowCopy = row.cloneNode(true);
@@ -22,7 +22,7 @@ const addRow = function() {
   }
 };
 
-const deleteRow = function() {
+const fnRemoveRow = function() {
   if (tBody.children.length > 2) {
     tBody.lastElementChild.remove();
 
@@ -34,7 +34,7 @@ const deleteRow = function() {
   }
 };
 
-const addColumn = function() {
+const fnAppendColumn = function() {
   const rows = document.querySelectorAll('tr');
 
   for (const row of Array.from(rows)) {
@@ -54,7 +54,7 @@ const addColumn = function() {
   }
 };
 
-const deleteColumn = function() {
+const fnRemoveColumn = function() {
   const rows = document.querySelectorAll('tr');
 
   for (const row of Array.from(rows)) {
@@ -72,10 +72,10 @@ const deleteColumn = function() {
   }
 };
 
-appendRow.addEventListener('click', addRow);
+appendRow.addEventListener('click', fnAppendRow);
 
-removeRow.addEventListener('click', deleteRow);
+removeRow.addEventListener('click', fnRemoveRow);
 
-appendColumn.addEventListener('click', addColumn);
+appendColumn.addEventListener('click', fnAppendColumn);
 
-removeColumn.addEventListener('click', deleteColumn);
+removeColumn.addEventListener('click', fnRemoveColumn);
