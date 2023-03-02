@@ -9,24 +9,28 @@ let amountColum = 4;
 let amountRow = 4;
 
 const AddRow = () => {
-  const tr = document.createElement('tr');
-
   if (amountRow >= 10) {
+    appendRow.disabled = true;
+
     return;
   }
 
-  for (let i = 0; i < amountColum; i++) {
-    const td = document.createElement('td');
-
-    tr.append(td);
+  if (amountRow >= 2) {
+    removeRow.disabled = false;
   }
-  tabl.prepend(tr);
+  tabl.append(tabl.firstElementChild.cloneNode(true));
   amountRow++;
 };
 
 const AddColumn = () => {
   if (amountColum >= 10) {
+    appendColumn.disabled = true;
+
     return;
+  }
+
+  if (amountColum >= 2) {
+    removeColumn.disabled = false;
   }
 
   for (const child of tabl.children) {
@@ -39,19 +43,28 @@ const AddColumn = () => {
 
 const RemoveRow = () => {
   if (amountRow <= 2) {
+    removeRow.disabled = true;
+
     return;
   }
 
-  const RemoveChild = tabl.firstElementChild;
+  if (amountRow <= 10) {
+    appendRow.disabled = false;
+  }
 
-  RemoveChild.remove();
-
+  tabl.firstElementChild.remove();
   amountRow--;
 };
 
 const RemoveColumn = () => {
   if (amountColum <= 2) {
+    removeColumn.disabled = true;
+
     return;
+  }
+
+  if (amountColum <= 10) {
+    appendColumn.disabled = false;
   }
 
   for (const child of tabl.children) {
@@ -59,7 +72,6 @@ const RemoveColumn = () => {
 
     RemoveFirstElement.remove();
   }
-
   amountColum--;
 };
 
