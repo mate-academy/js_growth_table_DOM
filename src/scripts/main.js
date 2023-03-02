@@ -10,8 +10,6 @@ let amountRow = 4;
 
 const AddRow = () => {
   if (amountRow >= 10) {
-    appendRow.disabled = true;
-
     return;
   }
 
@@ -20,12 +18,14 @@ const AddRow = () => {
   }
   tabl.append(tabl.firstElementChild.cloneNode(true));
   amountRow++;
+
+  if (amountRow >= 10) {
+    appendRow.disabled = true;
+  }
 };
 
 const AddColumn = () => {
   if (amountColum >= 10) {
-    appendColumn.disabled = true;
-
     return;
   }
 
@@ -39,12 +39,14 @@ const AddColumn = () => {
     child.append(td);
   }
   amountColum++;
+
+  if (amountColum >= 10) {
+    appendColumn.disabled = true;
+  }
 };
 
 const RemoveRow = () => {
-  if (amountRow <= 2) {
-    removeRow.disabled = true;
-
+  if (amountRow < 3) {
     return;
   }
 
@@ -54,12 +56,14 @@ const RemoveRow = () => {
 
   tabl.firstElementChild.remove();
   amountRow--;
+
+  if (amountRow < 3) {
+    removeRow.disabled = true;
+  }
 };
 
 const RemoveColumn = () => {
-  if (amountColum <= 2) {
-    removeColumn.disabled = true;
-
+  if (amountColum < 3) {
     return;
   }
 
@@ -73,6 +77,10 @@ const RemoveColumn = () => {
     RemoveFirstElement.remove();
   }
   amountColum--;
+
+  if (amountColum < 3) {
+    removeColumn.disabled = true;
+  }
 };
 
 appendRow.addEventListener('click', AddRow);
