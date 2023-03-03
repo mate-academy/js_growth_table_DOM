@@ -8,7 +8,7 @@ const removeColumn = document.querySelector('.remove-column');
 const tBody = document.querySelector('tbody');
 
 const fnAppendRow = function() {
-  if (tBody.children.length <= 10) {
+  if (tBody.children.length < 10) {
     const row = document.querySelector('tr');
     const rowCopy = row.cloneNode(true);
 
@@ -26,7 +26,7 @@ const fnRemoveRow = function() {
   if (tBody.children.length > 2) {
     tBody.lastElementChild.remove();
 
-    if (tBody.children.length <= 10) {
+    if (tBody.children.length < 10) {
       appendRow.removeAttribute('disabled');
     }
   } else {
@@ -38,7 +38,7 @@ const fnAppendColumn = function() {
   const rows = document.querySelectorAll('tr');
 
   for (const row of Array.from(rows)) {
-    if (row.children.length <= 10) {
+    if (row.children.length < 10) {
       const td = document.createElement('td');
 
       row.append(td);
@@ -46,9 +46,7 @@ const fnAppendColumn = function() {
       if (row.children.length > 2) {
         removeColumn.removeAttribute('disabled');
       }
-    }
-
-    if (row.children.length > 10) {
+    } else {
       appendColumn.setAttribute('disabled', true);
     }
   }
@@ -61,12 +59,10 @@ const fnRemoveColumn = function() {
     if (row.children.length > 2) {
       row.lastElementChild.remove();
 
-      if (row.children.length <= 10) {
+      if (row.children.length < 10) {
         appendColumn.removeAttribute('disabled');
       }
-    }
-
-    if (row.children.length <= 2) {
+    } else {
       removeColumn.setAttribute('disabled', true);
     }
   }
