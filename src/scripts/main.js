@@ -61,5 +61,7 @@ function growTable(e) {
       });
       appendColumnButton.disabled = '';
       break;
+
+    default:
   }
 }
