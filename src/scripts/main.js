@@ -17,7 +17,9 @@ const fnAppendRow = function() {
     if (tBody.children.length >= 2) {
       removeRow.removeAttribute('disabled');
     }
-  } else {
+  }
+
+  if (tBody.children.length >= 10) {
     appendRow.setAttribute('disabled', true);
   }
 };
@@ -29,7 +31,9 @@ const fnRemoveRow = function() {
     if (tBody.children.length <= 10) {
       appendRow.removeAttribute('disabled');
     }
-  } else {
+  }
+
+  if (tBody.children.length <= 2) {
     removeRow.setAttribute('disabled', true);
   }
 };
@@ -46,7 +50,9 @@ const fnAppendColumn = function() {
       if (row.children.length >= 2) {
         removeColumn.removeAttribute('disabled');
       }
-    } else {
+    }
+
+    if (row.children.length >= 10) {
       appendColumn.setAttribute('disabled', true);
     }
   }
@@ -62,7 +68,9 @@ const fnRemoveColumn = function() {
       if (row.children.length <= 10) {
         appendColumn.removeAttribute('disabled');
       }
-    } else {
+    }
+
+    if (row.children.length <= 2) {
       removeColumn.setAttribute('disabled', true);
     }
   }
