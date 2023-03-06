@@ -37,10 +37,10 @@ removeRow.addEventListener('click', () => {
 });
 
 appendColumn.addEventListener('click', () => {
-  const column = Array.from(document.querySelectorAll('tr'));
+  const rows = Array.from(document.querySelectorAll('tr'));
   const item = document.querySelector('td');
 
-  column.forEach(row => {
+  rows.forEach(row => {
     const newItem = item.cloneNode();
 
     row.append(newItem);
