@@ -1,33 +1,33 @@
 'use strict';
 
-const appendRow = document.querySelector('.append-row');
-const removeRow = document.querySelector('.remove-row');
-const appendColumn = document.querySelector('.append-column');
-const removeColumn = document.querySelector('.remove-column');
+const appendRowButton = document.querySelector('.append-row');
+const removeRowButton = document.querySelector('.remove-row');
+const appendColumnButton = document.querySelector('.append-column');
+const removeColumnButton = document.querySelector('.remove-column');
 const field = document.querySelector('tbody');
 let rowLength = [...document.querySelectorAll('tr')].length;
 let columnLength = [...document.querySelector('tr')
   .querySelectorAll('td')].length;
 
-appendRow.addEventListener('click', () => {
+appendRowButton.addEventListener('click', () => {
   const copyRow = field.lastElementChild.cloneNode(true);
 
   field.append(copyRow);
 
   rowLength++;
 
-  disabledButton(appendRow, removeRow, rowLength);
+  disabledButton(appendRowButton, removeRowButton, rowLength);
 });
 
-removeRow.addEventListener('click', () => {
+removeRowButton.addEventListener('click', () => {
   field.lastElementChild.remove();
 
   rowLength--;
 
-  disabledButton(appendRow, removeRow, rowLength);
+  disabledButton(appendRowButton, removeRowButton, rowLength);
 });
 
-appendColumn.addEventListener('click', () => {
+appendColumnButton.addEventListener('click', () => {
   const rows = [...document.querySelectorAll('tr')];
 
   rows.forEach((row) => {
@@ -38,10 +38,10 @@ appendColumn.addEventListener('click', () => {
 
   columnLength++;
 
-  disabledButton(appendColumn, removeColumn, columnLength);
+  disabledButton(appendColumnButton, removeColumnButton, columnLength);
 });
 
-removeColumn.addEventListener('click', () => {
+removeColumnButton.addEventListener('click', () => {
   const rows = [...document.querySelectorAll('tr')];
 
   rows.forEach((row) => {
@@ -50,7 +50,7 @@ removeColumn.addEventListener('click', () => {
 
   columnLength--;
 
-  disabledButton(appendColumn, removeColumn, columnLength);
+  disabledButton(appendColumnButton, removeColumnButton, columnLength);
 });
 
 function disabledButton(btnAdd, btnRemove, lengthElement) {
