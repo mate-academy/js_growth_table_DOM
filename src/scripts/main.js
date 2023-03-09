@@ -15,10 +15,11 @@ buttons.forEach(button => {
       const newRow = table.insertRow(-1);
 
       newRow.innerHTML = table.rows[lastRowIndex].innerHTML;
-    } else if (button.classList.contains('append-column')) {
+    } else if (button.classList.contains('append-column')
+    && lastColumnIndex <= 8) {
       [...table.rows].forEach(row => row.insertCell(-1));
     } else if (button.classList.contains('remove-column')
-    && lastColumnIndex >= 1) {
+    && lastColumnIndex >= 2) {
       [...table.rows].forEach(row => row.deleteCell(lastColumnIndex));
     }
   });
