@@ -19,7 +19,7 @@ addRow.addEventListener('click', () => {
 
 removeRow.addEventListener('click', () => {
   addRow.removeAttribute('disabled');
-  tableField.lastChild.remove();
+  tableField.lastElementChild.remove();
   tableitems = tableField.querySelectorAll('tr');
 
   if (tableitems.length <= 2) {
@@ -38,7 +38,7 @@ addColumn.addEventListener('click', () => {
 
 removeColumn.addEventListener('click', () => {
   addColumn.removeAttribute('disabled');
-  [...tableitems].map(el => el.lastChild.remove());
+  [...tableitems].map(el => el.lastElementChild.remove());
 
   if ([...tableitems][0].children.length <= 2) {
     removeColumn.setAttribute('disabled', true);
