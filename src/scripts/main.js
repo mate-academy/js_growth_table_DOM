@@ -5,9 +5,12 @@ const addRowButton = document.querySelector('.append-row');
 const removeRowButton = document.querySelector('.remove-row');
 const addColumnButton = document.querySelector('.append-column');
 const removeColumnButton = document.querySelector('.remove-column');
+const maxAmount = 10;
+const minAmount = 2;
+const maxColumnsAmount = 9;
 
-let rowsAmount = tBody.rows.length;
 const tableRows = tBody.rows;
+let rowsAmount = tableRows.length;
 
 addRowButton.addEventListener('click', () => {
   const columnsAmount = tBody.rows[0].cells.length;
@@ -23,11 +26,11 @@ addRowButton.addEventListener('click', () => {
     tBody.append(rows);
   }
 
-  if (removeRowButton.disabled && rowsAmount > 2) {
+  if (removeRowButton.disabled && rowsAmount > minAmount) {
     removeRowButton.disabled = false;
   }
 
-  if (rowsAmount >= 10) {
+  if (rowsAmount >= maxAmount) {
     addRowButton.disabled = true;
   }
 }
@@ -37,11 +40,11 @@ removeRowButton.addEventListener('click', () => {
   rowsAmount--;
   tBody.lastElementChild.remove();
 
-  if (rowsAmount <= 2) {
+  if (rowsAmount <= minAmount) {
     removeRowButton.disabled = true;
   }
 
-  if (rowsAmount < 10 && addRowButton.disabled) {
+  if (rowsAmount < maxAmount && addRowButton.disabled) {
     addRowButton.disabled = false;
   }
 });
@@ -55,11 +58,11 @@ addColumnButton.addEventListener('click', () => {
     item.append(cell);
   }
 
-  if (columnsAmount >= 9) {
+  if (columnsAmount >= maxColumnsAmount) {
     addColumnButton.disabled = true;
   }
 
-  if (columnsAmount >= 2 && removeColumnButton.disabled) {
+  if (columnsAmount >= minAmount && removeColumnButton.disabled) {
     removeColumnButton.disabled = false;
   }
 });
@@ -71,11 +74,11 @@ removeColumnButton.addEventListener('click', () => {
     item.lastElementChild.remove();
   }
 
-  if (columnsAmount <= 9 && addColumnButton.disabled) {
+  if (columnsAmount <= maxColumnsAmount && addColumnButton.disabled) {
     addColumnButton.disabled = false;
   }
 
-  if (columnsAmount <= 2) {
+  if (columnsAmount <= minAmount) {
     removeColumnButton.disabled = true;
   }
 });
