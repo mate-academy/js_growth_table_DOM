@@ -1,0 +1,385 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 13,
+    "passes": 0,
+    "pending": 0,
+    "failures": 13,
+    "start": "2023-03-07T14:21:07.201Z",
+    "end": "2023-03-07T14:22:07.594Z",
+    "duration": 60120,
+    "testsRegistered": 13,
+    "passPercent": 0,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "c29e3b89-19c8-458c-bc64-3561b39eb245",
+      "title": "",
+      "fullFile": "cypress/integration/jsGrowthTableDOM.spec.js",
+      "file": "cypress/integration/jsGrowthTableDOM.spec.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "e729f852-4a9b-4178-b028-64d867baf020",
+          "title": "Table",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "should have 4 rows by default",
+              "fullTitle": "Table should have 4 rows by default",
+              "timedOut": null,
+              "duration": 4842,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('@rows').should('have.length', 4);",
+              "err": {
+                "message": "AssertionError: Timed out retrying: Too many elements found. Found '12', expected '4'.",
+                "estack": "AssertionError: Timed out retrying: Too many elements found. Found '12', expected '4'.\n    at Context.eval (http://localhost:8080/__cypress/tests?p=cypress/integration/jsGrowthTableDOM.spec.js:113:21)",
+                "diff": "- 12\n+ 4\n"
+              },
+              "uuid": "ae667515-275a-4cd8-bda8-980f7caf0a7e",
+              "parentUUID": "e729f852-4a9b-4178-b028-64d867baf020",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should add 1 row by click",
+              "fullTitle": "Table should add 1 row by click",
+              "timedOut": null,
+              "duration": 4591,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('.append-row').click();\ncy.get('@rows').should('have.length', 5);",
+              "err": {
+                "message": "AssertionError: Timed out retrying: Expected to find element: `.append-row`, but never found it.",
+                "estack": "AssertionError: Timed out retrying: Expected to find element: `.append-row`, but never found it.\n    at Context.eval (http://localhost:8080/__cypress/tests?p=cypress/integration/jsGrowthTableDOM.spec.js:116:8)",
+                "diff": null
+              },
+              "uuid": "47d6413b-e3c4-4b52-b45c-6dbef03425d3",
+              "parentUUID": "e729f852-4a9b-4178-b028-64d867baf020",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should have 4 columns by default",
+              "fullTitle": "Table should have 4 columns by default",
+              "timedOut": null,
+              "duration": 4552,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('@columns').should('have.length', 4);",
+              "err": {
+                "message": "AssertionError: Timed out retrying: Too many elements found. Found '5', expected '4'.",
+                "estack": "AssertionError: Timed out retrying: Too many elements found. Found '5', expected '4'.\n    at Context.eval (http://localhost:8080/__cypress/tests?p=cypress/integration/jsGrowthTableDOM.spec.js:120:24)",
+                "diff": "- 5\n+ 4\n"
+              },
+              "uuid": "18fd34df-310c-4c2e-97a7-60a2385d81cb",
+              "parentUUID": "e729f852-4a9b-4178-b028-64d867baf020",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should add 1 column by click",
+              "fullTitle": "Table should add 1 column by click",
+              "timedOut": null,
+              "duration": 4589,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('.append-column').click();\ncy.get('@columns').should('have.length', 5);",
+              "err": {
+                "message": "AssertionError: Timed out retrying: Expected to find element: `.append-column`, but never found it.",
+                "estack": "AssertionError: Timed out retrying: Expected to find element: `.append-column`, but never found it.\n    at Context.eval (http://localhost:8080/__cypress/tests?p=cypress/integration/jsGrowthTableDOM.spec.js:123:8)",
+                "diff": null
+              },
+              "uuid": "ad4aa337-5dae-4d59-a205-529d144f8239",
+              "parentUUID": "e729f852-4a9b-4178-b028-64d867baf020",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should have max 10 columns",
+              "fullTitle": "Table should have max 10 columns",
+              "timedOut": null,
+              "duration": 4532,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "// 4 columns by default and click 7 times to add 7 columns\ncy.clickButton('.append-column', 7);\ncy.get('@columns').should('have.length', 10);",
+              "err": {
+                "message": "AssertionError: Timed out retrying: Expected to find element: `.append-column`, but never found it.",
+                "estack": "AssertionError: Timed out retrying: Expected to find element: `.append-column`, but never found it.\n    at Context.eval (http://localhost:8080/__cypress/tests?p=cypress/integration/jsGrowthTableDOM.spec.js:101:8)",
+                "diff": null
+              },
+              "uuid": "29455956-abe0-4e35-9820-dad638d46053",
+              "parentUUID": "e729f852-4a9b-4178-b028-64d867baf020",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "add column button should be disabled after 10 column",
+              "fullTitle": "Table add column button should be disabled after 10 column",
+              "timedOut": null,
+              "duration": 4547,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "// 4 columns by default and click 6 times to add 6 columns\ncy.clickButton('.append-column', 6);\ncy.get('.append-column').should('be.disabled');",
+              "err": {
+                "message": "AssertionError: Timed out retrying: Expected to find element: `.append-column`, but never found it.",
+                "estack": "AssertionError: Timed out retrying: Expected to find element: `.append-column`, but never found it.\n    at Context.eval (http://localhost:8080/__cypress/tests?p=cypress/integration/jsGrowthTableDOM.spec.js:101:8)",
+                "diff": null
+              },
+              "uuid": "7c02e085-83f1-4255-bc05-58b61c1f08b5",
+              "parentUUID": "e729f852-4a9b-4178-b028-64d867baf020",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should remove one column",
+              "fullTitle": "Table should remove one column",
+              "timedOut": null,
+              "duration": 4526,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('.remove-column').click();\ncy.get('@columns').should('have.length', 3);",
+              "err": {
+                "message": "AssertionError: Timed out retrying: Expected to find element: `.remove-column`, but never found it.",
+                "estack": "AssertionError: Timed out retrying: Expected to find element: `.remove-column`, but never found it.\n    at Context.eval (http://localhost:8080/__cypress/tests?p=cypress/integration/jsGrowthTableDOM.spec.js:137:8)",
+                "diff": null
+              },
+              "uuid": "c9c0f934-cb7a-4576-84dd-0531ba054e2b",
+              "parentUUID": "e729f852-4a9b-4178-b028-64d867baf020",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should have max 10 rows",
+              "fullTitle": "Table should have max 10 rows",
+              "timedOut": null,
+              "duration": 4610,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "// 4 columns by default and click 7 times to add 7 rows\ncy.clickButton('.append-row', 7);\ncy.get('@rows').should('have.length', 10);",
+              "err": {
+                "message": "AssertionError: Timed out retrying: Expected to find element: `.append-row`, but never found it.",
+                "estack": "AssertionError: Timed out retrying: Expected to find element: `.append-row`, but never found it.\n    at Context.eval (http://localhost:8080/__cypress/tests?p=cypress/integration/jsGrowthTableDOM.spec.js:101:8)",
+                "diff": null
+              },
+              "uuid": "c6c60b23-986b-4cc3-a35d-df70386fb574",
+              "parentUUID": "e729f852-4a9b-4178-b028-64d867baf020",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "add row button should be disabled after 10 rows",
+              "fullTitle": "Table add row button should be disabled after 10 rows",
+              "timedOut": null,
+              "duration": 4594,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "// 4 columns by default and click 6 times to add 6 rows\ncy.clickButton('.append-row', 6);\ncy.get('.append-row').should('be.disabled');",
+              "err": {
+                "message": "AssertionError: Timed out retrying: Expected to find element: `.append-row`, but never found it.",
+                "estack": "AssertionError: Timed out retrying: Expected to find element: `.append-row`, but never found it.\n    at Context.eval (http://localhost:8080/__cypress/tests?p=cypress/integration/jsGrowthTableDOM.spec.js:101:8)",
+                "diff": null
+              },
+              "uuid": "14b61caf-0f02-478b-96d3-e0f9cd378128",
+              "parentUUID": "e729f852-4a9b-4178-b028-64d867baf020",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should remove one row",
+              "fullTitle": "Table should remove one row",
+              "timedOut": null,
+              "duration": 4586,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('.remove-row').click();\ncy.get('@rows').should('have.length', 3);",
+              "err": {
+                "message": "AssertionError: Timed out retrying: Expected to find element: `.remove-row`, but never found it.",
+                "estack": "AssertionError: Timed out retrying: Expected to find element: `.remove-row`, but never found it.\n    at Context.eval (http://localhost:8080/__cypress/tests?p=cypress/integration/jsGrowthTableDOM.spec.js:151:8)",
+                "diff": null
+              },
+              "uuid": "447b03a6-81a0-4f59-8ae5-42885aa24309",
+              "parentUUID": "e729f852-4a9b-4178-b028-64d867baf020",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should have 2 columns and 2 rows minimum",
+              "fullTitle": "Table should have 2 columns and 2 rows minimum",
+              "timedOut": null,
+              "duration": 4613,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('.remove-row').click().click();\ncy.get('.remove-column').click().click();\ncy.get('@rows').should('have.length', 2);\ncy.get('@columns').should('have.length', 2);",
+              "err": {
+                "message": "AssertionError: Timed out retrying: Expected to find element: `.remove-row`, but never found it.",
+                "estack": "AssertionError: Timed out retrying: Expected to find element: `.remove-row`, but never found it.\n    at Context.eval (http://localhost:8080/__cypress/tests?p=cypress/integration/jsGrowthTableDOM.spec.js:155:8)",
+                "diff": null
+              },
+              "uuid": "f5aaa5b6-abd6-40f7-819f-1b4bd502a0ad",
+              "parentUUID": "e729f852-4a9b-4178-b028-64d867baf020",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "remove row button should be disabled\n      when only 2 rows exist",
+              "fullTitle": "Table remove row button should be disabled\n      when only 2 rows exist",
+              "timedOut": null,
+              "duration": 4786,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('.remove-row').click().click();\ncy.get('.remove-row').should('be.disabled');",
+              "err": {
+                "message": "AssertionError: Timed out retrying: Expected to find element: `.remove-row`, but never found it.",
+                "estack": "AssertionError: Timed out retrying: Expected to find element: `.remove-row`, but never found it.\n    at Context.eval (http://localhost:8080/__cypress/tests?p=cypress/integration/jsGrowthTableDOM.spec.js:161:8)",
+                "diff": null
+              },
+              "uuid": "c213d5d7-6693-4a84-b76f-c5dab2bf1705",
+              "parentUUID": "e729f852-4a9b-4178-b028-64d867baf020",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "remove column button should be disabled\n      when only 2 columns exist",
+              "fullTitle": "Table remove column button should be disabled\n      when only 2 columns exist",
+              "timedOut": null,
+              "duration": 4752,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('.remove-column').click().click();\ncy.get('.remove-column').should('be.disabled');",
+              "err": {
+                "message": "AssertionError: Timed out retrying: Expected to find element: `.remove-column`, but never found it.",
+                "estack": "AssertionError: Timed out retrying: Expected to find element: `.remove-column`, but never found it.\n    at Context.eval (http://localhost:8080/__cypress/tests?p=cypress/integration/jsGrowthTableDOM.spec.js:165:8)",
+                "diff": null
+              },
+              "uuid": "fb65e33f-abcb-4dc1-bbde-e92ce22ad611",
+              "parentUUID": "e729f852-4a9b-4178-b028-64d867baf020",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "ae667515-275a-4cd8-bda8-980f7caf0a7e",
+            "47d6413b-e3c4-4b52-b45c-6dbef03425d3",
+            "18fd34df-310c-4c2e-97a7-60a2385d81cb",
+            "ad4aa337-5dae-4d59-a205-529d144f8239",
+            "29455956-abe0-4e35-9820-dad638d46053",
+            "7c02e085-83f1-4255-bc05-58b61c1f08b5",
+            "c9c0f934-cb7a-4576-84dd-0531ba054e2b",
+            "c6c60b23-986b-4cc3-a35d-df70386fb574",
+            "14b61caf-0f02-478b-96d3-e0f9cd378128",
+            "447b03a6-81a0-4f59-8ae5-42885aa24309",
+            "f5aaa5b6-abd6-40f7-819f-1b4bd502a0ad",
+            "c213d5d7-6693-4a84-b76f-c5dab2bf1705",
+            "fb65e33f-abcb-4dc1-bbde-e92ce22ad611"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 60120,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "6.2.1"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "raw_reports",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "5.1.0"
+    }
+  }
+}
