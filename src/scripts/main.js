@@ -8,7 +8,6 @@ const removeColumnButton = document.querySelector('.remove-column');
 
 container.addEventListener('click', e => {
   const tbody = document.querySelector('.field').firstElementChild;
-  const rowCount = tbody.children.length;
   const columnCount = tbody.children[0].children.length;
 
   switch (e.target.className) {
@@ -20,26 +19,14 @@ container.addEventListener('click', e => {
       }
 
       tbody.append(newRow);
+      appendRowButton.disabled = tbody.children.length >= 10;
 
-      if (rowCount >= 9) {
-        appendRowButton.disabled = true;
-      }
-
-      if (rowCount >= 2) {
-        removeRowButton.disabled = false;
-      }
       break;
 
     case 'remove-row button':
-      if (rowCount <= 10) {
-        appendRowButton.disabled = false;
-      }
-
       tbody.lastElementChild.remove();
+      removeRowButton.disabled = tbody.children.length <= 2;
 
-      if (rowCount <= 3) {
-        removeRowButton.disabled = true;
-      }
       break;
 
     case 'append-column button':
@@ -47,27 +34,15 @@ container.addEventListener('click', e => {
         tbody.children[i].append(document.createElement('td'));
       }
 
-      if (columnCount >= 9) {
-        appendColumnButton.disabled = true;
-      }
-
-      if (columnCount >= 2) {
-        removeColumnButton.disabled = false;
-      }
+      appendColumnButton.disabled = tbody.children[0].children.length >= 10;
       break;
 
     case 'remove-column button':
-      if (columnCount <= 10) {
-        appendColumnButton.disabled = false;
-      }
-
       for (let i = 0; i < tbody.children.length; i++) {
         tbody.children[i].lastElementChild.remove();
       }
 
-      if (columnCount <= 3) {
-        removeColumnButton.disabled = true;
-      }
+      removeColumnButton.disabled = tbody.children[0].children.length <= 2;
       break;
 
     default:
