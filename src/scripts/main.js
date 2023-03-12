@@ -19,13 +19,11 @@ container.addEventListener('click', e => {
       }
 
       tbody.append(newRow);
-      appendRowButton.disabled = tbody.children.length >= 10;
 
       break;
 
     case 'remove-row button':
       tbody.lastElementChild.remove();
-      removeRowButton.disabled = tbody.children.length <= 2;
 
       break;
 
@@ -34,7 +32,6 @@ container.addEventListener('click', e => {
         tbody.children[i].append(document.createElement('td'));
       }
 
-      appendColumnButton.disabled = tbody.children[0].children.length >= 10;
       break;
 
     case 'remove-column button':
@@ -42,10 +39,14 @@ container.addEventListener('click', e => {
         tbody.children[i].lastElementChild.remove();
       }
 
-      removeColumnButton.disabled = tbody.children[0].children.length <= 2;
       break;
 
     default:
       break;
   }
+
+  appendRowButton.disabled = tbody.children.length >= 10;
+  removeRowButton.disabled = tbody.children.length <= 2;
+  appendColumnButton.disabled = tbody.children[0].children.length >= 10;
+  removeColumnButton.disabled = tbody.children[0].children.length <= 2;
 });
