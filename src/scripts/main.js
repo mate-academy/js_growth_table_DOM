@@ -5,6 +5,8 @@ const appendRowButton = document.querySelector('.append-row');
 const appendColumnButton = document.querySelector('.append-column');
 const removeRowButton = document.querySelector('.remove-row');
 const removeColumnButton = document.querySelector('.remove-column');
+const maxRange = 10;
+const minRange = 2;
 
 container.addEventListener('click', e => {
   const tbody = document.querySelector('.field').firstElementChild;
@@ -45,8 +47,8 @@ container.addEventListener('click', e => {
       return;
   }
 
-  appendRowButton.disabled = tbody.children.length >= 10;
-  removeRowButton.disabled = tbody.children.length <= 2;
-  appendColumnButton.disabled = tbody.children[0].children.length >= 10;
-  removeColumnButton.disabled = tbody.children[0].children.length <= 2;
+  appendRowButton.disabled = tbody.children.length >= maxRange;
+  removeRowButton.disabled = tbody.children.length <= minRange;
+  appendColumnButton.disabled = tbody.children[0].children.length >= maxRange;
+  removeColumnButton.disabled = tbody.children[0].children.length <= minRange;
 });
