@@ -42,7 +42,7 @@ container.addEventListener('click', e => {
       break;
 
     default:
-      break;
+      return;
   }
 
   appendRowButton.disabled = tbody.children.length >= 10;
