@@ -9,6 +9,11 @@ const removeCellButton = document.querySelector('.remove-column');
 const addRowButton = document.querySelector('.append-row');
 const removeRowButton = document.querySelector('.remove-row');
 
+const maxCells = 9;
+const minCells = 3;
+const maxRows = 9;
+const minRows = 3;
+
 addCellButton.addEventListener('click', () => {
   [...gridRows].forEach(row => {
     const newCell = document.createElement('td');
@@ -16,14 +21,17 @@ addCellButton.addEventListener('click', () => {
     row.append(newCell);
   });
 
-  if (gridBody.rows[0].cells.length > 9) {
+  const isMaxColumns = checkMaxCellsAmount(gridBody, maxCells);
+  const isMinColumns = checkMinCellsAmount(gridBody, minCells);
+  const isRemoveCellButtonDisabled = checkForAttributeDisabled(
+    removeCellButton
+  );
+
+  if (isMaxColumns) {
     addCellButton.setAttribute('disabled', 'true');
   }
 
-  if (
-    gridBody.rows[0].cells.length > 2
-    && removeCellButton.hasAttribute('disabled')
-  ) {
+  if (!isMinColumns && isRemoveCellButtonDisabled) {
     removeCellButton.removeAttribute('disabled');
   }
 });
@@ -36,14 +44,15 @@ removeCellButton.addEventListener('click', () => {
     currentCells[i].remove();
   }
 
-  if (gridBody.rows[0].cells.length < 3) {
+  const isMaxColumns = checkMaxCellsAmount(gridBody, maxCells);
+  const isMinColumns = checkMinCellsAmount(gridBody, minCells);
+  const isAddCellButtonDisabled = checkForAttributeDisabled(addCellButton);
+
+  if (isMinColumns) {
     removeCellButton.setAttribute('disabled', 'true');
   }
 
-  if (
-    gridBody.rows[0].cells.length < 10
-    && addCellButton.hasAttribute('disabled')
-  ) {
+  if (!isMaxColumns && isAddCellButtonDisabled) {
     addCellButton.removeAttribute('disabled');
   }
 });
@@ -60,11 +69,15 @@ addRowButton.addEventListener('click', () => {
 
   gridBody.append(newRow);
 
-  if (gridBody.rows.length > 9) {
+  const isMaxRows = checkMaxRowsAmount(gridBody, maxRows);
+  const isMinRows = checkMinRowsAmount(gridBody, minRows);
+  const isRemoveRowButtonDisabled = checkForAttributeDisabled(removeRowButton);
+
+  if (isMaxRows) {
     addRowButton.setAttribute('disabled', 'true');
   }
 
-  if (gridBody.rows.length > 2 && removeRowButton.hasAttribute('disabled')) {
+  if (!isMinRows && isRemoveRowButtonDisabled) {
     removeRowButton.removeAttribute('disabled');
   }
 });
@@ -72,15 +85,55 @@ addRowButton.addEventListener('click', () => {
 removeRowButton.addEventListener('click', () => {
   gridBody.lastElementChild.remove();
 
-  if (gridBody.rows.length < 3) {
+  const isMaxRows = checkMaxRowsAmount(gridBody, maxRows);
+  const isMinRows = checkMinRowsAmount(gridBody, minRows);
+  const isAddRowButtonDisabled = checkForAttributeDisabled(addRowButton);
+
+  if (isMinRows) {
     removeRowButton.setAttribute('disabled', 'true');
   }
 
-  if (gridBody.rows.length < 10 && addRowButton.hasAttribute('disabled')) {
+  if (!isMaxRows && isAddRowButtonDisabled) {
     addRowButton.removeAttribute('disabled');
   }
 });
 
 function allCells(nameOfTag) {
   return document.querySelectorAll(`${nameOfTag}`);
+}
+
+function checkForAttributeDisabled(element) {
+  return element.hasAttribute('disabled');
+}
+
+function checkMaxCellsAmount(tBody, limit) {
+  if (tBody.rows[0].cells.length > limit) {
+    return true;
+  }
+
+  return false;
+}
+
+function checkMinCellsAmount(tBody, limit) {
+  if (tBody.rows[0].cells.length < limit) {
+    return true;
+  }
+
+  return false;
+}
+
+function checkMaxRowsAmount(tBody, limit) {
+  if (tBody.rows.length > limit) {
+    return true;
+  }
+
+  return false;
+}
+
+function checkMinRowsAmount(tBody, limit) {
+  if (tBody.rows.length < limit) {
+    return true;
+  }
+
+  return false;
 }
