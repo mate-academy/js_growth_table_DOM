@@ -11,8 +11,6 @@ const removeRowButton = document.querySelector('.remove-row');
 
 const maxCells = 9;
 const minCells = 3;
-const maxRows = 9;
-const minRows = 3;
 
 addCellButton.addEventListener('click', () => {
   [...gridRows].forEach(row => {
@@ -69,8 +67,8 @@ addRowButton.addEventListener('click', () => {
 
   gridBody.append(newRow);
 
-  const isMaxRows = checkMaxRowsAmount(gridBody, maxRows);
-  const isMinRows = checkMinRowsAmount(gridBody, minRows);
+  const isMaxRows = checkMaxRowsAmount(gridBody, maxCells);
+  const isMinRows = checkMinRowsAmount(gridBody, minCells);
   const isRemoveRowButtonDisabled = checkForAttributeDisabled(removeRowButton);
 
   if (isMaxRows) {
@@ -85,8 +83,8 @@ addRowButton.addEventListener('click', () => {
 removeRowButton.addEventListener('click', () => {
   gridBody.lastElementChild.remove();
 
-  const isMaxRows = checkMaxRowsAmount(gridBody, maxRows);
-  const isMinRows = checkMinRowsAmount(gridBody, minRows);
+  const isMaxRows = checkMaxRowsAmount(gridBody, maxCells);
+  const isMinRows = checkMinRowsAmount(gridBody, minCells);
   const isAddRowButtonDisabled = checkForAttributeDisabled(addRowButton);
 
   if (isMinRows) {
