@@ -57,9 +57,9 @@ document.addEventListener('click', (e) => {
       break;
 
     case 'append-column':
-      const trs = document.querySelectorAll('tr');
+      const rows = document.querySelectorAll('tr');
 
-      for (const column of trs) {
+      for (const column of rows) {
         const td = document.createElement('td');
 
         column.appendChild(td);
@@ -71,9 +71,9 @@ document.addEventListener('click', (e) => {
       break;
 
     case 'remove-column':
-      const trss = document.querySelectorAll('tr');
+      const rowsRemove = document.querySelectorAll('tr');
 
-      for (const column of trss) {
+      for (const column of rowsRemove) {
         column.deleteCell(0);
       }
 
