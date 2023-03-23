@@ -45,15 +45,11 @@ document.addEventListener('click', (e) => {
       tr.append(...cells);
       tbody.append(tr);
       rowsNumber++;
-
-      disableButton(rowsNumber, columnNumber, action);
       break;
 
     case 'remove-row':
       tbody.lastElementChild.remove();
       rowsNumber--;
-
-      disableButton(rowsNumber, columnNumber, action);
       break;
 
     case 'append-column':
@@ -66,8 +62,6 @@ document.addEventListener('click', (e) => {
       }
 
       columnNumber++;
-
-      disableButton(rowsNumber, columnNumber, action);
       break;
 
     case 'remove-column':
@@ -78,7 +72,7 @@ document.addEventListener('click', (e) => {
       }
 
       columnNumber--;
-
-      disableButton(rowsNumber, columnNumber, action);
   }
+
+  disableButton(rowsNumber, columnNumber, action);
 });
