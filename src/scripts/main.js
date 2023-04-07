@@ -10,14 +10,11 @@ const table = document.querySelector('.field').tBodies[0];
 const maxLength = 10;
 const minLength = 2;
 
-function updateButtonState() {
+function updateRowButtonState() {
   const rowsCount = table.rows.length;
-  const columnsCount = table.rows[0].cells.length;
 
   appendRowButton.disabled = rowsCount >= maxLength;
   removeRowButton.disabled = rowsCount <= minLength;
-  appendColumnButton.disabled = columnsCount >= maxLength;
-  removeColumnButton.disabled = columnsCount <= minLength;
 }
 
 function addRow() {
@@ -27,7 +24,7 @@ function addRow() {
     newRow.insertCell(-1);
   }
 
-  updateButtonState();
+  updateRowButtonState();
 }
 
 function removeRow() {
@@ -37,7 +34,14 @@ function removeRow() {
 
   table.deleteRow(-1);
 
-  updateButtonState();
+  updateRowButtonState();
+}
+
+function updateColumnButtonState() {
+  const columnsCount = table.rows[0].cells.length;
+
+  appendColumnButton.disabled = columnsCount >= maxLength;
+  removeColumnButton.disabled = columnsCount <= minLength;
 }
 
 function addColumn() {
@@ -45,7 +49,7 @@ function addColumn() {
     row.insertCell(-1);
   }
 
-  updateButtonState();
+  updateColumnButtonState();
 }
 
 function removeColumn() {
@@ -57,7 +61,7 @@ function removeColumn() {
     row.deleteCell(-1);
   }
 
-  updateButtonState();
+  updateColumnButtonState();
 }
 
 appendRowButton.addEventListener('click', addRow);
