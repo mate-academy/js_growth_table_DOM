@@ -11,13 +11,13 @@ function getAllRows() {
   return document.querySelectorAll('tr');
 }
 
-function lengthOfRows() {
+function getlengthOfRows() {
   return document.querySelectorAll('tr')[0].cells.length;
 }
 
 function addRowTable(e) {
   const target = e.target;
-  const rowLength = lengthOfRows();
+  const rowLength = getlengthOfRows();
   const allNewRows = getAllRows();
 
   if (target.classList.contains('append-row')) {
@@ -50,31 +50,13 @@ function addRowTable(e) {
 
   const newRowCount = getAllRows().length;
 
-  if (newRowCount < 10) {
-    addRow.disabled = false;
-  } else if (newRowCount >= 10) {
-    addRow.disabled = true;
-  }
+  addRow.disabled = newRowCount >= 10;
+  removeRow.disabled = newRowCount <= 2;
 
-  if (newRowCount <= 2) {
-    removeRow.disabled = true;
-  } else if (newRowCount > 2) {
-    removeRow.disabled = false;
-  }
+  const newLengthOfRows = getlengthOfRows();
 
-  const newLengthOfRows = lengthOfRows();
-
-  if (newLengthOfRows >= 10) {
-    addColumn.disabled = true;
-  } else if (newLengthOfRows < 10) {
-    addColumn.disabled = false;
-  }
-
-  if (newLengthOfRows <= 2) {
-    removeColumn.disabled = true;
-  } else if (newLengthOfRows > 2) {
-    removeColumn.disabled = false;
-  }
+  addColumn.disabled = newLengthOfRows >= 10;
+  removeColumn.disabled = newLengthOfRows <= 2;
 }
 
 container.addEventListener('click', addRowTable);
