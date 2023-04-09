@@ -12,8 +12,9 @@ appendRowButton.addEventListener('click', () => {
   const rows = table.querySelectorAll('tr');
   const lastRow = rows[rows.length - 1];
   const newRow = lastRow.cloneNode(true);
+  const numberOfRows = table.rows.length;
 
-  if (table.rows.length < 10) {
+  if (numberOfRows < 10) {
     table.appendChild(newRow);
   }
 });
@@ -21,8 +22,9 @@ appendRowButton.addEventListener('click', () => {
 removeRowButton.addEventListener('click', () => {
   const rows = table.querySelectorAll('tr');
   const lastRow = rows[rows.length - 1];
+  const numberOfRows = table.rows.length;
 
-  if (table.rows.length > 2) {
+  if (numberOfRows > 2) {
     lastRow.remove();
   }
 });
@@ -32,8 +34,9 @@ appendColumnButton.addEventListener('click', () => {
 
   for (let i = 0; i < rows.length; i++) {
     const newCell = document.createElement('td');
+    const numberOfColumns = rows[i].cells.length;
 
-    if (rows[i].cells.length < 10) {
+    if (numberOfColumns < 10) {
       rows[i].appendChild(newCell);
     }
   }
@@ -44,8 +47,9 @@ removeColumnButton.addEventListener('click', () => {
 
   for (let i = 0; i < rows.length; i++) {
     const lastCell = table.rows[i].lastElementChild;
+    const numberOfColumns = rows[i].cells.length;
 
-    if (rows[i].cells.length > 2) {
+    if (numberOfColumns > 2) {
       lastCell.remove();
     }
   }
