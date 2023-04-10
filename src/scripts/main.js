@@ -11,6 +11,8 @@ addRow.onclick = () => {
   const trCount = document.querySelectorAll('table tr').length;
 
   if (trCount < 10) {
+    removeRow.disabled = false;
+
     const template = document.querySelector('table tr');
 
     const tdCount = template.children.length;
@@ -61,7 +63,7 @@ removeColumn.onclick = () => {
   }
 
   if (row === 2) {
-    removeRow.disabled = true;
+    removeColumn.disabled = true;
   }
 };
 
