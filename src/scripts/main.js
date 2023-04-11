@@ -8,22 +8,22 @@ const removeColumn = document.querySelector('.remove-column');
 addRow.onclick = () => {
   const table = document.querySelector('table tbody');
 
+  const template = document.querySelector('table tr');
+
+  const tdCount = template.children.length;
+
+  const tr = document.createElement('tr');
+
+  for (let i = 0; i < tdCount; i++) {
+    tr.innerHTML += '<td></td>';
+  }
+
+  table.insertAdjacentElement('afterbegin', tr);
+
   const trCount = document.querySelectorAll('table tr').length;
 
   if (trCount < 10) {
     removeRow.disabled = false;
-
-    const template = document.querySelector('table tr');
-
-    const tdCount = template.children.length;
-
-    const tr = document.createElement('tr');
-
-    for (let i = 0; i < tdCount; i++) {
-      tr.innerHTML += '<td></td>';
-    }
-
-    table.insertAdjacentElement('afterbegin', tr);
   }
 
   if (trCount === 10) {
@@ -34,16 +34,16 @@ addRow.onclick = () => {
 addColumn.onclick = () => {
   const trArr = document.querySelectorAll('table tr');
 
+  trArr.forEach((tr) => {
+    const td = document.createElement('td');
+
+    tr.insertAdjacentElement('beforeend', td);
+  });
+
   const countTd = document.querySelectorAll('table tr:first-child td').length;
 
   if (countTd < 10) {
     removeColumn.disabled = false;
-
-    trArr.forEach((tr) => {
-      const td = document.createElement('td');
-
-      tr.insertAdjacentElement('beforeend', td);
-    });
   }
 
   if (countTd === 10) {
@@ -52,14 +52,15 @@ addColumn.onclick = () => {
 };
 
 removeColumn.onclick = () => {
+
+  const column = document.querySelectorAll('table tr td:last-child');
+
+  column.forEach((td) => td.remove());
+
   const row = document.querySelectorAll('table tr:first-child td').length;
 
   if (row > 2) {
-    const column = document.querySelectorAll('table tr td:last-child');
-
     addColumn.disabled = false;
-
-    column.forEach((td) => td.remove());
   }
 
   if (row === 2) {
@@ -68,10 +69,11 @@ removeColumn.onclick = () => {
 };
 
 removeRow.onclick = () => {
+  document.querySelector('table tr:last-child').remove();
+
   const row = document.querySelectorAll('table tr').length;
 
   if (row > 2) {
-    document.querySelector('table tr:last-child').remove();
     addRow.disabled = false;
   }
 
