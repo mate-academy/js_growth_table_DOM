@@ -1,7 +1,6 @@
 'use strict';
 
 const container = document.querySelector('.container');
-
 const table = document.querySelector('table');
 
 container.addEventListener('click', (e) => {
@@ -13,9 +12,9 @@ container.addEventListener('click', (e) => {
     case 'append-row button':
       document.querySelector('.remove-row').disabled = false;
 
-      if (table.rows.length < 10) {
-        table.append(document.querySelector('tr').cloneNode(true));
-      } else {
+      table.append(document.querySelector('tr').cloneNode(true));
+
+      if (table.rows.length === 10) {
         e.target.disabled = true;
       }
       break;
@@ -23,19 +22,21 @@ container.addEventListener('click', (e) => {
     case 'remove-row button':
       document.querySelector('.append-row').disabled = false;
 
-      if (table.rows.length > 2) {
-        table.querySelector('tr').remove();
-      } else {
+      table.querySelector('tr').remove();
+
+      if (table.rows.length === 2) {
         e.target.disabled = true;
       }
       break;
 
     case 'append-column button':
-      if (table.rows[0].cells.length < 10) {
-        for (const row of table.rows) {
-          row.append(document.createElement('td'));
-        }
-      } else {
+      document.querySelector('.remove-column').disabled = false;
+
+      for (const row of table.rows) {
+        row.append(document.createElement('td'));
+      }
+
+      if (table.rows[0].cells.length === 10) {
         e.target.disabled = true;
       }
       break;
@@ -43,11 +44,11 @@ container.addEventListener('click', (e) => {
     case 'remove-column button':
       document.querySelector('.append-column').disabled = false;
 
-      if (table.rows[0].cells.length > 2) {
-        for (const row of table.rows) {
-          row.querySelector('td').remove();
-        }
-      } else {
+      for (const row of table.rows) {
+        row.querySelector('td').remove();
+      }
+
+      if (table.rows[0].cells.length === 2) {
         e.target.disabled = true;
       }
       break;
