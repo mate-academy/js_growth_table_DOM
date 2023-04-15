@@ -5,70 +5,46 @@ const removerow = document.querySelector('.remove-row');
 const appendcolumn = document.querySelector('.append-column');
 const removecolumn = document.querySelector('.remove-column');
 
-let trs = document.querySelectorAll('tr');
-let tr = document.querySelector('tr');
+let rowList = document.querySelectorAll('tr');
+let row = document.querySelector('tr');
 const table = document.querySelector('tbody');
 const td = document.querySelector('td');
 
 appendrow.addEventListener('click', (e) => {
-  const newtr = tr.cloneNode(true);
+  const newtr = row.cloneNode(true);
 
   table.append(newtr);
-  trs = document.querySelectorAll('tr');
+  rowList = document.querySelectorAll('tr');
 
-  if (trs.length >= 10) {
-    appendrow.disabled = true;
-  }
-
-  if (trs.length > 2) {
-    removerow.disabled = false;
-  }
+  appendrow.disabled = rowList.length >= 10;
+  removerow.disabled = rowList.length < 2;
 });
 
 removerow.addEventListener('click', (e) => {
-  tr = document.querySelector('tr');
-  tr.remove();
-  trs = document.querySelectorAll('tr');
+  row = document.querySelector('tr');
+  row.remove();
+  rowList = document.querySelectorAll('tr');
 
-  if (trs.length < 10) {
-    appendrow.disabled = false;
-  }
-
-  if (trs.length <= 2) {
-    removerow.disabled = true;
-  } else {
-    removerow.disabled = false;
-  }
+  appendrow.disabled = rowList.length > 10;
+  removerow.disabled = rowList.length <= 2;
 });
 
 appendcolumn.addEventListener('click', (e) => {
-  for (const trforcolum of trs) {
+  for (const currentRow of rowList) {
     const newtd = td.cloneNode(true);
 
-    trforcolum.append(newtd);
+    currentRow.append(newtd);
 
-    if (trforcolum.children.length >= 10) {
-      appendcolumn.disabled = true;
-    }
-
-    if (trforcolum.children.length > 2) {
-      removecolumn.disabled = false;
-    }
+    appendcolumn.disabled = currentRow.children.length >= 10;
+    removecolumn.disabled = currentRow.children.length < 2;
   }
 });
 
 removecolumn.addEventListener('click', (e) => {
-  for (const trforcolum of trs) {
-    trforcolum.lastElementChild.remove();
+  for (const currentRow of rowList) {
+    currentRow.lastElementChild.remove();
 
-    if (trforcolum.children.length < 10) {
-      appendcolumn.disabled = false;
-    }
-
-    if (trforcolum.children.length <= 2) {
-      removecolumn.disabled = true;
-    } else {
-      removecolumn.disabled = false;
-    }
+    appendcolumn.disabled = currentRow.children.length > 10;
+    removecolumn.disabled = currentRow.children.length <= 2;
   }
 });
