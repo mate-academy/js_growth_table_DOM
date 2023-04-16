@@ -25,26 +25,31 @@ container.addEventListener('click', e => {
     [...table.rows[0].cells].forEach((el, index) => {
       newRow.insertCell(index);
     });
+
+    rowsLength++;
   }
 
   if (item.classList.contains('remove-row') && table.rows.length > 1) {
     table.deleteRow(rowsLength - 1);
+
+    rowsLength--;
   }
 
   if (item.classList.contains('append-column')) {
     [...table.rows].forEach((el, index) => {
       el.insertCell(cellsLength);
     });
+
+    cellsLength++;
   }
 
   if (item.classList.contains('remove-column') && cellsLength > 1) {
     [...table.rows].forEach((row, i) => {
       row.deleteCell(cellsLength - 1);
     });
-  }
 
-  rowsLength = table.rows.length;
-  cellsLength = table.rows[0].cells.length;
+    cellsLength--;
+  }
 
   appendRow.disabled = rowsLength === 10;
   removeRow.disabled = rowsLength === 2;
