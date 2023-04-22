@@ -6,32 +6,35 @@ const removeRow = document.querySelector('.remove-row');
 const addColumn = document.querySelector('.append-column');
 const removeColumn = document.querySelector('.remove-column');
 
+
 function control() {
-  if (table.rows.length === 10) {
+  let rLength = table.rows.length;
+  let cLength = table.rows[0].cells.length;
+
+  if (rLength === 10) {
     addRow.disabled = true;
   } else {
     addRow.disabled = false;
   }
-  
-  if (table.rows.length === 2) {
+
+  if (rLength === 2) {
     removeRow.disabled = true;
   } else {
     removeRow.disabled = false;
   }
-  
-  if (table.rows[0].cells.length === 10) {
+
+  if (cLength === 10) {
     addColumn.disabled = true;
   } else {
     addColumn.disabled = false;
   }
-  
-  if (table.rows[0].cells.length === 2) {
+
+  if (cLength === 2) {
     removeColumn.disabled = true;
   } else {
     removeColumn.disabled = false;
   }
 }
-
 
 addRow.addEventListener('click', () => {
   const rowToClone = table.rows[0];
@@ -44,7 +47,7 @@ addRow.addEventListener('click', () => {
 removeRow.addEventListener('click', () => {
   table.deleteRow(0);
   control();
-})
+});
 
 addColumn.addEventListener('click', () => {
   for (let i = 0; i < table.rows.length; i++) {
