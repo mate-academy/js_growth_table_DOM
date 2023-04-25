@@ -6,30 +6,29 @@ const removeRow = document.querySelector('.remove-row');
 const addColumn = document.querySelector('.append-column');
 const removeColumn = document.querySelector('.remove-column');
 
-
 function control() {
-  let rLength = table.rows.length;
-  let cLength = table.rows[0].cells.length;
+  const maxLength = 10;
+  const minLenght = 2;
 
-  if (rLength === 10) {
+  if (table.rows.length === maxLength) {
     addRow.disabled = true;
   } else {
     addRow.disabled = false;
   }
 
-  if (rLength === 2) {
+  if (table.rows.length === minLenght) {
     removeRow.disabled = true;
   } else {
     removeRow.disabled = false;
   }
 
-  if (cLength === 10) {
+  if (table.rows[0].cells.length === maxLength) {
     addColumn.disabled = true;
   } else {
     addColumn.disabled = false;
   }
 
-  if (cLength === 2) {
+  if (table.rows[0].cells.length === minLenght) {
     removeColumn.disabled = true;
   } else {
     removeColumn.disabled = false;
