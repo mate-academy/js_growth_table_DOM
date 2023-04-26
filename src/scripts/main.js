@@ -16,54 +16,64 @@ container.addEventListener('click', clickEvent => {
   const target = clickEvent.target;
   const rows = document.querySelectorAll('tr');
 
-  if (target.classList.contains('append-row')) {
-    table.rows++;
+  switch (true) {
+    case target.classList.contains('append-row'): {
+      table.rows++;
 
-    const row = document.createElement('tr');
+      const row = document.createElement('tr');
 
-    row.innerHTML = createTd(table.columns);
+      row.innerHTML = createTd(table.columns);
 
-    field.firstElementChild.appendChild(row);
-  } else if (target.classList.contains('remove-row')) {
-    table.rows--;
-    field.firstElementChild.lastElementChild.remove();
-  } else if (target.classList.contains('append-column')) {
-    table.columns++;
+      field.firstElementChild.appendChild(row);
+      break;
+    }
 
-    rows.forEach(row => {
-      const element = document.createElement('td');
+    case target.classList.contains('remove-row'): {
+      table.rows--;
+      field.firstElementChild.lastElementChild.remove();
+      break;
+    }
 
-      row.insertBefore(element, row.firstChild);
-    });
-  } else if (target.classList.contains('remove-column')) {
-    table.columns--;
+    case target.classList.contains('append-column'): {
+      table.columns++;
 
-    rows.forEach(row => {
-      row.firstElementChild.remove();
-    });
+      rows.forEach(row => {
+        const element = document.createElement('td');
+
+        row.insertBefore(element, row.firstChild);
+      });
+      break;
+    }
+
+    case target.classList.contains('remove-column'): {
+      table.columns--;
+
+      rows.forEach(row => {
+        row.firstElementChild.remove();
+      });
+      break;
+    }
+
+    default: {
+      Error('Wrong class');
+    }
   }
 
   if (table.rows === 2) {
     removeRow.setAttribute('disabled', 'true');
-  } else {
-    removeRow.removeAttribute('disabled');
-  }
-
-  if (table.rows === 10) {
+  } else if (table.rows === 10) {
     appendRow.setAttribute('disabled', 'true');
   } else {
+    removeRow.removeAttribute('disabled');
     appendRow.removeAttribute('disabled');
   }
 
   if (table.columns === 2) {
     removeColumn.setAttribute('disabled', 'true');
-  } else {
-    removeColumn.removeAttribute('disabled');
-  }
-
-  if (table.columns === 10) {
+  } else if (table.columns === 10) {
     appendColumn.setAttribute('disabled', 'true');
   } else {
+    removeColumn.removeAttribute('disabled');
     appendColumn.removeAttribute('disabled');
   }
 });
