@@ -27,7 +27,7 @@ Some rules:
 As always, on JS Advanced course you do not need to change the HTML layout or CSS styles.
 
 Examples:
-![10x10](./src/images/10x10.png)
+<img width="648" alt="image" src="https://user-images.githubusercontent.com/94261494/234831834-c2a1d711-0ea6-4746-9e38-941734e78e81.png">
 
 ![2x2](./src/images/2x2.png)
 
