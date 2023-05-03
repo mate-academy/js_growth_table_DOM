@@ -22,10 +22,10 @@ const buttons = document.querySelectorAll('.container .button');
     }
 
     if (button.classList.contains('remove-row')) {
-      if (table.children.length > 3) {
+      if (table.children.length > 2) {
         table.deleteRow(length - 1);
 
-        if (table.children.length === 3) {
+        if (table.children.length === 2) {
           button.setAttribute('disabled', false);
         }
 
