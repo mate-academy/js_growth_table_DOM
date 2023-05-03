@@ -55,10 +55,10 @@ const buttons = document.querySelectorAll('.container .button');
 
     if (button.classList.contains('remove-column')) {
       [...table.children].forEach(item => {
-        if (item.children.length > 3) {
+        if (item.children.length > 2) {
           item.lastElementChild.remove();
 
-          if (item.children.length === 3) {
+          if (item.children.length === 2) {
             button.setAttribute('disabled', false);
           }
 
