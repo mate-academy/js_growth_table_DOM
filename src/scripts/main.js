@@ -3,7 +3,7 @@
 const appendRow = document.querySelector('.append-row');
 const removeRow = document.querySelector('.remove-row');
 const appendColumn = document.querySelector('.append-column');
-const remoweColumn = document.querySelector('.remove-column');
+const removeColumn = document.querySelector('.remove-column');
 const table = document.querySelector('tbody');
 const tableRows = document.getElementsByTagName('tr');
 
@@ -26,17 +26,17 @@ appendColumn.addEventListener('click', () => {
     addTableColumn();
   }
 
-  checkDisabled(appendColumn, remoweColumn, tableRows[0].children.length === 10,
+  checkDisabled(appendColumn, removeColumn, tableRows[0].children.length === 10,
     tableRows[0].children.length === 2
   );
 });
 
-remoweColumn.addEventListener('click', () => {
+removeColumn.addEventListener('click', () => {
   if (tableRows[0].children.length >= 3) {
     remoweTableColumn();
   }
 
-  checkDisabled(appendColumn, remoweColumn, tableRows[0].children.length === 10,
+  checkDisabled(appendColumn, removeColumn, tableRows[0].children.length === 10,
     tableRows[0].children.length === 2
   );
 });
