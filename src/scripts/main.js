@@ -10,11 +10,13 @@ const trNode = table.rows;
 const checkAmount = () => {
   const rowsCount = table.rows.length;
   const columnsCount = table.rows[0].cells.length;
+  const minAmountOfElements = 2;
+  const maxAmountOfElements = 10;
 
-  appendRow.disabled = rowsCount >= 10;
-  removeRow.disabled = rowsCount <= 2;
-  appendCol.disabled = columnsCount >= 10;
-  removeCol.disabled = columnsCount <= 2;
+  appendRow.disabled = rowsCount >= maxAmountOfElements;
+  removeRow.disabled = rowsCount <= minAmountOfElements;
+  appendCol.disabled = columnsCount >= maxAmountOfElements;
+  removeCol.disabled = columnsCount <= minAmountOfElements;
 };
 
 appendRow.addEventListener('click', () => {
