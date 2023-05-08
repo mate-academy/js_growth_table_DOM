@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 'use strict';
 
 // table dom element
@@ -16,7 +17,7 @@ const table = {
 };
 
 addRowBtn.addEventListener('click', (e) => {
-  tableElement.append(tableElement.rows[0].cloneNode(true));
+  tableElement.append(tableElement.rows[tableElement.rows.length - 1].cloneNode(true));
   removeRowBtn.disabled = false;
   table.height++;
 
@@ -26,7 +27,7 @@ addRowBtn.addEventListener('click', (e) => {
 });
 
 removeRowBtn.addEventListener('click', (e) => {
-  tableElement.rows[0].remove();
+  tableElement.rows[tableElement.rows.length - 1].remove();
   addRowBtn.disabled = false;
   table.height--;
 
@@ -37,7 +38,7 @@ removeRowBtn.addEventListener('click', (e) => {
 
 addColumnBtn.addEventListener('click', (e) => {
   for (const row of tableElement.rows) {
-    row.append(row.children[0].cloneNode());
+    row.insertAdjacentHTML('beforeend', '<td></td>');
   }
   removeColumnBtn.disabled = false;
   table.width++;
@@ -49,7 +50,7 @@ addColumnBtn.addEventListener('click', (e) => {
 
 removeColumnBtn.addEventListener('click', (e) => {
   for (const row of tableElement.rows) {
-    row.children[0].remove();
+    row.lastElementChild.remove();
   }
   addColumnBtn.disabled = false;
   table.width--;
