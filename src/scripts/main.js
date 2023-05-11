@@ -12,8 +12,8 @@ const removeColumnButton = document.querySelector('.remove-column');
 let td;
 let tr;
 let tdHTML = '';
-const maxCount = 10;
-const minCount = 2;
+const MAX_COUNT = 10;
+const MIN_COUNT = 2;
 
 appendRowButton.addEventListener('click', function() {
   for (let i = 0; i < tableRows[0].cells.length; i++) {
@@ -25,7 +25,7 @@ appendRowButton.addEventListener('click', function() {
   tBody.append(tr);
   tdHTML = '';
 
-  if (tableRows.length >= maxCount) {
+  if (tableRows.length >= MAX_COUNT) {
     this.disabled = true;
 
     return;
@@ -37,7 +37,7 @@ appendRowButton.addEventListener('click', function() {
 removeRowButton.addEventListener('click', function() {
   tableRows[tableRows.length - 1].remove();
 
-  if (tableRows.length <= minCount) {
+  if (tableRows.length <= MIN_COUNT) {
     this.disabled = true;
 
     return;
@@ -51,7 +51,7 @@ appendColumnButton.addEventListener('click', function() {
   [...tableRows].forEach(row => row.insertAdjacentHTML(
     'beforeend', td.outerHTML));
 
-  if (tableRows[0].cells.length >= maxCount) {
+  if (tableRows[0].cells.length >= MAX_COUNT) {
     this.disabled = true;
 
     return;
@@ -63,7 +63,7 @@ appendColumnButton.addEventListener('click', function() {
 removeColumnButton.addEventListener('click', function() {
   [...tableRows].forEach(row => row.cells[row.cells.length - 1].remove());
 
-  if (tableRows[0].cells.length <= minCount) {
+  if (tableRows[0].cells.length <= MIN_COUNT) {
     this.disabled = true;
 
     return;
