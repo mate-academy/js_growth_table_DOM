@@ -1,6 +1,11 @@
 'use strict';
 
-const table = document.querySelector('tbody');
+const table = document.querySelector('table');
+const tableBody = document.createElement('tbody');
+table.innerHTML = '';
+table.append(tableBody);
+
+const tbody = document.querySelector('tbody');
 
 const apppendRow = document.querySelector('.append-row');
 const removeRow = document.querySelector('.remove-row');
@@ -26,9 +31,9 @@ apppendRow.addEventListener('click', () => {
 
   tableSize.height++;
 
-  const trClone = table.lastElementChild.cloneNode(true);
+  const trClone = tbody.lastElementChild.cloneNode(true);
 
-  table.append(trClone);
+  tbody.append(trClone);
 
   if (buttonsState.removeRowButton === 'disabled') {
     buttonsState.removeRowButton = 'enabled';
@@ -48,10 +53,10 @@ removeRow.addEventListener('click', () => {
 
   tableSize.height--;
 
-  const trLast = table.lastElementChild;
+  const trLast = tbody.lastElementChild;
 
   if (trLast) {
-    table.removeChild(trLast);
+    tbody.removeChild(trLast);
   }
 
   if (buttonsState.apppendRowButton === 'disabled') {
@@ -72,7 +77,7 @@ appendColumn.addEventListener('click', () => {
 
   tableSize.width++;
 
-  [...table.children].forEach((child) => {
+  [...tbody.children].forEach((child) => {
     const td = document.createElement('td');
 
     child.append(td);
@@ -96,7 +101,7 @@ removeColumn.addEventListener('click', () => {
 
   tableSize.width--;
 
-  [...table.children].forEach((child) => {
+  [...tbody.children].forEach((child) => {
     const tdLast = child.lastElementChild;
 
     if (tdLast) {
@@ -118,17 +123,19 @@ removeColumn.addEventListener('click', () => {
 // in case we need to rerender the table
 // eslint-disable-next-line
 function render() {
-  table.innerHTML = '';
+  tbody.innerHTML = '';
 
-  for (let i = 0; i < 20; i++) {
+  for (let i = 0; i < tableSize.height; i++) {
     const tr = document.createElement('tr');
 
-    for (let j = 0; j < 20; j++) {
+    for (let j = 0; j < tableSize.width; j++) {
       const td = document.createElement('td');
 
       tr.append(td);
     }
 
-    table.append(tr);
+    tbody.append(tr);
   }
 }
+
+render();
