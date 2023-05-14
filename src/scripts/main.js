@@ -2,12 +2,13 @@
 
 const table = document.querySelector('table');
 const tableBody = document.createElement('tbody');
+
 table.innerHTML = '';
 table.append(tableBody);
 
 const tbody = document.querySelector('tbody');
 
-const apppendRow = document.querySelector('.append-row');
+const appendRow = document.querySelector('.append-row');
 const removeRow = document.querySelector('.remove-row');
 const appendColumn = document.querySelector('.append-column');
 const removeColumn = document.querySelector('.remove-column');
@@ -18,14 +19,14 @@ const tableSize = {
 };
 
 const buttonsState = {
-  apppendRowButton: 'enabled',
-  removeRowButton: 'enabled',
-  appendColumnButton: 'enabled',
-  removeColumnButton: 'enabled',
+  appendRowButton: true,
+  removeRowButton: true,
+  appendColumnButton: true,
+  removeColumnButton: true,
 };
 
-apppendRow.addEventListener('click', () => {
-  if (buttonsState.apppendRowButton === 'disabled') {
+appendRow.addEventListener('click', () => {
+  if (!buttonsState.appendRowButton) {
     return;
   }
 
@@ -35,19 +36,19 @@ apppendRow.addEventListener('click', () => {
 
   tbody.append(trClone);
 
-  if (buttonsState.removeRowButton === 'disabled') {
-    buttonsState.removeRowButton = 'enabled';
+  if (!buttonsState.removeRowButton) {
+    buttonsState.removeRowButton = true;
     removeRow.disabled = false;
   }
 
   if (tableSize.height >= 10) {
-    apppendRow.disabled = true;
-    buttonsState.apppendRowButton = 'disabled';
+    appendRow.disabled = true;
+    buttonsState.appendRowButton = false;
   }
 });
 
 removeRow.addEventListener('click', () => {
-  if (buttonsState.removeRowButton === 'disabled') {
+  if (!buttonsState.removeRowButton) {
     return;
   }
 
@@ -59,19 +60,19 @@ removeRow.addEventListener('click', () => {
     tbody.removeChild(trLast);
   }
 
-  if (buttonsState.apppendRowButton === 'disabled') {
-    buttonsState.apppendRowButton = 'enabled';
-    apppendRow.disabled = false;
+  if (!buttonsState.appendRowButton) {
+    buttonsState.appendRowButton = true;
+    appendRow.disabled = false;
   }
 
   if (tableSize.height <= 2) {
     removeRow.disabled = true;
-    buttonsState.removeRowButton = 'disabled';
+    buttonsState.removeRowButton = false;
   }
 });
 
 appendColumn.addEventListener('click', () => {
-  if (buttonsState.appendColumnButton === 'disabled') {
+  if (!buttonsState.appendColumnButton) {
     return;
   }
 
@@ -83,19 +84,19 @@ appendColumn.addEventListener('click', () => {
     child.append(td);
   });
 
-  if (buttonsState.removeColumnButton === 'disabled') {
-    buttonsState.removeColumnButton = 'enabled';
+  if (!buttonsState.removeColumnButton) {
+    buttonsState.removeColumnButton = true;
     removeColumn.disabled = false;
   }
 
   if (tableSize.width >= 10) {
     appendColumn.disabled = true;
-    buttonsState.appendColumnButton = 'disabled';
+    buttonsState.appendColumnButton = false;
   }
 });
 
 removeColumn.addEventListener('click', () => {
-  if (buttonsState.removeColumnButton === 'disabled') {
+  if (!buttonsState.removeColumnButton) {
     return;
   }
 
@@ -109,14 +110,14 @@ removeColumn.addEventListener('click', () => {
     }
   });
 
-  if (buttonsState.appendColumnButton === 'disabled') {
-    buttonsState.appendColumnButton = 'enabled';
+  if (!buttonsState.appendColumnButton) {
+    buttonsState.appendColumnButton = true;
     appendColumn.disabled = false;
   }
 
   if (tableSize.width <= 2) {
     removeColumn.disabled = true;
-    buttonsState.removeColumnButton = 'disabled';
+    buttonsState.removeColumnButton = false;
   }
 });
 
