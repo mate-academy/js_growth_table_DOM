@@ -17,7 +17,12 @@ const table = {
 };
 
 addRowBtn.addEventListener('click', (e) => {
-  tableElement.append(tableElement.rows[tableElement.rows.length - 1].cloneNode(true));
+  const newRow = document.createElement('tr');
+
+  [...tableElement.rows[tableElement.rows.length - 1].cells].forEach(cell => {
+    newRow.insertAdjacentHTML('beforeend', '<td></td>');
+  });
+  tableElement.append(newRow);
   removeRowBtn.disabled = false;
   table.height++;
 
