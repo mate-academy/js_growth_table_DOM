@@ -11,16 +11,16 @@ window.addEventListener('click', even => {
   if (even.target.tagName === 'BUTTON') {
     switch (even.target) {
       case buttonAppendRow:
-        appendRow();
+        appendRow(even.target);
         break;
       case buttonRemoveRow:
-        removeRow();
+        removeRow(even.target);
         break;
       case buttonsAppendColumn:
-        appendColumn();
+        appendColumn(even.target);
         break;
       case buttonRemoveColumn:
-        removeColumn();
+        removeColumn(even.target);
         break;
 
       default:
@@ -29,7 +29,9 @@ window.addEventListener('click', even => {
   }
 });
 
-function appendRow() {
+function appendRow(button) {
+  buttonRemoveRow.disabled = false;
+
   const newRow = document.createElement('tr');
 
   if (table.rows.length < 10) {
@@ -41,17 +43,29 @@ function appendRow() {
 
     table.appendChild(newRow);
   }
+
+  if (table.rows.length === 10) {
+    button.disabled = true;
+  }
 }
 
-function removeRow() {
+function removeRow(button) {
+  buttonAppendRow.disabled = false;
+
   const rows = table.rows;
 
   if (rows.length > 2) {
     table.deleteRow(rows.length - 1);
   }
+
+  if (rows.length === 2) {
+    button.disabled = true;
+  }
 }
 
-function appendColumn() {
+function appendColumn(button) {
+  buttonRemoveColumn.disabled = false;
+
   const currentColumnCount = table.rows[0].cells.length;
 
   if (currentColumnCount < 10) {
@@ -61,14 +75,24 @@ function appendColumn() {
       table.rows[i].appendChild(newCell);
     }
   }
+
+  if (table.rows[0].cells.length === 10) {
+    button.disabled = true;
+  }
 }
 
-function removeColumn() {
+function removeColumn(button) {
+  buttonsAppendColumn.disabled = false;
+
   const currentColumnCount = table.rows[0].cells.length;
 
   if (currentColumnCount > 2) {
     for (let i = 0; i < table.rows.length; i++) {
       table.rows[i].lastElementChild.remove();
     }
+  }
+
+  if (table.rows[0].cells.length === 2) {
+    button.disabled = true;
   }
 }
