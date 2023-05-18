@@ -1,7 +1,6 @@
 'use strict';
 
 const container = document.querySelector('.container');
-
 let table = document.querySelector('tbody');
 const rows = table.children;
 
@@ -40,5 +39,34 @@ container.addEventListener('click', (e) => {
 
     default:
       table = document.querySelector('tbody');
+  }
+
+  const maxElements = 10;
+  const minElements = 2;
+  const rowsNumber = rows.length;
+  const columsNumber = rows[0].children.length;
+
+  if (rowsNumber >= maxElements) {
+    addRow.disabled = true;
+  } else if (addRow.disabled && rowsNumber < maxElements) {
+    addRow.disabled = false;
+  }
+
+  if (rowsNumber <= minElements) {
+    removeRow.disabled = true;
+  } else if (removeRow.disabled && rowsNumber >= minElements) {
+    removeRow.disabled = false;
+  }
+
+  if (columsNumber >= maxElements) {
+    addColumn.disabled = true;
+  } else if (addColumn.disabled && columsNumber <= maxElements) {
+    addColumn.disabled = false;
+  }
+
+  if (columsNumber <= minElements) {
+    removeColumn.disabled = true;
+  } else if (removeColumn.disabled && columsNumber >= minElements) {
+    removeColumn.disabled = false;
   }
 });
