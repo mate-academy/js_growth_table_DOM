@@ -17,6 +17,10 @@ appendRowButton.addEventListener('click', () => {
     return;
   }
 
+  if (rowLength === 9) {
+    appendRowButton.disabled = true;
+  }
+
   const newTr = document.createElement('tr');
   for (let i = 0; i < cellsValue; i++) {
     const newCeil = document.createElement('td');
@@ -24,6 +28,7 @@ appendRowButton.addEventListener('click', () => {
   }
 
   table.append(newTr);
+  removeRowButton.disabled = false;
 })
 
 removeRowButton.addEventListener('click', () => {
@@ -33,7 +38,12 @@ removeRowButton.addEventListener('click', () => {
     return;
   }
 
+  if (rowLength === 3) {
+    removeRowButton.disabled = true;
+  }
+
   table.lastElementChild.remove();
+  appendRowButton.disabled = false;
 })
 
 appendColumnButton.addEventListener('click', () => {
@@ -44,11 +54,16 @@ appendColumnButton.addEventListener('click', () => {
     return;
   }
 
+  if (currentColumsValue === 9) {
+    appendColumnButton.disabled = true;
+  }
+
   for (const row of rowLength) {
     const newCeil = document.createElement('td');
     row.append(newCeil);
   }
 
+  removeColumnButton.disabled = false;
 })
 
 removeColumnButton.addEventListener('click', () => {
@@ -59,7 +74,12 @@ removeColumnButton.addEventListener('click', () => {
     return;
   }
 
+  if (cellsValue === 3) {
+    removeColumnButton.disabled = true;
+  }
+
   for (const row of rows) {
     row.lastElementChild.remove();
   }
+  appendColumnButton.disabled = false;
 })
