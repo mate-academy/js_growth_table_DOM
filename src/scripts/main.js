@@ -18,8 +18,7 @@ appendRow.addEventListener('click', () => {
 
   countRows++;
 
-  appendRow.disabled = countRows >= maxLength;
-  removeRow.disabled = countRows <= minLength;
+  updateRowStatus();
 });
 
 removeRow.addEventListener('click', () => {
@@ -27,8 +26,7 @@ removeRow.addEventListener('click', () => {
 
   countRows--;
 
-  appendRow.disabled = countRows >= maxLength;
-  removeRow.disabled = countRows <= minLength;
+  updateRowStatus();
 });
 
 appendColumn.addEventListener('click', () => {
@@ -37,8 +35,7 @@ appendColumn.addEventListener('click', () => {
 
   countColumns++;
 
-  appendColumn.disabled = countColumns >= maxLength;
-  removeColumn.disabled = countColumns <= minLength;
+  updateColumnStatus();
 });
 
 removeColumn.addEventListener('click', () => {
@@ -47,6 +44,15 @@ removeColumn.addEventListener('click', () => {
 
   countColumns--;
 
+  updateColumnStatus();
+});
+
+function updateRowStatus() {
+  appendRow.disabled = countRows >= maxLength;
+  removeRow.disabled = countRows <= minLength;
+}
+
+function updateColumnStatus() {
   appendColumn.disabled = countColumns >= maxLength;
   removeColumn.disabled = countColumns <= minLength;
-});
+}
