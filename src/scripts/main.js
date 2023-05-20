@@ -5,7 +5,7 @@ const removeRow = document.querySelector('.remove-row');
 const addColumn = document.querySelector('.append-column');
 const removeColumn = document.querySelector('.remove-column');
 
-const table = document.querySelector('table');
+const table = document.querySelector('tbody');
 let rows = document.querySelectorAll('tr');
 const max = 10;
 const min = 2;
@@ -29,7 +29,7 @@ addRow.addEventListener('click', () => {
 });
 
 removeRow.addEventListener('click', () => {
-  table.lastChild.remove();
+  table.lastElementChild.remove();
   rows = document.querySelectorAll('tr');
   rowsNumber--;
 
