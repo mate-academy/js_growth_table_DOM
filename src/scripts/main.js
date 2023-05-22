@@ -15,37 +15,33 @@ removeColumnButton.addEventListener('click', removeColumn);
 function appendRow() {
   if (fieldTable.rows.length < 10) {
     const newRow = fieldTable.insertRow();
-
     addCellsToRow(newRow);
 
     if (fieldTable.rows.length === 10) {
       appendRowButton.disabled = true;
     }
-
     removeRowButton.disabled = false;
   }
 }
 
 function removeRow() {
-  if (fieldTable.rows.lenght > 2) {
+  if (fieldTable.rows.length > 2) {
     fieldTable.deleteRow(-1);
 
-    if (fieldTable.row.lenght === 2) {
+    if (fieldTable.rows.length === 2) {
       removeRowButton.disabled = true;
     }
-
     appendRowButton.disabled = false;
   }
 }
 
 function appendColumn() {
-  if (fieldTable.rows[0].cells.lenght < 10) {
+  if (fieldTable.rows[0].cells.length < 10) {
     const rows = fieldTable.rows;
-
     [...rows].forEach(row => row.insertCell());
   }
 
-  if (fieldTable.rows[0].cells.lenght === 10) {
+  if (fieldTable.rows[0].cells.length === 10) {
     appendColumnButton.disabled = true;
   }
   removeColumnButton.disabled = false;
@@ -54,7 +50,6 @@ function appendColumn() {
 function removeColumn() {
   if (fieldTable.rows[0].cells.length > 2) {
     const rows = fieldTable.rows;
-
     [...rows].forEach(row => row.deleteCell(-1));
 
     if (fieldTable.rows[0].cells.length === 2) {
@@ -65,8 +60,7 @@ function removeColumn() {
 }
 
 function addCellsToRow(row) {
-  const numCells = fieldTable.rows[0].cells.lenght;
-
+  const numCells = fieldTable.rows[0].cells.length;
   for (let i = 0; i < numCells; i++) {
     row.insertCell();
   }
