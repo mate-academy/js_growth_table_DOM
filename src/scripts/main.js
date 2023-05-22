@@ -15,6 +15,7 @@ removeColumnButton.addEventListener('click', removeColumn);
 function appendRow() {
   if (fieldTable.rows.length < 10) {
     const newRow = fieldTable.insertRow();
+
     addCellsToRow(newRow);
 
     if (fieldTable.rows.length === 10) {
@@ -38,6 +39,7 @@ function removeRow() {
 function appendColumn() {
   if (fieldTable.rows[0].cells.length < 10) {
     const rows = fieldTable.rows;
+
     [...rows].forEach(row => row.insertCell());
   }
 
@@ -50,6 +52,7 @@ function appendColumn() {
 function removeColumn() {
   if (fieldTable.rows[0].cells.length > 2) {
     const rows = fieldTable.rows;
+
     [...rows].forEach(row => row.deleteCell(-1));
 
     if (fieldTable.rows[0].cells.length === 2) {
@@ -61,6 +64,7 @@ function removeColumn() {
 
 function addCellsToRow(row) {
   const numCells = fieldTable.rows[0].cells.length;
+
   for (let i = 0; i < numCells; i++) {
     row.insertCell();
   }
