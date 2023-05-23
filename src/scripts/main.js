@@ -12,6 +12,13 @@ let totalColumns = table.querySelectorAll('tr')[0].children.length;
 const max = 10;
 const min = 2;
 
+function updateButtonState() {
+  appendRow.disabled = totalRows >= max;
+  removeRow.disabled = totalRows <= min;
+  appendColumn.disabled = totalColumns >= max;
+  removeColumn.disabled = totalColumns <= min;
+}
+
 [...buttons].forEach(button => {
   button.addEventListener('click', e => {
     switch (e.target) {
@@ -31,7 +38,7 @@ const min = 2;
 
       case appendColumn:
         if (totalColumns < max) {
-          [...table.children].forEach((row) => {
+          [...table.children].forEach(row => {
             row.append(row.lastElementChild.cloneNode(true));
           });
           totalColumns++;
@@ -40,7 +47,7 @@ const min = 2;
 
       case removeColumn:
         if (totalColumns > min) {
-          [...table.children].forEach((row) => row.lastElementChild.remove());
+          [...table.children].forEach(row => row.lastElementChild.remove());
           totalColumns--;
         }
         break;
@@ -48,5 +55,7 @@ const min = 2;
       default:
         break;
     }
+
+    updateButtonState();
   });
 });
