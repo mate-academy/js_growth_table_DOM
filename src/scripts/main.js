@@ -27,6 +27,10 @@ container.addEventListener('click', (e) => {
 
       table.children[0].append(tr);
 
+      if (mainRow.length >= 9) {
+        item.setAttribute('disabled', 'disabled');
+      }
+
       for (let i = 0; i < tds.length; i++) {
         const td = document.createElement('td');
 
