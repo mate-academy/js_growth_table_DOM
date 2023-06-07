@@ -5,6 +5,8 @@ const table = container.querySelector('.field');
 const buttons = container.querySelectorAll('.button');
 let rowCount = table.rows.length;
 let columnCount = table.rows[0].cells.length;
+const maxElements = 10;
+const minElements = 2;
 
 buttons.forEach(button => {
   button.addEventListener('click', (e) => {
@@ -60,8 +62,8 @@ const updateButtonStates = () => {
   const appendColumnButton = container.querySelector('.append-column');
   const removeColumnButton = container.querySelector('.remove-column');
 
-  appendRowButton.disabled = rowCount >= 10;
-  removeRowButton.disabled = rowCount <= 2;
-  appendColumnButton.disabled = columnCount >= 10;
-  removeColumnButton.disabled = columnCount <= 2;
+  appendRowButton.disabled = rowCount >= maxElements;
+  removeRowButton.disabled = rowCount <= minElements;
+  appendColumnButton.disabled = columnCount >= maxElements;
+  removeColumnButton.disabled = columnCount <= minElements;
 };
