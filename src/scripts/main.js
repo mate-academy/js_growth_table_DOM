@@ -54,8 +54,9 @@ buttons.forEach((button) =>
   button.addEventListener('click', (e) => {
     const tableRowsLength = tableRows.length;
     const tableColumnsLength = tableRows[0].children.length;
+    const targetsClassList = e.target.classList[0];
 
-    switch (e.target.classList[0]) {
+    switch (targetsClassList) {
       case 'append-row':
         insertNewRow(tableColumnsLength, tableRowsLength);
         break;
@@ -72,10 +73,10 @@ buttons.forEach((button) =>
         throw Error('This button has no function');
     }
 
-    if (e.target.classList[0].includes('row')) {
-      checkButtons(tableRows.length, 'row');
+    if (targetsClassList.includes('row')) {
+      checkButtons(tableRowsLength, 'row');
     } else {
-      checkButtons(tableRows[0].children.length, 'column');
+      checkButtons(tableColumnsLength, 'column');
     }
   })
 );
