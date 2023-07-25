@@ -4,14 +4,16 @@ const newRow = document.querySelector('.append-row');
 const newColumn = document.querySelector('.append-column');
 const removeRow = document.querySelector('.remove-row');
 const removeColumn = document.querySelector('.remove-column');
+const tbody = document.querySelector('tbody');
+const row = document.querySelector('tr');
 let numberOfRows = 4;
 let numberOfColumns = 4;
 
 const addRow = () => {
   numberOfRows++;
 
-  const tbody = document.querySelector('tbody');
-  const row = document.querySelector('tr');
+  // const tbody = document.querySelector('tbody');
+  // const row = document.querySelector('tr');
 
   tbody.appendChild(row.cloneNode(true));
   removeRow.disabled = false;
@@ -39,7 +41,7 @@ const addColumn = () => {
   numberOfColumns++;
 
   const arrayOfRows = Array.from(document.querySelectorAll('tr'));
-  const row = document.querySelector('tr');
+  //const row = document.querySelector('tr');
 
   arrayOfRows.forEach(oneRow => {
     oneRow.appendChild(row.firstElementChild.cloneNode(true));
