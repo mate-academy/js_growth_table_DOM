@@ -14,22 +14,29 @@ const removeCol = document.querySelector('.remove-column');
 
 buttons.forEach(button => {
   button.addEventListener('click', () => {
-    if (button === appendRow) {
-      table.tBodies[0].append(row.cloneNode(true));
-      removeRow.disabled = false;
-    } else if (button === removeRow) {
-      table.deleteRow(1);
-      appendRow.disabled = false;
-    } else if (button === appendCol) {
-      [...table.rows].forEach(el => {
-        el.append(cell.cloneNode(true));
-        removeCol.disabled = false;
-      });
-    } else if (button === removeCol) {
-      [...table.rows].forEach(el => {
-        el.deleteCell(1);
-        appendCol.disabled = false;
-      });
+    switch (button) {
+      case appendRow:
+        table.tBodies[0].append(row.cloneNode(true));
+        removeRow.disabled = false;
+        break;
+      case removeRow:
+        table.deleteRow(1);
+        appendRow.disabled = false;
+        break;
+      case appendCol:
+        [...table.rows].forEach(el => {
+          el.append(cell.cloneNode(true));
+          removeCol.disabled = false;
+        });
+        break;
+      case removeCol:
+        [...table.rows].forEach(el => {
+          el.deleteCell(1);
+          appendCol.disabled = false;
+        });
+        break;
+      default:
+        break;
     }
 
     appendRow.disabled = (table.rows.length === max);
