@@ -20,6 +20,8 @@ function updateButtonStatus() {
   removeColumn.disabled = columnCount === minCount;
 }
 
+document.body.addEventListener('click', updateButtonStatus);
+
 appendRow.addEventListener('click', () => {
   const newRow = table.insertRow();
   const columnCount = rows[0].cells.length;
@@ -27,33 +29,22 @@ appendRow.addEventListener('click', () => {
   for (let i = 0; i < columnCount; i++) {
     newRow.insertCell();
   }
-
-  updateButtonStatus();
 });
 
 removeRow.addEventListener('click', () => {
   table.deleteRow(-1);
-  updateButtonStatus();
 });
 
 appendColumn.addEventListener('click', () => {
-  const rowCount = rows.length;
-
-  for (let i = 0; i < rowCount; i++) {
-    rows[i].insertCell();
+  for (const row of rows) {
+    row.insertCell();
   }
-
-  updateButtonStatus();
 });
 
 removeColumn.addEventListener('click', () => {
-  const rowCount = rows.length;
-
-  for (let i = 0; i < rowCount; i++) {
-    rows[i].deleteCell(-1);
+  for (const row of rows) {
+    row.deleteCell(-1);
   }
-
-  updateButtonStatus();
 });
 
 updateButtonStatus();
