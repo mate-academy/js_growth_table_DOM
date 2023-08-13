@@ -3,61 +3,60 @@
 let rows = 4;
 let cols = 4;
 
-const table = document.querySelector('.field');
+const container = document.querySelector('.container');
+const table = container.querySelector('.field');
 
-const appendRow = document.querySelector('.append-row');
-const appendCol = document.querySelector('.append-column');
-const removeRow = document.querySelector('.remove-row');
-const removeCol = document.querySelector('.remove-column');
+const appendRow = container.querySelector('.append-row');
+const appendCol = container.querySelector('.append-column');
+const removeRow = container.querySelector('.remove-row');
+const removeCol = container.querySelector('.remove-column');
 
-appendRow.addEventListener('click', () => {
-  rows++;
-
-  checkBtns();
-  createTable();
-});
-
-appendCol.addEventListener('click', () => {
-  cols++;
-
-  checkBtns();
-  createTable();
-});
-
-removeRow.addEventListener('click', () => {
-  rows--;
-
-  checkBtns();
-  createTable();
-});
-
-removeCol.addEventListener('click', () => {
-  cols--;
+container.addEventListener('click', (ev) => {
+  switch (ev.target) {
+    case appendRow:
+      rows++;
+      break;
+    case appendCol:
+      cols++;
+      break;
+    case removeRow:
+      rows--;
+      break;
+    case removeCol:
+      cols--;
+      break;
+    default:
+      return;
+  }
 
   checkBtns();
   createTable();
 });
 
 function checkBtns() {
-  if (rows === 2) {
+  if (rows <= 2) {
+    rows = 2;
     removeRow.disabled = true;
   } else {
     removeRow.disabled = false;
   }
 
-  if (rows === 10) {
+  if (rows >= 10) {
+    rows = 10;
     appendRow.disabled = true;
   } else {
     appendRow.disabled = false;
   }
 
-  if (cols === 2) {
+  if (cols <= 2) {
+    cols = 2;
     removeCol.disabled = true;
   } else {
     removeCol.disabled = false;
   }
 
-  if (cols === 10) {
+  if (cols >= 10) {
+    cols = 10;
     appendCol.disabled = true;
   } else {
     appendCol.disabled = false;
