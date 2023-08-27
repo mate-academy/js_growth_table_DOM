@@ -51,30 +51,38 @@ function addRemove(buttonClass, button) {
     case 'append-row':
       addRow();
 
-      rowsCount.length >= 10
-        ? button.setAttribute('disabled', '')
-        : removeRowBtn.disabled = false;
+      if (rowsCount.length >= 10) {
+        appendRowBtn.disabled = true;
+      } else {
+        removeRowBtn.disabled = false;
+      }
       break;
     case 'remove-row':
       removeRow();
 
-      rowsCount.length <= 2
-        ? button.setAttribute('disabled', '')
-        : appendRowBtn.disabled = false;
+      if (rowsCount.length <= 2) {
+        removeRowBtn.disabled = true;
+      } else {
+        appendRowBtn.disabled = false;
+      }
       break;
     case 'append-column':
       addColumn();
 
-      columnsCount.length >= 10
-        ? button.setAttribute('disabled', '')
-        : removeColumnBtn.disabled = false;
+      if (columnsCount.length >= 10) {
+        appendColumnBtn.disabled = true;
+      } else {
+        removeColumnBtn.disabled = false;
+      }
       break;
     case 'remove-column':
       removeColumn();
 
-      columnsCount.length <= 2
-        ? button.setAttribute('disabled', '')
-        : appendColumnBtn.disabled = false;
+      if (columnsCount.length <= 2) {
+        removeColumnBtn.disabled = true;
+      } else {
+        appendColumnBtn.disabled = false;
+      }
       break;
   }
 }
