@@ -2,7 +2,7 @@
 
 // write code here
 
-const buttons = document.querySelector('.container');
+const sizeAlteringBox = document.querySelector('.container');
 const addRow = document.querySelector('.append-row');
 const removeRow = document.querySelector('.remove-row');
 const addCol = document.querySelector('.append-column');
@@ -10,7 +10,7 @@ const removeCol = document.querySelector('.remove-column');
 let rowCount = 4;
 let columnCount = 4;
 
-buttons.addEventListener('click', function(evt) {
+sizeAlteringBox.addEventListener('click', function(evt) {
   evt.preventDefault();
 
   const table = document.querySelector('tbody');
