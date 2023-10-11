@@ -18,60 +18,42 @@ buttons.addEventListener('click', function(evt) {
   const tableRows = document.querySelectorAll('tr');
   const toResize = evt.target.classList[0];
 
-  if (toResize === 'append-row') {
-    rowCount++;
+  switch (toResize) {
+    case 'append-row':
+      rowCount++;
 
-    const tableRowCopy = tableRow.cloneNode(true);
+      const tableRowCopy = tableRow.cloneNode(true);
 
-    table.append(tableRowCopy);
+      table.append(tableRowCopy);
+      break;
+    case 'remove-row':
+      rowCount--;
+      table.removeChild(tableRow);
+      break;
+    case 'append-column':
+      columnCount++;
+
+      tableRows.forEach(row => {
+        const newCol = document.createElement('td');
+
+        row.append(newCol);
+      });
+      break;
+    case 'remove-column':
+      columnCount--;
+
+      tableRows.forEach(row => {
+        const rowToGo = row.querySelector('td');
+
+        row.removeChild(rowToGo);
+      });
   };
 
-  if (toResize === 'remove-row') {
-    rowCount--;
-    table.removeChild(tableRow);
-  };
+  const max = 10;
+  const min = 2;
 
-  if (toResize === 'append-column') {
-    columnCount++;
-
-    tableRows.forEach(row => {
-      const newCol = document.createElement('td');
-
-      row.append(newCol);
-    });
-  };
-
-  if (toResize === 'remove-column') {
-    columnCount--;
-
-    tableRows.forEach(row => {
-      const rowToGo = row.querySelector('td');
-
-      row.removeChild(rowToGo);
-    });
-  };
-
-  if (rowCount === 10) {
-    addRow.disabled = true;
-  } else {
-    addRow.disabled = false;
-  }
-
-  if (rowCount === 2) {
-    removeRow.disabled = true;
-  } else {
-    removeRow.disabled = false;
-  }
-
-  if (columnCount === 10) {
-    addCol.disabled = true;
-  } else {
-    addCol.disabled = false;
-  }
-
-  if (columnCount === 2) {
-    removeCol.disabled = true;
-  } else {
-    removeCol.disabled = false;
-  }
+  rowCount === max ? addRow.disabled = true : addRow.disabled = false;
+  rowCount === min ? removeRow.disabled = true : removeRow.disabled = false;
+  columnCount === max ? addCol.disabled = true : addCol.disabled = false;
+  columnCount === min ? removeCol.disabled = true : removeCol.disabled = false;
 });
