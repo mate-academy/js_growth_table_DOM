@@ -2,7 +2,6 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   const container = document.querySelector('.container');
-  const field = document.querySelector('.field');
 
   const buttons = {
     appendRow: document.querySelector('.append-row'),
@@ -12,20 +11,12 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   container.addEventListener('click', e => {
-    const tr = document.querySelectorAll('tr');
-    const rowsCount = tr.length;
-    const columnCount = tr[0].querySelectorAll('td').length;
-
-    const buttonStyles = () => {
-      buttons.removeRow.disabled = rowsCount === 2;
-      buttons.appendRow.disabled = rowsCount === 10;
-      buttons.removeColumn.disabled = columnCount === 2;
-      buttons.appendColumn.disabled = columnCount === 10;
-    };
+    const field = document.querySelector('.field');
+    const tr = document.getElementsByTagName('tr');
+    let rowsCount = tr.length;
+    let columnCount = tr[0].querySelectorAll('td').length;
 
     if (e.target.classList.contains('append-row')) {
-      buttonStyles();
-
       if (rowsCount < 10) {
         const newRow = document.createElement('tr');
 
@@ -37,8 +28,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (e.target.classList.contains('append-column')) {
-      buttonStyles();
-
       if (columnCount < 10) {
         for (const row of tr) {
           const newCell = document.createElement('td');
@@ -51,8 +40,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (e.target.classList.contains('remove-row')) {
-      buttonStyles();
-
       if (rowsCount > 2) {
         const fiirsRow = field.querySelector('tr');
 
@@ -63,8 +50,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (e.target.classList.contains('remove-column')) {
-      buttonStyles();
-
       if (columnCount > 2) {
         for (const column of tr) {
           column.querySelector('td').remove();
@@ -73,5 +58,15 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
     };
+
+    rowsCount = tr.length;
+    columnCount = tr[0].querySelectorAll('td').length;
+
+    (function() {
+      buttons.removeRow.disabled = rowsCount === 2;
+      buttons.appendRow.disabled = rowsCount === 10;
+      buttons.removeColumn.disabled = columnCount === 2;
+      buttons.appendColumn.disabled = columnCount === 10;
+    })();
   });
 });
