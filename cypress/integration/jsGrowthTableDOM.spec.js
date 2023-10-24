@@ -1,11 +1,11 @@
 'use strict';
 
 Cypress.Commands.add('clickButton',
-(selector, times) => {
-  for (let n = 0; n < times; n++) {
-    cy.get(selector).click( {force: true} );
-  }
-});
+  (selector, times) => {
+    for (let n = 0; n < times; n++) {
+      cy.get(selector).click({ force: true });
+    }
+  });
 
 describe('Table', () => {
   beforeEach(() => {
@@ -35,24 +35,24 @@ describe('Table', () => {
   it('should have max 10 columns', () => {
     // 4 columns by default and click 7 times to add 7 columns
     cy.clickButton('.append-column', 7);
-    cy.get('@columns').should('have.length', 10)
+    cy.get('@columns').should('have.length', 10);
   });
 
   it('add column button should be disabled after 10 column', () => {
     // 4 columns by default and click 6 times to add 6 columns
-    cy.clickButton('.append-column', 6)
+    cy.clickButton('.append-column', 6);
     cy.get('.append-column').should('be.disabled');
   });
 
   it('should remove one column', () => {
     cy.get('.remove-column').click();
-    cy.get('@columns').should('have.length', 3)
+    cy.get('@columns').should('have.length', 3);
   });
 
   it('should have max 10 rows', () => {
     // 4 columns by default and click 7 times to add 7 rows
-    cy.clickButton('.append-row', 7)
-    cy.get('@rows').should('have.length', 10)
+    cy.clickButton('.append-row', 7);
+    cy.get('@rows').should('have.length', 10);
   });
 
   it('add row button should be disabled after 10 rows', () => {
@@ -63,14 +63,14 @@ describe('Table', () => {
 
   it('should remove one row', () => {
     cy.get('.remove-row').click();
-    cy.get('@rows').should('have.length', 3)
+    cy.get('@rows').should('have.length', 3);
   });
 
   it('should have 2 columns and 2 rows minimum', () => {
     cy.get('.remove-row').click().click();
     cy.get('.remove-column').click().click();
-    cy.get('@rows').should('have.length', 2)
-    cy.get('@columns').should('have.length', 2)
+    cy.get('@rows').should('have.length', 2);
+    cy.get('@columns').should('have.length', 2);
   });
 
   it(`remove row button should be disabled
