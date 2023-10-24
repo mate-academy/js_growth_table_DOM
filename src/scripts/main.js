@@ -15,47 +15,41 @@ document.querySelector('.container').addEventListener('click', e => {
 
   switch (e.target.classList[0]) {
     case APPEND_ROW:
+      if (tbody.children.length === 9) {
+        document.querySelector(`.${APPEND_ROW}`).disabled = true;
+      }
       tbody.append(tbody.rows[0].cloneNode(true));
       document.querySelector(`.${REMOVE_ROW}`).disabled = false;
       break;
 
     case REMOVE_ROW:
+      if (tbody.children.length === 3) {
+        document.querySelector(`.${REMOVE_ROW}`).disabled = true;
+      }
       table.deleteRow(-1);
       document.querySelector(`.${APPEND_ROW}`).disabled = false;
       break;
 
     case APPEND_COLUMN:
+      if (tbody.lastElementChild.children.length === 9) {
+        document.querySelector(`.${APPEND_COLUMN}`).disabled = true;
+      }
+
       for (const tr of tbody.children) {
         tr.append(document.createElement('td'));
-        document.querySelector(`.${REMOVE_COLUMN}`).disabled = false;
       }
+      document.querySelector(`.${REMOVE_COLUMN}`).disabled = false;
       break;
 
     case REMOVE_COLUMN:
+      if (tbody.lastElementChild.children.length === 3) {
+        document.querySelector(`.${REMOVE_COLUMN}`).disabled = true;
+      }
+
       for (const tr of tbody.children) {
         tr.lastElementChild.remove();
-        document.querySelector(`.${APPEND_COLUMN}`).disabled = false;
       }
-      break;
-  }
-
-  switch (tbody.children.length) {
-    case 10:
-      document.querySelector(`.${APPEND_ROW}`).disabled = true;
-      break;
-
-    case 2:
-      document.querySelector(`.${REMOVE_ROW}`).disabled = true;
-      break;
-  }
-
-  switch (tbody.lastElementChild.children.length) {
-    case 10:
-      document.querySelector(`.${APPEND_COLUMN}`).disabled = true;
-      break;
-
-    case 2:
-      document.querySelector(`.${REMOVE_COLUMN}`).disabled = true;
+      document.querySelector(`.${APPEND_COLUMN}`).disabled = false;
       break;
   }
 });
