@@ -15,6 +15,10 @@ document.querySelector('.container').addEventListener('click', e => {
 
   switch (e.target.classList[0]) {
     case APPEND_ROW:
+      if (tbody.children.length >= 10) {
+        break;
+      }
+
       if (tbody.children.length === 9) {
         document.querySelector(`.${APPEND_ROW}`).disabled = true;
       }
@@ -31,6 +35,10 @@ document.querySelector('.container').addEventListener('click', e => {
       break;
 
     case APPEND_COLUMN:
+      if (tbody.lastElementChild.children.length >= 10) {
+        break;
+      }
+
       if (tbody.lastElementChild.children.length === 9) {
         document.querySelector(`.${APPEND_COLUMN}`).disabled = true;
       }
