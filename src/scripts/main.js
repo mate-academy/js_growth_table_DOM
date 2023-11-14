@@ -42,7 +42,7 @@ function removeRow() {
 }
 
 function appendColumn() {
-  if (columnCount > minRowCount) {
+  if (columnCount >= minRowCount) {
     for (let i = 0; i < rowCount; i++) {
       table.rows[i].insertCell(-1);
     }
@@ -65,5 +65,5 @@ function updateButtonStates() {
   appendRowBtn.disabled = rowCount >= maxRowCount;
   removeRowBtn.disabled = rowCount <= minRowCount;
   appendColumnBtn.disabled = columnCount >= maxColumnCount;
-  removeColumnBtn.disabled = columnCount < minColumnCount;
+  removeColumnBtn.disabled = columnCount <= minColumnCount;
 }
