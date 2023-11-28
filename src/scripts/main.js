@@ -5,10 +5,9 @@ const table = document.querySelector('.field');
 const buttonAppendRow = document.querySelector('.append-row');
 
 buttonAppendRow.addEventListener('click', function() {
-  const firstRowLength = table.rows[0].cells.length;
   const trElem = document.createElement('tr');
 
-  for (let i = 0; i < firstRowLength; i++) {
+  for (let i = 0; i < table.rows[0].cells.length; i++) {
     trElem.append(document.createElement('td'));
     table.append(trElem);
   }
