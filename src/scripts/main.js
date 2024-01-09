@@ -9,19 +9,22 @@ const removeColumn = document.querySelector('.remove-column');
 let rowCount = table.rows.length;
 let colCount = table.rows[0].cells.length;
 
+const minCount = 2;
+const maxCount = 10;
+
 function updateButtonStates() {
-  if (rowCount === 2) {
+  if (rowCount === minCount) {
     removeRow.disabled = true;
-  } else if (rowCount === 10) {
+  } else if (rowCount === maxCount) {
     appendRow.disabled = true;
   } else {
     removeRow.disabled = false;
     appendRow.disabled = false;
   }
 
-  if (colCount === 2) {
+  if (colCount === minCount) {
     removeColumn.disabled = true;
-  } else if (colCount === 10) {
+  } else if (colCount === maxCount) {
     appendColumn.disabled = true;
   } else {
     removeColumn.disabled = false;
@@ -30,7 +33,7 @@ function updateButtonStates() {
 }
 
 function handleAppendRow() {
-  if (rowCount < 10) {
+  if (rowCount < maxCount) {
     const newRow = table.insertRow();
 
     for (let i = 0; i < colCount; i++) {
@@ -42,7 +45,7 @@ function handleAppendRow() {
 }
 
 function handleDeleteRow() {
-  if (rowCount > 2) {
+  if (rowCount > minCount) {
     table.deleteRow(-1);
     rowCount--;
     updateButtonStates();
@@ -50,7 +53,7 @@ function handleDeleteRow() {
 }
 
 function handleAppendColumn() {
-  if (colCount < 10) {
+  if (colCount < maxCount) {
     for (let i = 0; i < rowCount; i++) {
       table.rows[i].insertCell();
     }
@@ -60,7 +63,7 @@ function handleAppendColumn() {
 }
 
 function handleDeleteColumn() {
-  if (colCount > 2) {
+  if (colCount > minCount) {
     for (let i = 0; i < rowCount; i++) {
       table.rows[i].deleteCell(-1);
     }
