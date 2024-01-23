@@ -8,26 +8,22 @@ const appendColumnButton = document.querySelector('.append-column');
 const removeColumnButton = document.querySelector('.remove-column');
 
 container.addEventListener('click', (e) => {
-  const target = e.target;
-
   const rows = document.querySelectorAll('tr');
 
-  const buttonType = target.classList[0];
-
-  switch (buttonType) {
-    case 'append-row':
+  switch (e.target) {
+    case appendRowButton:
       tbody.append(rows[0].cloneNode(true));
       break;
-    case 'remove-row':
+    case removeRowButton:
       rows[0].remove();
 
       break;
-    case 'append-column':
+    case appendColumnButton:
       for (const row of rows) {
         row.append(row.cells[0].cloneNode(true));
       }
       break;
-    case 'remove-column':
+    case removeColumnButton:
       for (const row of rows) {
         row.cells[0].remove();
       }
