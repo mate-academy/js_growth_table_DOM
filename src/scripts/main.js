@@ -8,10 +8,13 @@ const appendColumnBtn = document.querySelector('.append-column');
 const removeColumnBtn = document.querySelector('.remove-column');
 
 function updateButtonState() {
-  appendRowBtn.disabled = table.children.length === 10;
-  removeRowBtn.disabled = table.children.length === 2;
-  appendColumnBtn.disabled = getUpdatedRows()[0].children.length === 10;
-  removeColumnBtn.disabled = getUpdatedRows()[0].children.length === 2;
+  const rowCount = table.children.length;
+  const columnCount = getUpdatedRows()[0].children.length;
+
+  appendRowBtn.disabled = rowCount >= 10;
+  removeRowBtn.disabled = rowCount <= 2;
+  appendColumnBtn.disabled = columnCount >= 10;
+  removeColumnBtn.disabled = columnCount <= 2;
 }
 
 function getUpdatedRows() {
