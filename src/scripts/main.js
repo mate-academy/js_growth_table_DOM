@@ -64,21 +64,19 @@ function createRow() {
 container.addEventListener('click', (e) => {
   const targetButton = e.target;
 
-  switch (targetButton.classList.value) {
-    case 'append-row button':
+  switch (true) {
+    case targetButton.classList.contains('append-row'):
       appendRow();
       break;
-    case 'remove-row button':
+    case targetButton.classList.contains('remove-row'):
       removeRow();
       break;
-    case 'append-column button':
+    case targetButton.classList.contains('append-column'):
       appendColumn();
       break;
-    case 'remove-column button':
+    case targetButton.classList.contains('remove-column'):
       removeColumn();
       break;
     default:
   }
 });
-
-updateButtonState();
