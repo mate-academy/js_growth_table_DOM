@@ -1,6 +1,5 @@
 'use strict';
 
-// write code here
 const buttons = document.querySelectorAll('.button');
 const addRow = document.querySelector('.append-row');
 const removeRow = document.querySelector('.remove-row');
