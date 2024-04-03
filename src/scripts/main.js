@@ -15,7 +15,7 @@ function refreshButtons(size, appendButton, removeButton) {
 }
 
 function resizeTable(tableEvent) {
-  const buttonClass = tableEvent.target.className.replace(' button', '');
+  const buttonClass = tableEvent.target.className.replace('button', '').trim();
 
   switch (buttonClass) {
     case 'append-row':
