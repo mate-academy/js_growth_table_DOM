@@ -6,30 +6,15 @@ const appendColumnButton = document.querySelector('.append-column');
 const removeColumnButton = document.querySelector('.remove-column');
 const table = document.querySelector('.field');
 
-// let totalRows = table.rows.length;
-// let columns = table.rows[0].cells.length;
-
 function updateButtonStates() {
   const rowCount = table.rows.length;
   const columnCount = table.rows[0].cells.length;
 
-  if (rowCount === 10) {
-    appendRowButton.disabled = true;
-  } else if (rowCount === 2) {
-    removeRowButton.disabled = true;
-  } else {
-    appendRowButton.disabled = false;
-    removeRowButton.disabled = false;
-  }
+  appendRowButton.disabled = rowCount === 10;
+  removeRowButton.disabled = rowCount === 2;
 
-  if (columnCount === 10) {
-    appendColumnButton.disabled = true;
-  } else if (columnCount === 2) {
-    removeColumnButton.disabled = true;
-  } else {
-    appendColumnButton.disabled = false;
-    removeColumnButton.disabled = false;
-  }
+  appendColumnButton.disabled = columnCount === 10;
+  removeColumnButton.disabled = columnCount === 2;
 }
 
 function addRows() {
