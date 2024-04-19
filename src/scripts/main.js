@@ -7,14 +7,16 @@ const removeColumnButton = document.querySelector('.remove-column');
 const table = document.querySelector('.field');
 
 function updateButtonStates() {
+  const minCount = 2;
+  const maxCount = 10;
   const rowCount = table.rows.length;
   const columnCount = table.rows[0].cells.length;
 
-  appendRowButton.disabled = rowCount === 10;
-  removeRowButton.disabled = rowCount === 2;
+  appendRowButton.disabled = rowCount === maxCount;
+  removeRowButton.disabled = rowCount === minCount;
 
-  appendColumnButton.disabled = columnCount === 10;
-  removeColumnButton.disabled = columnCount === 2;
+  appendColumnButton.disabled = columnCount === maxCount;
+  removeColumnButton.disabled = columnCount === minCount;
 }
 
 function addRows() {
