@@ -69,7 +69,10 @@ container.addEventListener('click', (e) => {
     return;
   }
 
-  const currentBtnActionName = button.classList[0];
+  const currentBtnActionName = button.className
+    .split(' ')
+    .find((className) => className !== 'button');
+
   const rows = tableBody.querySelectorAll('tr');
   let currentRowCount = rows.length;
   let currentColCount = rows[0].children.length;
