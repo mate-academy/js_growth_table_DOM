@@ -7,6 +7,11 @@ const removeColumnButton = document.querySelector('.remove-column');
 const table = document.querySelector('.field');
 
 function isDisabledButton() {
+  appendRowButton.disabled = false;
+  removeColumnButton.disabled = false;
+  appendColumnButton.disabled = false;
+  removeRowButton.disabled = false;
+
   if (table.getElementsByTagName('tr').length >= 10) {
     appendRowButton.disabled = true;
   }
