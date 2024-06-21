@@ -1,5 +1,8 @@
 'use strict';
 
+const MIN__AMOUNT = 2;
+const MAX_AMOUNT = 10;
+
 const addRowButton = document.querySelector('.append-row');
 const removeRowButton = document.querySelector('.remove-row');
 const addColumnButton = document.querySelector('.append-column');
@@ -13,25 +16,25 @@ function updateRowsList() {
 }
 
 function toggleButtonsState() {
-  if (rows.length >= 10) {
+  if (rows.length >= MAX_AMOUNT) {
     addRowButton.disabled = true;
   } else {
     addRowButton.disabled = false;
   }
 
-  if (rows.length <= 2) {
+  if (rows.length <= MIN__AMOUNT) {
     removeRowButton.disabled = true;
   } else {
     removeRowButton.disabled = false;
   }
 
-  if (columnsCount >= 10) {
+  if (columnsCount >= MAX_AMOUNT) {
     addColumnButton.disabled = true;
   } else {
     addColumnButton.disabled = false;
   }
 
-  if (columnsCount <= 2) {
+  if (columnsCount <= MIN__AMOUNT) {
     removeColumnButton.disabled = true;
   } else {
     removeColumnButton.disabled = false;
@@ -39,7 +42,7 @@ function toggleButtonsState() {
 }
 
 addRowButton.addEventListener('click', () => {
-  if (rows.length < 10) {
+  if (rows.length < MAX_AMOUNT) {
     const tableRow = document.createElement('tr');
 
     for (let i = 0; i < columnsCount; i++) {
@@ -55,7 +58,7 @@ addRowButton.addEventListener('click', () => {
 });
 
 removeRowButton.addEventListener('click', () => {
-  if (rows.length > 2) {
+  if (rows.length > MIN__AMOUNT) {
     table.deleteRow(rows.length - 1);
     updateRowsList();
     toggleButtonsState();
@@ -63,7 +66,7 @@ removeRowButton.addEventListener('click', () => {
 });
 
 addColumnButton.addEventListener('click', () => {
-  if (columnsCount < 10) {
+  if (columnsCount < MAX_AMOUNT) {
     rows.forEach((row) => {
       const tableData = document.createElement('td');
 
@@ -76,7 +79,7 @@ addColumnButton.addEventListener('click', () => {
 });
 
 removeColumnButton.addEventListener('click', () => {
-  if (columnsCount > 2) {
+  if (columnsCount > MIN__AMOUNT) {
     rows.forEach((row) => {
       row.removeChild(row.lastElementChild);
     });
