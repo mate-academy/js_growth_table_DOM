@@ -32,7 +32,7 @@ appendRow.addEventListener('click', () => {
 });
 
 removeRow.addEventListener('click', () => {
-  table.removeChild(table.lastChild);
+  table.removeChild(table.lastElementChild);
 
   updateButtonsState();
 });
@@ -51,7 +51,7 @@ removeCol.addEventListener('click', () => {
   const rows = table.rows;
 
   [...rows].forEach((row) => {
-    row.removeChild(row.lastChild);
+    row.removeChild(row.lastElementChild);
   });
 
   updateButtonsState();
