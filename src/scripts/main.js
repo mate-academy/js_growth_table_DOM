@@ -11,20 +11,21 @@ const table = document.querySelector('.field');
 
 buttons.forEach((button) => {
   button.addEventListener('click', (e) => {
-    switch (button.classList[0]) {
-      case 'append-row':
+    switch (true) {
+      case button.classList.contains('append-row'):
         appendRow();
         break;
-      case 'remove-row':
+      case button.classList.contains('remove-row'):
         removeRow();
         break;
-      case 'append-column':
+      case button.classList.contains('append-column'):
         appendColumn();
         break;
-      case 'remove-column':
+      case button.classList.contains('remove-column'):
         removeColumn();
         break;
     }
+
     updateButtons();
   });
 });
