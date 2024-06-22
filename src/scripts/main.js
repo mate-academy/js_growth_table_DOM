@@ -7,6 +7,7 @@ const MIN_ROWS = 2;
 const MIN_COLUMNS = 2;
 
 const buttons = document.querySelectorAll('button');
+const table = document.querySelector('.field');
 
 buttons.forEach((button) => {
   button.addEventListener('click', (e) => {
@@ -29,8 +30,6 @@ buttons.forEach((button) => {
 });
 
 function appendRow() {
-  const table = document.querySelector('.field tbody');
-
   if (table.rows.length < MAX_ROWS) {
     const firstRow = table.querySelector('tr');
     const newRow = firstRow.outerHTML;
@@ -40,15 +39,14 @@ function appendRow() {
 }
 
 function removeRow() {
-  const table = document.querySelector('.field tbody');
+  const tbody = table.children[0];
 
   if (table.rows.length > MIN_ROWS) {
-    table.deleteRow(-1);
+    tbody.children[0].remove();
   }
 }
 
 function appendColumn() {
-  const table = document.querySelector('.field tbody');
   const rows = table.querySelectorAll('tr');
 
   if (rows[0].cells.length < MAX_COLUMNS) {
@@ -59,18 +57,18 @@ function appendColumn() {
 }
 
 function removeColumn() {
-  const table = document.querySelector('.field tbody');
   const rows = table.querySelectorAll('tr');
 
   rows.forEach((row) => {
     if (row.cells.length > MIN_COLUMNS) {
-      row.deleteCell(-1);
+      const lastCell = row.cells[row.cells.length - 1];
+
+      lastCell.remove();
     }
   });
 }
 
 function updateButtons() {
-  const table = document.querySelector('.field tbody');
   const appendRowButton = document.querySelector('.append-row');
   const removeRowButton = document.querySelector('.remove-row');
   const appendColumnButton = document.querySelector('.append-column');
