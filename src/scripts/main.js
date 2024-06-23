@@ -7,7 +7,7 @@ const MIN_ROWS = 2;
 const MIN_COLUMNS = 2;
 
 const buttons = document.querySelectorAll('button');
-const table = document.querySelector('.field');
+const table = document.querySelector('.field tbody');
 
 buttons.forEach((button) => {
   button.addEventListener('click', (e) => {
@@ -40,10 +40,8 @@ function appendRow() {
 }
 
 function removeRow() {
-  const tbody = table.children[0];
-
   if (table.rows.length > MIN_ROWS) {
-    tbody.children[0].remove();
+    table.lastElementChild.remove();
   }
 }
 
@@ -52,7 +50,10 @@ function appendColumn() {
 
   if (rows[0].cells.length < MAX_COLUMNS) {
     rows.forEach((row) => {
-      row.insertAdjacentHTML('beforeend', '<td></td>');
+      const firstCell = row.querySelector('td');
+      const newCell = firstCell.outerHTML;
+
+      row.insertAdjacentHTML('beforeend', newCell);
     });
   }
 }
