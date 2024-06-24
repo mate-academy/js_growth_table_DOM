@@ -3,79 +3,65 @@
 const table = document.querySelector('.field');
 const rowButtons = document.querySelectorAll('[class*="row"]');
 const columnButtons = document.querySelectorAll('[class*="column"]');
-const rows = [...table.querySelectorAll('tr')];
-const column = rows[0].cells;
-let rowsNumber = rows.length;
-let columnNumber = column.length;
 
 document.body.addEventListener('click', (e) => {
   const button = e.target.closest('.button');
+  const rows = [...table.querySelectorAll('tr')];
+  const column = rows[0].cells;
+  const rowsNumber = rows.length;
+  const columnNumber = column.length;
 
   if (button) {
     const buttonFunc = [...button.classList];
-    const regex = /column/g;
-    const containColumns = buttonFunc.some((cls) => regex.test(cls));
+    const rowProveRegex = /row/g;
+    const appendRegex = /append/g;
+    const containRows = buttonFunc.some((cls) => rowProveRegex.test(cls));
+    const isRegexTrue = buttonFunc.some((cls) => appendRegex.test(cls));
 
-    table.innerHTML = '';
-
-    if (containColumns) {
-      const appendRegex = /append/g;
-      const isRegexTrue = buttonFunc.some((cls) => appendRegex.test(cls));
-
+    if (containRows) {
       if (isRegexTrue) {
-        columnNumber++;
+        const newRow = table.insertRow();
 
-        if (columnNumber >= 10) {
+        for (let col = 0; col < columnNumber; col++) {
+          newRow.insertCell(col);
+        }
+
+        if (rowsNumber + 1 >= 10) {
           button.setAttribute('disabled', '');
-          columnNumber = 10;
         } else {
-          columnButtons.forEach((but) => but.removeAttribute('disabled'));
+          rowButtons.forEach((but) => but.removeAttribute('disabled'));
         }
       } else {
-        columnNumber--;
+        rows[0].remove();
 
-        if (columnNumber <= 2) {
+        if (rowsNumber - 1 <= 2) {
           button.setAttribute('disabled', '');
-          columnNumber = 2;
         } else {
-          columnButtons.forEach((but) => but.removeAttribute('disabled'));
+          rowButtons.forEach((but) => but.removeAttribute('disabled'));
         }
       }
     } else {
-      const appendRegex = /append/g;
-      const isRegexTrue = buttonFunc.some((cls) => appendRegex.test(cls));
-
       if (isRegexTrue) {
-        rowsNumber++;
+        rows.forEach((row) => {
+          row.insertCell();
+        });
 
-        if (rowsNumber >= 10) {
+        if (columnNumber + 1 >= 10) {
           button.setAttribute('disabled', '');
-          rowsNumber = 10;
         } else {
-          rowButtons.forEach((but) => but.removeAttribute('disabled'));
+          columnButtons.forEach((but) => but.removeAttribute('disabled'));
         }
       } else {
-        rowsNumber--;
+        rows.forEach((row) => {
+          row.children[0].remove();
+        });
 
-        if (rowsNumber <= 2) {
+        if (columnNumber - 1 <= 2) {
           button.setAttribute('disabled', '');
-          rowsNumber = 2;
         } else {
-          rowButtons.forEach((but) => but.removeAttribute('disabled'));
+          columnButtons.forEach((but) => but.removeAttribute('disabled'));
         }
       }
-    }
-
-    for (let row = 1; row <= rowsNumber; row++) {
-      const newRow = document.createElement('tr');
-
-      for (let col = 1; col <= columnNumber; col++) {
-        const newCol = document.createElement('td');
-
-        newRow.appendChild(newCol);
-      }
-
-      table.appendChild(newRow);
     }
   }
 });
