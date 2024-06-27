@@ -3,65 +3,72 @@
 const table = document.querySelector('.field');
 const rowButtons = document.querySelectorAll('[class*="row"]');
 const columnButtons = document.querySelectorAll('[class*="column"]');
+const MIN_PARTS = 2;
+const MAX_PARTS = 10;
 
 document.body.addEventListener('click', (e) => {
   const button = e.target.closest('.button');
+
+  if (!button) {
+    return null;
+  }
+
   const rows = [...table.querySelectorAll('tr')];
   const column = rows[0].cells;
-  const rowsNumber = rows.length;
-  const columnNumber = column.length;
+  let rowsNumber = rows.length;
+  let columnNumber = column.length;
+  const rowProveRegex = /row/g;
+  const appendRegex = /append/g;
+  const buttonFunc = [...button.classList];
+  const containRows = buttonFunc.some((cls) => rowProveRegex.test(cls));
+  const isRegexTrue = buttonFunc.some((cls) => appendRegex.test(cls));
 
-  if (button) {
-    const buttonFunc = [...button.classList];
-    const rowProveRegex = /row/g;
-    const appendRegex = /append/g;
-    const containRows = buttonFunc.some((cls) => rowProveRegex.test(cls));
-    const isRegexTrue = buttonFunc.some((cls) => appendRegex.test(cls));
+  if (containRows) {
+    switch (isRegexTrue) {
+      case true:
+        rowsNumber++;
 
-    if (containRows) {
-      if (isRegexTrue) {
         const newRow = table.insertRow();
 
         for (let col = 0; col < columnNumber; col++) {
           newRow.insertCell(col);
         }
-
-        if (rowsNumber + 1 >= 10) {
-          button.setAttribute('disabled', '');
-        } else {
-          rowButtons.forEach((but) => but.removeAttribute('disabled'));
-        }
-      } else {
+        break;
+      default:
+        rowsNumber--;
         rows[0].remove();
-
-        if (rowsNumber - 1 <= 2) {
-          button.setAttribute('disabled', '');
-        } else {
-          rowButtons.forEach((but) => but.removeAttribute('disabled'));
-        }
-      }
-    } else {
-      if (isRegexTrue) {
-        rows.forEach((row) => {
-          row.insertCell();
-        });
-
-        if (columnNumber + 1 >= 10) {
-          button.setAttribute('disabled', '');
-        } else {
-          columnButtons.forEach((but) => but.removeAttribute('disabled'));
-        }
-      } else {
-        rows.forEach((row) => {
-          row.children[0].remove();
-        });
-
-        if (columnNumber - 1 <= 2) {
-          button.setAttribute('disabled', '');
-        } else {
-          columnButtons.forEach((but) => but.removeAttribute('disabled'));
-        }
-      }
+        break;
     }
+
+    tablePartHandle(rowsNumber, button, rowButtons);
+
+    return;
   }
+
+  switch (isRegexTrue) {
+    case true:
+      columnNumber++;
+
+      rows.forEach((row) => {
+        row.insertCell();
+      });
+      break;
+    default:
+      columnNumber--;
+
+      rows.forEach((row) => {
+        row.children[0].remove();
+      });
+      break;
+  }
+
+  tablePartHandle(columnNumber, button, columnButtons);
 });
+
+function tablePartHandle(tablePart, button, tableButtons) {
+  if (tablePart <= MIN_PARTS || tablePart >= MAX_PARTS) {
+    button.setAttribute('disabled', '');
+  } else {
+    tableButtons.forEach((but) => but.removeAttribute('disabled'));
+  }
+}
