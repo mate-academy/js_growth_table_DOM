@@ -17,55 +17,48 @@ document.body.addEventListener('click', (e) => {
   const column = rows[0].cells;
   let rowsNumber = rows.length;
   let columnNumber = column.length;
-  const rowProveRegex = /row/g;
   const appendRegex = /append/g;
   const buttonFunc = [...button.classList];
-  const containRows = buttonFunc.some((cls) => rowProveRegex.test(cls));
-  const isRegexTrue = buttonFunc.some((cls) => appendRegex.test(cls));
+  const containRows = [...rowButtons].includes(button);
+  const isAppendOperation = buttonFunc.some((cls) => appendRegex.test(cls));
 
   if (containRows) {
-    switch (isRegexTrue) {
-      case true:
-        rowsNumber++;
+    if (isAppendOperation) {
+      rowsNumber++;
 
-        const newRow = table.insertRow();
+      const newRow = table.insertRow();
 
-        for (let col = 0; col < columnNumber; col++) {
-          newRow.insertCell(col);
-        }
-        break;
-      default:
-        rowsNumber--;
-        rows[0].remove();
-        break;
+      for (let col = 0; col < columnNumber; col++) {
+        newRow.insertCell(col);
+      }
+    } else {
+      rowsNumber--;
+      rows[0].remove();
     }
 
-    tablePartHandle(rowsNumber, button, rowButtons);
+    updateButtonStates(rowsNumber, button, rowButtons);
 
     return;
   }
 
-  switch (isRegexTrue) {
-    case true:
-      columnNumber++;
+  if (isAppendOperation) {
+    columnNumber++;
 
-      rows.forEach((row) => {
-        row.insertCell();
-      });
-      break;
-    default:
-      columnNumber--;
+    rows.forEach((row) => {
+      row.insertCell();
+    });
+  } else {
+    columnNumber--;
 
-      rows.forEach((row) => {
-        row.children[0].remove();
-      });
-      break;
+    rows.forEach((row) => {
+      row.children[0].remove();
+    });
   }
 
-  tablePartHandle(columnNumber, button, columnButtons);
+  updateButtonStates(columnNumber, button, columnButtons);
 });
 
-function tablePartHandle(tablePart, button, tableButtons) {
+function updateButtonStates(tablePart, button, tableButtons) {
   if (tablePart <= MIN_PARTS || tablePart >= MAX_PARTS) {
     button.setAttribute('disabled', '');
   } else {
