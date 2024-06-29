@@ -3,6 +3,7 @@
 const table = document.querySelector('.field');
 const rowButtons = document.querySelectorAll('[class*="row"]');
 const columnButtons = document.querySelectorAll('[class*="column"]');
+const appendButtons = document.querySelectorAll('[class*="append"]');
 const MIN_PARTS = 2;
 const MAX_PARTS = 10;
 
@@ -17,10 +18,8 @@ document.body.addEventListener('click', (e) => {
   const column = rows[0].cells;
   let rowsNumber = rows.length;
   let columnNumber = column.length;
-  const appendRegex = /append/g;
-  const buttonFunc = [...button.classList];
   const containRows = [...rowButtons].includes(button);
-  const isAppendOperation = buttonFunc.some((cls) => appendRegex.test(cls));
+  const isAppendOperation = [...appendButtons].includes(button);
 
   if (containRows) {
     if (isAppendOperation) {
