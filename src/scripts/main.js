@@ -22,7 +22,7 @@ document.body.addEventListener('click', (e) => {
   const isAppendOperation = [...appendButtons].includes(button);
 
   if (containRows) {
-    if (isAppendOperation) {
+    if (isAppendOperation && rowsNumber < MAX_PARTS) {
       rowsNumber++;
 
       const newRow = table.insertRow();
@@ -30,7 +30,7 @@ document.body.addEventListener('click', (e) => {
       for (let col = 0; col < columnNumber; col++) {
         newRow.insertCell(col);
       }
-    } else {
+    } else if (!isAppendOperation && rowsNumber > MIN_PARTS) {
       rowsNumber--;
       rows[0].remove();
     }
@@ -40,13 +40,13 @@ document.body.addEventListener('click', (e) => {
     return;
   }
 
-  if (isAppendOperation) {
+  if (isAppendOperation && columnNumber < MAX_PARTS) {
     columnNumber++;
 
     rows.forEach((row) => {
       row.insertCell();
     });
-  } else {
+  } else if (!isAppendOperation && columnNumber > MIN_PARTS) {
     columnNumber--;
 
     rows.forEach((row) => {
