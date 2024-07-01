@@ -26,7 +26,7 @@ function modifyTable(nameClass) {
         setDisabled(nameClass);
       }
 
-      if (fieldHeigth > 2 && fieldHeigth !== 10) {
+      if (fieldHeigth > 2) {
         setEnable('remove-row');
       }
 
@@ -43,7 +43,7 @@ function modifyTable(nameClass) {
         setDisabled(nameClass);
       }
 
-      if (fieldHeigth > 2 && fieldHeigth !== 10) {
+      if (fieldHeigth > 2) {
         setEnable('append-row');
       }
 
@@ -60,7 +60,7 @@ function modifyTable(nameClass) {
         setDisabled(nameClass);
       }
 
-      if (fieldLength > 2 && fieldLength !== 10) {
+      if (fieldLength > 2) {
         setEnable('remove-column');
       }
 
@@ -77,7 +77,7 @@ function modifyTable(nameClass) {
         setDisabled(nameClass);
       }
 
-      if (fieldLength > 2 && fieldLength !== 10) {
+      if (fieldLength > 2) {
         setEnable('append-column');
       }
 
