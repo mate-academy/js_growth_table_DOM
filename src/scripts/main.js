@@ -63,6 +63,7 @@ function modifyTable(nameClass) {
       [...field.firstElementChild.children].forEach((row) => {
         row.deleteCell(row.children.length - 1);
       });
+
       fieldLength--;
 
       if (fieldLength === 2) {
