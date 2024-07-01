@@ -8,9 +8,7 @@ let fieldLength = field.rows[0].cells.length;
 
 btns.forEach((btn) => {
   btn.addEventListener('click', (e) => {
-    const idx = e.target.className.indexOf(' ');
-
-    modifyTable(e.target.className.slice(0, idx));
+    modifyTable(e.target.className.replace(/button/g, '').trim());
   });
 });
 
