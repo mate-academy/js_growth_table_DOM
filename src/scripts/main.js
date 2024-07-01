@@ -87,7 +87,7 @@ function modifyTable(nameClass) {
 
 function setDisabled(nameClass) {
   btns.forEach((btn) => {
-    if (btn.className.startsWith(nameClass)) {
+    if (btn.className.includes(nameClass)) {
       btn.disabled = true;
     }
   });
@@ -95,7 +95,7 @@ function setDisabled(nameClass) {
 
 function setEnable(nameClass) {
   btns.forEach((btn) => {
-    if (btn.className.startsWith(nameClass)) {
+    if (btn.className.includes(nameClass)) {
       btn.disabled = false;
     }
   });
