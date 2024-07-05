@@ -103,15 +103,8 @@ function removeColumns() {
 
 // ----------------запуск кнопок------------------
 appendRow.addEventListener('click', (e) => {
-  let count = 0;
-
-  if (e.target && count < 6) {
-    count++;
+  if (e.target) {
     addRows();
-  }
-
-  if (count > 6) {
-    appendRow.removeEventListener();
   }
 });
 
