@@ -17,15 +17,11 @@ const buttonUpdate = () => {
 };
 
 appendRowButton.addEventListener('click', (e) => {
-  const tr = document.createElement('tr');
-  const tdLength = table.rows[0].cells.length;
+  const newRow = table.insertRow();
 
-  for (let i = 0; i < tdLength; i++) {
-    const td = document.createElement('td');
-
-    tr.appendChild(td);
+  for (let i = 0; i < table.rows[0].cells.length; i++) {
+    newRow.insertCell();
   }
-  table.appendChild(tr);
   buttonUpdate();
 });
 
