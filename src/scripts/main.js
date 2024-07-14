@@ -4,7 +4,7 @@ const appendRow = document.querySelector('.append-row');
 const removeRow = document.querySelector('.remove-row');
 const appendColumn = document.querySelector('.append-column');
 const removeColumn = document.querySelector('.remove-column');
-const table = document.querySelector('.field');
+const table = document.querySelector('tbody');
 
 let numRow = 4;
 let numColumn = 4;
