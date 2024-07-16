@@ -19,24 +19,29 @@ const updateButtonState = () => {
 };
 
 appendRow.addEventListener('click', () => {
-  const newRow = document.createElement('tr');
-  const columns = field.rows[0].cells.length;
+  const rows = field.rows.length;
 
-  for (let i = 0; i < columns; i++) {
-    const newCell = document.createElement('td');
+  if (rows < 10) {
+    const newRow = document.createElement('tr');
+    const columns = field.rows[0].cells.length;
 
-    newRow.appendChild(newCell);
+    for (let i = 0; i < columns; i++) {
+      const newCell = document.createElement('td');
+      newRow.appendChild(newCell);
+    }
+
+    field.appendChild(newRow);
+    updateButtonState();
   }
-  field.appendChild(newRow);
-  updateButtonState();
 });
 
 removeRow.addEventListener('click', () => {
   const rows = field.rows.length;
 
-  if (rows > 1) {
+  if (rows > 2) {
     field.deleteRow(rows - 1);
   }
+
   updateButtonState();
 });
 
@@ -48,6 +53,7 @@ appendColumn.addEventListener('click', () => {
       row.appendChild(newCell);
     });
   }
+
   updateButtonState();
 });
 
@@ -57,6 +63,7 @@ removeColumn.addEventListener('click', () => {
       row.deleteCell(row.cells.length - 1);
     });
   }
+
   updateButtonState();
 });
 
