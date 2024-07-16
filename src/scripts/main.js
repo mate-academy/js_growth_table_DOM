@@ -22,15 +22,17 @@ appendRow.addEventListener('click', () => {
   const rows = field.rows.length;
 
   if (rows < 10) {
+    const tbody = field.querySelector('tbody');
     const newRow = document.createElement('tr');
     const columns = field.rows[0].cells.length;
 
     for (let i = 0; i < columns; i++) {
       const newCell = document.createElement('td');
+
       newRow.appendChild(newCell);
     }
 
-    field.appendChild(newRow);
+    tbody.appendChild(newRow);
     updateButtonState();
   }
 });
