@@ -1,6 +1,7 @@
 'use strict';
 
 const table = document.querySelector('.field');
+const tbody = document.querySelector('tbody');
 
 const appendRow = document.querySelector('.append-row');
 const removeRow = document.querySelector('.remove-row');
@@ -16,7 +17,7 @@ appendRow.addEventListener('click', () => {
     newRow.append(newCell);
   }
 
-  table.append(newRow);
+  tbody.append(newRow);
 
   if (table.rows.length >= 10) {
     appendRow.setAttribute('disabled', true);
@@ -38,7 +39,7 @@ removeRow.addEventListener('click', () => {
 });
 
 appendColumn.addEventListener('click', () => {
-  Array.from(table.rows).forEach((row) => {
+  Array.from(tbody.rows).forEach((row) => {
     const newCell = document.createElement('td');
 
     row.append(newCell);
