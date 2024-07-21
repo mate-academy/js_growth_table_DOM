@@ -25,7 +25,7 @@ appendRow.addEventListener('click', () => {
   if (rows.length === MAX_COUNT) {
     appendRow.disabled = true;
   } else {
-    appendRow.disabled = false;
+    removeRow.disabled = false;
   }
 });
 
@@ -37,7 +37,7 @@ removeRow.addEventListener('click', () => {
   if (rows.length === MIN_COUNT) {
     removeRow.disabled = true;
   } else {
-    removeRow.disabled = false;
+    appendRow.disabled = false;
   }
 });
 
@@ -51,7 +51,7 @@ appendColumn.addEventListener('click', () => {
   if (rows[0].children.length === MAX_COUNT) {
     appendColumn.disabled = true;
   } else {
-    appendColumn.disabled = false;
+    removeColumn.disabled = false;
   }
 });
 
@@ -65,6 +65,6 @@ removeColumn.addEventListener('click', () => {
   if (rows[0].children.length === MIN_COUNT) {
     removeColumn.disabled = true;
   } else {
-    removeColumn.disabled = false;
+    appendColumn.disabled = false;
   }
 });
