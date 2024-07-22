@@ -22,11 +22,7 @@ appendRow.addEventListener('click', () => {
     tableBody.append(newRow);
   }
 
-  if (rows.length === MAX_COUNT) {
-    appendRow.disabled = true;
-  } else {
-    removeRow.disabled = false;
-  }
+  appendRow.disabled = rows.length === MAX_COUNT;
 });
 
 removeRow.addEventListener('click', () => {
@@ -34,11 +30,7 @@ removeRow.addEventListener('click', () => {
     rows[rows.length - 1].remove();
   }
 
-  if (rows.length === MIN_COUNT) {
-    removeRow.disabled = true;
-  } else {
-    appendRow.disabled = false;
-  }
+  removeRow.disabled = rows.length === MIN_COUNT;
 });
 
 appendColumn.addEventListener('click', () => {
@@ -48,11 +40,7 @@ appendColumn.addEventListener('click', () => {
     }
   }
 
-  if (rows[0].children.length === MAX_COUNT) {
-    appendColumn.disabled = true;
-  } else {
-    removeColumn.disabled = false;
-  }
+  appendColumn.disabled = rows[0].children.length === MAX_COUNT;
 });
 
 removeColumn.addEventListener('click', () => {
@@ -62,9 +50,5 @@ removeColumn.addEventListener('click', () => {
     }
   }
 
-  if (rows[0].children.length === MIN_COUNT) {
-    removeColumn.disabled = true;
-  } else {
-    appendColumn.disabled = false;
-  }
+  removeColumn.disabled = rows[0].children.length === MIN_COUNT;
 });
