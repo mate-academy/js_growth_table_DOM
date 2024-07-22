@@ -15,13 +15,13 @@ appendRowButton.addEventListener('click', (e) => {
   field.firstElementChild.appendChild(row);
 
   if (field.rows.length > ACTIVE_BUTTON_MAX_LINES) {
-    appendRowButton.setAttribute('disabled', '');
+    appendRowButton.disabled = true;
 
     return;
   }
 
   if (field.rows.length === ACTIVE_BUTTON_MIN_LINES) {
-    removeRowButton.removeAttribute('disabled');
+    removeRowButton.disabled = false;
   }
 });
 
@@ -29,13 +29,13 @@ removeRowButton.addEventListener('click', (e) => {
   field.rows[0].outerHTML = '';
 
   if (field.rows.length < ACTIVE_BUTTON_MIN_LINES) {
-    removeRowButton.setAttribute('disabled', '');
+    removeRowButton.disabled = true;
 
     return;
   }
 
   if (field.rows.length === ACTIVE_BUTTON_MAX_LINES) {
-    appendRowButton.removeAttribute('disabled');
+    appendRowButton.disabled = false;
   }
 });
 
@@ -45,13 +45,13 @@ appendColumnButton.addEventListener('click', (e) => {
   }
 
   if (field.rows[0].cells.length > ACTIVE_BUTTON_MAX_LINES) {
-    appendColumnButton.setAttribute('disabled', '');
+    appendColumnButton.disabled = true;
 
     return;
   }
 
   if (field.rows[0].cells.length === ACTIVE_BUTTON_MIN_LINES) {
-    removeColumnButton.removeAttribute('disabled');
+    removeColumnButton.disabled = false;
   }
 });
 
@@ -61,12 +61,12 @@ removeColumnButton.addEventListener('click', (e) => {
   }
 
   if (field.rows[0].cells.length < ACTIVE_BUTTON_MIN_LINES) {
-    removeColumnButton.setAttribute('disabled', '');
+    removeColumnButton.disabled = true;
 
     return;
   }
 
   if (field.rows[0].cells.length === ACTIVE_BUTTON_MAX_LINES) {
-    appendColumnButton.removeAttribute('disabled');
+    appendColumnButton.disabled = false;
   }
 });
