@@ -1,7 +1,7 @@
 'use strict';
 
-const ACTIVE_BUTTON_MAX_LINES = 9;
-const ACTIVE_BUTTON_MIN_LINES = 3;
+const MAX_LINES = 10;
+const MIN_LINES = 2;
 
 const field = document.querySelector('.field');
 const appendRowButton = document.querySelector('.append-row');
@@ -14,29 +14,23 @@ appendRowButton.addEventListener('click', (e) => {
 
   field.firstElementChild.appendChild(row);
 
-  if (field.rows.length > ACTIVE_BUTTON_MAX_LINES) {
+  if (field.rows.length >= MAX_LINES) {
     appendRowButton.disabled = true;
 
     return;
   }
-
-  if (field.rows.length === ACTIVE_BUTTON_MIN_LINES) {
-    removeRowButton.disabled = false;
-  }
+  removeRowButton.disabled = false;
 });
 
 removeRowButton.addEventListener('click', (e) => {
   field.rows[0].outerHTML = '';
 
-  if (field.rows.length < ACTIVE_BUTTON_MIN_LINES) {
+  if (field.rows.length <= MIN_LINES) {
     removeRowButton.disabled = true;
 
     return;
   }
-
-  if (field.rows.length === ACTIVE_BUTTON_MAX_LINES) {
-    appendRowButton.disabled = false;
-  }
+  appendRowButton.disabled = false;
 });
 
 appendColumnButton.addEventListener('click', (e) => {
@@ -44,15 +38,12 @@ appendColumnButton.addEventListener('click', (e) => {
     row.appendChild(document.createElement('td'));
   }
 
-  if (field.rows[0].cells.length > ACTIVE_BUTTON_MAX_LINES) {
+  if (field.rows[0].cells.length >= MAX_LINES) {
     appendColumnButton.disabled = true;
 
     return;
   }
-
-  if (field.rows[0].cells.length === ACTIVE_BUTTON_MIN_LINES) {
-    removeColumnButton.disabled = false;
-  }
+  removeColumnButton.disabled = false;
 });
 
 removeColumnButton.addEventListener('click', (e) => {
@@ -60,13 +51,10 @@ removeColumnButton.addEventListener('click', (e) => {
     row.cells[row.cells.length - 1].outerHTML = '';
   }
 
-  if (field.rows[0].cells.length < ACTIVE_BUTTON_MIN_LINES) {
+  if (field.rows[0].cells.length <= MIN_LINES) {
     removeColumnButton.disabled = true;
 
     return;
   }
-
-  if (field.rows[0].cells.length === ACTIVE_BUTTON_MAX_LINES) {
-    appendColumnButton.disabled = false;
-  }
+  appendColumnButton.disabled = false;
 });
