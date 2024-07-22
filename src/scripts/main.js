@@ -1,5 +1,8 @@
 'use strict';
 
+const ACTIVE_BUTTON_MAX_LINES = 9;
+const ACTIVE_BUTTON_MIN_LINES = 3;
+
 const field = document.querySelector('.field');
 const appendRowButton = document.querySelector('.append-row');
 const removeRowButton = document.querySelector('.remove-row');
@@ -11,13 +14,13 @@ appendRowButton.addEventListener('click', (e) => {
 
   field.firstElementChild.appendChild(row);
 
-  if (field.rows.length >= 10) {
+  if (field.rows.length > ACTIVE_BUTTON_MAX_LINES) {
     appendRowButton.setAttribute('disabled', '');
 
     return;
   }
 
-  if (field.rows.length === 3) {
+  if (field.rows.length === ACTIVE_BUTTON_MIN_LINES) {
     removeRowButton.removeAttribute('disabled');
   }
 });
@@ -25,13 +28,13 @@ appendRowButton.addEventListener('click', (e) => {
 removeRowButton.addEventListener('click', (e) => {
   field.rows[0].outerHTML = '';
 
-  if (field.rows.length <= 2) {
+  if (field.rows.length < ACTIVE_BUTTON_MIN_LINES) {
     removeRowButton.setAttribute('disabled', '');
 
     return;
   }
 
-  if (field.rows.length === 9) {
+  if (field.rows.length === ACTIVE_BUTTON_MAX_LINES) {
     appendRowButton.removeAttribute('disabled');
   }
 });
@@ -41,13 +44,13 @@ appendColumnButton.addEventListener('click', (e) => {
     row.appendChild(document.createElement('td'));
   }
 
-  if (field.rows[0].cells.length >= 10) {
+  if (field.rows[0].cells.length > ACTIVE_BUTTON_MAX_LINES) {
     appendColumnButton.setAttribute('disabled', '');
 
     return;
   }
 
-  if (field.rows[0].cells.length === 3) {
+  if (field.rows[0].cells.length === ACTIVE_BUTTON_MIN_LINES) {
     removeColumnButton.removeAttribute('disabled');
   }
 });
@@ -57,13 +60,13 @@ removeColumnButton.addEventListener('click', (e) => {
     row.cells[row.cells.length - 1].outerHTML = '';
   }
 
-  if (field.rows[0].cells.length <= 2) {
+  if (field.rows[0].cells.length < ACTIVE_BUTTON_MIN_LINES) {
     removeColumnButton.setAttribute('disabled', '');
 
     return;
   }
 
-  if (field.rows[0].cells.length === 9) {
+  if (field.rows[0].cells.length === ACTIVE_BUTTON_MAX_LINES) {
     appendColumnButton.removeAttribute('disabled');
   }
 });
