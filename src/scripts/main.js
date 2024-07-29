@@ -1,113 +1,106 @@
-'use strict'
+'use strict';
 
 // write code here
 
-const appendRowBtn = document.querySelector('.append-row')
-const removeRowBtn = document.querySelector('.remove-row')
+const appendRowBtn = document.querySelector('.append-row');
+const removeRowBtn = document.querySelector('.remove-row');
 const container = document.querySelector('.container');
 
-const appendColumnBtn = document.querySelector('.append-column')
-const removeColumnBtn = document.querySelector('.remove-column')
+const appendColumnBtn = document.querySelector('.append-column');
+const removeColumnBtn = document.querySelector('.remove-column');
 
-const table = document.querySelector('.field tbody')
-const tableItems = table.children
+const table = document.querySelector('.field tbody');
+const tableItems = table.children;
 
-const MIN_ITEMS = 2
-const MAX_ITEMS = 10
+const MIN_ITEMS = 2;
+const MAX_ITEMS = 10;
 
 const DISABLE_ACTIONS = {
   remove: 'remove',
-  append: 'append'
-}
+  append: 'append',
+};
 
 const initListener = (component, type, callback) => {
-  component.addEventListener(type, callback)
-}
+  component.addEventListener(type, callback);
+};
 
 const disableButtons = (type, items, ...components) => {
-  const [appendButton, removeButton] = components
+  const [appendButton, removeButton] = components;
 
-  const isMaxItems = items.children.length === MAX_ITEMS
-  const isMinItems = items.children.length === MIN_ITEMS
+  const isMaxItems = items.children.length === MAX_ITEMS;
+  const isMinItems = items.children.length === MIN_ITEMS;
 
-  const overIsMin = items.children.length > MIN_ITEMS
-  const lessIsMax = items.children.length < MAX_ITEMS
+  const overIsMin = items.children.length > MIN_ITEMS;
+  const lessIsMax = items.children.length < MAX_ITEMS;
 
   if (type === DISABLE_ACTIONS.append) {
     if (isMaxItems) {
-      appendButton.disabled = true
+      appendButton.disabled = true;
     }
+
     if (overIsMin) {
-      removeButton.disabled = false
+      removeButton.disabled = false;
     }
   }
 
   if (type === DISABLE_ACTIONS.remove) {
     if (lessIsMax) {
-      appendButton.disabled = false
+      appendButton.disabled = false;
     }
 
     if (isMinItems) {
-      removeButton.disabled = true
+      removeButton.disabled = true;
     }
   }
-
-}
+};
 
 const createNewRow = () => {
-  const th = document.createElement('tr')
-  const lastRow = table.lastElementChild
+  const th = document.createElement('tr');
+  const lastRow = table.lastElementChild;
 
   for (let i = 0; i < lastRow.children.length; i++) {
-    const td = document.createElement('td')
+    const td = document.createElement('td');
 
-    th.append(td)
+    th.append(td);
   }
-  table.append(th)
+  table.append(th);
 
-
-  disableButtons(DISABLE_ACTIONS.append, table, appendRowBtn, removeRowBtn)
-}
-
+  disableButtons(DISABLE_ACTIONS.append, table, appendRowBtn, removeRowBtn);
+};
 
 const removeLastRow = () => {
-  table.lastElementChild.remove()
+  table.lastElementChild.remove();
 
-  disableButtons(
-    DISABLE_ACTIONS.remove,
-    table,
-    appendRowBtn,
-    removeRowBtn
-  )
-}
+  disableButtons(DISABLE_ACTIONS.remove, table, appendRowBtn, removeRowBtn);
+};
 
 const removeColumn = () => {
   for (const row of tableItems) {
-    row.querySelector('td').remove()
+    row.querySelector('td').remove();
   }
 
   disableButtons(
     DISABLE_ACTIONS.remove,
     table.lastElementChild,
     appendColumnBtn,
-    removeColumnBtn
-  )
-}
+    removeColumnBtn,
+  );
+};
 
 const appendColumn = () => {
   for (const row of tableItems) {
-    const column = document.createElement('td')
-    row.append(column)
-  }
+    const column = document.createElement('td');
 
+    row.append(column);
+  }
 
   disableButtons(
     DISABLE_ACTIONS.append,
     table.lastElementChild,
     appendColumnBtn,
-    removeColumnBtn
-  )
-}
+    removeColumnBtn,
+  );
+};
 
 const App = () => {
   initListener(container, 'click', (e) => {
@@ -120,7 +113,7 @@ const App = () => {
     } else if (e.target.closest('.remove-column')) {
       removeColumn();
     }
-  })
-}
+  });
+};
 
 App();
