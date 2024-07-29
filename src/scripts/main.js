@@ -104,13 +104,13 @@ const appendColumn = () => {
 
 const App = () => {
   initListener(container, 'click', (e) => {
-    if (e.target.closest('.append-row')) {
+    if (e.target.classList.contains('append-row')) {
       createNewRow();
-    } else if (e.target.closest('.remove-row')) {
+    } else if (e.target.classList.contains('remove-row')) {
       removeLastRow();
-    } else if (e.target.closest('.append-column')) {
+    } else if (e.target.classList.contains('append-column')) {
       appendColumn();
-    } else if (e.target.closest('.remove-column')) {
+    } else if (e.target.classList.contains('remove-column')) {
       removeColumn();
     }
   });
