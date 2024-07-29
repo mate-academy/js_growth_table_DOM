@@ -31,8 +31,6 @@ const updateDisableStatus = () => {
 
   appendColumnBtn.disabled = isMaxColumns;
   removeColumnBtn.disabled = isMinColumns;
-
-  console.log('rows length', table.children.length);
 };
 
 const createNewRow = () => {
