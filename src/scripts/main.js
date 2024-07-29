@@ -1,11 +1,11 @@
 'use strict';
 
-const MAX_COLUMNS = 10;
-const MIN_ROWS = 2;
+const MAX_ITEMS = 10;
+const MIN_ITEMS = 2;
 
 const element = {
   add: (item) =>
-    item.children.length < 10 &&
+    item.children.length < MAX_ITEMS &&
     item.appendChild(item.lastElementChild.cloneNode(true)),
   remove: (item) => item.lastElementChild.remove(),
   set: (add, item) => (add ? element.add(item) : element.remove(item)),
@@ -16,11 +16,11 @@ const isButton = (lengths, item) => {
   const append = item.className.includes('append');
 
   switch (true) {
-    case lengths >= MAX_COLUMNS && append:
+    case lengths >= MAX_ITEMS && append:
       item.disabled = true;
       break;
 
-    case lengths === MIN_ROWS && remove:
+    case lengths === MIN_ITEMS && remove:
       item.disabled = true;
       break;
 
