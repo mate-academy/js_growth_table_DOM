@@ -15,43 +15,24 @@ const tableItems = table.children;
 const MIN_ITEMS = 2;
 const MAX_ITEMS = 10;
 
-const DISABLE_ACTIONS = {
-  remove: 'remove',
-  append: 'append',
-};
-
-const initListener = (component, type, callback) => {
+const initAddListener = (component, type, callback) => {
   component.addEventListener(type, callback);
 };
 
-const disableButtons = (type, items, ...components) => {
-  const [appendButton, removeButton] = components;
+const updateDisableStatus = () => {
+  const isMaxRows = table.children.length === MAX_ITEMS;
+  const isMinRows = table.children.length === MIN_ITEMS;
 
-  const isMaxItems = items.children.length === MAX_ITEMS;
-  const isMinItems = items.children.length === MIN_ITEMS;
+  const isMaxColumns = table.lastElementChild.children.length === MAX_ITEMS;
+  const isMinColumns = table.lastElementChild.children.length === MIN_ITEMS;
 
-  const overIsMin = items.children.length > MIN_ITEMS;
-  const lessIsMax = items.children.length < MAX_ITEMS;
+  appendRowBtn.disabled = isMaxRows;
+  removeRowBtn.disabled = isMinRows;
 
-  if (type === DISABLE_ACTIONS.append) {
-    if (isMaxItems) {
-      appendButton.disabled = true;
-    }
+  appendColumnBtn.disabled = isMaxColumns;
+  removeColumnBtn.disabled = isMinColumns;
 
-    if (overIsMin) {
-      removeButton.disabled = false;
-    }
-  }
-
-  if (type === DISABLE_ACTIONS.remove) {
-    if (lessIsMax) {
-      appendButton.disabled = false;
-    }
-
-    if (isMinItems) {
-      removeButton.disabled = true;
-    }
-  }
+  console.log('rows length', table.children.length);
 };
 
 const createNewRow = () => {
@@ -65,13 +46,13 @@ const createNewRow = () => {
   }
   table.append(th);
 
-  disableButtons(DISABLE_ACTIONS.append, table, appendRowBtn, removeRowBtn);
+  updateDisableStatus();
 };
 
 const removeLastRow = () => {
   table.lastElementChild.remove();
 
-  disableButtons(DISABLE_ACTIONS.remove, table, appendRowBtn, removeRowBtn);
+  updateDisableStatus();
 };
 
 const removeColumn = () => {
@@ -79,12 +60,7 @@ const removeColumn = () => {
     row.querySelector('td').remove();
   }
 
-  disableButtons(
-    DISABLE_ACTIONS.remove,
-    table.lastElementChild,
-    appendColumnBtn,
-    removeColumnBtn,
-  );
+  updateDisableStatus();
 };
 
 const appendColumn = () => {
@@ -94,16 +70,11 @@ const appendColumn = () => {
     row.append(column);
   }
 
-  disableButtons(
-    DISABLE_ACTIONS.append,
-    table.lastElementChild,
-    appendColumnBtn,
-    removeColumnBtn,
-  );
+  updateDisableStatus();
 };
 
 const App = () => {
-  initListener(container, 'click', (e) => {
+  initAddListener(container, 'click', (e) => {
     if (e.target.classList.contains('append-row')) {
       createNewRow();
     } else if (e.target.classList.contains('remove-row')) {
