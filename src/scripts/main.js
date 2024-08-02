@@ -25,14 +25,15 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function appendRow() {
-    const newRow = table.insertRow();
-    const elmentCount = table.rows[0].cells.length;
+    if (table.rows.length < 10) {
+      const newRow = table.insertRow();
+      const elmentCount = table.rows[0].cells.length;
 
-    for (let i = 0; i < elmentCount; i++) {
-      newRow.insertCell();
+      for (let i = 0; i < elmentCount; i++) {
+        newRow.insertCell();
+      }
+      updateButton();
     }
-
-    updateButton();
   }
 
   function removeRow() {
@@ -42,10 +43,12 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function appendColumn() {
-    const rowCount = table.rows.length;
+    if (table.rows[0].cells.length < 10) {
+      const rowCount = table.rows.length;
 
-    for (let i = 0; i < rowCount; i++) {
-      table.rows[i].insertCell();
+      for (let i = 0; i < rowCount; i++) {
+        table.rows[i].insertCell();
+      }
     }
 
     updateButton();
