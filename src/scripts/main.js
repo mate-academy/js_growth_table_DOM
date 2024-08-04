@@ -6,8 +6,10 @@ const maxTableSize = 10;
 const minTableSize = 2;
 
 container.addEventListener('click', (e) => {
-  switch (e.target.classList[0]) {
-    case 'append-row':
+  const targetClass = e.target.classList;
+
+  switch (true) {
+    case targetClass.contains('append-row'):
       if (table.rows.length < maxTableSize) {
         const newRow = table.insertRow();
 
@@ -25,7 +27,7 @@ container.addEventListener('click', (e) => {
       }
       break;
 
-    case 'remove-row':
+    case targetClass.contains('remove-row'):
       table.deleteRow(-1);
 
       if (table.rows.length === minTableSize) {
@@ -37,7 +39,7 @@ container.addEventListener('click', (e) => {
       }
       break;
 
-    case 'append-column':
+    case targetClass.contains('append-column'):
       if (table.rows[0].cells.length < maxTableSize) {
         for (let i = 0; i < table.rows.length; i++) {
           table.rows[i].insertCell();
@@ -53,7 +55,7 @@ container.addEventListener('click', (e) => {
       }
       break;
 
-    case 'remove-column':
+    case targetClass.contains('remove-column'):
       for (let i = 0; i < table.rows.length; i++) {
         table.rows[i].deleteCell(-1);
       }
