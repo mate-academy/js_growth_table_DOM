@@ -6,14 +6,13 @@ const appendRow = document.querySelector('.append-row');
 const removeRow = document.querySelector('.remove-row');
 const appendColumn = document.querySelector('.append-column');
 const removeColumn = document.querySelector('.remove-column');
-const tbody = document.querySelector('tbody');
-const trs = [...document.querySelectorAll('tr')];
 const cells = {
   rows: 4,
   columns: 4,
 };
 
 appendRow.addEventListener('click', () => {
+  const tbody = document.querySelector('tbody');
   const newRow = tbody.lastElementChild.cloneNode(true);
 
   tbody.append(newRow);
@@ -27,6 +26,8 @@ appendRow.addEventListener('click', () => {
 });
 
 removeRow.addEventListener('click', () => {
+  const tbody = document.querySelector('tbody');
+
   tbody.lastElementChild.remove();
   cells.rows--;
 
@@ -38,9 +39,12 @@ removeRow.addEventListener('click', () => {
 });
 
 appendColumn.addEventListener('click', () => {
+  const trs = [...document.querySelectorAll('tr')];
+
   if (trs[0].children.length < 10) {
     for (let i = 0; i < trs.length; i++) {
       const td = document.createElement('td');
+
       trs[i].appendChild(td);
     }
   }
@@ -55,6 +59,8 @@ appendColumn.addEventListener('click', () => {
 });
 
 removeColumn.addEventListener('click', () => {
+  const trs = [...document.querySelectorAll('tr')];
+
   trs.forEach((el) => el.lastElementChild.remove());
   cells.columns--;
 
