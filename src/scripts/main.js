@@ -14,16 +14,28 @@ container.addEventListener('click', (e) => {
 
     switch (action) {
       case 'append-row':
+        if (rowsQuantaty >= 10) {
+          return;
+        }
         changeTable('add', 'row');
         break;
       case 'remove-row':
+        if (rowsQuantaty <= 2) {
+          return;
+        }
         changeTable('remove', 'row');
         break;
 
       case 'append-column':
+        if (cellsQuantaty >= 10) {
+          return;
+        }
         changeTable('add', 'column');
         break;
       case 'remove-column':
+        if (cellsQuantaty <= 2) {
+          return;
+        }
         changeTable('remove', 'column');
         break;
     }
