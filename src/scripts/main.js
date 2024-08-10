@@ -1,4 +1,5 @@
 'use strict';
+
 const maxLen = 10;
 const minLen = 2;
 
@@ -10,14 +11,17 @@ const appendColumn = document.querySelector('.append-column');
 const removeColumn = document.querySelector('.remove-column');
 
 function updateButton() {
-  appendRow.disabled = tr.length === maxLen;
+  appendRow.disabled = tr.length < maxLen;
   removeRow.disabled = tr.length === minLen;
   appendColumn.disabled = tr[0].children.length === maxLen;
   removeColumn.disabled = tr[0].children.length === minLen;
 }
 
 appendRow.addEventListener('click', () => {
-  table.append(tr[0].cloneNode(true));
+  if (tr.length < maxLen) {
+    table.append(tr[0].cloneNode(true));
+  }
+
   updateButton();
 });
 
@@ -27,15 +31,19 @@ removeRow.addEventListener('click', () => {
 });
 
 appendColumn.addEventListener('click', () => {
-  Array.from(tr).forEach((row) => {
-    row.insertAdjacentHTML('beforeend', '<td></td>');
-  });
+  if (tr[0].children.length < maxLen) {
+    Array.from(tr).forEach((row) => {
+      row.insertAdjacentHTML('beforeend', '<td></td>');
+    });
+  }
 
   updateButton();
 });
 
 removeColumn.addEventListener('click', () => {
-  Array.from(tr).forEach((row) => row.cells[2].remove());
+  if (tr[0].children.length >= minLen) {
+    Array.from(tr).forEach((row) => row.cells[2].remove());
+  }
 
   updateButton();
 });
