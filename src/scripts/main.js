@@ -11,7 +11,7 @@ const appendColumn = document.querySelector('.append-column');
 const removeColumn = document.querySelector('.remove-column');
 
 function updateButton() {
-  appendRow.disabled = tr.length < maxLen;
+  appendRow.disabled = tr.length === maxLen;
   removeRow.disabled = tr.length === minLen;
   appendColumn.disabled = tr[0].children.length === maxLen;
   removeColumn.disabled = tr[0].children.length === minLen;
