@@ -9,44 +9,54 @@ function toggleButtons() {
 
   const removeRowButton = document.querySelector('.remove-row.button');
   const removeColumnButton = document.querySelector('.remove-column.button');
+  const appendRowButton = document.querySelector('.append-row.button');
+  const appendColumnButton = document.querySelector('.append-column.button');
 
-  removeRowButton.disabled = rows <= 1;
-  removeColumnButton.disabled = columns <= 1;
+  removeRowButton.disabled = rows <= 2;
+  appendRowButton.disabled = rows >= 10;
+
+  removeColumnButton.disabled = columns <= 2;
+  appendColumnButton.disabled = columns >= 10;
 }
 
 container.addEventListener('click', function (e) {
   const table = document.querySelector('.field');
   let rows = table.rows.length;
+  let columns = table.rows[0].cells.length;
 
   if (e.target.className === 'append-row button') {
-    const newRow = table.insertRow();
+    if (rows < 10) {
+      const newRow = table.insertRow();
 
-    for (let i = 0; i < table.rows[0].cells.length; i++) {
-      newRow.insertCell(i).textContent = '';
+      for (let i = 0; i < columns; i++) {
+        newRow.insertCell(i).textContent = '';
+      }
+      rows += 1;
     }
-    rows += 1;
   }
 
   if (e.target.className === 'remove-row button') {
-    if (rows > 1) {
+    if (rows > 2) {
       table.deleteRow(rows - 1);
       rows -= 1;
     }
   }
 
   if (e.target.className === 'append-column button') {
-    for (let i = 0; i < rows; i++) {
-      table.rows[i].insertCell().textContent = '';
+    if (columns < 10) {
+      for (let i = 0; i < rows; i++) {
+        table.rows[i].insertCell().textContent = '';
+      }
+      columns += 1;
     }
   }
 
   if (e.target.className === 'remove-column button') {
-    const columns = table.rows[0].cells.length;
-
-    if (columns > 1) {
+    if (columns > 2) {
       for (let i = 0; i < rows; i++) {
         table.rows[i].deleteCell(-1);
       }
+      columns -= 1;
     }
   }
 
