@@ -14,9 +14,13 @@ function toggleButtons() {
 
   removeRowButton.disabled = rows <= 2;
   appendRowButton.disabled = rows >= 10;
-
   removeColumnButton.disabled = columns <= 2;
   appendColumnButton.disabled = columns >= 10;
+
+  removeRowButton.style.display = rows <= 2 ? 'none' : '';
+  appendRowButton.style.display = rows >= 10 ? 'none' : '';
+  removeColumnButton.style.display = columns <= 2 ? 'none' : '';
+  appendColumnButton.style.display = columns >= 10 ? 'none' : '';
 }
 
 container.addEventListener('click', function (e) {
