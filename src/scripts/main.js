@@ -1,7 +1,18 @@
 'use strict';
 
-// write code here
 const container = document.querySelector('.container');
+
+function toggleButtons() {
+  const table = document.querySelector('.field');
+  const rows = table.rows.length;
+  const columns = table.rows[0].cells.length;
+
+  const removeRowButton = document.querySelector('.remove-row.button');
+  const removeColumnButton = document.querySelector('.remove-column.button');
+
+  removeRowButton.disabled = rows <= 1;
+  removeColumnButton.disabled = columns <= 1;
+}
 
 container.addEventListener('click', function (e) {
   const table = document.querySelector('.field');
@@ -17,7 +28,7 @@ container.addEventListener('click', function (e) {
   }
 
   if (e.target.className === 'remove-row button') {
-    if (rows > 0) {
+    if (rows > 1) {
       table.deleteRow(rows - 1);
       rows -= 1;
     }
@@ -30,8 +41,16 @@ container.addEventListener('click', function (e) {
   }
 
   if (e.target.className === 'remove-column button') {
-    for (let i = 0; i < rows; i++) {
-      table.rows[i].deleteCell(-1);
+    const columns = table.rows[0].cells.length;
+
+    if (columns > 1) {
+      for (let i = 0; i < rows; i++) {
+        table.rows[i].deleteCell(-1);
+      }
     }
   }
+
+  toggleButtons();
 });
+
+toggleButtons();
