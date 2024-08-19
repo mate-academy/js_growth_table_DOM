@@ -3,7 +3,8 @@
 
 const removeColumnButton = document.querySelector('.remove-column');
 const appendRowButton = document.querySelector('.append-row');
-
+const min = 2;
+const max = 10;
 let tableRows = [...document.querySelectorAll('tr')];
 
 removeColumnButton.addEventListener('click', (e) => {
@@ -11,16 +12,16 @@ removeColumnButton.addEventListener('click', (e) => {
     const lengthRow = row.children.length;
     const lastCell = row.querySelector('td:last-child');
 
-    if (lengthRow > 2) {
+    if (lengthRow > min) {
       lastCell.remove();
       removeColumnButton.disabled = false;
     }
 
-    if (row.children.length === 2) {
+    if (row.children.length === min) {
       removeColumnButton.disabled = true;
     }
 
-    if (lengthRow < 11) {
+    if (lengthRow === max) {
       appendColumnButton.disabled = false;
     }
   });
@@ -53,11 +54,11 @@ removeRowButton.addEventListener('click', (e) => {
   tableRows[0].remove();
   tableRows.shift();
 
-  if (tableRows.length === 2 || tableRows.length === 10) {
+  if (tableRows.length === min || tableRows.length === max) {
     removeRowButton.disabled = true;
   }
 
-  if (tableRows.length < 10) {
+  if (tableRows.length < max) {
     appendRowButton.disabled = false;
   }
 });
@@ -65,7 +66,7 @@ removeRowButton.addEventListener('click', (e) => {
 // adding rows
 
 appendRowButton.addEventListener('click', (e) => {
-  if (tableRows.length > 1 && tableRows.length < 10) {
+  if (tableRows.length > 1 && tableRows.length < max) {
     removeRowButton.disabled = false;
   }
 
@@ -75,7 +76,7 @@ appendRowButton.addEventListener('click', (e) => {
   rows.after(newRow);
   tableRows = [...document.querySelectorAll('tr')];
 
-  if (tableRows.length === 10) {
+  if (tableRows.length === max) {
     appendRowButton.disabled = true;
   }
 });
