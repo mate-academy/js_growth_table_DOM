@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const buttonRemoveColumn = document.querySelector('.remove-column');
 
   const table = document.querySelector('.field');
+  const tbody = table.querySelector('tbody');
 
   function updateButtons() {
     const rowCount = table.rows.length;
@@ -28,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
       newRow.appendChild(newCell);
     }
 
-    table.appendChild(newRow);
+    tbody.appendChild(newRow);
 
     updateButtons();
   });
@@ -37,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const rowCount = table.rows.length;
 
     if (rowCount > 2) {
-      table.deleteRow(rowCount - 1);
+      tbody.deleteRow(rowCount - 1);
 
       updateButtons();
     }
