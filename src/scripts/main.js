@@ -5,11 +5,15 @@ const appendRow = document.querySelector('.append-row');
 const removeRow = document.querySelector('.remove-row');
 const appendColumn = document.querySelector('.append-column');
 const removeColumn = document.querySelector('.remove-column');
-const table = document.getElementsByClassName('field')[0];
+const table = document
+  .getElementsByClassName('field')[0]
+  .querySelector('tbody');
 const rows = table.getElementsByTagName('tr');
 
 appendRow.addEventListener('click', () => {
-  const tr = rows[0].cloneNode(true);
+  const tr = document.createElement('tr');
+
+  tr.innerHTML = rows[0].innerHTML;
 
   appendRow.disabled = false;
   removeRow.disabled = false;
