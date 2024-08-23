@@ -1,5 +1,8 @@
 'use strict';
 
+const MAX_SIZE = 10;
+const MIN_SIZE = 2;
+
 const addRowButton = document.querySelector('.append-row');
 const removeRowButton = document.querySelector('.remove-row');
 const addColumnButton = document.querySelector('.append-column');
@@ -9,7 +12,7 @@ const table = document.querySelector('.field');
 const currentRows = table.querySelectorAll('tr');
 
 const addColumn = () => {
-  if (currentRows[1].querySelectorAll('td').length < 10) {
+  if (currentRows[1].querySelectorAll('td').length < MAX_SIZE) {
     removeColumnButton.disabled = false;
 
     table.querySelectorAll('tr').forEach((row) => {
@@ -19,7 +22,8 @@ const addColumn = () => {
     });
 
     if (
-      table.querySelectorAll('tr').item(0).querySelectorAll('td').length === 10
+      table.querySelectorAll('tr').item(0).querySelectorAll('td').length ===
+      MAX_SIZE
     ) {
       addColumnButton.disabled = true;
     }
@@ -27,7 +31,7 @@ const addColumn = () => {
 };
 
 const removeColumn = () => {
-  if (currentRows[1].querySelectorAll('td').length > 2) {
+  if (currentRows[1].querySelectorAll('td').length > MIN_SIZE) {
     addColumnButton.disabled = false;
 
     table.querySelectorAll('tr').forEach((row) => {
@@ -37,7 +41,8 @@ const removeColumn = () => {
     });
 
     if (
-      table.querySelectorAll('tr').item(0).querySelectorAll('td').length === 2
+      table.querySelectorAll('tr').item(0).querySelectorAll('td').length ===
+      MIN_SIZE
     ) {
       removeColumnButton.disabled = true;
     }
@@ -45,7 +50,7 @@ const removeColumn = () => {
 };
 
 const addRow = () => {
-  if (table.querySelectorAll('tr').length < 10) {
+  if (table.querySelectorAll('tr').length < MAX_SIZE) {
     removeRowButton.disabled = false;
 
     const newRow = table.insertRow();
@@ -56,18 +61,18 @@ const addRow = () => {
       newRow.insertCell();
     }
 
-    if (table.querySelectorAll('tr').length === 10) {
+    if (table.querySelectorAll('tr').length === MAX_SIZE) {
       addRowButton.disabled = true;
     }
   }
 };
 
 const removeRow = () => {
-  if (table.querySelectorAll('tr').length > 2) {
+  if (table.querySelectorAll('tr').length > MIN_SIZE) {
     addRowButton.disabled = false;
     table.deleteRow(-1);
 
-    if (table.querySelectorAll('tr').length === 2) {
+    if (table.querySelectorAll('tr').length === MIN_SIZE) {
       removeRowButton.disabled = true;
     }
   }
