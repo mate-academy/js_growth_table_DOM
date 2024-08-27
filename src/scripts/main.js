@@ -2,31 +2,24 @@
 
 // write code here
 
-const table = document
-  .getElementsByClassName('field')[0]
-  .querySelector('tbody');
+const table = document.querySelector('.field');
 const MIN = 2;
 const MAX = 10;
+
 const appendRow = document.querySelector('.append-row');
 const removeRow = document.querySelector('.remove-row');
 const appendColumn = document.querySelector('.append-column');
 const removeColumn = document.querySelector('.remove-column');
-const rows = table.getElementsByTagName('tr');
 
-appendRow.addEventListener('click', () => {
+appendRow.addEventListener('click', (e) => {
   const tr = document.createElement('tr');
 
-  tr.innerHTML = rows[0].innerHTML;
-  appendRow.disabled = false;
-  removeRow.disabled = false;
-
-  if (rows.length < 10) {
-    table.appendChild(tr);
+  for (let i = 0; i < table.rows[0].cells.length; i++) {
+    tr.insertCell();
   }
 
-  if (rows.length === 10) {
-    appendRow.disabled = true;
-  }
+  table.appendChild(tr);
+  checkDisabilityForButtons(table.rows.length, appendRow);
 });
 
 removeRow.addEventListener('click', (e) => {
@@ -37,24 +30,22 @@ removeRow.addEventListener('click', (e) => {
 });
 
 appendColumn.addEventListener('click', (e) => {
-  [...rows].forEach((row) => {
+  const rows = document.querySelectorAll('tr');
+
+  rows.forEach((row) => {
     row.appendChild(document.createElement('td'));
   });
+
   checkDisabilityForButtons();
 });
 
 removeColumn.addEventListener('click', (e) => {
-  [...rows].forEach((row) => {
-    const customTds = row.querySelectorAll('td');
+  const rows = document.querySelectorAll('tr');
 
-    if (customTds.length > 2) {
-      row.innerHTML = '';
-
-      for (const td of [...customTds].slice(0, -1)) {
-        row.appendChild(td);
-      }
-    }
+  rows.forEach((row) => {
+    row.lastChild.remove();
   });
+
   checkDisabilityForButtons();
 });
 
