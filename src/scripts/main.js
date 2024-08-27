@@ -1,7 +1,6 @@
 'use strict';
 
 // write code here
-
 const table = document.querySelector('.field');
 const MIN = 2;
 const MAX = 10;
