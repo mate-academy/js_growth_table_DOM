@@ -1,6 +1,7 @@
 'use strict';
 
 // write code here
+
 const table = document
   .getElementsByClassName('field')[0]
   .querySelector('tbody');
