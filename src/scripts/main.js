@@ -6,10 +6,16 @@ const removeRow = document.querySelector('.remove-row');
 const addColumn = document.querySelector('.append-column');
 const removeColumn = document.querySelector('.remove-column');
 
+const minRows = 2;
+const maxRows = 10;
+const minColumns = 2;
+const maxColumns = 10;
+const enableDisableThreshold = maxRows - 1; 
+
 addRowButton.addEventListener('click', () => {
   const allRows = Array.from(table.querySelectorAll('tr'));
 
-  if (allRows.length >= 10) {
+  if (allRows.length >= maxRows) {
     return;
   }
 
@@ -18,7 +24,7 @@ addRowButton.addEventListener('click', () => {
 
   table.appendChild(copy);
 
-  if (allRows.length >= 9) {
+  if (allRows.length >= enableDisableThreshold) {
     addRowButton.disabled = true;
   } else {
     removeRow.disabled = false;
@@ -28,13 +34,13 @@ addRowButton.addEventListener('click', () => {
 removeRow.addEventListener('click', () => {
   const allRows = Array.from(table.querySelectorAll('tr'));
 
-  if (allRows.length <= 2) {
+  if (allRows.length <= minRows) {
     return;
   }
 
   table.removeChild(table.lastElementChild);
 
-  if (allRows.length <= 3) {
+  if (allRows.length <= minRows + 1) {
     removeRow.disabled = true;
   } else {
     addRowButton.disabled = false;
@@ -46,21 +52,18 @@ addColumn.addEventListener('click', () => {
   const firstEl = allRows[0];
   const allCells = Array.from(firstEl.cells);
 
-  if (allCells.length >= 10) {
+  if (allCells.length >= maxColumns) {
     return;
   }
 
-  const checkCeil = Array.from(allRows[0].cells);
-
   allRows.forEach((x) => {
-    const allBlocks = x.cells;
-    const example = allBlocks[0];
+    const example = x.cells[0];
     const copy = example.cloneNode(true);
 
     x.appendChild(copy);
   });
 
-  if (checkCeil.length >= 9) {
+  if (allCells.length >= enableDisableThreshold) {
     addColumn.disabled = true;
   } else {
     removeColumn.disabled = false;
@@ -69,12 +72,10 @@ addColumn.addEventListener('click', () => {
 
 removeColumn.addEventListener('click', () => {
   const allRows = Array.from(table.querySelectorAll('tr'));
-
   const firstEl = allRows[0];
   const allCells = Array.from(firstEl.cells);
-  const checkCeil = Array.from(allRows[0].cells);
 
-  if (allCells.length <= 2) {
+  if (allCells.length <= minColumns) {
     return;
   }
 
@@ -82,7 +83,7 @@ removeColumn.addEventListener('click', () => {
     x.removeChild(x.lastElementChild);
   });
 
-  if (checkCeil.length <= 3) {
+  if (allCells.length <= minColumns + 1) {
     removeColumn.disabled = true;
   } else {
     addColumn.disabled = false;
