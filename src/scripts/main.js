@@ -78,7 +78,7 @@ buttons.removeColumn.addEventListener('click', () => {
   const amountOfColums = field[0].children.length;
   const amountOfColumsBoxs = field[0].children.length - 1;
 
-  if (amountOfColums === 9) {
+  if (amountOfColums === 10) {
     buttons.addColumn.disabled = false;
   }
 
