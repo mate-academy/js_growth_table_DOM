@@ -10,7 +10,7 @@ const minRows = 2;
 const maxRows = 10;
 const minColumns = 2;
 const maxColumns = 10;
-const enableDisableThreshold = maxRows - 1; 
+const enableDisableThreshold = maxRows - 1;
 
 addRowButton.addEventListener('click', () => {
   const allRows = Array.from(table.querySelectorAll('tr'));
