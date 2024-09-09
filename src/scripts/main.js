@@ -15,7 +15,7 @@ container.addEventListener('click', (e) => {
   const rowsLength = table.children.length;
   const coloumnLenght = table.firstElementChild.children.length;
 
-  if (e.target === appendRow) {
+  if (e.target === appendRow && rowsLength < maxCount) {
     if (rowsLength + 1 === maxCount) {
       appendRow.setAttribute('disabled', 'true');
     }
@@ -48,7 +48,7 @@ container.addEventListener('click', (e) => {
     lastRow.remove();
   }
 
-  if (e.target === appendColumn) {
+  if (e.target === appendColumn && coloumnLenght < maxCount) {
     if (removeColumn.hasAttribute('disabled')) {
       removeColumn.removeAttribute('disabled');
     }
