@@ -14,33 +14,16 @@ const rows = el.tableBody.children;
 
 function handleField(className) {
   function throughCollection(collection, action) {
-    const collectionParent = collection[0].parentNode;
-    const cloneArray = [...collection];
-
     switch (action) {
       case 'add':
-        const clone = cloneArray[0].cloneNode(cloneArray[0]);
+        const cloneElement = collection[0].cloneNode(true);
 
-        cloneArray.push(clone);
+        collection[0].parentNode.appendChild(cloneElement);
         break;
       case 'remove':
-        cloneArray.pop();
+        collection[0].parentNode.removeChild(collection[0]);
         break;
     }
-
-    collectionParent.innerHTML = '';
-    cloneArray.forEach((item) => collectionParent.appendChild(item));
-
-    // switch (action) {
-    //   case 'add':
-    //     const cloneElement = collection[0].cloneNode(true);
-
-    //     collection[0].parentNode.appendChild(cloneElement);
-    //     break;
-    //   case 'remove':
-    //     collection[0].parentNode.removeChild(collection[0]);
-    //     break;
-    // }
   }
 
   switch (className) {
@@ -74,7 +57,11 @@ el.container.addEventListener(
   'click',
   (e) => {
     if (e.target.classList.contains('button')) {
-      handleField(e.target.classList[0]);
+      const classForAction = [...e.target.classList].filter(
+        (item) => item !== 'button',
+      );
+
+      handleField(classForAction[0]);
       handleButtonsByLimit();
     }
   },
