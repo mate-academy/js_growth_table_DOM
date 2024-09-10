@@ -7,6 +7,7 @@
 
 ### Task: Growth table
 
+
 Let's blow up this table!
 
 Your task sounds simple: Do you see yellow buttons? Give the table the opportunity to grow in different directions.
