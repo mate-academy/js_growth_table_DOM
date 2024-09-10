@@ -14,16 +14,33 @@ const rows = el.tableBody.children;
 
 function handleField(className) {
   function throughCollection(collection, action) {
+    const collectionParent = collection[0].parentNode;
+    const cloneArray = [...collection];
+
     switch (action) {
       case 'add':
-        const cloneElement = collection[0].cloneNode(true);
+        const clone = cloneArray[0].cloneNode(cloneArray[0]);
 
-        collection[0].parentNode.appendChild(cloneElement);
+        cloneArray.push(clone);
         break;
       case 'remove':
-        collection[0].parentNode.removeChild(collection[0]);
+        cloneArray.pop();
         break;
     }
+
+    collectionParent.innerHTML = '';
+    cloneArray.forEach((item) => collectionParent.appendChild(item));
+
+    // switch (action) {
+    //   case 'add':
+    //     const cloneElement = collection[0].cloneNode(true);
+
+    //     collection[0].parentNode.appendChild(cloneElement);
+    //     break;
+    //   case 'remove':
+    //     collection[0].parentNode.removeChild(collection[0]);
+    //     break;
+    // }
   }
 
   switch (className) {
@@ -47,12 +64,10 @@ function handleField(className) {
 }
 
 function handleButtonsByLimit() {
-  const columns = rows[0].children;
-
   el.addRowButton.disabled = rows.length === 10;
   el.removeRowButton.disabled = rows.length === 2;
-  el.addColumnButton.disabled = columns.length === 10;
-  el.removeColumnButton.disabled = columns.length === 2;
+  el.addColumnButton.disabled = rows[0].children.length === 10;
+  el.removeColumnButton.disabled = rows[0].children.length === 2;
 }
 
 el.container.addEventListener(
