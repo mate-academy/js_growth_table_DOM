@@ -11,10 +11,12 @@ const appendColumn = document.querySelector('.append-column');
 button.forEach((el) => {
   el.addEventListener('click', (e) => {
     const clickedButt = e.target.className;
+    const maxNumber = 9;
+    const minNumber = 3;
 
     switch (clickedButt) {
       case 'append-row button': {
-        if (tBody.children.length >= 9) {
+        if (tBody.children.length >= maxNumber) {
           e.target.setAttribute('disabled', true);
         }
 
@@ -29,7 +31,7 @@ button.forEach((el) => {
       }
 
       case 'append-column button': {
-        if (tr[0].cells.length >= 9) {
+        if (tr[0].cells.length >= maxNumber) {
           appendColumn.setAttribute('disabled', true);
         }
 
@@ -49,7 +51,7 @@ button.forEach((el) => {
       }
 
       case 'remove-row button': {
-        if (tBody.children.length <= 3) {
+        if (tBody.children.length <= minNumber) {
           removeRow.setAttribute('disabled', true);
         }
 
@@ -63,7 +65,7 @@ button.forEach((el) => {
       }
 
       case 'remove-column button': {
-        if (tr[0].cells.length <= 3) {
+        if (tr[0].cells.length <= minNumber) {
           removeColumn.setAttribute('disabled', true);
         }
 
