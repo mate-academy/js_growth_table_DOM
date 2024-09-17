@@ -5,8 +5,8 @@ const appendRow = document.querySelector('.append-row');
 const removeRow = document.querySelector('.remove-row');
 const appendColumn = document.querySelector('.append-column');
 const removeColumn = document.querySelector('.remove-column');
-const maxCount = 10;
 const minCount = 2;
+const maxCount = 10;
 
 appendRow.addEventListener('click', () => {
   const rows = table.rows;
