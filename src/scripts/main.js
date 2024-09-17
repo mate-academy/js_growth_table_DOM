@@ -4,60 +4,61 @@ const MAX_COUNT = 10;
 const MIN_COUNT = 2;
 
 const tbody = document.querySelector('.field > tbody');
-const tr = tbody.querySelector('tr');
 
 const appendRow = document.querySelector('.append-row');
 const removeRow = document.querySelector('.remove-row');
-
 const appendColumn = document.querySelector('.append-column');
 const removeColumn = document.querySelector('.remove-column');
 
-const updateButtonState = () => {
+const updateButtonState = (row) => {
   appendRow.disabled = tbody.childElementCount >= MAX_COUNT;
   removeRow.disabled = tbody.childElementCount <= MIN_COUNT;
-  appendColumn.disabled = tr.childElementCount >= MAX_COUNT;
-  removeColumn.disabled = tr.childElementCount <= MIN_COUNT;
+
+  if (row) {
+    appendColumn.disabled = row.childElementCount >= MAX_COUNT;
+    removeColumn.disabled = row.childElementCount <= MIN_COUNT;
+  }
 };
 
 appendRow.addEventListener('click', () => {
-  if (tbody.childElementCount < MAX_COUNT) {
-    tbody.innerHTML += `<tr></tr>`;
-  }
+  const firstRow = tbody.querySelector('tr');
+  const newRow = firstRow.cloneNode(true);
 
+  if (tbody.childElementCount < MAX_COUNT) {
+    tbody.appendChild(newRow);
+  }
   updateButtonState();
 });
 
 removeRow.addEventListener('click', () => {
   if (tbody.childElementCount > MIN_COUNT) {
-    const delRow = tbody.querySelector('tr');
-
-    delRow.remove();
+    tbody.lastElementChild.remove();
   }
-
   updateButtonState();
 });
 
 appendColumn.addEventListener('click', () => {
-  if (tr.childElementCount < MAX_COUNT) {
-    const tRowAllForAdd = tbody.querySelectorAll('tr');
-    const td = document.createElement('td');
+  const allRows = tbody.querySelectorAll('tr');
+  const firstRow = tbody.querySelector('tr');
 
-    tRowAllForAdd.forEach((el) => {
-      el.innerHTML += td.outerHTML;
+  if (firstRow.childElementCount < MAX_COUNT) {
+    allRows.forEach((row) => {
+      const newCell = document.createElement('td');
+
+      row.appendChild(newCell);
     });
   }
-
-  updateButtonState();
+  updateButtonState(firstRow);
 });
 
 removeColumn.addEventListener('click', () => {
-  if (tr.childElementCount > MIN_COUNT) {
-    const tRowAllForDel = tbody.querySelectorAll('tr');
+  const allRows = tbody.querySelectorAll('tr');
+  const firstRow = tbody.querySelector('tr');
 
-    tRowAllForDel.forEach((el) => {
-      el.lastElementChild.remove();
+  if (firstRow.childElementCount > MIN_COUNT) {
+    allRows.forEach((row) => {
+      row.lastElementChild.remove();
     });
   }
-
-  updateButtonState();
+  updateButtonState(firstRow);
 });
