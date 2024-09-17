@@ -5,12 +5,12 @@ const appendRow = document.querySelector('.append-row');
 const removeRow = document.querySelector('.remove-row');
 const appendColumn = document.querySelector('.append-column');
 const removeColumn = document.querySelector('.remove-column');
-const rows = table.rows;
-const columns = table.rows[0].children;
 const maxCount = 10;
 const minCount = 2;
 
 appendRow.addEventListener('click', () => {
+  const rows = table.rows;
+
   if (rows.length >= maxCount) {
     return;
   }
@@ -23,12 +23,17 @@ appendRow.addEventListener('click', () => {
 });
 
 removeRow.addEventListener('click', () => {
+  const rows = table.rows;
+
   rows[0].remove();
   appendRow.removeAttribute('disabled');
   removeRow.disabled = rows.length === minCount;
 });
 
 appendColumn.addEventListener('click', () => {
+  const rows = table.rows;
+  const columns = table.rows[0].children;
+
   if (columns.length >= maxCount) {
     return;
   }
@@ -43,6 +48,9 @@ appendColumn.addEventListener('click', () => {
 });
 
 removeColumn.addEventListener('click', () => {
+  const rows = table.rows;
+  const columns = table.rows[0].children;
+
   [...rows].forEach((row) => {
     row.firstElementChild.remove();
   });
