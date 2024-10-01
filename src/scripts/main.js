@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 'use strict';
 
 const buttons = [...document.querySelectorAll('button')];
@@ -15,6 +16,8 @@ const buttonActions = (buttonAction, table) => {
       table.appendChild(newRow);
       break;
     case 'remove-row':
+      console.log('removing row');
+
       const lastRow = table.lastElementChild;
 
       lastRow.remove();
@@ -31,6 +34,8 @@ const buttonActions = (buttonAction, table) => {
       });
       break;
     case 'remove-column':
+      console.log('removing column');
+
       [...table.children].forEach((row) => {
         const lastColumnCell = row.lastElementChild;
 
