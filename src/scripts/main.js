@@ -6,30 +6,32 @@ const appendColumn = document.querySelector('.append-column');
 const removeColumn = document.querySelector('.remove-column');
 
 const table = document.querySelector('.field');
+const maxCount = 10;
+const minCount = 2;
 
 function updateButton() {
   const rowCount = table.rows.length;
   const columnCount = table.rows[0].cells.length;
 
-  if (rowCount >= 10) {
+  if (rowCount >= maxCount) {
     appendRow.disabled = true;
   } else {
     appendRow.disabled = false;
   }
 
-  if (rowCount <= 2) {
+  if (rowCount <= minCount) {
     removeRow.disabled = true;
   } else {
     removeRow.disabled = false;
   }
 
-  if (columnCount >= 10) {
+  if (columnCount >= maxCount) {
     appendColumn.disabled = true;
   } else {
     appendColumn.disabled = false;
   }
 
-  if (columnCount <= 2) {
+  if (columnCount <= minCount) {
     removeColumn.disabled = true;
   } else {
     removeColumn.disabled = false;
@@ -39,7 +41,7 @@ function updateButton() {
 appendRow.addEventListener('click', () => {
   const rowCount = table.rows.length;
 
-  if (rowCount < 10) {
+  if (rowCount < maxCount) {
     const newRow = table.insertRow();
 
     const columnCount = table.rows[0].cells.length;
@@ -57,7 +59,7 @@ appendRow.addEventListener('click', () => {
 removeRow.addEventListener('click', () => {
   const rowCount = table.rows.length;
 
-  if (rowCount > 2) {
+  if (rowCount > minCount) {
     table.deleteRow(rowCount - 1);
   }
 
@@ -70,7 +72,7 @@ appendColumn.addEventListener('click', () => {
   const rowCount = table.rows.length;
   const columnCount = table.rows[0].cells.length;
 
-  if (columnCount < 10) {
+  if (columnCount < maxCount) {
     for (let i = 0; i < rowCount; i++) {
       table.rows[i].insertCell();
     }
@@ -85,7 +87,7 @@ removeColumn.addEventListener('click', () => {
   const rowCount = table.rows.length;
   const columnCount = table.rows[0].cells.length;
 
-  if (columnCount > 2) {
+  if (columnCount > minCount) {
     for (let i = 0; i < rowCount; i++) {
       table.rows[i].deleteCell(columnCount - 1);
     }
