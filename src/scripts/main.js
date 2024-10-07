@@ -1,49 +1,63 @@
 'use strict';
 
-const buttons = document.querySelectorAll('.button');
-const table = document.querySelector('table');
-const firstRow = table.rows[0];
+const appendRowButton = document.querySelector('.append-row');
+const removeRowButton = document.querySelector('.remove-row');
+const appendColumnButton = document.querySelector('.append-column');
+const removeColumnButton = document.querySelector('.remove-column');
+const table = document.querySelector('.field');
 
-buttons.forEach((button) => {
-  button.addEventListener('click', (ev) => {
-    const buttonClass = button.classList;
+// Функція для перевірки стану кнопок
+function updateButtonStates() {
+  const rows = table.rows.length;
+  const columns = table.rows[0].cells.length;
 
-    if (buttonClass.contains('append-row')) {
-      if (table.rows.length < 10) {
-        const newRow = table.insertRow();
+  // Додаємо або видаляємо атрибут disabled для кнопок
+  removeRowButton.disabled = rows <= 2;
+  removeColumnButton.disabled = columns <= 2;
 
-        for (let cell = 0; cell < firstRow.cells.length; cell++) {
-          const newCell = newRow.insertCell(cell);
+  appendRowButton.disabled = rows >= 10;
+  appendColumnButton.disabled = columns >= 10;
+}
 
-          newCell.textContent = '';
-        }
-      }
+// Функція для додавання рядка
+function addRow() {
+  const newRow = table.insertRow();
+
+  for (let i = 0; i < table.rows[0].cells.length; i++) {
+    newRow.insertCell();
+  }
+  updateButtonStates();
+}
+
+// Функція для видалення рядка
+function removeRow() {
+  if (table.rows.length > 1) {
+    table.deleteRow(table.rows.length - 1);
+    updateButtonStates();
+  }
+}
+
+// Функція для додавання стовпця
+function addColumn() {
+  for (let i = 0; i < table.rows.length; i++) {
+    table.rows[i].insertCell();
+  }
+  updateButtonStates();
+}
+
+// Функція для видалення стовпця
+function removeColumn() {
+  if (table.rows[0].cells.length > 1) {
+    for (let i = 0; i < table.rows.length; i++) {
+      table.rows[i].deleteCell(table.rows[i].cells.length - 1);
     }
+    updateButtonStates();
+  }
+}
 
-    if (buttonClass.contains('remove-row')) {
-      if (table.rows.length > 2) {
-        table.deleteRow(-1);
-      }
-    }
+appendRowButton.addEventListener('click', addRow);
+removeRowButton.addEventListener('click', removeRow);
+appendColumnButton.addEventListener('click', addColumn);
+removeColumnButton.addEventListener('click', removeColumn);
 
-    if (buttonClass.contains('append-column')) {
-      if (table.rows[0].cells.length < 10) {
-        const rows = document.querySelectorAll('tr');
-
-        rows.forEach((curRow) => {
-          const newCell = curRow.insertCell(-1);
-
-          newCell.textContent = '';
-        });
-      }
-    }
-
-    if (buttonClass.contains('remove-column')) {
-      if (firstRow.cells.length > 2) {
-        for (const curRow of table.rows) {
-          curRow.deleteCell(-1);
-        }
-      }
-    }
-  });
-});
+updateButtonStates();
