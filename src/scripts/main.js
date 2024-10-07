@@ -52,8 +52,6 @@ appendRow.addEventListener('click', () => {
   }
 
   updateButton();
-
-  // console.log('Додаємо рядок');
 });
 
 removeRow.addEventListener('click', () => {
@@ -64,8 +62,6 @@ removeRow.addEventListener('click', () => {
   }
 
   updateButton();
-
-  // console.log('Delete рядок');
 });
 
 appendColumn.addEventListener('click', () => {
@@ -79,8 +75,6 @@ appendColumn.addEventListener('click', () => {
   }
 
   updateButton();
-
-  // console.log('Додаємо column');
 });
 
 removeColumn.addEventListener('click', () => {
@@ -94,6 +88,4 @@ removeColumn.addEventListener('click', () => {
   }
 
   updateButton();
-
-  // console.log('Delete column');
 });
