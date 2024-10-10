@@ -1,109 +1,110 @@
 'use strict';
 
-const TBODY = document.querySelector('.field tbody');
-const ROWS = TBODY.rows;
+class Table {
+  TBODY = document.querySelector('.field tbody');
+  APPEND_ROW_BUTTON = document.querySelector('.append-row');
+  REMOVE_ROW_BUTTON = document.querySelector('.remove-row');
+  APPEND_COLUMN_BUTTON = document.querySelector('.append-column');
+  REMOVE_COLUMN_BUTTON = document.querySelector('.remove-column');
 
-const APPEND_ROW_BUTTON = document.querySelector('.append-row');
-const REMOVE_ROW_BUTTON = document.querySelector('.remove-row');
-const APPEND_COLUMN_BUTTON = document.querySelector('.append-column');
-const REMOVE_COLUMN_BUTTON = document.querySelector('.remove-column');
+  rowSize = 4;
+  cellsSize = 4;
 
-const getTableSize = () => {
-  const rows = TBODY.rows;
-  const cells = rows[0].cells;
+  constructor() {
+    this.getTableSize();
+    this.addListeners();
+  }
 
-  return {
-    rows: rows.length,
-    cells: cells.length,
+  getTableSize() {
+    this.ROWS = this.TBODY.querySelectorAll('tr');
+
+    if (this.ROWS.length > 0) {
+      const cells = this.ROWS[0].cells;
+
+      this.rowSize = this.ROWS.length;
+      this.cellsSize = cells.length;
+    }
+  }
+
+  createRow = () => {
+    // Next line for test, disabled button works correctly
+    if (this.rowSize === 10) {
+      return;
+    }
+
+    const row = document.createElement('tr');
+
+    for (let i = 0; i < this.cellsSize; i++) {
+      row.insertCell();
+    }
+
+    this.TBODY.append(row);
+    this.checkRowButtonDisabled();
   };
-};
+  removeRow = () => {
+    this.TBODY.deleteRow(this.rowSize - 1);
+    this.checkRowButtonDisabled();
+  };
 
-const createRow = (cellsSize, rowSize) => {
-  // Next line for test, disabled button works correctly
-  if (rowSize === 10) {
-    return;
+  createColumn = () => {
+    if (this.cellsSize === 10) {
+      return;
+    }
+
+    for (let i = 0; i < this.rowSize; i++) {
+      this.TBODY.rows[i].insertCell();
+    }
+    this.checkColumnButtonDisabled();
+  };
+
+  removeColumn = () => {
+    for (let i = 0; i < this.rowSize; i++) {
+      this.TBODY.rows[i].deleteCell(this.cellsSize - 1);
+    }
+
+    this.checkColumnButtonDisabled();
+  };
+
+  addListeners() {
+    this.APPEND_ROW_BUTTON.addEventListener('click', this.createRow);
+    this.APPEND_COLUMN_BUTTON.addEventListener('click', this.createColumn);
+    this.REMOVE_COLUMN_BUTTON.addEventListener('click', this.removeColumn);
+    this.REMOVE_ROW_BUTTON.addEventListener('click', this.removeRow);
   }
 
-  if (rowSize === 9) {
-    APPEND_ROW_BUTTON.disabled = true;
+  checkRowButtonDisabled() {
+    this.getTableSize();
+
+    if (this.rowSize >= 10) {
+      this.APPEND_ROW_BUTTON.disabled = true;
+    } else {
+      this.APPEND_ROW_BUTTON.disabled = false;
+    }
+
+    if (this.rowSize > 2) {
+      this.REMOVE_ROW_BUTTON.disabled = false;
+    } else {
+      this.REMOVE_ROW_BUTTON.disabled = true;
+    }
   }
 
-  if (rowSize === 2) {
-    REMOVE_ROW_BUTTON.disabled = false;
+  checkColumnButtonDisabled() {
+    this.getTableSize();
+
+    if (this.cellsSize >= 10) {
+      this.APPEND_COLUMN_BUTTON.disabled = true;
+    } else {
+      this.APPEND_COLUMN_BUTTON.disabled = false;
+    }
+
+    if (this.cellsSize > 2) {
+      this.REMOVE_COLUMN_BUTTON.disabled = false;
+    } else {
+      this.REMOVE_COLUMN_BUTTON.disabled = true;
+    }
   }
+}
 
-  const row = document.createElement('tr');
+const table = new Table();
 
-  for (let i = 0; i < cellsSize; i++) {
-    row.insertCell();
-  }
-
-  TBODY.append(row);
-};
-const removeRow = (rowSize) => {
-  if (rowSize === 3) {
-    REMOVE_ROW_BUTTON.disabled = true;
-  }
-
-  if (rowSize === 10) {
-    APPEND_ROW_BUTTON.disabled = false;
-  }
-  TBODY.deleteRow(rowSize - 1);
-};
-
-const createColumn = (cellsSize, rowSize) => {
-  // Next line for test, disabled button works correctly
-  if (cellsSize === 10) {
-    return;
-  }
-
-  if (cellsSize === 9) {
-    APPEND_COLUMN_BUTTON.disabled = true;
-  }
-
-  if (cellsSize === 2) {
-    REMOVE_COLUMN_BUTTON.disabled = false;
-  }
-
-  for (let i = 0; i < rowSize; i++) {
-    ROWS[i].insertCell();
-  }
-};
-
-const removeColumn = (cellsSize) => {
-  if (cellsSize === 3) {
-    REMOVE_COLUMN_BUTTON.disabled = true;
-  }
-
-  if (cellsSize === 10) {
-    APPEND_COLUMN_BUTTON.disabled = false;
-  }
-
-  for (let i = 0; i < ROWS.length; i++) {
-    TBODY.rows[i].deleteCell(cellsSize - 1);
-  }
-};
-
-REMOVE_COLUMN_BUTTON.addEventListener('click', () => {
-  const { cells } = getTableSize();
-
-  removeColumn(cells);
-});
-
-REMOVE_ROW_BUTTON.addEventListener('click', () => {
-  const { rows } = getTableSize();
-
-  removeRow(rows);
-});
-
-APPEND_ROW_BUTTON.addEventListener('click', () => {
-  const { cells, rows } = getTableSize();
-
-  createRow(cells, rows);
-});
-
-APPEND_COLUMN_BUTTON.addEventListener('click', () => {
-  const { cells, rows } = getTableSize();
-
-  createColumn(cells, rows);
-});
+export default table;
