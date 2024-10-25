@@ -1,6 +1,7 @@
 'use strict';
 
 const table = document.querySelector('table');
+
 const rows = table.rows;
 
 const appendRow = document.querySelector('.append-row');
@@ -11,7 +12,7 @@ const removeColumn = document.querySelector('.remove-column');
 const minCells = 2;
 const maxCells = 10;
 
-appendRow.onclick = function () {
+appendRow.onclick = () => {
   if (rows.length < maxCells) {
     const newRow = table.insertRow();
 
@@ -27,7 +28,7 @@ appendRow.onclick = function () {
   }
 };
 
-removeRow.onclick = function () {
+removeRow.onclick = () => {
   table.deleteRow(-1);
 
   appendRow.disabled = false;
@@ -37,7 +38,7 @@ removeRow.onclick = function () {
   }
 };
 
-appendColumn.onclick = function () {
+appendColumn.onclick = () => {
   if (rows[0].cells.length < maxCells) {
     for (let count = 0; count < rows.length; count++) {
       rows[count].insertCell(-1);
@@ -51,7 +52,7 @@ appendColumn.onclick = function () {
   }
 };
 
-removeColumn.onclick = function () {
+removeColumn.onclick = () => {
   if (rows[0].cells.length > minCells) {
     for (let count = 0; count < rows.length; count++) {
       rows[count].deleteCell(-1);
