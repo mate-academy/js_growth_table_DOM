@@ -77,3 +77,5 @@ function clickOnRemColBtn() {
 }
 
 remColBtn.addEventListener('click', clickOnRemColBtn);
+
+updateButtonStates();
