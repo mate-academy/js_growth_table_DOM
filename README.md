@@ -1,9 +1,9 @@
 1. Replace `<your_account>` with your Github username in the link
-    - [DEMO LINK](https://<your_account>.github.io/js_growth_table_DOM/)
+   - [DEMO LINK](https://maksym2493.github.io/js_growth_table_DOM/)
 2. Follow [this instructions](https://mate-academy.github.io/layout_task-guideline/)
-    - Run `npm run test` command to test your code;
-    - Run `npm run test:only -- -n` to run fast test ignoring linter;
-    - Run `npm run test:only -- -l` to run fast test with additional info in console ignoring linter.
+   - Run `npm run test` command to test your code;
+   - Run `npm run test:only -- -n` to run fast test ignoring linter;
+   - Run `npm run test:only -- -l` to run fast test with additional info in console ignoring linter.
 
 ### Task: Growth table
 
@@ -15,6 +15,7 @@ Preview:
 ![Preview](./src/images/4x4.png)
 
 Some rules:
+
 - Click on the button with class `append-row` should append a new row to the table.
 - Click on the button with class `remove-row` should remove the last row from the table.
 - Click on the button with class `append-column` should append a new column to the table.
@@ -32,4 +33,3 @@ Examples:
 ![2x2](./src/images/2x2.png)
 
 ![3x10](./src/images/3x10.png)
-
