@@ -1,5 +1,5 @@
 1. Replace `<your_account>` with your Github username in the link
-    - [DEMO LINK](https://<your_account>.github.io/js_growth_table_DOM/)
+    - [DEMO LINK](https://vladislav-tsybuliak1.github.io/js_growth_table_DOM/)
 2. Follow [this instructions](https://mate-academy.github.io/layout_task-guideline/)
     - Run `npm run test` command to test your code;
     - Run `npm run test:only -- -n` to run fast test ignoring linter;
@@ -7,7 +7,7 @@
 
 ### Task: Growth table
 
-Let's blow up this table!
+Let's blow up this table! 
 
 Your task sounds simple: Do you see yellow buttons? Give the table the opportunity to grow in different directions.
 
