@@ -13,7 +13,7 @@ addRow.addEventListener('click', () => {
 
     const newRow = field.insertRow(1);
 
-    newRow.innerHtml = clonedRow;
+    newRow.innerHTML = clonedRow.innerHTML;
 
     removeRow.disabled = false;
 
