@@ -5,12 +5,16 @@ const MIN_VALUE = 2;
 const MAX_VALUE = 10;
 
 document.addEventListener('DOMContentLoaded', () => {
-  const table = document.querySelector('.field');
+  const table = document.querySelector('table');
 
   const appendRowBtn = document.querySelector('.append-row');
   const removeRowBtn = document.querySelector('.remove-row');
   const appendColBtn = document.querySelector('.append-column');
   const removeColBtn = document.querySelector('.remove-column');
+
+  if (!table || table.rows.length === 0 || table.rows[0].cells.length === 0) {
+    throw new Error('Table is not properly initialized.');
+  }
 
   function updateButtons() {
     const rowCount = table.rows.length;
