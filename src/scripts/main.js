@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   appendRowBtn.addEventListener('click', () => {
-    if (table.rows.length < 10) {
+    if (table.rows.length < MAX_VALUE) {
       const newRow = table.insertRow();
       const colCount = table.rows[0].cells.length;
 
@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   removeRowBtn.addEventListener('click', () => {
-    if (table.rows.length > 2) {
+    if (table.rows.length > MIN_VALUE) {
       table.deleteRow(-1);
     }
 
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   appendColBtn.addEventListener('click', () => {
-    if (table.rows[0].cells.length < 10) {
+    if (table.rows[0].cells.length < MAX_VALUE) {
       for (const row of table.rows) {
         row.insertCell();
       }
@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   removeColBtn.addEventListener('click', () => {
-    if (table.rows[0].cells.length > 2) {
+    if (table.rows[0].cells.length > MIN_VALUE) {
       for (const row of table.rows) {
         row.deleteCell(-1);
       }
