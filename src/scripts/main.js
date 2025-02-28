@@ -11,13 +11,13 @@ const MIN_ROW_OR_COLUMNS = 2;
 
 addRowBtn.onclick = (e) => {
   e.preventDefault();
-  tbody.append(tbody.lastElementChild.cloneNode(true));
+  tbody.append(tbody.lastElementChild?.cloneNode(true));
   check();
 };
 
 removeRowBtn.onclick = (e) => {
   e.preventDefault();
-  tbody.lastElementChild.remove();
+  tbody.lastElementChild?.remove();
   check();
 };
 
@@ -25,7 +25,7 @@ addColumnBtn.onclick = (e) => {
   e.preventDefault();
 
   Array.from(tbody.rows).forEach((row) => {
-    row.append(row.lastElementChild.cloneNode(true));
+    row.append(row.lastElementChild?.cloneNode(true));
   });
   check();
 };
@@ -34,15 +34,15 @@ removeColumnBtn.onclick = (e) => {
   e.preventDefault();
 
   Array.from(tbody.rows).forEach((row) => {
-    row.lastElementChild.remove();
+    row.lastElementChild?.remove();
   });
   check();
 };
 
 function check() {
-  const rows = tbody.rows;
+  const rows = tbody?.rows;
   const rowsLength = rows.length;
-  const columnsLength = rows[0].children.length;
+  const columnsLength = rows[0]?.children?.length;
 
   addRowBtn.removeAttribute('disabled');
   removeRowBtn.removeAttribute('disabled');
