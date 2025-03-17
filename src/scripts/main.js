@@ -11,18 +11,19 @@ const delRow = document.querySelector('.remove-row');
 const newCol = document.querySelector('.append-column');
 const delCol = document.querySelector('.remove-column');
 
+const updateBtnState = () => {
+  newRow.disabled = table.rows.length >= maxSize;
+  delRow.disabled = table.rows.length <= minSize;
+
+  newCol.disabled = table.rows[0].cells.length >= maxSize;
+  delCol.disabled = table.rows[0].cells.length <= minSize;
+}
+
 newCol.addEventListener('click', () => {
   for (let i = 0; i < table.rows.length; i++) {
     table.rows[i].insertCell(-1).innerHTML = '';
   }
-
-  if (table.rows[0].cells.length === maxSize) {
-    newCol.disabled = true;
-  }
-
-  if (delCol.disabled === true) {
-    delCol.disabled = false;
-  }
+  updateBtnState();
 });
 
 delCol.addEventListener('click', () => {
@@ -30,13 +31,7 @@ delCol.addEventListener('click', () => {
     table.rows[i].deleteCell(-1);
   }
 
-  if (table.rows[0].cells.length === minSize) {
-    delCol.disabled = true;
-  }
-
-  if (newCol.disabled === true) {
-    newCol.disabled = false;
-  }
+  updateBtnState();
 });
 
 newRow.addEventListener('click', () => {
@@ -45,24 +40,10 @@ newRow.addEventListener('click', () => {
   for (let i = 0; i < table.rows[0].cells.length; i++) {
     addRow.insertCell(-1).innerHTML = '';
   }
-
-  if (table.rows.length === maxSize) {
-    newRow.disabled = true;
-  }
-
-  if (delRow.disabled === true) {
-    delRow.disabled = false;
-  }
+  updateBtnState();
 });
 
 delRow.addEventListener('click', () => {
   table.deleteRow(-1);
-
-  if (table.rows.length === minSize) {
-    delRow.disabled = true;
-  }
-
-  if (newRow.disabled === true) {
-    newRow.disabled = false;
-  }
+  updateBtnState();
 });
