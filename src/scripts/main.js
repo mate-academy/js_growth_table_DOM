@@ -48,6 +48,12 @@ function updateColumnButtons() {
 }
 
 appendColumnButton.addEventListener('click', () => {
+  const columnCount = table.rows[0].cells.length;
+
+  if (columnCount >= 10) {
+    return;
+  }
+
   for (const row of table.rows) {
     const td = document.createElement('td');
 
@@ -58,12 +64,6 @@ appendColumnButton.addEventListener('click', () => {
 });
 
 removeColumnButton.addEventListener('click', () => {
-  const columnCount = table.rows[0].cells.length;
-
-  if (columnCount >= 10) {
-    return;
-  }
-
   for (const row of table.rows) {
     if (row.cells.length > 0) {
       row.deleteCell(-1);
