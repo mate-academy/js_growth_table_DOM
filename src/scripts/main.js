@@ -29,7 +29,9 @@ container.addEventListener('click', (e) => {
       break;
 
     case targetClass.contains('remove-row'):
-      table.deleteRow(-1);
+      if (table.rows.length === minTableSize) {
+        table.deleteRow(1);
+      }
 
       if (table.rows.length === minTableSize) {
         e.target.setAttribute('disabled', '');
@@ -58,7 +60,9 @@ container.addEventListener('click', (e) => {
 
     case targetClass.contains('remove-column'):
       for (let i = 0; i < table.rows.length; i++) {
-        table.rows[i].deleteCell(-1);
+        if (table.rows[0].cells.length === minTableSize) {
+          table.rows[i].deleteCell(-1);
+        }
       }
 
       if (table.rows[0].cells.length === minTableSize) {
