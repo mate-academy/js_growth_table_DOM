@@ -54,9 +54,9 @@ removeColumn.addEventListener('click', () => {
 
   if (tdCount > 2) {
     rows.forEach((row) => {
-      const firstCell = row.querySelector('td');
+      const lastCell = row.querySelectorAll('td');
 
-      firstCell.remove();
+      lastCell[lastCell.length - 1].remove();
     });
   }
 
