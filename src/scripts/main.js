@@ -1,75 +1,105 @@
 'use strict';
 
-// write code here
 document.addEventListener('DOMContentLoaded', () => {
-  const table = document.querySelector('table');
-  const rows = table.rows;
+  const table = document.querySelector('.field');
+  const container = document.querySelector('.container');
 
-  const minLength = 2;
-  const maxLength = 10;
+  const MIN = 2;
+  const MAX = 10;
 
-  const addRow = document.querySelector('.append-row');
-  const removeRow = document.querySelector('.remove-row');
-  const addColumn = document.querySelector('.append-column');
-  const removeColumn = document.querySelector('.remove-column');
+  const appendRowBtn = document.querySelector('.append-row button');
+  const removeRowBtn = document.querySelector('.remove-row button');
+  const appendColBtn = document.querySelector('.append-column button');
+  const removeColBtn = document.querySelector('.remove-column button');
 
-  addRow.addEventListener('click', () => {
-    if (rows.length < maxLength) {
-      table.tBodies[0].append(rows[0].cloneNode(true));
-    }
+  function updateButtons() {
+    const rowCount = table.rows.length;
+    const colCount = table.row[0].cells.length;
 
-    if (rows.length === maxLength) {
-      addRow.disabled = true;
-    } else {
-      removeRow.disabled = false;
-    }
-  });
+    appendRowBtn.disabled = rowCount >= MAX;
+    removeRowBtn.disabled = rowCount <= MIN;
+    appendColBtn.disabled = colCount >= MAX;
+    removeColBtn.disabled = colCount <= MIN;
+  }
 
-  removeRow.addEventListener('click', () => {
-    if (rows.length > minLength) {
-      rows[0].remove();
-    }
+  function appendRow() {
+    const rowCount = table.rows.length;
+    const colCount = table.row[0].cells.length;
+    const newTr = document.createElement('tr');
 
-    if (rows.length === minLength) {
-      removeRow.disabled = true;
-    } else {
-      addRow.disabled = false;
-    }
-  });
-
-  addColumn.addEventListener('click', () => {
-    const columns = rows[0].cells;
-
-    if (columns.length < maxLength) {
-      for (const tr of rows) {
-        const newItem = tr.cells[0];
-
-        tr.append(newItem.cloneNode(true));
+    for (let i = 0; i < colCount; i++) {
+      if (rowCount >= MAX) {
+        return;
       }
+
+      const td = document.createElement('td');
+
+      newTr.appendChild(td);
     }
 
-    if (columns.length === maxLength) {
-      addColumn.disabled = true;
-    } else {
-      removeColumn.disabled = false;
+    table.appendChild(newTr);
+    updateButtons();
+  }
+
+  function removeRow() {
+    const rowCount = table.rows.length;
+
+    if (rowCount <= MIN) {
+      return;
+    }
+
+    table.removeChild(table.lastElementChild);
+    updateButtons();
+  }
+
+  function appendColumn() {
+    const currentRows = [...table.querySelectorAll('tr')];
+    const colCount = table.row[0].cells.length;
+
+    if (colCount >= MAX) {
+      return;
+    }
+
+    currentRows.forEach((row) => {
+      const td = document.createElement('td');
+
+      row.appendChild(td);
+    });
+    updateButtons();
+  }
+
+  function removeColumn() {
+    const currentRows = [...table.querySelectorAll('tr')];
+    const colCount = table.row[0].cells.length;
+
+    if (colCount <= MIN) {
+      return;
+    }
+
+    currentRows.forEach((row) => {
+      row.deleteCell(-1);
+    });
+
+    updateButtons();
+  }
+
+  container.addEventListener('click', (e) => {
+    if (e.target.closest('.append-row')) {
+      appendRow();
+    }
+
+    if (e.target.closest('.remove-row')) {
+      removeRow();
+    }
+
+    if (e.target.closest('.append-column')) {
+      appendColumn();
+    }
+
+    if (e.target.closest('.remove-column')) {
+      removeColumn();
     }
   });
 
-  removeColumn.addEventListener('click', () => {
-    const columns = rows[0].cells;
-
-    if (columns.length > minLength) {
-      for (const tr of rows) {
-        const cellItem = tr.cells[0];
-
-        cellItem.remove();
-      }
-    }
-
-    if (columns.length === minLength) {
-      removeColumn.disabled = true;
-    } else {
-      addColumn.disabled = false;
-    }
-  });
+  updateButtons();
 });
