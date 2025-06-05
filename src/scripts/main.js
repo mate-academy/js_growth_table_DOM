@@ -9,6 +9,8 @@ const table = document.querySelector('table');
 let rowCount = table.rows.length;
 let columnCount = table.rows[0].cells.length;
 
+buttonChecker();
+
 appendRow.addEventListener('click', () => {
   if (rowCount < 10) {
     const newRow = table.insertRow();
