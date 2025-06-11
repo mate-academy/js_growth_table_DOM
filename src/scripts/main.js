@@ -10,67 +10,56 @@ const columnButtons = {
   remove: document.querySelector('.remove-column.button'),
 };
 
+function updateButtons() {
+  const rows = table.rows.length;
+  const cols = table.rows[0].cells.length;
+
+  rowButtons.append.disabled = rows >= 10;
+  rowButtons.remove.disabled = rows <= 2;
+  columnButtons.append.disabled = cols >= 10;
+  columnButtons.remove.disabled = cols <= 2;
+}
+
 rowButtons.append.onclick = function () {
-  const row = document.createElement('tr');
-  const rowSizeBeforeOperation = table.rows.length;
-  const columnSize = table.rows[0].cells.length;
-
-  if (rowSizeBeforeOperation === 2) {
-    rowButtons.remove.style.display = '';
+  if (table.rows.length >= 10) {
+    return;
   }
 
-  row.innerHTML = '<td></td>\n'.repeat(columnSize);
-  table.tBodies[0].appendChild(row);
+  const cols = table.rows[0].cells.length;
+  const tr = document.createElement('tr');
 
-  if (table.rows.length === 10) {
-    rowButtons.append.style.display = 'none';
-  }
+  tr.innerHTML = '<td></td>'.repeat(cols);
+  table.tBodies[0].appendChild(tr);
+  updateButtons();
 };
 
 rowButtons.remove.onclick = function () {
-  const rowSizeBeforeOperation = table.rows.length;
-
-  if (rowSizeBeforeOperation === 10) {
-    rowButtons.append.style.display = '';
+  if (table.rows.length <= 2) {
+    return;
   }
-
-  table.deleteRow(rowSizeBeforeOperation - 1);
-
-  if (table.rows.length === 2) {
-    rowButtons.remove.style.display = 'none';
-  }
+  table.deleteRow(table.rows.length - 1);
+  updateButtons();
 };
 
 columnButtons.append.onclick = function () {
-  const columnSizeBeforeOperation = table.rows[0].cells.length;
-
-  if (columnSizeBeforeOperation === 2) {
-    columnButtons.remove.style.display = '';
+  if (table.rows[0].cells.length >= 10) {
+    return;
   }
 
-  for (const row of table.rows) {
-    const column = document.createElement('td');
-
-    row.appendChild(column);
+  for (const tr of table.rows) {
+    tr.appendChild(document.createElement('td'));
   }
-
-  if (table.rows[0].cells.length === 10) {
-    columnButtons.append.style.display = 'none';
-  }
+  updateButtons();
 };
 
 columnButtons.remove.onclick = function () {
-  const columnSizeBeforeOperation = table.rows[0].cells.length;
-
-  if (columnSizeBeforeOperation === 10) {
-    columnButtons.append.style.display = '';
+  if (table.rows[0].cells.length <= 2) {
+    return;
   }
 
-  for (const row of table.rows) {
-    row.deleteCell(columnSizeBeforeOperation - 1);
+  for (const tr of table.rows) {
+    tr.deleteCell(tr.cells.length - 1);
   }
-
-  if (table.rows[0].cells.length === 2) {
-    columnButtons.remove.style.display = 'none';
-  }
+  updateButtons();
 };
+updateButtons();
