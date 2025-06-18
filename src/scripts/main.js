@@ -60,8 +60,6 @@ appendRowButton.addEventListener('click', () => {
 });
 
 removeRowButton.addEventListener('click', () => {
-  updateButtonsState();
-
   const rows = tbody.querySelectorAll('tr');
 
   if (rows.length > 2) {
@@ -73,8 +71,6 @@ removeRowButton.addEventListener('click', () => {
 });
 
 appendColumnButton.addEventListener('click', () => {
-  updateButtonsState();
-
   if (getColumnsCount() < 10) {
     const rows = tbody.querySelectorAll('tr');
 
@@ -88,8 +84,6 @@ appendColumnButton.addEventListener('click', () => {
 });
 
 removeColumnButton.addEventListener('click', () => {
-  updateButtonsState();
-
   if (getColumnsCount() > 2) {
     const rows = tbody.querySelectorAll('tr');
 
