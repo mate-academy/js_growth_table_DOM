@@ -7,7 +7,7 @@ const removeRowButton = document.querySelector('.remove-row');
 const addColumnButton = document.querySelector('.append-column');
 const removeColumnButton = document.querySelector('.remove-column');
 
-if (table) {
+if (table && tbody) {
   addRowButton.addEventListener('click', () => {
     const { rows, cells } = getRowsAndCells();
 
