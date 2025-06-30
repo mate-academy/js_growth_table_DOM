@@ -4,7 +4,7 @@ const container = document.querySelector('.container');
 
 // Counts
 let rowsCount = document.querySelector('tr').children.length;
-let columnCount = document.querySelector('tr').children.length;
+let columnCount = document.querySelectorAll('tbody tr').length;
 
 // Buttons
 const appendRowButton = document.querySelector('.append-row');
@@ -48,10 +48,11 @@ container.addEventListener('click', (e) => {
 
   if (e.target === appendColumnButton) {
     column.forEach((el) => {
-      el.lastElementChild.before(document.createElement('td'));
+      el.lastElementChild.appendChild(document.createElement('td'));
     });
 
     columnCount++;
+
     updateButtons();
   }
 
