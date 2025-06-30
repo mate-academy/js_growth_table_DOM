@@ -1,6 +1,6 @@
 'use strict';
 
-// write code here
+// write code here asd
 const table = document.querySelector('table');
 const appendRowBtn = document.querySelector('.append-row');
 const removeRowBtn = document.querySelector('.remove-row');
