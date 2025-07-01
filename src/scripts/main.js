@@ -28,7 +28,7 @@ function disableButton(e, appendButton, elementLength, removeButton) {
 
 appendRow.addEventListener('click', (e) => {
   const newRow = document.createElement('tr');
-  const rows = field.firstElementChild.querySelectorAll('tr>td');
+  const rows = field.firstElementChild.querySelectorAll('td');
 
   for (let i = 0; i < rows.length; i++) {
     const newEl = document.createElement('td');
@@ -58,8 +58,7 @@ appendColumn.addEventListener('click', (e) => {
     key.appendChild(newCol);
   }
 
-  const columnsLength =
-    field.firstElementChild.querySelectorAll('tr>td').length;
+  const columnsLength = field.firstElementChild.querySelectorAll('td').length;
 
   disableButton(e, appendColumn, columnsLength, removeColumn);
 });
@@ -69,8 +68,7 @@ removeColumn.addEventListener('click', (e) => {
     key.lastElementChild.remove();
   }
 
-  const columnsLength =
-    field.firstElementChild.querySelectorAll('tr>td').length;
+  const columnsLength = field.firstElementChild.querySelectorAll('td').length;
 
   disableButton(e, appendColumn, columnsLength, removeColumn);
 });
