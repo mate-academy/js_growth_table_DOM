@@ -7,78 +7,55 @@ const removeColumn = document.querySelector('.remove-column');
 const field = document.querySelector('.field').children[0];
 
 appendRow.addEventListener('click', () => {
-  const rows = document.querySelectorAll('tr');
-
-  if (rows.length === 9) {
-    appendRow.disabled = true;
-  }
-
-  if (rows.length >= 10) {
-    appendRow.disabled = true;
-
-    return;
-  }
-
   const row = document.querySelector('tr');
   const copiedRow = row.cloneNode(true);
 
   field.appendChild(copiedRow);
+
+  const updatedRows = document.querySelectorAll('tr');
+
+  appendRow.disabled = updatedRows.length >= 10;
+  removeRow.disabled = false;
 });
 
 removeRow.addEventListener('click', () => {
   const rows = document.querySelectorAll('tr');
 
-  if (rows.length === 3) {
-    removeRow.disabled = true;
-  }
+  rows[rows.length - 1].remove();
 
-  if (rows.length <= 2) {
-    return;
-  }
+  const updatedRows = document.querySelectorAll('tr');
 
-  const row = document.querySelector('tr');
-
-  row.remove();
+  removeRow.disabled = updatedRows.length <= 2;
+  appendRow.disabled = false;
 });
 
 appendColumn.addEventListener('click', () => {
   const rows = document.querySelectorAll('tr');
 
   rows.forEach((row) => {
-    if (row.children.length === 9) {
-      appendColumn.disabled = true;
-    }
-
-    if (row.children.length >= 10) {
-      appendColumn.disabled = true;
-
-      return;
-    }
-
     const td = document.createElement('td');
 
     row.appendChild(td);
   });
+
+  const rowFirst = document.querySelector('tr');
+
+  appendColumn.disabled = rowFirst.children.length >= 10;
+
+  removeColumn.disabled = false;
 });
 
 removeColumn.addEventListener('click', () => {
-  const rows = document.querySelectorAll('tr');
-
-  rows.forEach((row) => {
-    if (row.children.length === 3) {
-      removeColumn.disabled = true;
-    }
-
-    if (row.children.length <= 2) {
-      // removeColumn.disabled = true;
-
-      return;
-    }
-
+  document.querySelectorAll('tr').forEach((row) => {
     const td = row.querySelector('td');
 
     row.removeChild(td);
   });
+
+  const rowFirst = document.querySelector('tr');
+
+  removeColumn.disabled = rowFirst.children.length <= 2;
+  appendColumn.disabled = false;
 });
 
 // i need to add or remove column/row and then move the buttons
