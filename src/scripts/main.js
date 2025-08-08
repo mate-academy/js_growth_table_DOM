@@ -41,10 +41,7 @@ appendRowBtn.addEventListener('click', () => {
 removeRowBtn.addEventListener('click', () => {
   const rows = getRows();
 
-  if (rows.length > 2) {
-    tableBody.removeChild(rows[rows.length - 1]);
-  }
-
+  tableBody.removeChild(rows[rows.length - 1]);
   updateControls();
 });
 
@@ -55,9 +52,7 @@ appendColBtn.addEventListener('click', () => {
 
 removeColBtn.addEventListener('click', () => {
   getRows().forEach((row) => {
-    if (row.cells.length > 2) {
-      row.deleteCell(-1);
-    }
+    row.deleteCell(-1);
   });
 
   updateControls();
