@@ -27,11 +27,15 @@ function updateButtons() {
 
 addRow.addEventListener('click', () => {
   const rows = getRows();
+  const rowCount = rows.length;
   const colCount = rows[0].cells.length;
-  const newRow = table.insertRow();
 
-  for (let i = 0; i < colCount; i++) {
-    newRow.insertCell();
+  if (rowCount < max) {
+    const newRow = table.insertRow();
+
+    for (let i = 0; i < colCount; i++) {
+      newRow.insertCell();
+    }
   }
 
   updateButtons();
@@ -54,8 +58,9 @@ addColumn.addEventListener('click', () => {
     for (let i = 0; i < rows.length; i++) {
       rows[i].insertCell();
     }
-    updateButtons();
   }
+
+  updateButtons();
 });
 
 removeColumn.addEventListener('click', () => {
@@ -66,8 +71,9 @@ removeColumn.addEventListener('click', () => {
     for (let i = 0; i < rows.length; i++) {
       rows[i].deleteCell(colCount - 1);
     }
-    updateButtons();
   }
+
+  updateButtons();
 });
 
 updateButtons();
