@@ -9,6 +9,36 @@ const field = document.querySelector('.field');
 const minCount = 2;
 const maxCount = 10;
 
+function updateButtonsState() {
+  if (field.querySelectorAll('tr').length < maxCount) {
+    appendRow.disabled = false;
+  } else {
+    appendRow.disabled = true;
+  }
+
+  if (field.querySelectorAll('tr').length > minCount) {
+    removeRow.disabled = false;
+  } else {
+    removeRow.disabled = true;
+  }
+
+  if (field.querySelectorAll('tr')[0].children.length < maxCount) {
+    appendColumn.disabled = false;
+  } else {
+    appendColumn.disabled = true;
+  }
+
+  if (field.querySelectorAll('tr')[0].children.length > minCount) {
+    removeColumn.disabled = false;
+  } else {
+    removeColumn.disabled = true;
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  updateButtonsState();
+});
+
 appendColumn.addEventListener('click', () => {
   const rows = field.querySelectorAll('tr');
   const columnsCount = rows[0].children.length;
