@@ -9,6 +9,11 @@ const minCells = 2;
 function appendRow() {
   const row = document.createElement('tr');
   const colums = tAble.rows[0].cells.length;
+  const rowLength = tAble.rows.length;
+
+  if (rowLength >= maxRows) {
+    return;
+  }
 
   for (let i = 0; i < colums; i++) {
     const cell = document.createElement('td');
@@ -20,12 +25,24 @@ function appendRow() {
 }
 
 function removeRow() {
+  const rowLength = tAble.rows.length;
+
+  if (rowLength <= minRows) {
+    return;
+  }
+
   if (tAble.rows.length > 0) {
     tAble.deleteRow(-1);
   }
 }
 
 function appendColumn() {
+  const colLength = tAble.rows[0].cells.length;
+
+  if (colLength >= maxCells) {
+    return;
+  }
+
   Array.from(tAble.rows).forEach((tr) => {
     const cell = document.createElement('td');
 
@@ -34,6 +51,12 @@ function appendColumn() {
 }
 
 function removeColumn() {
+  const colLength = tAble.rows[0].cells.length;
+
+  if (colLength <= minCells) {
+    return;
+  }
+
   Array.from(tAble.rows).forEach((row) => {
     row.deleteCell(-1);
   });
@@ -54,22 +77,36 @@ function updateButtons() {
   delColBtn.disabled = colLength === minCells;
 }
 
-addRowBtn.addEventListener('click', () => {
+addRowBtn.addEventListener('click', (e) => {
+  if (e.currentTarget.disabled) {
+    return;
+  }
   appendRow();
   updateButtons();
 });
 
-delRowBtn.addEventListener('click', () => {
+delRowBtn.addEventListener('click', (e) => {
+  if (e.currentTarget.disabled) {
+    return;
+  }
   removeRow();
   updateButtons();
 });
 
-addColBtn.addEventListener('click', () => {
+addColBtn.addEventListener('click', (e) => {
+  if (e.currentTarget.disabled) {
+    return;
+  }
   appendColumn();
   updateButtons();
 });
 
-delColBtn.addEventListener('click', () => {
+delColBtn.addEventListener('click', (e) => {
+  if (e.currentTarget.disabled) {
+    return;
+  }
   removeColumn();
   updateButtons();
 });
+
+updateButtons();
