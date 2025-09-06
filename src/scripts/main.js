@@ -23,6 +23,7 @@ function disabledClass() {
   appendColumn.disabled = cellsCount() >= MAX_CELLS;
   removeColumn.disabled = cellsCount() <= MIN_CELLS;
 }
+disabledClass();
 
 appendRow.addEventListener('click', (el) => {
   el.preventDefault();
