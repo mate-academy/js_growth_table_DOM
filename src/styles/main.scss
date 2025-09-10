@@ -19,6 +19,11 @@ td {
   transition: 0.2s background ease;
   padding: 0;
 
+  -webkit-user-select: none; /* Safari, Chrome, Opera */
+  -moz-user-select: none;    /* Firefox */
+  -ms-user-select: none;     /* Internet Explorer/Edge */
+  user-select: none;         /* Standard syntax */
+
   &:hover {
     background: #00a6ff;
   }
