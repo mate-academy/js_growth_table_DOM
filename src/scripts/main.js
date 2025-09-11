@@ -34,13 +34,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     table.append(newRow);
-    updateButtons()
+    updateButtons();
   });
 
   removeRowBtn.addEventListener('click', () => {
     if (table.rows.length > 2) {
       table.rows[table.rows.length - 1].remove();
     }
+    updateButtons();
   });
 
   addColBtn.addEventListener('click', () => {
