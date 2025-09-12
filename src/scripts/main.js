@@ -11,29 +11,58 @@ document.addEventListener('DOMContentLoaded', () => {
   const MIN_COLUMNS = 2;
   const MAX_COLUMNS = 10;
 
-  const tables = document.querySelector('.field');
-  const tbody = tables.querySelector('tbody') || tables;
+  const table = document.querySelector('.field');
+
+  if (!table) {
+    return;
+  }
+
+  const tbody = table.querySelector('tbody') || table;
 
   function updateButtonsRows() {
-    const rowCount = tables.querySelectorAll('tr').length;
+    const rows = tbody.querySelectorAll('tr');
+    const rowCount = rows.length;
 
-    appendRow.disabled = rowCount >= MAX_ROWS;
-    removeRow.disabled = rowCount <= MIN_ROWS;
+    if (appendRow) {
+      appendRow.disabled = rowCount >= MAX_ROWS;
+    }
+
+    if (removeRow) {
+      removeRow.disabled = rowCount <= MIN_ROWS;
+    }
   }
 
   function updateButtonsColumns() {
-    const columns = tables.querySelectorAll('tr');
-    const columnCount = columns[0].cells.length;
+    const rows = tbody.querySelectorAll('tr');
 
-    appendColumn.disabled = columnCount >= MAX_COLUMNS;
-    removeColumn.disabled = columnCount <= MIN_COLUMNS;
+    if (!rows.length) {
+      if (appendColumn) {
+        appendColumn.disabled = true;
+      }
+
+      if (removeColumn) {
+        removeColumn.disabled = true;
+      }
+
+      return;
+    }
+
+    const columnCount = rows[0].cells.length;
+
+    if (appendColumn) {
+      appendColumn.disabled = columnCount >= MAX_COLUMNS;
+    }
+
+    if (removeColumn) {
+      removeColumn.disabled = columnCount <= MIN_COLUMNS;
+    }
   }
 
-  appendRow.addEventListener('click', () => {
-    const trTable = tables.querySelectorAll('tr');
+  appendRow?.addEventListener('click', () => {
+    const rows = tbody.querySelectorAll('tr');
 
-    if (trTable.length < MAX_ROWS) {
-      const newRow = trTable[trTable.length - 1].cloneNode(true);
+    if (rows.length < MAX_ROWS && rows.length) {
+      const newRow = rows[rows.length - 1].cloneNode(true);
 
       tbody.appendChild(newRow);
       updateButtonsRows();
@@ -41,40 +70,49 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  removeRow.addEventListener('click', () => {
-    const trTable = tables.querySelectorAll('tr');
+  removeRow?.addEventListener('click', () => {
+    const rows = tbody.querySelectorAll('tr');
 
-    if (trTable.length > MIN_ROWS) {
-      trTable[trTable.length - 1].remove();
+    if (rows.length > MIN_ROWS) {
+      rows[rows.length - 1].remove();
       updateButtonsRows();
       updateButtonsColumns();
     }
   });
 
-  appendColumn.addEventListener('click', () => {
-    const trTable = tables.querySelectorAll('tr');
-    const columnCount = trTable[0].cells.length;
+  appendColumn?.addEventListener('click', () => {
+    const rows = tbody.querySelectorAll('tr');
+
+    if (!rows.length) {
+      return;
+    }
+
+    const columnCount = rows[0].cells.length;
 
     if (columnCount < MAX_COLUMNS) {
-      trTable.forEach((column) => {
-        const lastCell = column.cells[column.cells.length - 1];
+      rows.forEach((row) => {
+        const lastCell = row.cells[row.cells.length - 1];
         const newCell = lastCell.cloneNode(true);
 
-        column.appendChild(newCell);
+        row.appendChild(newCell);
       });
+
       updateButtonsRows();
       updateButtonsColumns();
     }
   });
 
-  removeColumn.addEventListener('click', () => {
-    const trTable = tables.querySelectorAll('tr');
-    const columnCount = trTable[0].cells.length;
+  removeColumn?.addEventListener('click', () => {
+    const rows = tbody.querySelectorAll('tr');
+
+    if (!rows.length) {
+      return;
+    }
+
+    const columnCount = rows[0].cells.length;
 
     if (columnCount > MIN_COLUMNS) {
-      trTable.forEach((column) => {
-        column.cells[column.cells.length - 1].remove();
-      });
+      rows.forEach((row) => row.cells[row.cells.length - 1].remove());
       updateButtonsRows();
       updateButtonsColumns();
     }
