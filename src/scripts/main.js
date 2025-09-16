@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const updateButtons = () => {
     const rowCount = tbody.rows.length;
-    const colCount = tbody.rows[0].cells.length;
+    const colCount = tbody.rows[0] ? tbody.rows[0].cells.length : 0; // guard
 
     appendRowBtn.disabled = rowCount >= 10;
     removeRowBtn.disabled = rowCount <= 2;
@@ -31,9 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const row = document.createElement('tr');
 
     for (let i = 0; i < rowLength; i++) {
-      const td = document.createElement('td');
-
-      row.append(td);
+      row.append(document.createElement('td'));
     }
 
     tbody.append(row);
@@ -56,15 +54,11 @@ document.addEventListener('DOMContentLoaded', () => {
   appendColBtn.addEventListener('click', () => {
     const rows = [...tbody.rows];
 
-    if (rows[0].cells.length >= 10) {
+    if (!rows.length || rows[0].cells.length >= 10) {
       return;
     }
 
-    rows.forEach((tr) => {
-      const td = document.createElement('td');
-
-      tr.append(td);
-    });
+    rows.forEach((tr) => tr.append(document.createElement('td')));
 
     updateButtons();
   });
@@ -72,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
   removeColBtn.addEventListener('click', () => {
     const rows = [...tbody.rows];
 
-    if (rows[0].cells.length <= 2) {
+    if (!rows.length || rows[0].cells.length <= 2) {
       return;
     }
 
@@ -80,4 +74,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     updateButtons();
   });
+
+  updateButtons();
 });
