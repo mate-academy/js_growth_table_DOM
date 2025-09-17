@@ -1,11 +1,33 @@
 'use strict';
 
-const container = document.querySelector('.container');
 const tbody = document.querySelector('.field tbody');
 const appendRowButton = document.querySelector('.append-row');
 const removeRowButton = document.querySelector('.remove-row');
 const appendColumnButton = document.querySelector('.append-column');
 const removeColumnButton = document.querySelector('.remove-column');
+
+if (
+  typeof tbody === 'undefined' ||
+  tbody === null ||
+  typeof appendRowButton === 'undefined' ||
+  appendRowButton === null ||
+  typeof removeRowButton === 'undefined' ||
+  removeRowButton === null ||
+  typeof appendColumnButton === 'undefined' ||
+  appendColumnButton === null ||
+  typeof removeColumnButton === 'undefined' ||
+  removeColumnButton === null
+) {
+  const buttons = document.querySelectorAll('.button');
+
+  for (const button of buttons) {
+    button.setAttribute('disabled', '');
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  updateButtonsState();
+});
 
 function getTrs() {
   return document.querySelectorAll('.container .field tbody tr');
@@ -55,44 +77,31 @@ function updateButtonsState(element) {
   }
 }
 
-container.addEventListener('click', (e) => {
+appendRowButton.addEventListener('click', (e) => {
+  tbody.appendChild(tbody.lastElementChild.cloneNode(true));
   updateButtonsState();
+});
 
-  const classList = [...e.target.classList];
+removeRowButton.addEventListener('click', (e) => {
+  tbody.lastElementChild.remove();
+  updateButtonsState();
+});
+
+appendColumnButton.addEventListener('click', (e) => {
   const trs = getTrs();
 
-  if (
-    typeof tbody === 'undefined' ||
-    tbody === null ||
-    typeof appendRowButton === 'undefined' ||
-    appendRowButton === null ||
-    typeof removeRowButton === 'undefined' ||
-    removeRowButton === null ||
-    typeof appendColumnButton === 'undefined' ||
-    appendColumnButton === null ||
-    typeof removeColumnButton === 'undefined' ||
-    removeColumnButton === null
-  ) {
-    return;
+  for (const tr of trs) {
+    tr.appendChild(document.createElement('td'));
   }
 
-  if (classList.includes('button')) {
-    if (classList.includes('append-row')) {
-      tbody.appendChild(tbody.lastElementChild.cloneNode(true));
-      updateButtonsState();
-    } else if (classList.includes('remove-row')) {
-      tbody.lastElementChild.remove();
-      updateButtonsState();
-    } else if (classList.includes('append-column')) {
-      for (const tr of trs) {
-        tr.appendChild(document.createElement('td'));
-      }
-      updateButtonsState();
-    } else if (classList.includes('remove-column')) {
-      for (const tr of trs) {
-        tr.lastElementChild.remove();
-      }
-      updateButtonsState();
-    }
+  updateButtonsState();
+});
+
+removeColumnButton.addEventListener('click', (e) => {
+  const trs = getTrs();
+
+  for (const tr of trs) {
+    tr.lastElementChild.remove();
   }
+  updateButtonsState();
 });
