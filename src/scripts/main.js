@@ -1,65 +1,83 @@
 'use strict';
 
 // write code here
-const buttons = document.querySelectorAll('.button');
+const buttons = document.querySelectorAll(
+  '.append-row, .remove-row, .append-column, .remove-column',
+);
 const table = document.querySelector('.field');
 
+// Ensure the table has at least 2x2 cells initially
+function ensureInitialTable() {
+  if (table.rows.length === 0) {
+    for (let r = 0; r < 2; r++) {
+      const row = document.createElement('tr');
+
+      for (let c = 0; c < 2; c++) {
+        row.appendChild(document.createElement('td'));
+      }
+      table.appendChild(row);
+    }
+  }
+}
+
+// Update button states
 function updateButtons() {
   const rowCount = table.rows.length;
   const columnCount = table.rows[0].cells.length;
+  const appendRowBtn = document.querySelector('.append-row');
+  const removeRowBtn = document.querySelector('.remove-row');
+  const appendColumnBtn = document.querySelector('.append-column');
+  const removeColumnBtn = document.querySelector('.remove-column');
 
-  document.querySelector('.append-row').disabled = rowCount >= 10;
-  document.querySelector('.remove-row').disabled = rowCount <= 2;
-  document.querySelector('.append-column').disabled = columnCount >= 10;
-  document.querySelector('.remove-column').disabled = columnCount <= 2;
+  appendRowBtn.disabled = rowCount >= 10;
+  removeRowBtn.disabled = rowCount <= 2;
+  appendColumnBtn.disabled = columnCount >= 10;
+  removeColumnBtn.disabled = columnCount <= 2;
 }
 
+// Handle button clicks
 buttons.forEach((button) => {
   button.addEventListener('click', () => {
+    const rowCount = table.rows.length;
+    const columnCount = table.rows[0].cells.length;
+
     if (button.classList.contains('append-row')) {
-      const newRow = document.createElement('tr');
-      const columnCount = table.rows[0].cells.length;
+      if (rowCount < 10) {
+        const newRow = document.createElement('tr');
 
-      for (let i = 0; i < columnCount; i++) {
-        const newCell = document.createElement('td');
-
-        newRow.appendChild(newCell);
+        for (let i = 0; i < columnCount; i++) {
+          newRow.appendChild(document.createElement('td'));
+        }
+        table.appendChild(newRow);
       }
-      table.appendChild(newRow);
     }
 
     if (button.classList.contains('remove-row')) {
-      if (table.rows.length > 2) {
-        table.deleteRow(table.rows.length - 1);
+      if (rowCount > 2) {
+        table.deleteRow(rowCount - 1);
       }
     }
 
     if (button.classList.contains('append-column')) {
-      const columnCount = table.rows[0].cells.length;
-
-      if (columnCount >= 10) {
-        return;
-      }
-
-      for (const row of table.rows) {
-        const newCell = document.createElement('td');
-
-        row.appendChild(newCell);
+      if (columnCount < 10) {
+        for (const row of table.rows) {
+          row.appendChild(document.createElement('td'));
+        }
       }
     }
 
     if (button.classList.contains('remove-column')) {
-      const columnCount = table.rows[0].cells.length;
-
-      if (columnCount <= 2) {
-        return;
-      }
-
-      for (const row of table.rows) {
-        row.deleteCell(-1);
+      if (columnCount > 2) {
+        for (const row of table.rows) {
+          row.deleteCell(row.cells.length - 1);
+        }
       }
     }
 
     updateButtons();
   });
 });
+
+// Initialize
+ensureInitialTable();
+updateButtons();
