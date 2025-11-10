@@ -1,5 +1,5 @@
 1. Replace `<your_account>` with your Github username in the link
-    - [DEMO LINK](https://<your_account>.github.io/js_growth_table_DOM/)
+    - [DEMO LINK](https://pzwolenik.github.io/js_growth_table_DOM/)
 2. Follow [this instructions](https://mate-academy.github.io/layout_task-guideline/)
     - Run `npm run test` command to test your code;
     - Run `npm run test:only -- -n` to run fast test ignoring linter;
@@ -22,7 +22,7 @@ Some rules:
 - The max count of rows or columns is 10.
 - The min count of rows or columns is 2.
 - If the count of columns or rows reaches maximum or minimum, set disabled the corresponding button.
-- If the count of columns or rows can be changed again (after reaching maximum or minimum), set enabled the corresponding button.
+- If the count of columns  or rows can be changed again (after reaching maximum or minimum), set enabled the corresponding button.
 
 As always, on JS Advanced course you do not need to change the HTML layout or CSS styles.
 
