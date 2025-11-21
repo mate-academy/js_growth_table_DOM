@@ -90,3 +90,4 @@ removeColumn.addEventListener('click', () => {
   }
   updateButtons();
 });
+updateButtons();
