@@ -28,7 +28,8 @@ function appendRow() {
     trElement.appendChild(document.createElement('td'));
   }
 
-  table.appendChild(trElement);
+  // table.appendChild(trElement);
+  table.insertRow(trElement);
   updateButtons();
 }
 
@@ -94,3 +95,5 @@ appendColumnButton.addEventListener('click', () => {
 removeColumnButton.addEventListener('click', () => {
   removeColumn();
 });
+
+updateButtons();
