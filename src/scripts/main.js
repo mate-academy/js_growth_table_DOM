@@ -7,12 +7,11 @@ const btnColumnEl = document.querySelector('.append-column');
 const removeBtnColumnEl = document.querySelector('.remove-column');
 
 const tableElem = document.querySelector('table.field');
-const trElem = tableElem.querySelector('tr');
-const allTdInTr = trElem.querySelectorAll('td');
 
 btnRowEl.addEventListener('click', () => {
   const allInitialTr = tableElem.querySelectorAll('tr');
-
+  const trElem = tableElem.querySelector('tr');
+  const allTdInTr = trElem.querySelectorAll('td');
   const newRow = document.createElement('tr');
 
   allTdInTr.forEach(() => {
@@ -23,7 +22,7 @@ btnRowEl.addEventListener('click', () => {
 
   allInitialTr[allInitialTr.length - 1].after(newRow);
 
-  getUpdatedTr(btnRowEl, removeBtnRowEl);
+  getUpdatedTr();
 });
 
 removeBtnRowEl.addEventListener('click', () => {
@@ -31,22 +30,22 @@ removeBtnRowEl.addEventListener('click', () => {
 
   allTrElem[allTrElem.length - 1].remove();
 
-  getUpdatedTr(btnRowEl, removeBtnRowEl);
+  getUpdatedTr();
 });
 
-function getUpdatedTr(btnRow, removeBtnRow) {
+function getUpdatedTr() {
   const updatedTr = tableElem.querySelectorAll('tr');
 
-  if (updatedTr.length >= 5) {
-    btnRow.disabled = true;
+  if (updatedTr.length >= 10) {
+    btnRowEl.disabled = true;
   } else {
-    btnRow.disabled = false;
+    btnRowEl.disabled = false;
   }
 
   if (updatedTr.length <= 2) {
-    removeBtnRow.disabled = true;
+    removeBtnRowEl.disabled = true;
   } else {
-    removeBtnRow.disabled = false;
+    removeBtnRowEl.disabled = false;
   }
 }
 
@@ -59,7 +58,7 @@ btnColumnEl.addEventListener('click', () => {
     tr.append(newTd);
   });
 
-  getUpdatedColumn(btnColumnEl, removeBtnColumnEl);
+  getUpdatedColumn();
 });
 
 removeBtnColumnEl.addEventListener('click', () => {
@@ -71,25 +70,25 @@ removeBtnColumnEl.addEventListener('click', () => {
     allColumn[allColumn.length - 1].remove();
   });
 
-  getUpdatedColumn(btnColumnEl, removeBtnColumnEl);
+  getUpdatedColumn();
 });
 
-function getUpdatedColumn(btnColumn, removeBtnColumn) {
+function getUpdatedColumn() {
   const updatedTr = tableElem.querySelectorAll('tr');
 
   updatedTr.forEach((tr) => {
     const updatedTd = tr.querySelectorAll('td');
 
-    if (updatedTd.length >= 5) {
-      btnColumn.disabled = true;
+    if (updatedTd.length >= 10) {
+      btnColumnEl.disabled = true;
     } else {
-      btnColumn.disabled = false;
+      btnColumnEl.disabled = false;
     }
 
     if (updatedTd.length <= 2) {
-      removeBtnColumn.disabled = true;
+      removeBtnColumnEl.disabled = true;
     } else {
-      removeBtnColumn.disabled = false;
+      removeBtnColumnEl.disabled = false;
     }
   });
 }
