@@ -14,6 +14,8 @@ const MIN_COUNT_ROWS_OR_COL = 2;
 let currentRowCount;
 let currentColumnCount;
 
+lengthCount();
+
 addRowButton.addEventListener('click', () => {
   addRow();
 });
@@ -38,14 +40,6 @@ function addColumn() {
   });
 
   lengthCount();
-
-  if (currentColumnCount >= MAX_COUNT_ROWS_OR_COL) {
-    addColumnButton.disabled = true;
-  }
-
-  if (currentColumnCount > MIN_COUNT_ROWS_OR_COL) {
-    removeColumnButton.disabled = false;
-  }
 }
 
 function removeColumn() {
@@ -58,14 +52,6 @@ function removeColumn() {
   });
 
   lengthCount();
-
-  if (currentColumnCount <= MIN_COUNT_ROWS_OR_COL) {
-    removeColumnButton.disabled = true;
-  }
-
-  if (currentColumnCount < MAX_COUNT_ROWS_OR_COL) {
-    addColumnButton.disabled = false;
-  }
 }
 
 function addRow() {
@@ -75,14 +61,6 @@ function addRow() {
   tBody.appendChild(tableRowCope);
 
   lengthCount();
-
-  if (currentRowCount >= MAX_COUNT_ROWS_OR_COL) {
-    addRowButton.disabled = true;
-  }
-
-  if (currentColumnCount > MIN_COUNT_ROWS_OR_COL) {
-    removeRowButton.disabled = false;
-  }
 }
 
 function removeRow() {
@@ -91,17 +69,15 @@ function removeRow() {
   row.remove();
 
   lengthCount();
-
-  if (currentRowCount <= MIN_COUNT_ROWS_OR_COL) {
-    removeRowButton.disabled = true;
-  }
-
-  if (currentRowCount < MAX_COUNT_ROWS_OR_COL) {
-    addRowButton.disabled = false;
-  }
 }
 
 function lengthCount() {
   currentRowCount = rows.length;
   currentColumnCount = rows[0].cells.length;
+
+  removeRowButton.disabled = currentRowCount <= MIN_COUNT_ROWS_OR_COL;
+  addRowButton.disabled = currentRowCount >= MAX_COUNT_ROWS_OR_COL;
+
+  removeColumnButton.disabled = currentColumnCount <= MIN_COUNT_ROWS_OR_COL;
+  addColumnButton.disabled = currentColumnCount >= MAX_COUNT_ROWS_OR_COL;
 }
