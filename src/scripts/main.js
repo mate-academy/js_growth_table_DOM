@@ -61,8 +61,8 @@ removeColumn.addEventListener('click', () => {
   allRows.forEach((row) => {
     if (row.children.length > 2) {
       row.lastElementChild.remove();
+      appendColumn.disabled = false;
     }
-    appendColumn.disabled = false;
 
     if (row.children.length === 2) {
       removeColumn.disabled = true;
