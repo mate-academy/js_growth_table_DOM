@@ -20,6 +20,8 @@ function updateButtons() {
   removeColumnBtn.disabled = colsCount <= MIN;
 }
 
+updateButtons();
+
 function addRow() {
   if (rowsCount >= MAX) {
     return;
