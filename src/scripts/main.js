@@ -35,8 +35,6 @@ document.addEventListener('DOMContentLoaded', () => {
       tbody.append(tr.cloneNode(true));
       totalRowCount += 1;
       updateRowButtons();
-    } else {
-      appendRow.setAttribute('disabled', 'disabled');
     }
   });
 
@@ -51,8 +49,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
       totalRowCount -= 1;
       updateRowButtons();
-    } else {
-      removeRow.setAttribute('disabled', 'disabled');
     }
   });
 
@@ -82,8 +78,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
       totalColumnCount += 1;
       updateColButtons();
-    } else {
-      appendColumn.setAttribute('disabled', 'disabled');
     }
   });
 
@@ -97,8 +91,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
       totalColumnCount -= 1;
       updateColButtons();
-    } else {
-      removeColumn.setAttribute('disabled', 'disabled');
     }
   });
 });
