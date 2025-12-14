@@ -82,5 +82,6 @@ removeColumn.addEventListener('click', () => {
 
     el.children[lastTd].remove();
   });
-  updateButtonsState();
 });
+
+updateButtonsState();
