@@ -15,6 +15,11 @@ const COLUMNS_MIN = 2;
 let countRow = table.children.length;
 let countColumn = table.firstElementChild.children.length;
 
+checkLimit(appendRow, countRow, ROWS_MAX);
+checkLimit(removeRow, countRow, ROWS_MIN);
+checkLimit(removeColumn, countColumn, COLUMNS_MIN);
+checkLimit(appendColumn, countColumn, COLUMNS_MAX);
+
 appendRow.addEventListener('click', () => {
   const newRow = document.createElement('tr');
 
