@@ -72,5 +72,13 @@ buttons.forEach((node) => {
     if (actions[actionsKey]) {
       actions[actionsKey]();
     }
+
+    const rowsDis = table.querySelectorAll('tr').length;
+    const colsDis = table.rows[0].cells.length;
+
+    document.querySelector('.append-row').disabled = rowsDis >= MAX_SIZE;
+    document.querySelector('.remove-row').disabled = rowsDis <= MIN_SIZE;
+    document.querySelector('.append-column').disabled = colsDis >= MAX_SIZE;
+    document.querySelector('.remove-column').disabled = colsDis <= MIN_SIZE;
   });
 });
