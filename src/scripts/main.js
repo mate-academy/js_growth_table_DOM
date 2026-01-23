@@ -35,7 +35,9 @@ for (const btn of btns) {
       e.target.className.includes('remove-row') &&
       rowCount.length > 2
     ) {
-      document.querySelector('tbody').removeChild(document.querySelector('tr'));
+      const deletRow = document.querySelector('tbody').lastElementChild;
+
+      document.querySelector('tbody').removeChild(deletRow);
 
       if (rowCount.length <= 3) {
         btnRemoveRow[0].disabled = true;
@@ -64,7 +66,7 @@ for (const btn of btns) {
       columnCount.length > 2
     ) {
       for (const row of rows) {
-        row.removeChild(row.querySelector('td'));
+        row.removeChild(row.lastElementChild);
       }
 
       if (columnCount.length <= 3) {
