@@ -14,8 +14,12 @@ function updateButtons() {
 
 const field = document.querySelector('.field');
 
-let colNum = 4;
-let rowNum = 4;
+const rowStats = field.querySelectorAll('tr');
+let rowNum = rowStats.length;
+
+let colNum = rowStats[0] ? rowStats[0].querySelectorAll('td').length : 0;
+
+updateButtons();
 
 addColButton.addEventListener('click', (ev) => {
   const rows = field.querySelectorAll('tr');
