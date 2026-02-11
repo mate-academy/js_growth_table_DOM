@@ -17,6 +17,8 @@ function updateButton() {
   colRem.disabled = currentCol <= 2;
 }
 
+updateButton();
+
 rowAp.addEventListener('click', (e) => {
   e.preventDefault();
 
