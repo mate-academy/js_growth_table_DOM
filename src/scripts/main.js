@@ -5,24 +5,42 @@ const buttons = document.querySelectorAll('.button');
 const min = 2;
 const max = 10;
 
+function getRows() {
+  return table.querySelectorAll('tr');
+}
+
+function getColumns() {
+  const firstRow = getRows()[0];
+
+  if (!firstRow) {
+    return 0;
+  }
+
+  return firstRow.children.length;
+}
+
+function getBody() {
+  return table.querySelector('tbody') || table;
+}
+
 function addRow() {
-  const rows = table.querySelectorAll('tr');
+  const rows = getRows();
   const rowsCount = rows.length;
 
   if (rowsCount < max) {
     const newRow = document.createElement('tr');
-    const columnsCount = rows[0].children.length;
+    const columnsCount = getColumns();
 
     for (let i = 0; i < columnsCount; i++) {
       newRow.appendChild(document.createElement('td'));
     }
 
-    table.appendChild(newRow);
+    getBody().appendChild(newRow);
   }
 }
 
 function removeRow() {
-  const rows = table.querySelectorAll('tr');
+  const rows = getRows();
   const rowsCount = rows.length;
 
   if (rowsCount > min) {
@@ -31,8 +49,8 @@ function removeRow() {
 }
 
 function addColumn() {
-  const rows = table.querySelectorAll('tr');
-  const columnsCount = rows[0].children.length;
+  const rows = getRows();
+  const columnsCount = getColumns();
 
   if (columnsCount < max) {
     rows.forEach((row) => row.appendChild(document.createElement('td')));
@@ -40,8 +58,8 @@ function addColumn() {
 }
 
 function removeColumn() {
-  const rows = table.querySelectorAll('tr');
-  const columnsCount = rows[0].children.length;
+  const rows = getRows();
+  const columnsCount = getColumns();
 
   if (columnsCount > min) {
     rows.forEach((row) => row.lastElementChild.remove());
@@ -49,9 +67,9 @@ function removeColumn() {
 }
 
 function updateButtons() {
-  const rows = table.querySelectorAll('tr');
+  const rows = getRows();
   const rowsCount = rows.length;
-  const columnsCount = rows[0].children.length;
+  const columnsCount = getColumns();
 
   buttons.forEach((btn) => {
     const btnClass = btn.classList;
@@ -76,7 +94,7 @@ function updateButtons() {
 
 buttons.forEach((btn) => {
   btn.addEventListener('click', (e) => {
-    const btnClass = e.target.classList;
+    const btnClass = e.currentTarget.classList;
 
     if (btnClass.contains('append-row')) {
       addRow();
