@@ -74,8 +74,8 @@ function removeColumn() {
     if (cells.length > 0) {
       row.removeChild(cells[cells.length - 1]);
     }
-    updateButtons();
   });
+  updateButtons();
 }
 
 addRowButton.addEventListener('click', addRow);
@@ -83,4 +83,4 @@ addColumnButton.addEventListener('click', addColumn);
 removeRowButton.addEventListener('click', removeRow);
 removeColumnButton.addEventListener('click', removeColumn);
 
-document.addEventListener('DOMCountetLoaded', updateButtons());
+document.addEventListener('DOMContentLoaded', updateButtons);
