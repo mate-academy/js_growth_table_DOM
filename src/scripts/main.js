@@ -18,7 +18,7 @@ function updateButtons() {
 }
 
 addRowBtn.addEventListener('click', (e) => {
-  const rows = document.querySelectorAll('tr');
+  const rows = table.querySelectorAll('tr');
   const colCount = rows[0].children.length;
 
   let newRow = '<tr>';
