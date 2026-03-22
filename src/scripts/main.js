@@ -53,7 +53,7 @@ TableController.prototype = {
     if (this.tbody.rows.length < wanted) {
       const frag = document.createDocumentFragment();
 
-      while (frag.children.length < wanted) {
+      while (frag.children.length + this.tbody.rows.length < wanted) {
         const tr = this.createRow(this.cols);
 
         frag.appendChild(tr);
