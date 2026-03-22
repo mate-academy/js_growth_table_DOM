@@ -41,7 +41,7 @@ removeRow.addEventListener('click', (e) => {
 
 appendColumn.addEventListener('click', (e) => {
   if (table.rows[0].cells.length < 10) {
-    const rows = Array.from(table.tBodies[0].querySelectorAll('tr'));
+    const rows = Array.from(table.rows);
 
     rows.forEach((row) => {
       const newCell = document.createElement('td');
@@ -59,7 +59,7 @@ appendColumn.addEventListener('click', (e) => {
 
 removeColumn.addEventListener('click', (e) => {
   if (table.rows[0].cells.length > 2) {
-    const rows = Array.from(table.tBodies[0].querySelectorAll('tr'));
+    const rows = Array.from(table.rows);
 
     rows.forEach((row) => {
       row.deleteCell(-1);
