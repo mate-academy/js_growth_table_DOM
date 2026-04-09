@@ -62,8 +62,10 @@ appendColumn.addEventListener('click', () => {
 });
 
 removeColumn.addEventListener('click', () => {
-  for (const row of rows) {
-    row.deleteCell(-1);
+  if (rows[0].cells.length > 2) {
+    for (const row of rows) {
+      row.deleteCell(-1);
+    }
   }
 
   if (rows[0].cells.length > 2) {
