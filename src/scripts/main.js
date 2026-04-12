@@ -53,7 +53,9 @@ const handleButtonClick = (e) => {
     table.rows[0].cells.length > MIN_COUNT_ROWS
   ) {
     for (let c = 0; c < table.rows.length; c++) {
-      table.rows[c].deleteCell(-1);
+      const row = table.rows[c];
+
+      row.deleteCell(row.cells.length - 1);
     }
     buttonStatusChecker();
   }
