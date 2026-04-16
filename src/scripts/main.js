@@ -8,8 +8,8 @@ const table = document.querySelector('.field tbody');
 
 const max = 10;
 const min = 2;
-const getRows = () => table.children?.length ?? 0;
-const getColumns = () => table.children[0]?.children.length ?? 0;
+const getRows = () => table?.children?.length ?? 0;
+const getColumns = () => table?.children[0]?.children?.length ?? 0;
 
 function updateState() {
   appendRowButton.disabled = getRows() >= max;
