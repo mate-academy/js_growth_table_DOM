@@ -8,7 +8,7 @@ const btnRemoveColumn = document.querySelector('.remove-column');
 const table = document.querySelector('table');
 let rowsCount = document.querySelectorAll('tr').length;
 const firstRow = document.querySelector('table tr');
-let colsCount = firstRow ? firstRow.querySelectorAll('td').length : 0;
+let colsCount = firstRow ? firstRow.querySelectorAll('td, th').length : 0;
 
 const maxCount = 10;
 const minCount = 2;
@@ -35,7 +35,6 @@ btnAppendRow.addEventListener('click', (e) => {
   }
   updateButtons();
 });
-btnAppendRow.disabled = rowsCount >= maxCount;
 
 btnAppendColumn.addEventListener('click', (e) => {
   const rows = document.querySelectorAll('tr');
@@ -50,9 +49,9 @@ btnAppendColumn.addEventListener('click', (e) => {
 });
 
 btnRemoveRow.addEventListener('click', (e) => {
-  const rows = document.querySelectorAll('tr');
+  if (rowsCount > minCount) {
+    const rows = document.querySelectorAll('tr');
 
-  if (rows.length > minCount) {
     rows[rows.length - 1].remove();
     rowsCount--;
   }
@@ -64,7 +63,7 @@ btnRemoveColumn.addEventListener('click', (e) => {
 
   if (colsCount > minCount) {
     for (const row of rows) {
-      const cells = row.querySelectorAll('td');
+      const cells = row.querySelectorAll('td, th');
 
       if (cells.length > 0) {
         cells[cells.length - 1].remove();
@@ -74,3 +73,5 @@ btnRemoveColumn.addEventListener('click', (e) => {
   }
   updateButtons();
 });
+
+updateButtons();
