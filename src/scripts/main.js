@@ -6,11 +6,31 @@ const removeRowBtn = document.querySelector('.remove-row');
 const addColumnBtn = document.querySelector('.append-column');
 const removeColumnBtn = document.querySelector('.remove-column');
 
+// --- ПЕРЕВІРКА НАЯВНОСТІ ЕЛЕМЕНТІВ (Захист від помилок) ---
+
+// Перевіряємо, чи всі вузли знайшлися в DOM.
+// Якщо хоча б одного немає — кидаємо помилку, щоб скрипт не «впав» пізніше.
+
+if (
+  !field ||
+  !addRowBtn ||
+  !removeRowBtn ||
+  !addColumnBtn ||
+  !removeColumnBtn
+) {
+  throw new Error(
+    'Не вдалося знайти всі необхідні елементи таблиці.Перевірте розмітку HTML!',
+  );
+}
 /**
  * Допоміжна функція для заповнення рядка клітинками.
  * Вона гарантує, що в рядку буде мінімум 2 колонки.
  */
+
 function fillRowWithCells(row) {
+  if (!row || typeof row.insertCell !== 'function') {
+    return; // Якщо щось не так, просто виходимо, щоб не «зламати» весь скрипт
+  }
   // Визначаємо кількість колонок: беремо з першого рядка або ставимо 0
 
   let currentColumnsCount =
