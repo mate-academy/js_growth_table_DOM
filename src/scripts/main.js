@@ -10,7 +10,7 @@ const maxSize = 10;
 const minSize = 2;
 
 function UpdateButtons() {
-  const rowCount = table.rows.length;
+  const rowCount = table.querySelector('tbody').rows.length;
   const columnCount = table.rows[0].cells.length;
 
   appendRowButton.disabled = rowCount >= maxSize;
@@ -23,6 +23,7 @@ appendRowButton.addEventListener('click', () => {
   const columnCount = table.rows[0].cells.length;
 
   if (table.rows.length < maxSize) {
+    const tableBody = table.querySelector('tbody');
     const newRow = document.createElement('tr');
 
     for (let i = 0; i < columnCount; i++) {
@@ -31,17 +32,19 @@ appendRowButton.addEventListener('click', () => {
       newRow.appendChild(newCell);
     }
 
-    table.appendChild(newRow);
+    tableBody.appendChild(newRow);
   }
 
   UpdateButtons();
 });
 
 removeRowButton.addEventListener('click', () => {
+  const tableBody = table.querySelector('tbody');
+
   if (table.rows.length > minSize) {
-    table.deleteRow(-1);
-    UpdateButtons();
+    tableBody.deleteRow(-1);
   }
+  UpdateButtons();
 });
 
 appendColumnButton.addEventListener('click', () => {
