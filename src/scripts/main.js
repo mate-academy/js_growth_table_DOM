@@ -29,7 +29,7 @@ appendColumn.addEventListener('click', () => {
 
 removeRow.addEventListener('click', () => {
   if (table.rows.length > 2) {
-    table.lastElementChild.lastElementChild.remove();
+    table.deleteRow(-1);
   }
 
   updateButtons();
