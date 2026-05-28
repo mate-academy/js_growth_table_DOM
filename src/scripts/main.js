@@ -67,3 +67,5 @@ function manageButtons() {
     }
   });
 }
+
+manageButtons();
