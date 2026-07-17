@@ -37,9 +37,9 @@ removeColumn.addEventListener('click', () => {
   const trs = field.querySelectorAll('tr');
 
   trs.forEach((tr) => {
-    const td = tr.querySelector('td');
+    const td = tr.lastElementChild;
 
-    tr.removeChild(td);
+    td.remove();
   });
 
   updateButtonsState();
