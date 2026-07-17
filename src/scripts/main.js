@@ -14,14 +14,14 @@ function updateButtonsState() {
   const rowsCount = field.querySelectorAll('tr').length;
   const columnsCount = field.querySelector('tr').children.length;
 
-  appendRow.disabled = columnsCount >= 10;
-  removeRow.disabled = columnsCount <= 2;
+  appendRow.disabled = rowsCount >= 10;
+  removeRow.disabled = rowsCount <= 2;
 
-  appendColumn.disabled = rowsCount >= 10;
-  removeColumn.disabled = rowsCount <= 2;
+  appendColumn.disabled = columnsCount >= 10;
+  removeColumn.disabled = columnsCount <= 2;
 }
 
-appendRow.addEventListener('click', () => {
+appendColumn.addEventListener('click', () => {
   const trs = field.querySelectorAll('tr');
 
   trs.forEach((tr) => {
@@ -33,7 +33,7 @@ appendRow.addEventListener('click', () => {
   updateButtonsState();
 });
 
-removeRow.addEventListener('click', () => {
+removeColumn.addEventListener('click', () => {
   const trs = field.querySelectorAll('tr');
 
   trs.forEach((tr) => {
@@ -45,7 +45,7 @@ removeRow.addEventListener('click', () => {
   updateButtonsState();
 });
 
-appendColumn.addEventListener('click', () => {
+appendRow.addEventListener('click', () => {
   const tbody = field.querySelector('tbody');
   const tr = document.createElement('tr');
 
@@ -60,7 +60,7 @@ appendColumn.addEventListener('click', () => {
   updateButtonsState();
 });
 
-removeColumn.addEventListener('click', () => {
+removeRow.addEventListener('click', () => {
   const tbody = field.querySelector('tbody');
 
   tbody.lastElementChild.remove();
