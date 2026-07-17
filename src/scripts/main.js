@@ -20,13 +20,13 @@ appendRow.addEventListener('click', () => {
 
   field.append(clonedRow);
 
-  if (field.children.length > removeLimit) {
+  const currentRows = field.children.length;
+
+  if (currentRows > removeLimit) {
     removeRow.disabled = false;
   }
 
-  const appendCount = field.children.length;
-
-  if (appendCount >= appendLimit) {
+  if (currentRows >= appendLimit) {
     appendRow.disabled = true;
   }
 });
@@ -41,13 +41,13 @@ removeRow.addEventListener('click', () => {
 
   rowToRemove.remove();
 
-  if (field.children.length < appendLimit) {
+  const currentRowsCount = field.children.length;
+
+  if (currentRowsCount < appendLimit) {
     appendRow.disabled = false;
   }
 
-  const removeCount = field.children.length;
-
-  if (removeCount <= removeLimit) {
+  if (currentRowsCount <= removeLimit) {
     removeRow.disabled = true;
   }
 });
@@ -55,11 +55,11 @@ removeRow.addEventListener('click', () => {
 appendColumn.addEventListener('click', () => {
   const rows = field.querySelectorAll('tr');
 
-  rows.forEach((row) => {
-    if (row.children.length >= appendLimit) {
-      return;
-    }
+  if (rows[0].children.length >= appendLimit) {
+    return;
+  }
 
+  rows.forEach((row) => {
     const targetCell = row.children[0];
 
     if (targetCell) {
@@ -67,42 +67,42 @@ appendColumn.addEventListener('click', () => {
 
       row.append(clonedCell);
     }
-
-    if (row.children.length > removeLimit) {
-      removeColumn.disabled = false;
-    }
-
-    const appendNumber = row.children.length + 1;
-
-    if (appendNumber > appendLimit) {
-      appendColumn.disabled = true;
-    }
   });
+
+  const currentColumns = rows[0].children.length;
+
+  if (currentColumns > removeLimit) {
+    removeColumn.disabled = false;
+  }
+
+  if (currentColumns >= appendLimit) {
+    appendColumn.disabled = true;
+  }
 });
 
 removeColumn.addEventListener('click', () => {
   const rows = field.querySelectorAll('tr');
 
-  rows.forEach((row) => {
-    if (row.children.length <= removeLimit) {
-      return;
-    }
+  if (rows[0].children.length <= removeLimit) {
+    return;
+  }
 
+  rows.forEach((row) => {
     const lastIndex = row.children.length - 1;
     const removeCell = row.children[lastIndex];
 
     if (removeCell) {
       removeCell.remove();
     }
-
-    if (row.children.length < appendLimit) {
-      appendColumn.disabled = false;
-    }
-
-    const removeNumber = row.children.length;
-
-    if (removeNumber <= removeLimit) {
-      removeColumn.disabled = true;
-    }
   });
+
+  const currentColumnsCount = rows[0].children.length;
+
+  if (currentColumnsCount < appendLimit) {
+    appendColumn.disabled = false;
+  }
+
+  if (currentColumnsCount <= removeLimit) {
+    removeColumn.disabled = true;
+  }
 });
