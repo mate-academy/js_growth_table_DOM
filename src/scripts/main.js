@@ -10,6 +10,12 @@ const buttonAppendColumn = document.querySelector('button.append-column');
 const buttonRemoveColumn = document.querySelector('button.remove-column');
 
 buttonAppendRow.addEventListener('click', () => {
+  const rows = table.querySelectorAll('tr');
+
+  if (rows.length >= 10) {
+    return;
+  }
+
   const newRow = row.cloneNode(true);
 
   table.tBodies[0].appendChild(newRow);
@@ -27,6 +33,11 @@ buttonRemoveRow.addEventListener('click', () => {
 
 buttonAppendColumn.addEventListener('click', () => {
   const rows = table.querySelectorAll('tr');
+  const cells = rows[0] ? rows[0].querySelectorAll('td') : [];
+
+  if (cells.length >= 10) {
+    return;
+  }
 
   for (const each of rows) {
     const newCell = document.createElement('td');
