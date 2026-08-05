@@ -27,13 +27,13 @@ function activeButton() {
   }
 
   if (amountColumns > 2 && amountColumns < 10) {
-    remoColumns.disabled = null;
-    appCol.disabled = null;
+    remoColumns.disabled = false;
+    appCol.disabled = false;
   }
 
   if (amountRows > 2 && amountRows < 10) {
-    remoRow.disabled = null;
-    appRow.disabled = null;
+    remoRow.disabled = false;
+    appRow.disabled = false;
   }
 }
 
@@ -82,6 +82,9 @@ document.addEventListener('click', (e) => {
   }
 
   if (removeRows) {
+    if (amountRows === 2) {
+      return;
+    }
     rows[rows.length - 1].remove();
 
     amountRows--;
@@ -89,6 +92,10 @@ document.addEventListener('click', (e) => {
   }
 
   if (removeColumns) {
+    if (amountColumns === 2) {
+      return;
+    }
+
     for (let i = 0; i < amountRows; i++) {
       rows[i].cells[amountColumns - 1].remove();
     }
