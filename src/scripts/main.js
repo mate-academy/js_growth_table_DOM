@@ -26,8 +26,6 @@ function updateButtonState() {
 appendColumn.addEventListener('click', () => {
   const totalCells = field.rows[0]?.cells.length ?? 0;
 
-  appendColumn.disabled = totalCells >= MAX;
-
   if (totalCells === MAX) {
     return;
   }
@@ -43,8 +41,6 @@ appendColumn.addEventListener('click', () => {
 
 removeColumn.addEventListener('click', () => {
   const totalCells = field.rows[0]?.cells.length ?? 0;
-
-  removeColumn.disabled = totalCells >= MIN;
 
   if (totalCells === MIN) {
     return;
