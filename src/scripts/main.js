@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const removeColBtn = document.querySelector('.remove-column');
 
   const table = document.querySelector('table');
-  const tbody = table.querySelector('.tbody') || table;
+  const tbody = table.querySelector('tbody') || table;
 
   const getRowCount = () => tbody.querySelectorAll('tr').length;
   const getColCount = () => {
