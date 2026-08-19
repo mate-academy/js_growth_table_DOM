@@ -28,17 +28,19 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   appendRowBtn.addEventListener('click', () => {
-    const newRow = document.createElement('tr');
-    const cols = getColCount();
+    if (getRowCount() < 10) {
+      const newRow = document.createElement('tr');
+      const cols = getColCount();
 
-    for (let i = 0; i < cols; i++) {
-      const newCell = document.createElement('td');
+      for (let i = 0; i < cols; i++) {
+        const newCell = document.createElement('td');
 
-      newRow.appendChild(newCell);
+        newRow.appendChild(newCell);
+      }
+
+      tbody.appendChild(newRow);
+      updateButtonsState();
     }
-
-    tbody.appendChild(newRow);
-    updateButtonsState();
   });
 
   removeRowBtn.addEventListener('click', () => {
