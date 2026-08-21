@@ -20,18 +20,18 @@ allTrsForRow.forEach(() => {
 });
 
 buttonAppendRow.addEventListener('click', () => {
+  const tr = tableField.querySelector('tr');
+  const trCopy = tr.cloneNode(true);
+
   ++countOfRow;
 
-  if (MAX_ROWS_COL <= countOfRow) {
+  if (MAX_ROWS_COL < countOfRow) {
     buttonAppendRow.disabled = true;
-  }
-
-  if (MAX_ROWS_COL >= countOfRow) {
+  } else if (MAX_ROWS_COL === countOfRow) {
+    tbody.append(trCopy);
+    buttonAppendRow.disabled = true;
+  } else if (MAX_ROWS_COL > countOfRow) {
     buttonRemoveRow.disabled = false;
-
-    const tr = tableField.querySelector('tr');
-    const trCopy = tr.cloneNode(true);
-
     tbody.append(trCopy);
   }
 });
@@ -41,19 +41,13 @@ buttonRemoveRow.addEventListener('click', () => {
 
   const trLast = tbody.lastElementChild;
 
-  if (MIN_ROWS_COL === countOfRow) {
-    trLast.remove();
-
-    buttonRemoveRow.disabled = true;
-  }
-
   if (MIN_ROWS_COL > countOfRow) {
     buttonRemoveRow.disabled = true;
-  }
-
-  if (MIN_ROWS_COL <= countOfRow) {
+  } else if (MIN_ROWS_COL === countOfRow) {
+    trLast.remove();
+    buttonRemoveRow.disabled = true;
+  } else if (MIN_ROWS_COL < countOfRow) {
     buttonAppendRow.disabled = false;
-
     trLast.remove();
   }
 });
@@ -67,9 +61,9 @@ allTrsforCol.forEach(() => {
 });
 
 buttonAppendColumn.addEventListener('click', () => {
-  ++countofCol;
-
   const allTrs = tableField.querySelectorAll('tr');
+
+  ++countofCol;
 
   if (MAX_ROWS_COL === countofCol) {
     allTrs.forEach((tr) => {
@@ -79,13 +73,9 @@ buttonAppendColumn.addEventListener('click', () => {
     });
 
     buttonAppendColumn.disabled = true;
-  }
-
-  if (MAX_ROWS_COL < countofCol) {
+  } else if (MAX_ROWS_COL < countofCol) {
     buttonAppendColumn.disabled = true;
-  }
-
-  if (MAX_ROWS_COL > countofCol) {
+  } else if (MAX_ROWS_COL > countofCol) {
     buttonRemoveColumn.disabled = false;
 
     allTrs.forEach((tr) => {
@@ -109,13 +99,9 @@ buttonRemoveColumn.addEventListener('click', () => {
     });
 
     buttonRemoveColumn.disabled = true;
-  }
-
-  if (MIN_ROWS_COL > countofCol) {
+  } else if (MIN_ROWS_COL > countofCol) {
     buttonRemoveColumn.disabled = true;
-  }
-
-  if (MIN_ROWS_COL < countofCol) {
+  } else if (MIN_ROWS_COL < countofCol) {
     buttonAppendColumn.disabled = false;
 
     allTrs.forEach((tr) => {
