@@ -23,38 +23,33 @@ buttonAppendRow.addEventListener('click', () => {
   const tr = tableField.querySelector('tr');
   const trCopy = tr.cloneNode(true);
 
-  ++countOfRow;
-
-  if (MAX_ROWS_COL < countOfRow) {
-    buttonAppendRow.disabled = true;
-  } else if (MAX_ROWS_COL === countOfRow) {
+  if (MAX_ROWS_COL > countOfRow) {
     tbody.append(trCopy);
-    buttonAppendRow.disabled = true;
-  } else if (MAX_ROWS_COL > countOfRow) {
+    countOfRow++;
     buttonRemoveRow.disabled = false;
-    tbody.append(trCopy);
+  }
+
+  if (MAX_ROWS_COL <= countOfRow) {
+    buttonAppendRow.disabled = true;
   }
 });
 
 buttonRemoveRow.addEventListener('click', () => {
-  countOfRow--;
-
   const trLast = tbody.lastElementChild;
 
-  if (MIN_ROWS_COL > countOfRow) {
-    buttonRemoveRow.disabled = true;
-  } else if (MIN_ROWS_COL === countOfRow) {
-    trLast.remove();
-    buttonRemoveRow.disabled = true;
-  } else if (MIN_ROWS_COL < countOfRow) {
+  if (MIN_ROWS_COL < countOfRow) {
     buttonAppendRow.disabled = false;
     trLast.remove();
+    countOfRow--;
+  }
+
+  if (MIN_ROWS_COL >= countOfRow) {
+    buttonRemoveRow.disabled = true;
   }
 });
 
-let countofCol = 0;
-
 const allTrsforCol = tbody.lastElementChild.querySelectorAll('td');
+let countofCol = 0;
 
 allTrsforCol.forEach(() => {
   ++countofCol;
@@ -63,19 +58,7 @@ allTrsforCol.forEach(() => {
 buttonAppendColumn.addEventListener('click', () => {
   const allTrs = tableField.querySelectorAll('tr');
 
-  ++countofCol;
-
-  if (MAX_ROWS_COL === countofCol) {
-    allTrs.forEach((tr) => {
-      const td = document.createElement('td');
-
-      tr.append(td);
-    });
-
-    buttonAppendColumn.disabled = true;
-  } else if (MAX_ROWS_COL < countofCol) {
-    buttonAppendColumn.disabled = true;
-  } else if (MAX_ROWS_COL > countofCol) {
+  if (MAX_ROWS_COL > countofCol) {
     buttonRemoveColumn.disabled = false;
 
     allTrs.forEach((tr) => {
@@ -83,25 +66,18 @@ buttonAppendColumn.addEventListener('click', () => {
 
       tr.append(td);
     });
+    ++countofCol;
+  }
+
+  if (MAX_ROWS_COL <= countofCol) {
+    buttonAppendColumn.disabled = true;
   }
 });
 
 buttonRemoveColumn.addEventListener('click', () => {
-  countofCol--;
-
   const allTrs = tableField.querySelectorAll('tr');
 
-  if (MIN_ROWS_COL === countofCol) {
-    allTrs.forEach((tr) => {
-      const lastTd = tr.lastElementChild;
-
-      lastTd.remove();
-    });
-
-    buttonRemoveColumn.disabled = true;
-  } else if (MIN_ROWS_COL > countofCol) {
-    buttonRemoveColumn.disabled = true;
-  } else if (MIN_ROWS_COL < countofCol) {
+  if (MIN_ROWS_COL < countofCol) {
     buttonAppendColumn.disabled = false;
 
     allTrs.forEach((tr) => {
@@ -109,5 +85,10 @@ buttonRemoveColumn.addEventListener('click', () => {
 
       lastTd.remove();
     });
+    countofCol--;
+  }
+
+  if (MIN_ROWS_COL >= countofCol) {
+    buttonRemoveColumn.disabled = true;
   }
 });
