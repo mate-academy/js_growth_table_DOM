@@ -23,6 +23,12 @@ arrowRowAdd.addEventListener('click', () => {
 });
 
 arrowRowRemove.addEventListener('click', () => {
+  const rowsCount = tableBody.querySelectorAll('tr').length;
+
+  if (rowsCount <= 2) {
+    return;
+  }
+
   const lastRow = tableBody.querySelector('tr:last-child');
 
   if (lastRow) {
@@ -51,6 +57,11 @@ arrowColumnAdd.addEventListener('click', () => {
 
 arrowColumnRemove.addEventListener('click', () => {
   const rows = tableBody.querySelectorAll('tr');
+  const columnsCount = rows[0]?.querySelectorAll('td').length ?? 0;
+
+  if (columnsCount <= 2) {
+    return;
+  }
 
   rows.forEach((row) => {
     const lastCell = row.querySelector('td:last-child');
