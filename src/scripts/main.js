@@ -13,7 +13,11 @@ const minimum = 2;
 function updButtonState() {
   const rows = table.querySelectorAll('tr');
   const rowsCount = rows.length;
-  const colCount = rows[0].cells.length;
+  let colCount;
+
+  if (rows.length > 0) {
+    colCount = rows[0].cells.length;
+  }
 
   appendRow.disabled = rowsCount >= maximum;
   removeRow.disabled = rowsCount <= minimum;
