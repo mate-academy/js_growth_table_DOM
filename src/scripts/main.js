@@ -30,7 +30,9 @@ const appendRow = () => {
     newRow.appendChild(document.createElement('td'));
   }
 
-  field.append(newRow);
+  const tbody = field.tBodies[0] || field;
+
+  tbody.append(newRow);
 };
 
 const removeRow = () => {
