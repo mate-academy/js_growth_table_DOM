@@ -4,7 +4,7 @@
 let rowCount = 4;
 let columnCount = 4;
 
-const field = document.querySelector('.field');
+const field = document.querySelector('.field tbody');
 
 const appendRowButton = document.querySelector('.append-row.button');
 const removeRowButton = document.querySelector('.remove-row.button');
