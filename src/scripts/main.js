@@ -33,7 +33,7 @@ appendRowButton.addEventListener('click', (e) => {
 
 removeRowButton.addEventListener('click', (e) => {
   if (rowCount > 2) {
-    field.querySelector('tr').remove();
+    field.lastElementChild.remove();
     rowCount--;
     appendRowButton.disabled = false;
   }
@@ -65,7 +65,7 @@ appendColumnButton.addEventListener('click', (e) => {
 removeColumnButton.addEventListener('click', (e) => {
   if (columnCount > 2) {
     for (const row of field.querySelectorAll('tr')) {
-      row.querySelector('td').remove();
+      row.lastElementChild.remove();
     }
 
     columnCount--;
