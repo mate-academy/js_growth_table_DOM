@@ -14,10 +14,10 @@ function updateButtonStates() {
   const rowCount = table.children.length;
   const columnCount = table.firstElementChild.children.length;
 
-  addRowBtn.disabled = rowCount >= max;
-  removeRowBtn.disabled = rowCount <= min;
-  addColumnBtn.disabled = columnCount >= max;
-  removeColumnBtn.disabled = columnCount <= min;
+  addRowBtn.disabled = rowCount === max;
+  removeRowBtn.disabled = rowCount === min;
+  addColumnBtn.disabled = columnCount === max;
+  removeColumnBtn.disabled = columnCount === min;
 }
 
 addRowBtn.addEventListener('click', () => {
