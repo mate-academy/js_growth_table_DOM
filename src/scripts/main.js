@@ -21,6 +21,10 @@ function updateButtonStates() {
 }
 
 addRowBtn.addEventListener('click', () => {
+  if (table.children.length >= 10) {
+    return;
+  }
+
   const columnCount = table.firstElementChild.children.length;
 
   const row = document.createElement('tr');
@@ -36,11 +40,18 @@ addRowBtn.addEventListener('click', () => {
 });
 
 removeRowBtn.addEventListener('click', () => {
+  if (table.children.length <= 2) {
+    return;
+  }
   table.removeChild(table.lastChild);
   updateButtonStates();
 });
 
 addColumnBtn.addEventListener('click', () => {
+  if (table.firstElementChild.children.length >= 10) {
+    return;
+  }
+
   Array.from(table.children).forEach((row) => {
     const cell = document.createElement('td');
 
@@ -50,6 +61,10 @@ addColumnBtn.addEventListener('click', () => {
 });
 
 removeColumnBtn.addEventListener('click', () => {
+  if (table.firstElementChild.children.length <= 2) {
+    return;
+  }
+
   Array.from(table.children).forEach((row) => {
     row.removeChild(row.lastChild);
   });
