@@ -25,7 +25,9 @@ function addRow() {
     row.append(cell);
   }
 
-  table.append(row);
+  const tbody = table.querySelector('tbody');
+
+  tbody.append(row);
 }
 
 function removeRow() {
