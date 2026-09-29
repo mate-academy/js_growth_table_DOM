@@ -5,6 +5,7 @@ const removeRow = document.querySelector('.remove-row');
 const appendColumn = document.querySelector('.append-column');
 const removeColumn = document.querySelector('.remove-column');
 const table = document.querySelector('.field');
+const tbody = table.querySelector('tbody');
 
 function updateButton() {
   const rowCount = table.rows.length;
@@ -31,7 +32,7 @@ appendRow.addEventListener('click', () => {
     newRow.append(cell);
   }
 
-  table.append(newRow);
+  tbody.append(newRow);
   updateButton();
 });
 
