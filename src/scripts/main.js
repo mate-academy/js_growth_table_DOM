@@ -20,6 +20,10 @@ function updateButtons() {
 }
 
 appendRowButton.addEventListener('click', () => {
+  if (table.rows.length >= MAX_SIZE) {
+    return;
+  }
+
   const newRow = table.rows[table.rows.length - 1].cloneNode(true);
 
   table.rows[table.rows.length - 1].parentNode.append(newRow);
@@ -28,12 +32,20 @@ appendRowButton.addEventListener('click', () => {
 });
 
 removeRowButton.addEventListener('click', () => {
+  if (table.rows.length <= MIN_SIZE) {
+    return;
+  }
+
   table.rows[table.rows.length - 1].remove();
 
   updateButtons();
 });
 
 appendColumnButton.addEventListener('click', () => {
+  if (table.rows[0].cells.length >= MAX_SIZE) {
+    return;
+  }
+
   for (const row of table.rows) {
     row.append(document.createElement('td'));
   }
@@ -42,6 +54,10 @@ appendColumnButton.addEventListener('click', () => {
 });
 
 removeColumnButton.addEventListener('click', () => {
+  if (table.rows[0].cells.length <= MIN_SIZE) {
+    return;
+  }
+
   for (const row of table.rows) {
     row.cells[row.cells.length - 1].remove();
   }
