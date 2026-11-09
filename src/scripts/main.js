@@ -27,15 +27,9 @@ appendRow.addEventListener('click', () => {
 });
 
 removeRow.addEventListener('click', () => {
-  const tableRows = [...field.rows].slice(0, -1);
+  field.rows[field.rows.length - 1].remove();
 
-  field.tBodies[0].innerHTML = '';
-
-  tableRows.forEach((row) => {
-    field.tBodies[0].append(row);
-  });
-
-  disabledButton(tableRows.length, minRows, removeRow, appendRow);
+  disabledButton(field.rows.length, minRows, removeRow, appendRow);
 });
 
 appendColumn.addEventListener('click', () => {
@@ -49,19 +43,13 @@ appendColumn.addEventListener('click', () => {
 });
 
 removeColumn.addEventListener('click', () => {
+  for (let i = 0; i < field.rows.length; i++) {
+    field.rows[i].cells[field.rows[i].cells.length - 1].remove();
+  }
+
   const cells = field.rows[0].cells.length;
 
-  [...field.rows].forEach((row) => {
-    row.innerHTML = '';
-
-    for (let i = 0; i < cells - 1; i++) {
-      row.innerHTML += '<td></td>';
-    }
-  });
-
-  const newCells = field.rows[0].cells.length;
-
-  disabledButton(newCells, minColumns, removeColumn, appendColumn);
+  disabledButton(cells, minColumns, removeColumn, appendColumn);
 });
 
 function disabledButton(lengthRows, whatItShouldBe, offButton, powerButton) {
