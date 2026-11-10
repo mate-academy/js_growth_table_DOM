@@ -3,57 +3,61 @@
 const container = document.querySelector('div.container');
 const table = container.querySelector('.field');
 
+const selectButton = {
+  appendRow: document.querySelector('.append-row'),
+  removeRow: document.querySelector('.remove-row'),
+
+  appendColumn: document.querySelector('.append-column'),
+  removeColumn: document.querySelector('.remove-column'),
+};
+
 const tableState = {
   rows: [...table.querySelectorAll('tr')].length,
   columns: [...table.querySelector('tr').querySelectorAll('td')].length,
 };
 
-function canBeRemoved(amount) {
-  if (amount <= 2) {
-    return 0;
-  }
+function canBeAdded(amount) {
+  return amount === 10;
 }
 
-function canBeAdded(amount) {
-  if (amount >= 10) {
-    return 0;
-  }
+function canBeRemoved(amount) {
+  return amount === 2;
+}
+
+function updateButtonsState() {
+  selectButton.appendRow.disabled = canBeAdded(tableState.rows);
+  selectButton.removeRow.disabled = canBeRemoved(tableState.rows);
+
+  selectButton.appendColumn.disabled = canBeAdded(tableState.columns);
+  selectButton.removeColumn.disabled = canBeRemoved(tableState.columns);
 }
 
 container.addEventListener('click', (e) => {
   switch (e.target.getAttribute('class')) {
     // CASE 1
     case 'append-row button':
-      if (canBeAdded(tableState.rows) === 0) {
-        break;
-      }
-
       const copyRow = table.querySelector('tr').cloneNode(true);
 
       table.append(copyRow);
 
       tableState.rows += 1;
+
+      updateButtonsState();
       break;
 
     // CASE 2
     case 'remove-row button':
-      if (canBeRemoved(tableState.rows) === 0) {
-        break;
-      }
-
       const allRows = table.querySelectorAll('tr');
 
       allRows[allRows.length - 1].remove();
 
       tableState.rows -= 1;
+
+      updateButtonsState();
       break;
 
     // CASE 3
     case 'append-column button':
-      if (canBeAdded(tableState.columns) === 0) {
-        break;
-      }
-
       const rows = [...table.querySelectorAll('tr')];
 
       rows.forEach((row) => {
@@ -63,14 +67,12 @@ container.addEventListener('click', (e) => {
       });
 
       tableState.columns += 1;
+
+      updateButtonsState();
       break;
 
     // CASE 4
     case 'remove-column button':
-      if (canBeRemoved(tableState.columns) === 0) {
-        break;
-      }
-
       const removeColumn = [...table.querySelectorAll('tr')];
 
       removeColumn.forEach((node) => {
@@ -78,6 +80,8 @@ container.addEventListener('click', (e) => {
       });
 
       tableState.columns -= 1;
+
+      updateButtonsState();
       break;
 
     default:
