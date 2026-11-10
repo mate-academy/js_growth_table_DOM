@@ -17,19 +17,19 @@ const tableState = {
 };
 
 function canBeAdded(amount) {
-  return amount === 10;
+  return amount < 10;
 }
 
 function canBeRemoved(amount) {
-  return amount === 2;
+  return amount > 2;
 }
 
 function updateButtonsState() {
-  selectButton.appendRow.disabled = canBeAdded(tableState.rows);
-  selectButton.removeRow.disabled = canBeRemoved(tableState.rows);
+  selectButton.appendRow.disabled = !canBeAdded(tableState.rows);
+  selectButton.removeRow.disabled = !canBeRemoved(tableState.rows);
 
-  selectButton.appendColumn.disabled = canBeAdded(tableState.columns);
-  selectButton.removeColumn.disabled = canBeRemoved(tableState.columns);
+  selectButton.appendColumn.disabled = !canBeAdded(tableState.columns);
+  selectButton.removeColumn.disabled = !canBeRemoved(tableState.columns);
 }
 
 container.addEventListener('click', (e) => {
