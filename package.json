@@ -13,6 +13,7 @@
     "lint": "npm run style-format && npm run format && mate-scripts lint",
     "test:only": "mate-scripts test",
     "build": "mate-scripts build",
+    "predeploy": "node -e \"require('fs').rmSync('.parcel-cache', { recursive: true, force: true })\"",
     "deploy": "mate-scripts deploy",
     "update": "mate-scripts update",
     "postinstall": "npm run update",
