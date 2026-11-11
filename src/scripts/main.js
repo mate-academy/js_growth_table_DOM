@@ -34,11 +34,13 @@ function updateButtonsState() {
 
 container.addEventListener('click', (e) => {
   if (e.target.classList.contains('append-row')) {
-    if (!canBeAdded(tableState.rows)) return;
+    if (!canBeAdded(tableState.rows)) {
+      return;
+    }
 
     const copyRow = table.querySelector('tr').cloneNode(true);
 
-    table.append(copyRow);
+    table.querySelector('tbody').append(copyRow);
 
     tableState.rows += 1;
 
@@ -46,7 +48,9 @@ container.addEventListener('click', (e) => {
   }
 
   if (e.target.classList.contains('remove-row')) {
-    if (!canBeRemoved(tableState.rows)) return;
+    if (!canBeRemoved(tableState.rows)) {
+      return;
+    }
 
     const allRows = table.querySelectorAll('tr');
 
@@ -58,7 +62,9 @@ container.addEventListener('click', (e) => {
   }
 
   if (e.target.classList.contains('append-column')) {
-    if (!canBeAdded(tableState.columns)) return;
+    if (!canBeAdded(tableState.columns)) {
+      return;
+    }
 
     const rows = [...table.querySelectorAll('tr')];
 
@@ -74,7 +80,9 @@ container.addEventListener('click', (e) => {
   }
 
   if (e.target.classList.contains('remove-column')) {
-    if (!canBeRemoved(tableState.columns)) return;
+    if (!canBeRemoved(tableState.columns)) {
+      return;
+    }
 
     const removeColumn = [...table.querySelectorAll('tr')];
 
