@@ -33,58 +33,57 @@ function updateButtonsState() {
 }
 
 container.addEventListener('click', (e) => {
-  switch (e.target.getAttribute('class')) {
-    // CASE 1
-    case 'append-row button':
-      const copyRow = table.querySelector('tr').cloneNode(true);
+  if (e.target.classList.contains('append-row')) {
+    if (!canBeAdded(tableState.rows)) return;
 
-      table.append(copyRow);
+    const copyRow = table.querySelector('tr').cloneNode(true);
 
-      tableState.rows += 1;
+    table.append(copyRow);
 
-      updateButtonsState();
-      break;
+    tableState.rows += 1;
 
-    // CASE 2
-    case 'remove-row button':
-      const allRows = table.querySelectorAll('tr');
+    updateButtonsState();
+  }
 
-      allRows[allRows.length - 1].remove();
+  if (e.target.classList.contains('remove-row')) {
+    if (!canBeRemoved(tableState.rows)) return;
 
-      tableState.rows -= 1;
+    const allRows = table.querySelectorAll('tr');
 
-      updateButtonsState();
-      break;
+    allRows[allRows.length - 1].remove();
 
-    // CASE 3
-    case 'append-column button':
-      const rows = [...table.querySelectorAll('tr')];
+    tableState.rows -= 1;
 
-      rows.forEach((row) => {
-        const createCell = document.createElement('td');
+    updateButtonsState();
+  }
 
-        row.append(createCell);
-      });
+  if (e.target.classList.contains('append-column')) {
+    if (!canBeAdded(tableState.columns)) return;
 
-      tableState.columns += 1;
+    const rows = [...table.querySelectorAll('tr')];
 
-      updateButtonsState();
-      break;
+    rows.forEach((row) => {
+      const createCell = document.createElement('td');
 
-    // CASE 4
-    case 'remove-column button':
-      const removeColumn = [...table.querySelectorAll('tr')];
+      row.append(createCell);
+    });
 
-      removeColumn.forEach((node) => {
-        node.lastElementChild.remove();
-      });
+    tableState.columns += 1;
 
-      tableState.columns -= 1;
+    updateButtonsState();
+  }
 
-      updateButtonsState();
-      break;
+  if (e.target.classList.contains('remove-column')) {
+    if (!canBeRemoved(tableState.columns)) return;
 
-    default:
-      break;
+    const removeColumn = [...table.querySelectorAll('tr')];
+
+    removeColumn.forEach((node) => {
+      node.lastElementChild.remove();
+    });
+
+    tableState.columns -= 1;
+
+    updateButtonsState();
   }
 });
