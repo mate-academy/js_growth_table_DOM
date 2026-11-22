@@ -16,7 +16,7 @@ container.addEventListener('click', (e) => {
   const removeColumn = document.querySelector('.remove-column');
   const tr = document.querySelector('tr');
 
-  if (e.target.classList.contains('append-row')) {
+  if (button.classList.contains('append-row')) {
     tbody.append(tbody.children[0].cloneNode(true));
 
     if (tbody.children.length >= 10) {
@@ -28,7 +28,7 @@ container.addEventListener('click', (e) => {
     }
   }
 
-  if (e.target.classList.contains('remove-row')) {
+  if (button.classList.contains('remove-row')) {
     tbody.lastElementChild.remove();
 
     if (tbody.children.length <= 2) {
@@ -40,7 +40,7 @@ container.addEventListener('click', (e) => {
     }
   }
 
-  if (e.target.classList.contains('append-column')) {
+  if (button.classList.contains('append-column')) {
     for (const item of tbody.children) {
       const td = document.createElement('td');
 
@@ -56,7 +56,7 @@ container.addEventListener('click', (e) => {
     }
   }
 
-  if (e.target.classList.contains('remove-column')) {
+  if (button.classList.contains('remove-column')) {
     for (const item of tbody.children) {
       item.lastElementChild.remove();
     }
